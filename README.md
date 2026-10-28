@@ -220,7 +220,8 @@ One thread, 30 s per timed step; each load inserts the 100,000 orders into an em
 | The same, EF: one query for the 100                                                                      | 3,205,427 orders/s  | 304,814 orders/s     | ×10.5    |
 | Load and read 1,000 random orders, their lines and products, per transaction                             | 271,859 orders/s    | 12,421 orders/s      | ×21.9    |
 | Lazy loading: 1,000 objects per transaction, Order → OrderLine → Product                                 | 1,364,387 objects/s | 5,271 objects/s      | ×258.8   |
-**This last comparison is unfair:** GBO do not have "data transportation" to perform. Any entity is instantly accessible. It simply show that entity navigation is not anymore a problem using GBO. 304k entity re-hydration is a strong result.
+
+**This last comparison is unfair:** GBO has no data to transport, since every entity is instantly accessible. It simply shows that navigating between entities is no longer a problem with GBO. For its part, EF Core re-hydrating 304k entities per second is a strong result.
 
 ### Concurrent: one writer, 1 to 8 readers
 
