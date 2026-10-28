@@ -1,3 +1,5 @@
+![[GBO-Logo.png]]
+
 # Ghost Body Object
 ## What is GBO?
 
