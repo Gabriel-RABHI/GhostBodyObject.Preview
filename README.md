@@ -1,9 +1,8 @@
 ![Ghost Body Object](GBO-Logo.png)
 
-# Ghost Body Object
-## What is GBO?
+# What is GBO?
 
-GBO (Ghost Body Object) is a high-performance, transactional, persistent and distributed memory manager. It manages millions of C# objects in collections that can be several times larger than the physical RAM. These large collections can be shared and spread over dozens of servers in real time, transparently. GBO can make this memory persistent on disk, and supports the best standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery).
+**GBO** (Ghost Body Object) is a high-performance, transactional, persistent and distributed memory manager. It manages millions of C# objects in collections that can be several times larger than the physical RAM. These large collections can be shared and spread over dozens of servers in real time, transparently. GBO can make this memory persistent on disk, and supports the best standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery).
 
 Its API is ambient: managing these objects takes no load and no save operation. You open a transaction, create or find the objects, change them, and commit the transaction. These collections of objects can hold the data of a business application, make independent systems communicate without a message broker, build a cache infrastructure, aggregate data in edge computing or IoT, or build complex distributed systems that combine all of these.
 
@@ -370,5 +369,10 @@ GBO on one page: what the engine does, how each guarantee is obtained, and the i
 
 - **One writer at a time per chain.** The commits of a chain are serialized in the whole cluster: write throughput is that of one writer, without network round trips while it keeps the token. Writers scale by splitting the data into several chains.
 - **No SQL.** The queries are C#, over the Views and the indexes.
-- **No automatic fail-over yet.** The loss of the owner of the write token stops the writes of its chain, the reads going on, until the chain is restarted.
 - **Little-endian platforms only.**
+
+#### To come
+
+- **Automatic fail-over.** The loss of the owner of the write token stops the writes of its chain, the reads going on, until the chain is restarted. It will perform a recovery with quorum.
+- **Internet Scale Distribution**. Will use Web Sockets.
+- **Transparent SQL connectors**, to fill an SQL server with every transaction done using GBO. EF entities included.
