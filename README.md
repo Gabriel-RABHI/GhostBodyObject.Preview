@@ -32,7 +32,7 @@ internal interface MAppointment
 // Your own code in the generated class: computed at each read, never stored.
 internal partial class Appointment
 {
-    public bool Today => At.Date == DateTime.Today;
+    public bool IsToday => At.Date == DateTime.Today;
 }
 
 // The Repository of the model.
@@ -71,7 +71,10 @@ using (var tx = agenda.OpenTransaction(StoreAccessMode.ReadWrite))
 // A Read transaction finds the appointments of today, as committed.
 using (agenda.OpenTransaction(StoreAccessMode.ReadOnly))
 {
-    foreach (var appointment in AppointmentCollection.Where(static a => a.Today))
+	// Notice that you can call any added entity member in LINQ queries.
+	// IsToday is a calculated property, evaluated on the fly.
+	// Collections are not IQueryable, but true IEnumerable.
+    foreach (var appointment in AppointmentCollection.Where(static a => a.IsToday))
         Console.WriteLine($"{appointment.Subject} at {appointment.At:t}"); // Dentist at 10:30
 }
 ```
