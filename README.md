@@ -44,7 +44,7 @@ internal interface MAgendaRepository
 }
 ```
 
-This model is deliberately minimal: a model can declare many entity types, with complex relations, constraints and indexes ([Tutorials Two to Five](Documentation/Tutorials/Two-Relationships.md)). A model that must evolve, read by both the old and the new versions of an application, gives its numbers, as [Tutorial One](Documentation/Tutorials/One-TheBasics.md) shows.
+This model is deliberately minimal: a model can declare many entity types, with complex relations, constraints and indexes ([Tutorials Two to Five](Two-Relationships.md)). A model that must evolve, read by both the old and the new versions of an application, gives its numbers, as [Tutorial One](One-TheBasics.md) shows.
 
 #### 2. The operations: `Program.cs`
 
@@ -99,7 +99,7 @@ using var agenda = new AgendaRepository(store);
 Console.ReadLine();
 ```
 
-Each commit on one node is copied to the other, in the order of the commits: both nodes read and write the same appointments. Start the second node while the first one runs. Two nodes that both wrote while apart hold two different histories: when they meet, both stop rather than merge them ([Tutorial Seven](Documentation/Tutorials/Seven-ChainsAndDistribution.md)).
+Each commit on one node is copied to the other, in the order of the commits: both nodes read and write the same appointments. Start the second node while the first one runs. Two nodes that both wrote while apart hold two different histories: when they meet, both stop rather than merge them ([Tutorial Seven](Seven-ChainsAndDistribution.md)).
 
 You can read the first seven tutorials to discover what GBO can do :
 
@@ -131,7 +131,7 @@ One library in the process and one directory on the disk replace the database se
 
 ### **High performance**
 
-No serialization, no network round trip, no copy: the data is read where it is stored. Against EF Core with PostgreSQL, on the same machine, GBO inserts 25 to 60 times faster, reads orders by their key 311 times faster, and aggregates 3.5 to 6 times faster ([results](GhostBodyObject.Benchmarks.EntityFramework/RESULTS.md)). On YCSB, it reads up to 4.7 M records/s on 8 threads, 15 times RocksDB and 7 times Garnet ([results](GhostBodyObject.Ycsb.Benchmarks/RESULTS.md)).
+No serialization, no network round trip, no copy: the data is read where it is stored. Against EF Core with PostgreSQL, on the same machine, GBO inserts 25 to 60 times faster, reads orders by their key 311 times faster, and aggregates 3.5 to 6 times faster ([results](#gbo-vs-ef--postgresql)). On YCSB, it reads up to 4.7 M records/s on 8 threads, 15 times RocksDB and 7 times Garnet.
 
 ### **Built for AI-assisted development**
 
@@ -293,7 +293,7 @@ How to read the columns:
 - **Working set:** the process of the benchmark and its servers, at the end of the mix, for the commands played. For PostgreSQL, the private bytes of its processes and its shared buffers once.
 ## Spreadsheet
 
-GBO on one page: what the engine does, how each guarantee is obtained, and the industry principle it follows. The details are in the [specifications](Documentation/Specifications/SPEC-Registry.md) and the [tutorials](Documentation/Tutorials/One-TheBasics.md).
+GBO on one page: what the engine does, how each guarantee is obtained, and the industry principle it follows. The details are in the [tutorials](One-TheBasics.md).
 
 #### At a glance
 
