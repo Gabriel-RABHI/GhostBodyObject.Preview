@@ -1,4 +1,4 @@
-![[GBO-Logo.png]]
+![Ghost Body Object](GBO-Logo.png)
 
 # Ghost Body Object
 ## What is GBO?
