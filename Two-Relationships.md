@@ -2618,3 +2618,5 @@ Choose an aggregate by the rule it protects: an order and its lines, for the tot
 - A **component** is a capability that an entity gains and loses without knowing it, removed with its entity; a **system** joins an entity and its components, and reads only what may belong to it.
 
 [Tutorial Three](Three-Composition.md) goes further with the components and the systems: the composition model of GBO.
+
+**Next tutorial:** [Tutorial Three: Composition](Three-Composition.md)

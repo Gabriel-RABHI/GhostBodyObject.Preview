@@ -1198,3 +1198,5 @@ The lessons went from an edge to what it does. This chapter goes the other way: 
 - An edge is **an aggregate of its own**: it changes in parallel with its ends.
 
 The next tutorial, Tutorial Five, goes further with the indexes and the custom collections.
+
+**Next tutorial:** [Tutorial Five: Indexes](Five-Indexes.md)

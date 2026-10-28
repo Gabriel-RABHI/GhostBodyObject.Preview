@@ -1437,3 +1437,5 @@ Every question has its tool. The path, from the most common to the rarest:
 - An index is **a part of the data**: up to date at the next instruction, rolled back, committed, kept over a restart, and made again from the entities when needed.
 
 The next tutorial shows the Log and the Record types: their subscription, and their replay.
+
+**Next tutorial:** [Tutorial Six: The Log](Six-TheLog.md)

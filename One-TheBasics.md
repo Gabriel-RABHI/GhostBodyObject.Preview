@@ -2,21 +2,7 @@
 
 ## GBO in a few words
 
-This series of tutorials explains, step by step, how to use GBO.
-
-Each lesson is a test class of the project `GhostBodyObject.TutorialOne`. Read it here, run it, then change it and see what breaks.
-
-### The Tutorial Series
-
-GBO is a sophisticated, production-oriented software technology. Each tutorial introduces a set of features and use case.
-
-- **Tutorial One**: the basics, an overview.
-- **Tutorial Two**: object relationships, constraints and deterministic garbage collection.
-- **Tutorial Three**: Entity Component System and object composition model.
-- **Tutorial Four**: Edges and graph oriented model.
-- **Tutorial Five**: indexes and custom collections.
-- **Tutorial Six**: the Log and Record types, subscription and replay mode.
-- **Tutorial Seven**: the Store chains, the cross-Store transactions, and distribution.
+This series of tutorials explains, step by step, how to use GBO. Each lesson is a test class of the project `GhostBodyObject.TutorialOne`. Read it here, run it, then change it and see what breaks.
 
 ## What you will build
 
@@ -1346,4 +1332,4 @@ public async Task BoundTheWaitOfAnExclusiveTransaction()
 - **Views** read many entities for free; **Bodies** change the few you need.
 - Transactions run **concurrently** under MVCC; a conflict is reported at the commit, and an **exclusive** transaction never meets one.
 
-The next tutorials go further, from where this one stops.
+**Next tutorial:** [Tutorial Two: Relationships](Two-Relationships.md)

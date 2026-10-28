@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "Two-Relationships.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "Two-Relationships"
             }
           }
         ]
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "Two-Relationships.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "Two-Relationships.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md",
+                "file": "Two-Relationships.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -190,16 +190,20 @@
   },
   "active": "b162e489810370b7",
   "lastOpenFiles": [
+    "One-TheBasics.md",
+    "Six-TheLog.md.tmp",
+    "Five-Indexes.md.tmp",
+    "Four-Edges.md.tmp",
+    "Three-Composition.md.tmp",
+    "Two-Relationships.md.tmp",
+    "One-TheBasics.md.tmp",
+    "README.md",
     "README.md.tmp.42852.a8685e92181e",
     "Seven-ChainsAndDistribution.md",
-    "README.md",
     "sedEjfWMR",
     "ps1BCC.tmp",
     "README.md.tmp.42852.b5f82b035e78",
     "GBO-Logo.png",
-    "ps91F.tmp",
-    "One-TheBasics.md",
-    "README.md.tmp.42852.56cad56ff29b",
     "Two-Relationships.md",
     "Three-Composition.md",
     "Six-TheLog.md",

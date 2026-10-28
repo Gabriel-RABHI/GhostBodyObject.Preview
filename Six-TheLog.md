@@ -1507,3 +1507,5 @@ In a model rebuilt from its Log, every change comes from a handler of a Record, 
 - A **replay** gives the model again, in memory at each opening, on disk on request: the same handlers, Replay transactions, identities taken from the Records.
 
 The next tutorial shows the chains of Stores, the transactions over several Stores, and the distribution.
+
+**Next tutorial:** [Tutorial Seven: Chains and Distribution](Seven-ChainsAndDistribution.md)

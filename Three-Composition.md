@@ -1260,3 +1260,5 @@ The lessons went from a component to what it does. This chapter goes the other w
 - A component is **an aggregate of its own**: it changes in parallel with its entity.
 
 [Tutorial Four](Four-Edges.md) goes further with the edges and the graph oriented model.
+
+**Next tutorial:** [Tutorial Four: Edges](Four-Edges.md)
