@@ -17,14 +17,6 @@ GBO is a sophisticated, production-oriented software technology. Each tutorial i
 - **Tutorial Five**: indexes and custom collections.
 - **Tutorial Six**: the Log and Record types, subscription and replay mode.
 - **Tutorial Seven**: the Store chains, the cross-Store transactions, and distribution.
-- ----- Next :
-- **Tutorial X**: managing the evolution of the model, and the migration policies.
-- **Tutorial X**: the distribution models, the ACID configurations, and the large-scale distribution of data over the Internet with the Hub.
-- **Tutorial X**: architectural concepts with CRUD, Commands, Mutation Sourcing, Event Sourcing, CQRS.
-- **Tutorial X**: the Replay migration concept, and rolling server updates with failover.
-- **Tutorial X**: managing external, asynchronous services with the outbox pattern.
-- **Tutorial X**: reaching hundreds of millions of operations per second on a single server.
-- **Tutorial X**: the tooling, to explore and watch the data, and to manage the infrastructure.
 
 ## What you will build
 
