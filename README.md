@@ -1,13 +1,13 @@
 ![GBO](Documentation/gbo-git-logo.png)
 # What is GBO?
 
-GBO (Ghost Body Object) is a high-performance, transactional, persistent and distributed memory manager. It manages millions of C# objects in collections that can be several times larger than the physical RAM. These large collections can be shared and spread over dozens of servers in real time, transparently. GBO can make this memory persistent on disk, and supports the best standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery).
+GBO (Ghost Body Object) is a high-performance, transactional, persistent and distributed memory manager. It manages millions of C# objects in collections that can be several times larger than the physical RAM. These large collections can be shared and spread over dozens of servers in real time, transparently. It meets the highest standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery).
 
-Its API is ambient: managing these objects takes no load and no save operation. You open a transaction, create or find the objects, change them, and commit the transaction. These collections of objects can hold the data of a business application, make independent systems communicate without a message broker, build a cache infrastructure, aggregate data in edge computing or IoT, or build complex distributed systems that combine all of these.
+Its API is ambient: managing these objects requires no load or save operation. You open a transaction, create or find the objects across deep call paths, change them, and commit the transaction. These collections of objects can hold the data of a business application, make independent systems communicate without a message broker, build a cache infrastructure, aggregate data in edge computing or IoT, or build complex distributed systems that combine all of these. GBO can be used alongside traditional DBMSs and message brokers, or replace them.
 
-Transactions at the memory level bring a massive simplification and a smaller code base, from the smallest applications to the largest, modular and distributed ones. The data model combines object graphs, entity component systems and edge-based graphs, and supports various indexes, text included.
+Transactions at the memory level bring a massive simplification and a smaller code base, from the smallest applications to the largest, modular and distributed ones. The data model combines object graphs, entity component systems and edge-based graphs, and supports various indexes, including text indexes.
 
-GBO introduces a new paradigm in error and memory management, made for both human developers and the next generation of AI Dark Software Factories. It combines strong safety (no more `NullReferenceException`), deterministic memory management and a sophisticated, constrained data model: the combination that makes Rust so efficient in AI-assisted software development.
+GBO introduces a new paradigm in error and memory management, easy for human developers and powerful for the next generation of AI Dark Software Factories. It combines strong safety (no more `NullReferenceException`), deterministic memory management and a sophisticated, constrained data model: the combination that makes Rust so efficient in AI-assisted software development.
 
 ### A minimal sample
 
@@ -27,8 +27,7 @@ internal readonly ref partial struct Subject { }
 internal readonly partial struct Date { }
 
 // An appointment: from this interface, the generator writes the class Appointment and AppointmentCollection.
-[Root]       // an appointment lives by itself
-[Enumerable] // AppointmentCollection enumerates the appointments
+[Root, Enumerable]       // an appointment lives by itself, with AppointmentCollection
 internal interface MAppointment
 {
     GhostString Subject { get; set; }
