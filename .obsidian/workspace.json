@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Documentation/Tutorials/One-TheBasics.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "One-TheBasics"
+              "title": "README"
             }
           }
         ]
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Documentation/Tutorials/One-TheBasics.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Documentation/Tutorials/One-TheBasics.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Documentation/Tutorials/One-TheBasics.md",
+                "file": "README.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -190,13 +190,13 @@
   },
   "active": "b162e489810370b7",
   "lastOpenFiles": [
+    "Documentation/Tutorials/One-TheBasics.md",
     "README.md",
     "Documentation/Benchmarks/BENCH-GBO-vs-EF-Postgres.md",
     "Documentation/Tutorials/Two-Relationships.md",
     "Documentation/Tutorials/Three-Composition.md",
     "Documentation/Tutorials/Six-TheLog.md",
     "Documentation/Tutorials/Seven-ChainsAndDistribution.md",
-    "Documentation/Tutorials/One-TheBasics.md",
     "Documentation/Tutorials/Four-Edges.md",
     "Documentation/Tutorials/Five-Indexes.md",
     "Documentation/Tutorials",
