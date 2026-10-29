@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="390" viewBox="0 0 960 390" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>Concurrent write / read</title>
+<desc>One writer changes 1 order per transaction while 1 to 8 readers total every order · linear scales. The writer: orders changed per second: 1 reader: GBO 9,777, EF Core + PostgreSQL 1,205, ×8.1; 2 readers: GBO 13,488, EF Core + PostgreSQL 1,124, ×12.0; 4 readers: GBO 11,918, EF Core + PostgreSQL 1,045, ×11.4; 8 readers: GBO 10,686, EF Core + PostgreSQL 867, ×12.3. The readers together: totals of every order per second: 1 reader: GBO 3, EF Core + PostgreSQL 0.9, ×3.5; 2 readers: GBO 5.8, EF Core + PostgreSQL 1.6, ×3.7; 4 readers: GBO 11, EF Core + PostgreSQL 2.9, ×3.9; 8 readers: GBO 19.8, EF Core + PostgreSQL 4.6, ×4.3.</desc>
+<rect width="960" height="390" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Concurrent write / read</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">One writer changes 1 order per transaction while 1 to 8 readers total every order · linear scales</text>
+<rect x="714" y="58" width="12" height="12" rx="3" fill="#3987e5"/>
+<text x="732" y="68" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">GBO</text>
+<rect x="778" y="58" width="12" height="12" rx="3" fill="#66757d"/>
+<text x="796" y="68" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">EF Core + PostgreSQL</text>
+<text x="102" y="106" font-size="12" font-weight="600" fill="#aebcc4" text-anchor="start">The writer: orders changed per second</text>
+<line x1="183.66666666666669" y1="116" x2="183.66666666666669" y2="326" stroke="#2b3a42" stroke-width="1"/>
+<line x1="265.33333333333337" y1="116" x2="265.33333333333337" y2="326" stroke="#2b3a42" stroke-width="1"/>
+<line x1="347" y1="116" x2="347" y2="326" stroke="#2b3a42" stroke-width="1"/>
+<text x="102" y="344" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">0</text>
+<text x="183.66666666666669" y="344" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">5k</text>
+<text x="265.33333333333337" y="344" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">10k</text>
+<text x="347" y="344" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">15k</text>
+<line x1="102" y1="116" x2="102" y2="326" stroke="#4a5a62" stroke-width="1"/>
+<text x="86" y="139" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">1 reader</text>
+<path d="M102 126H257.7Q261.7 126 261.7 130V136Q261.7 140 257.7 140H102Z" fill="#3987e5"/>
+<text x="269.69100000000003" y="137.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">9,777</text>
+<path d="M102 144H117.7Q121.7 144 121.7 148V154Q121.7 158 117.7 158H102Z" fill="#66757d"/>
+<text x="129.68166666666667" y="155.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">1,205</text>
+<text x="495" y="149" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×8.1</text>
+<text x="86" y="191" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">2 readers</text>
+<path d="M102 178H318.3Q322.3 178 322.3 182V188Q322.3 192 318.3 192H102Z" fill="#3987e5"/>
+<text x="330.304" y="189.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">13,488</text>
+<path d="M102 196H116.4Q120.4 196 120.4 200V206Q120.4 210 116.4 210H102Z" fill="#66757d"/>
+<text x="128.35866666666666" y="207.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">1,124</text>
+<text x="495" y="201" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×12.0</text>
+<text x="86" y="243" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">4 readers</text>
+<path d="M102 230H292.7Q296.7 230 296.7 234V240Q296.7 244 292.7 244H102Z" fill="#3987e5"/>
+<text x="304.66066666666666" y="241.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">11,918</text>
+<path d="M102 248H115.1Q119.1 248 119.1 252V258Q119.1 262 115.1 262H102Z" fill="#66757d"/>
+<text x="127.06833333333333" y="259.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">1,045</text>
+<text x="495" y="253" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×11.4</text>
+<text x="86" y="295" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">8 readers</text>
+<path d="M102 282H272.5Q276.5 282 276.5 286V292Q276.5 296 272.5 296H102Z" fill="#3987e5"/>
+<text x="284.538" y="293.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">10,686</text>
+<path d="M102 300H112.2Q116.2 300 116.2 304V310Q116.2 314 112.2 314H102Z" fill="#66757d"/>
+<text x="124.161" y="311.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">867</text>
+<text x="495" y="305" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×12.3</text>
+<text x="535" y="106" font-size="12" font-weight="600" fill="#aebcc4" text-anchor="start">The readers together: totals of every order per second</text>
+<line x1="596.25" y1="116" x2="596.25" y2="326" stroke="#2b3a42" stroke-width="1"/>
+<line x1="657.5" y1="116" x2="657.5" y2="326" stroke="#2b3a42" stroke-width="1"/>
+<line x1="718.75" y1="116" x2="718.75" y2="326" stroke="#2b3a42" stroke-width="1"/>
+<line x1="780" y1="116" x2="780" y2="326" stroke="#2b3a42" stroke-width="1"/>
+<text x="535" y="344" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">0</text>
+<text x="596.25" y="344" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">5</text>
+<text x="657.5" y="344" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">10</text>
+<text x="718.75" y="344" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">15</text>
+<text x="780" y="344" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">20</text>
+<line x1="535" y1="116" x2="535" y2="326" stroke="#4a5a62" stroke-width="1"/>
+<path d="M535 126H567.8Q571.8 126 571.8 130V136Q571.8 140 567.8 140H535Z" fill="#3987e5"/>
+<text x="579.75" y="137.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">3.0</text>
+<path d="M535 144H542.0Q546.0 144 546.0 148V154Q546.0 158 542.0 158H535Z" fill="#66757d"/>
+<text x="554.025" y="155.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">0.9</text>
+<text x="928" y="149" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×3.5</text>
+<path d="M535 178H602.0Q606.0 178 606.0 182V188Q606.0 192 602.0 192H535Z" fill="#3987e5"/>
+<text x="614.05" y="189.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">5.8</text>
+<path d="M535 196H550.6Q554.6 196 554.6 200V206Q554.6 210 550.6 210H535Z" fill="#66757d"/>
+<text x="562.6" y="207.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">1.6</text>
+<text x="928" y="201" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×3.7</text>
+<path d="M535 230H665.8Q669.8 230 669.8 234V240Q669.8 244 665.8 244H535Z" fill="#3987e5"/>
+<text x="677.75" y="241.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">11.0</text>
+<path d="M535 248H566.5Q570.5 248 570.5 252V258Q570.5 262 566.5 262H535Z" fill="#66757d"/>
+<text x="578.525" y="259.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">2.9</text>
+<text x="928" y="253" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×3.9</text>
+<path d="M535 282H773.5Q777.5 282 777.5 286V292Q777.5 296 773.5 296H535Z" fill="#3987e5"/>
+<text x="785.55" y="293.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">19.8</text>
+<path d="M535 300H587.4Q591.4 300 591.4 304V310Q591.4 314 587.4 314H535Z" fill="#66757d"/>
+<text x="599.35" y="311.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">4.6</text>
+<text x="928" y="305" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×4.3</text>
+<text x="32" y="372" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Intel i9-9900K, NVMe SSD, Windows 10, .NET 10 · EF Core 10, PostgreSQL 18 · 100,000 orders, 2,000,000 lines · 2026-10-27</text>
+</svg>

@@ -4,6 +4,28 @@
 
 This series of tutorials explains, step by step, how to use GBO. Each lesson is a test class of the project `GhostBodyObject.TutorialOne`. Read it here, run it, then change it and see what breaks.
 
+### The Tutorial Series
+
+GBO is a sophisticated, production-oriented software technology. Each tutorial introduces a set of features and use case.
+
+- **Tutorial One**: the basics, an overview.
+- **Tutorial Two**: object relationships, constraints and deterministic garbage collection.
+- **Tutorial Three**: Entity Component System and object composition model.
+- **Tutorial Four**: Edges and graph oriented model.
+- **Tutorial Five**: indexes and custom collections.
+- **Tutorial Six**: the Log and Record types, subscription and replay mode.
+- **Tutorial Seven**: the Store chains, the cross-Store transactions, and distribution.
+
+### To come
+
+- **Tutorial X**: managing the evolution of the model, and the migration policies.
+- **Tutorial X**: the distribution models, the ACID configurations, and the large-scale distribution of data over the Internet with the Hub.
+- **Tutorial X**: architectural concepts with CRUD, Commands, Mutation Sourcing, Event Sourcing, CQRS.
+- **Tutorial X**: the Replay migration concept, and rolling server updates with failover.
+- **Tutorial X**: managing external, asynchronous services with the outbox pattern.
+- **Tutorial X**: reaching hundreds of millions of operations per second on a single server.
+- **Tutorial X**: the tooling, to explore and watch the data, and to manage the infrastructure.
+
 ## What you will build
 
 A small library of books. One entity type, `Book`, and one Repository, `LibraryRepository`, are enough to discover the basic API principles : declare a model, open a store, changing data, querying, run code and manage transactions.
@@ -14,8 +36,76 @@ A small library of books. One entity type, `Book`, and one Repository, `LibraryR
 
 A model is a set of C# interfaces. You never implement them: the generator reads them and writes the classes. An interface whose name starts with `M` gives a class without the `M`: `MBook` gives `Book`.
 
+**The values of the model come first.** Each value of a book has a type that says what it is: a value object. A `decimal` does not say whether it is a price or a rate, nor a `string` whether it is a title or an author; a `Money` is not a `Percent`, and a title given for an author no longer compiles. You declare a value object and its rule; the generator writes the rest, and the code that runs is the code of the value inside it. [Lesson 18](#lesson-18-give-each-value-its-type) shows them in detail.
+
 ```csharp
-[Entity(1, 1, 5)]
+// [ValueObject<GhostString>] on a readonly ref partial struct: a text value object, made from a string ("Dune"), compared to one, stored
+// as a text. GBO writes two types: Title, that a book reads and writes in place, and ReadOnlyTitle, that a BookView reads.
+[ValueObject<GhostString>]
+internal readonly ref partial struct Title
+{
+}
+
+[ValueObject<GhostString>]
+internal readonly ref partial struct AuthorName
+{
+}
+
+// [ValueObject<int>]: a number value object, stored as an int. ImplicitConversion = true: an int converts to it, Year = 1965, checked as
+// Year.From(1965) is; to an int, Value.
+[ValueObject<int>(ImplicitConversion = true)]
+internal readonly partial struct Year
+{
+}
+
+// Operators: the operators between two amounts, + and -, by which Sum adds them. IsValid: the rule of a value, checked at each
+// conversion; an amount below zero does not exist.
+[ValueObject<decimal>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
+internal readonly partial struct Money
+{
+    private static bool IsValid(decimal amount) => amount >= 0;
+
+    public override string ToString() => Value.ToString("0.00", CultureInfo.InvariantCulture);
+}
+
+// The 13 digits of an ISBN in a long, compared and stored as a long; TryRead reads one from a text (Lesson 18).
+[ValueObject<long>]
+internal readonly partial struct Isbn
+{
+    private static bool IsValid(long digits) => digits is >= 0 and < 10_000_000_000_000;
+
+    public static bool TryRead(string text, out Isbn isbn) { /* 13 digits, hyphens apart */ }
+
+    public override string ToString() => Value.ToString("D13");
+}
+
+[ValueObject<decimal>(ImplicitConversion = true)]
+internal readonly partial struct Percent
+{
+    private static bool IsValid(decimal value) => value is >= 0 and <= 100;
+
+    public Money Of(Money amount) => amount.Value * Value / 100;
+}
+
+// The mark of the shelf of a book, "SF-12": a text that checks its form.
+[ValueObject<GhostString>]
+internal readonly ref partial struct ShelfMark
+{
+    private static bool IsValid(ReadOnlySpan<char> text) => text.Length is > 2 and <= 8 && text.IndexOf('-') > 0;
+}
+
+// Whether a book is on its shelf or borrowed: a state, an enum, not a bool.
+internal enum Availability
+{
+    Available,
+    Borrowed
+}
+```
+
+Then the entity, whose properties are typed by these values:
+
+```csharp
+[Entity(1, 1, 10)]
 [Root]
 [Removable]
 [Enumerable]
@@ -24,25 +114,44 @@ internal interface MBook
     // [Property(n)]: the identifier of the property. GBO stores the value under its identifier, not under its name: you may
     // rename a property, but never give its identifier to another one.
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     [Property(2)]
-    string Author { get; set; }
+    AuthorName Author { get; set; }
 
     [Property(3)]
-    int Year { get; set; }
+    Year Year { get; set; }
 
     [Property(4)]
-    decimal Price { get; set; }
+    Money Price { get; set; }
 
     [Property(5)]
-    bool Borrowed { get; set; }
+    Availability Availability { get; set; }
+
+    // The count of the real changes of the price, a raw counter that names no value: stored as any property, and kept by a rule of
+    // Lesson 11.
+    [Property(6)]
+    int PriceChanges { get; set; }
+
+    [Property(7)]
+    Isbn Isbn { get; set; }
+
+    // A deposit and a discount, both optional: absent until given (Lesson 9).
+    [Property(8)]
+    Option<Money> Deposit { get; set; }
+
+    [Property(9)]
+    Option<Percent> MemberDiscount { get; set; }
+
+    [Property(10)]
+    ShelfMark Shelf { get; set; }
 }
 ```
 
 | Attribute           | Meaning                                                                                                                                                      |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `[Entity(1, 1, 5)]` | The type identifier of `Book` (1, unique among the types of the Repository), the version of its model (1), and the highest identifier of its properties (5). |
+| `[ValueObject<T>]`  | A value object over `T`, stored as `T`: a number, a date, a `bool`, a `Guid`, or a text, `GhostString`. Its rule, `IsValid`, and its display are yours; its members are written by the generator. |
+| `[Entity(1, 1, 10)]` | The type identifier of `Book` (1, unique among the types of the Repository), the version of its model (1), and the highest identifier of its properties (10). |
 | `[Root]`            | A book lives by itself: GBO never removes it on its own.                                                                                                     |
 | `[Removable]`       | Your code may remove a book, with `book.Remove()`.                                                                                                           |
 | `[Enumerable]`      | The generator writes `BookCollection`, which enumerates the books.                                                                                           |
@@ -252,7 +361,7 @@ public void ReadEachBookWithForeach()
 }
 ```
 
-A property never set has its default value. And GBO has no `null` strings: a string never set is empty.
+A property never set has its default value. And GBO has no `null` texts: a text never set is empty.
 
 ```csharp
 [Fact]
@@ -264,11 +373,11 @@ public void ReadTheDefaultValues()
 
     var book = new Book();
 
-    // GBO has no null strings: a string never set is empty.
+    // GBO has no null texts: a text never set is empty.
     Assert.Equal("", book.Title);
     Assert.Equal(0, book.Year);
     Assert.Equal(0m, book.Price);
-    Assert.False(book.Borrowed);
+    Assert.Equal(Availability.Available, book.Availability);
 }
 ```
 
@@ -440,7 +549,7 @@ public void CountAndTestBooks()
 
     // A value from outside is a state: passed before the lambda, received after the book. This line would not compile:
     //     BookCollection.Count(book => book.Year < before);   // error GBO013: the lambda captures "before"
-    int before = 1950;
+    Year before = 1950;
     Assert.Equal(2, BookCollection.Count(before, static (book, year) => book.Year < year));
 
     // Two values of state, in their order.
@@ -486,18 +595,20 @@ public void AggregateBooks()
     // The six books, as listed above.
 
     Assert.Equal(51.60m, BookCollection.Sum(static book => book.Price));
-    Assert.Equal(8.60m, BookCollection.Average(static book => book.Price));
+    Assert.Equal(8.60m, BookCollection.Average(static book => book.Price.Value));
     Assert.Equal((1932, 1984), (BookCollection.Min(static book => book.Year), BookCollection.Max(static book => book.Year)));
 
     // MaxBy gives the book of the greatest key, where Max gives the key.
     Assert.Equal("Neuromancer", BookCollection.MaxBy(static book => book.Price).Title);
 
+    // A text is read in place: a key that GroupBy or ToDictionary keeps is its string, ToString().
+
     // GroupBy gives one group per author, with its key and its books, in the order of their first book.
-    var authors = BookCollection.GroupBy(static book => book.Author).Select(static group => $"{group.Key}: {group.Count()}").ToList();
+    var authors = BookCollection.GroupBy(static book => book.Author.ToString()).Select(static group => $"{group.Key}: {group.Count()}").ToList();
     Assert.Equal(["Frank Herbert: 1", "Isaac Asimov: 2", "William Gibson: 1", "George Orwell: 1", "Aldous Huxley: 1"], authors);
 
     // ToDictionary finds a book by a key: two books of the same key would throw.
-    var byTitle = BookCollection.ToDictionary(static book => book.Title);
+    var byTitle = BookCollection.ToDictionary(static book => book.Title.ToString());
     Assert.Equal(1965, byTitle["Dune"].Year);
 }
 ```
@@ -536,7 +647,7 @@ public void FindABookOrNone()
     Assert.Equal(0, hamlet.Select(static found => found.Year).GetOr(0));
 
     // Match handles both cases.
-    Assert.Equal("not in the library", hamlet.Match(static found => found.Title, static () => "not in the library"));
+    Assert.Equal("not in the library", hamlet.Match(static found => found.Title.ToString(), static () => "not in the library"));
 
     // Get gives the item, and throws if it is absent: use it when the absence is a bug.
     Assert.Equal("Dune", dune.Get().Title);
@@ -596,7 +707,8 @@ public void SearchWithViews()
     {
         // A View has the properties of the book, to read only: it has no setter.
         BookView dune = BookViewCollection.First(static book => book.Title == "Dune");
-        Assert.Equal(("Frank Herbert", 1965), (dune.Author, dune.Year));
+        Assert.Equal("Frank Herbert", dune.Author);
+        Assert.Equal(1965, dune.Year);
 
         Assert.Equal(2, BookViewCollection.Count(10m, static (book, price) => book.Price < price));
         Assert.Equal(["Foundation", "Dune", "Neuromancer"], BookViewCollection.OrderBy(static book => book.Year).Select(static book => book.Title).ToList());
@@ -648,7 +760,7 @@ public void ChangeTheBooksFoundWithTheirBodies()
 
 ### Lesson 11: Add your own code
 
-`Book` and `BookView` are partial: add computed properties and business rules to them in your own files. GBO stores the properties of the model only; what you add is computed, or lives as long as the object.
+`Book` and `BookView` are partial: add computed properties and business rules to them in your own files. GBO stores the properties of the model only: what you add is computed, or kept by your rules in a property of the model.
 
 ```csharp
 internal partial class Book
@@ -656,10 +768,8 @@ internal partial class Book
     /// <summary>A computed property: GBO does not store it, it is computed at each read.</summary>
     public bool IsClassic => Year < 1960;
 
-    /// <summary>A plain property of the object: GBO does not store it, it lives as long as this Body.</summary>
-    public int PriceChanges { get; private set; }
-
-    // For each property of the model, the generator declares a partial method, called after a real change of its value.
+    // For each property of the model, the generator declares a partial method, called after a real change of its value. This
+    // rule keeps PriceChanges, a property of the model: the count is stored, committed and seen by every transaction.
     partial void OnPriceChanged() => PriceChanges++;
 }
 
@@ -670,7 +780,11 @@ internal readonly partial struct BookView
 }
 ```
 
-A computed property is used in a query as any property, and the rule counts the real changes only: the same price written again is not one.
+> **Warning: Never a field of your own in a Body**
+>
+> A Body lives in one transaction: a field or an auto-property that you declare in its partial class, `public int PriceChanges { get; private set; }`, is stored nowhere. No other transaction sees it, no commit writes it, no replica receives it, and it starts again at each transaction. What a rule must keep is a property of the model, as `PriceChanges` above; what is computed is a property with a body, as `IsClassic`.
+
+A computed property is used in a query as any property, and the rule counts the real changes only: the same price written again is not one. The count is a property of the model: committed with the book, a new transaction reads it.
 
 ```csharp
 [Fact]
@@ -678,21 +792,32 @@ public void ComputeAndReactInTheEntity()
 {
     using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-11-code", StoreAccessMode.ReadWrite);
     using var library = new LibraryRepository(store);
-    using var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite);
-    var dune = new Book { Title = "Dune", Year = 1965, Price = 9.90m };
-    new Book { Title = "Foundation", Year = 1951, Price = 8.50m };
+    int changes;
+    using (var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite))
+    {
+        var dune = new Book { Title = "Dune", Year = 1965, Price = 9.90m };
+        new Book { Title = "Foundation", Year = 1951, Price = 8.50m };
 
-    // The computed property, on the Body and on the View, as any property.
-    Assert.False(dune.IsClassic);
-    Assert.Equal(1, BookCollection.Count(static book => book.IsClassic));
-    Assert.Equal("Foundation", BookViewCollection.Single(static book => book.IsClassic).Title);
+        // The computed property, on the Body and on the View, as any property.
+        Assert.False(dune.IsClassic);
+        Assert.Equal(1, BookCollection.Count(static book => book.IsClassic));
+        Assert.Equal("Foundation", BookViewCollection.Single(static book => book.IsClassic).Title);
 
-    // The rule counts the real changes: the same price written again is not one.
-    int before = dune.PriceChanges;
-    dune.Price = 12.50m;
-    dune.Price = 12.50m;
-    dune.Price = 13.00m;
-    Assert.Equal(2, dune.PriceChanges - before);
+        // The rule counts the real changes: the same price written again is not one.
+        int before = dune.PriceChanges;
+        dune.Price = 12.50m;
+        dune.Price = 12.50m;
+        dune.Price = 13.00m;
+        Assert.Equal(2, dune.PriceChanges - before);
+        changes = dune.PriceChanges;
+        transaction.Commit();
+    }
+
+    // The count is a property of the model: committed with the book, a new transaction reads it.
+    using (library.OpenTransaction(StoreAccessMode.ReadOnly))
+    {
+        Assert.Equal(changes, BookViewCollection.Single(static book => book.Title == "Dune").PriceChanges);
+    }
 }
 ```
 
@@ -711,7 +836,7 @@ The collections are ambient: `BookCollection` finds the transaction of the conte
 private static bool IsBargain(Book book) => book.Price < 8m;
 
 // A method that runs a query itself: it receives no context, no transaction, no collection.
-private static int CountBooksOf(string author) => BookCollection.Count(author, static (book, name) => book.Author == name);
+private static int CountBooksOf(AuthorName author) => BookCollection.Count(author, static (book, name) => book.Author == name);
 ```
 
 ```csharp
@@ -778,28 +903,28 @@ In Entity Framework, a method that reads or writes needs the `DbContext`: it rec
 Here is the end of the year of the library, in methods that call each other, as your services would:
 
 ```csharp
-private static void CloseTheYear(int year)
+private static void CloseTheYear(Year year)
 {
-    DiscountTheBooksBefore(1960, 0.10m);
+    DiscountTheBooksBefore(1960, 10);
     ReprintTheBooksBefore(1950, year);
 }
 
 // Queries and changes.
-private static void DiscountTheBooksBefore(int year, decimal rate)
+private static void DiscountTheBooksBefore(Year year, Percent rate)
 {
     foreach (var book in BookCollection.Where(year, static (book, before) => book.Year < before))
-        book.Price = Math.Round(book.Price * (1 - rate), 2);
+        book.Price -= rate.Of(book.Price);
 }
 
 // Queries and creates.
-private static void ReprintTheBooksBefore(int before, int year)
+private static void ReprintTheBooksBefore(Year before, Year year)
 {
     foreach (var book in BookCollection.Where(before, static (book, limit) => book.Year < limit))
         Reprint(book, year);
 }
 
 // Creates, deeper again.
-private static Book Reprint(Book book, int year) => new() { Title = book.Title, Author = book.Author, Year = year, Price = book.Price };
+private static Book Reprint(Book book, Year year) => new() { Title = book.Title, Author = book.Author, Year = year, Price = book.Price };
 ```
 
 Three levels of calls below the transaction, the methods find it by themselves:
@@ -839,11 +964,11 @@ The lambda of a query is such a method too: it may change the books it reads, or
 // Change or create, and say so: to be called in the lambda of a query.
 private static bool Lend(Book book)
 {
-    book.Borrowed = true;
+    book.Availability = Availability.Borrowed;
     return true;
 }
 
-private static bool Reprinted(Book book, int year)
+private static bool Reprinted(Book book, Year year)
 {
     Reprint(book, year);
     return true;
@@ -863,7 +988,7 @@ public void ChangeAndCreateBooksInsideAQuery()
 
     // The lambda lends each old book it meets: the query changes the books while it reads them.
     Assert.Equal(2, BookCollection.Count(static book => book.Year < 1960 && Lend(book)));
-    Assert.Equal(["Foundation", "1984"], BookCollection.Where(static book => book.Borrowed).Select(static book => book.Title).ToList());
+    Assert.Equal(["Foundation", "1984"], BookCollection.Where(static book => book.Availability == Availability.Borrowed).Select(static book => book.Title).ToList());
 
     // The lambda reprints each book older than 1950, in 2026. The reprint is created during the enumeration, so the
     // same query meets it too, later: it is from 2026, and is not reprinted again.
@@ -1183,52 +1308,7 @@ The level of conflict is chosen when a transaction opens:
 | -------------------------- | -------------------------------------------------------------------------------------------------- |
 | `Optimistic` (the default) | A book changed or removed since the transaction opened is a conflict.                              |
 | `Pessimistic`              | As `Optimistic`, and a change of any entity of a type that the transaction read is a conflict too. |
-| `Override`                 | Nothing: the last commit wins.                                                                     |
 | `Exclusive`                | Nothing to check: no conflict can happen (Lesson 17).                                              |
-
-With `Override`, the first transaction below commits after the second one, and replaces its price:
-
-```csharp
-[Fact]
-public async Task LetTheLastCommitWinWithOverride()
-{
-    using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-16-override", StoreAccessMode.ReadWrite);
-    using var library = new LibraryRepository(store);
-    using (var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite))
-    {
-        new Book { Title = "Dune", Price = 9.90m };
-        transaction.Commit();
-    }
-    var firstChanged = new TaskCompletionSource();
-    var secondCommitted = new TaskCompletionSource();
-
-    var first = Task.Run(async () =>
-    {
-        // The level of conflict, given when the transaction opens.
-        using var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite, TransactionConflictLevel.Override);
-        BookCollection.Single().Price = 12.50m;
-        firstChanged.SetResult();
-        await secondCommitted.Task;
-
-        // No check: this commit replaces the price that the other transaction committed.
-        transaction.Commit();
-    });
-    await firstChanged.Task;
-    await Task.Run(() =>
-    {
-        using var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite);
-        BookCollection.Single().Price = 11.00m;
-        transaction.Commit();
-    });
-    secondCommitted.SetResult();
-    await first;
-
-    using (library.OpenTransaction(StoreAccessMode.ReadOnly))
-    {
-        Assert.Equal(12.50m, BookCollection.Single().Price);
-    }
-}
-```
 
 ### Lesson 17: Exclusive transactions
 
@@ -1322,14 +1402,138 @@ public async Task BoundTheWaitOfAnExclusiveTransaction()
 }
 ```
 
+## Part 6: Values that say what they are
+
+### Lesson 18: Give each value its type
+
+A `decimal` does not say whether it is a price, a deposit or a rate; a `string`, whether it is a title or an author. **A value object** names its concept, checks its values, and holds its operators: a deposit given where a rate is due no longer compiles. Every value of `MBook` is one, declared at the head of the model, in [Lesson 1](#lesson-1-declare-a-model): `Title`, `AuthorName`, `Year`, `Money`, `Isbn`, `Percent`, `ShelfMark`. This lesson shows what GBO writes for them.
+
+**You declare a value object and its rules; GBO writes the rest**, and the code that runs is the code of the value inside it: reading a `Year` costs what reading an `int` costs.
+
+| You write | GBO writes |
+| --- | --- |
+| `[ValueObject<T>]` on a `readonly partial struct`, `T` a number, a date, a time or a `Guid` | `Value`; `From`, which throws when your rule refuses the value, and `TryFrom`, which says false; the equality; the order; `Parse` and `TryParse`; the formats of `T` |
+| `Operators = ValueOperators.Add \| ...` | The operators between two values, `+`, `-`, `*`, `/`: `Sum` adds by `+`. Never by default: an amount added to an amount makes sense, an amount multiplied by an amount does not |
+| `ImplicitConversion = true` | `Price = 9.90m`, `Year = 1965`, checked as by `From`. Never by default: a number does not say its unit, 1250 cents or 1250 euros; the library asks for it, so that its values read as they are written |
+| `static bool IsValid(T value)` | The check of each value that `From`, `TryFrom`, `Parse` and a conversion create. `default` is the default value, never checked; a value read back from the Store is not checked again |
+| `ToString()` | Nothing more: your display wins |
+| `[ValueObject<GhostString>]` on a `readonly ref partial struct` | A text in disguise, in two types as `GhostString` and `ReadOnlyGhostString`: `Title`, that a `Book` reads and writes in place, each text checked by your rule, and `ReadOnlyTitle`, that a `BookView` reads; made from a `string`, `ShelfMark shelf = "SF-12";`, compared to one, never copied but by `ToString()` |
+
+GBO stores each value object as the value inside it: a `Money` as a `decimal`, a `Title` as a text. Its indexes, its ranges, its sums and its merges are those of that value.
+
+Check, then write: a value that breaks its rule never exists, and so never reaches a book.
+
+```csharp
+[Fact]
+public void StoreAndQueryTheValueObjectsOfTheBooks()
+{
+    using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-18-values", StoreAccessMode.ReadWrite);
+    using var library = new LibraryRepository(store);
+    using (var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite))
+    {
+        // Check, then write: a text that is no ISBN gives none.
+        Assert.False(Isbn.TryRead("not an isbn", out _));
+        Assert.True(Isbn.TryRead("978-0-441-17271-9", out var dune));
+        Assert.True(Isbn.TryRead("978-0-553-29335-7", out var foundation));
+        new Book { Title = "Dune", Isbn = dune, Deposit = Money.From(20m), MemberDiscount = Percent.From(10), Shelf = "SF-12" };
+        new Book { Title = "Foundation", Isbn = foundation, Deposit = Money.From(15m), Shelf = "SF-07" };
+        // Without a deposit nor a discount: the Options are absent.
+        new Book { Title = "Emma", Shelf = "RO-01" };
+
+        // A value that breaks its rule does not exist: TryFrom says false, From and a conversion throw.
+        Assert.False(Money.TryFrom(-1m, out _));
+        Assert.Throws<ArgumentException>(static () => Percent.From(150));
+        Assert.Throws<ArgumentException>(static () => { Money price = -0.01m; });
+        Assert.Throws<ArgumentException>(static () => new ShelfMark("12"));
+        transaction.Commit();
+    }
+
+    using (library.OpenTransaction(StoreAccessMode.ReadOnly))
+    {
+        // The sum and the greatest of the deposits, by the operators of Money, and its display.
+        var total = BookViewCollection.Sum(static book => book.Deposit.GetOr(0m));
+        Assert.Equal((Money.From(35m), "35.00"), (total, total.ToString()));
+        Assert.Equal(Money.From(20m), BookViewCollection.Max(static book => book.Deposit.GetOr(0m)));
+
+        // A book found by its ISBN, compared as a long; the ISBN given to the lambda as its state.
+        Assert.True(Isbn.TryRead("9780553293357", out var wanted));
+        var found = BookViewCollection.Single(wanted, static (book, isbn) => book.Isbn == isbn);
+        Assert.Equal("Foundation", found.Title);
+        Assert.Equal("9780553293357", found.Isbn.ToString());
+
+        // The discount of a member, applied by its own method.
+        var discounted = BookViewCollection.Single(static book => book.MemberDiscount.Any());
+        Assert.Equal(Money.From(2m), discounted.MemberDiscount.Get().Of(discounted.Deposit.Get()));
+        Assert.False(BookViewCollection.Single(static book => book.Title == "Emma").Deposit.Any());
+    }
+}
+```
+
+A text in disguise is read where it is stored: compared to a string, given as the state of a query, selected and ordered in place. Its string is made only when the code asks for one.
+
+```csharp
+[Fact]
+public void ReadTheTextsInPlace()
+{
+    // Three books: Foundation, Dune and Emma, of their authors and shelves.
+
+    using (library.OpenTransaction(StoreAccessMode.ReadOnly))
+    {
+        // A local value made from a string, checked, then given as the state of a query.
+        ShelfMark shelf = "SF-12";
+        Assert.Equal("Dune", BookViewCollection.Single(shelf, static (book, mark) => book.Shelf == mark).Title);
+        Assert.True(BookViewCollection.First().Shelf.StartsWith("SF-"));
+
+        // Selected and ordered in place: ToList copies each title into a string, once.
+        Assert.Equal(["Dune", "Emma", "Foundation"], BookViewCollection.OrderBy(static book => book.Title).Select(static book => book.Title).ToList());
+        Assert.Equal(["Emma", "Foundation"], BookViewCollection.Where(static book => book.Shelf != "SF-12").OrderByDescending(static book => book.Author).Select(static book => book.Title).ToList());
+
+        // A string of it, when the code needs one: an interpolation, a key of a dictionary.
+        var dune = BookViewCollection.Single(static book => book.Title == "Dune");
+        Assert.Equal("Dune, by Frank Herbert", $"{dune.Title}, by {dune.Author}");
+        Assert.Equal(3, BookViewCollection.ToDictionary(static book => book.Title.ToString()).Count);
+    }
+}
+```
+
+> **Warning: A text in disguise stays in its method**
+>
+> A text value object is a `ref struct`, as a `GhostString`: a field of the model, a parameter, a local value, the state of a query that ends it (`Count`, `Single`, `Any`...), the result and the key of a `Select` and an `OrderBy`. Never a field of a class, an element of a `List` or of a tuple, a parameter of an `async` method, the key that `GroupBy`, `DistinctBy` or `ToDictionary` keeps: there, take its string, `ToString()`, which an interpolation and an assertion take by themselves. To carry a text further, put it in a Record (Tutorial Six).
+
+**The fastest amount is in cents, over a `long`.** A `decimal` adds and compares by a call; a `long`, in one instruction. The library keeps its prices in `decimal`, to read them as they are written, `9.90m`; a model whose amounts are many and summed often stores them in cents:
+
+```csharp
+[ValueObject<long>(Operators = ValueOperators.Add | ValueOperators.Subtract)]
+internal readonly partial struct Cents
+{
+    private static bool IsValid(long cents) => cents >= 0;
+
+    public override string ToString() => $"{Value / 100}.{Value % 100:D2}";
+}
+
+[Fact]
+public void CountInCents()
+{
+    var price = Cents.From(990);
+    Assert.Equal((Cents.From(1980), "19.80"), (price + price, (price + price).ToString()));
+    Assert.True(Cents.From(850) < price);
+    Assert.False(Cents.TryFrom(-1, out _));
+}
+```
+
+> **Tip: The other forms of a value**
+>
+> A value of several fields, an amount and its currency, is a struct that you write with its layout, `[StructLayout(LayoutKind.Explicit)]`. A type that you do not own, a `Uri`, a type of another library, is stored by a converter, `IGhostConverter<T, TStored>`. A closed set of named states is an enum, never a `bool`: `Availability.Borrowed`. A raw counter that names no value, `PriceChanges`, stays a number.
+
 ## What you learned
 
-- A **model** is a set of interfaces; the generator writes `Book`, `BookView` and `LibraryRepository`.
+- A **model** is a set of interfaces, its **value objects** declared at its head; the generator writes `Book`, `BookView` and `LibraryRepository`.
 - A **Store** keeps the data, in memory, on disk or on a farm of servers: the choice is one line.
 - Every read and write happens in an **ambient transaction**, with no Unit of Work: every change is visible at once, and `Commit()` makes it durable.
 - **Queries** are the operators of LINQ, with static lambdas and their states: no allocation, and any method of yours inside.
 - An absence is an **`Option<T>`**, never `null`.
 - **Views** read many entities for free; **Bodies** change the few you need.
 - Transactions run **concurrently** under MVCC; a conflict is reported at the commit, and an **exclusive** transaction never meets one.
+- Every value is a **value object**: you declare it with `[ValueObject<T>]` and its rules, GBO writes the rest; its operators work in the queries, at the speed of the value inside it, and a text is read in place.
 
-**Next tutorial:** [Tutorial Two: Relationships](Two-Relationships.md)
+The next tutorials go further, from where this one stops.

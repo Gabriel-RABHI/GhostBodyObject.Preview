@@ -18,13 +18,42 @@ A parcel carrier. First its journal, Records alone: a parcel registered, scanned
 
 Two models, each in a namespace of its own, as in the tutorials before: `Journal` for Lessons 1 to 8, with two Logs, `ParcelLog` and `RouteLog`; `Carrier` for Lessons 9 to 11, a Repository of the parcels and their Log, `CarrierLog`.
 
+**The values of the models come first**, each a value object ([Tutorial One, Lesson 18](One-TheBasics.md#lesson-18-give-each-value-its-type)), a value of a Record as of an entity. Those the two models share are declared once, in the namespace of the tutorial; each model declares at its head the values that it alone has. An operator of yours joins those that GBO writes: the time between two moments.
+
+```csharp
+namespace TutorialSix
+{
+    [ValueObject<GhostString>]
+    internal readonly ref partial struct TrackingNumber
+    {
+    }
+
+    [ValueObject<GhostString>]
+    internal readonly ref partial struct Name
+    {
+    }
+
+    [ValueObject<GhostString>]
+    internal readonly ref partial struct Depot
+    {
+    }
+
+    [ValueObject<DateTime>(ImplicitConversion = true)]
+    internal readonly partial struct Instant
+    {
+        /// <summary>The time between two moments: an operator of yours, beside those that GBO writes.</summary>
+        public static TimeSpan operator -(Instant later, Instant earlier) => later.Value - earlier.Value;
+    }
+}
+```
+
 Every declaration of the tutorial, and the lesson that shows it:
 
 | Declaration in the model | What GBO guarantees | Lessons |
 | ------------------------ | ------------------- | ------- |
 | `[Record(n, version, max)]` on `MParcelRegistered` | A Record type, its number stable in the Log: the class `ParcelRegistered`, created anywhere, frozen once added; its View `ParcelRegisteredView` | 1, 3 |
 | `[GhostLog]` and `[IncludeRecordModel]` on `MParcelLog` | A Log of these Record types: the class `ParcelLog`, its transactions, its subscriptions; `ParcelLogCollections.ParcelCollection`, the Records of a transaction | 1, 2 |
-| An enum, a `decimal`, a `GhostSpan<T>`, a struct of an explicit layout, an `Option<T>`, a `GhostString` in a Record | The values of a Record, read in place by its View, without a copy | 4 |
+| An enum, a value object, a `GhostSpan<T>`, a struct of an explicit layout, an `Option<T>`, a text value object in a Record | The values of a Record, read in place by its View, without a copy | 4 |
 | A `*Ref` in a Record | The identity of an entity, never a link: a fact names what it is about | 9 |
 | `AddChildStore` and `repository.Chain(log)` | The Records and the entities in one transaction, or neither | 9 |
 
@@ -37,46 +66,53 @@ A Record is declared as an entity: an interface whose name starts with `M`, its 
 The Log is an interface with `[GhostLog]`, which includes its Record types by `[IncludeRecordModel]`, as a Repository includes its entity types. `MParcelLog` gives the class `ParcelLog`, and `ParcelLogCollections.ParcelCollection`, the Records of its transaction:
 
 ```csharp
+// The weight of a parcel, in grams: a value of this model alone.
+[ValueObject<int>(ImplicitConversion = true)]
+internal readonly partial struct Grams
+{
+    private static bool IsValid(int grams) => grams >= 0;
+}
+
 // [Record(type, version, maxPropertyIdentifier)]: a Record type, as [Entity] declares an entity type. Its number is stable: the
 // Log stores it with each Record. The interface starts with M: MParcelRegistered gives the class ParcelRegistered.
 [Record(1, 1, 4)]
 internal interface MParcelRegistered
 {
     [Property(1)]
-    string TrackingNumber { get; set; }
+    TrackingNumber TrackingNumber { get; set; }
 
     [Property(2)]
-    string Recipient { get; set; }
+    Name Recipient { get; set; }
 
     [Property(3)]
-    int Grams { get; set; }
+    Grams Grams { get; set; }
 
     [Property(4)]
-    DateTime Registered { get; set; }
+    Instant Registered { get; set; }
 }
 
 [Record(2, 1, 3)]
 internal interface MParcelScanned
 {
     [Property(1)]
-    string TrackingNumber { get; set; }
+    TrackingNumber TrackingNumber { get; set; }
 
     // The depot where the parcel was scanned.
     [Property(2)]
-    string Depot { get; set; }
+    Depot Depot { get; set; }
 
     [Property(3)]
-    DateTime Scanned { get; set; }
+    Instant Scanned { get; set; }
 }
 
 [Record(3, 1, 2)]
 internal interface MParcelDelivered
 {
     [Property(1)]
-    string TrackingNumber { get; set; }
+    TrackingNumber TrackingNumber { get; set; }
 
     [Property(2)]
-    DateTime Delivered { get; set; }
+    Instant Delivered { get; set; }
 }
 
 // [GhostLog]: a Log, and the Record types it holds, each by [IncludeRecordModel]. MParcelLog gives the class ParcelLog, opened on
@@ -317,7 +353,7 @@ public void KeepAViewAfterItsDelivery()
     end.Cancel();
 
     // The Views read the Records where the Log keeps them: nothing was copied.
-    Assert.Equal(["Lyon", "Paris"], scans.Select(static scan => scan.Depot));
+    Assert.Equal(["Lyon", "Paris"], scans.Select(static scan => scan.Depot.ToString()));
     Assert.Equal(TimeSpan.FromHours(5), scans[1].Scanned - scans[0].Scanned);
 }
 ```
@@ -408,16 +444,34 @@ public void AddARecordOnceAndReadItsView()
 
 ### Lesson 4: The values of a Record
 
-A Record takes the values of an entity: the numbers, the decimals, the dates, the enums, the `Option<T>`, the texts, the arrays of values, `GhostSpan<T>`, and the structs of your own, their layout declared. It has **no link**: a Record is a fact, read long after the entities it names have changed or gone. It names them by their identity instead, a generated `*Ref` (Lesson 9).
+A Record takes the values of an entity: its value objects, numbers, dates and texts, the enums, the `Option<T>`, the arrays of values, `GhostSpan<T>`, and the structs of your own, their layout declared. It has **no link**: a Record is a fact, read long after the entities it names have changed or gone. It names them by their identity instead, a generated `*Ref` (Lesson 9).
 
 The lesson declares a second Log, `RouteLog`, for the routes planned for the parcels: a Log holds the Record types it includes, each Log on its own Store.
 
 ```csharp
+// The values of this Log alone, first; the others are those of the tutorial.
+
 internal enum ParcelSize
 {
     Letter,
     Small,
     Large
+}
+
+[ValueObject<decimal>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
+internal readonly partial struct Money
+{
+    private static bool IsValid(decimal amount) => amount >= 0;
+}
+
+[ValueObject<int>(ImplicitConversion = true)]
+internal readonly partial struct DepotNumber
+{
+}
+
+[ValueObject<GhostString>]
+internal readonly ref partial struct Note
+{
 }
 
 // A struct of your own, stored as its bytes are: its layout declared, explicit, a [FieldOffset] on each field, every byte covered
@@ -436,29 +490,29 @@ internal readonly struct Position(double latitude, double longitude)
 internal interface MRoutePlanned
 {
     [Property(1)]
-    string TrackingNumber { get; set; }
+    TrackingNumber TrackingNumber { get; set; }
 
-    // An enum, a decimal: the values of an entity are the values of a Record.
+    // An enum, a value object: the values of an entity are the values of a Record.
     [Property(2)]
     ParcelSize Size { get; set; }
 
     [Property(3)]
-    decimal Cost { get; set; }
+    Money Cost { get; set; }
 
-    // A GhostSpan: an array of values, the numbers of the depots of the route, in the Record.
+    // A GhostSpan: an array of values, the numbers of the depots of the route, in the Record; of value objects, as of numbers.
     [Property(4)]
-    GhostSpan<int> Stops { get; set; }
+    GhostSpan<DepotNumber> Stops { get; set; }
 
     [Property(5)]
     Position Destination { get; set; }
 
     // An Option: a promised day of delivery, or none.
     [Property(6)]
-    Option<DateTime> Promised { get; set; }
+    Option<Instant> Promised { get; set; }
 
-    // A GhostString: a text read in place by the View, without a copy.
+    // A text value object: a text read in place by the View, without a copy, as a GhostString.
     [Property(7)]
-    GhostString Note { get; set; }
+    Note Note { get; set; }
 }
 
 [GhostLog]
@@ -468,7 +522,7 @@ internal interface MRouteLog
 }
 ```
 
-A `GhostSpan<T>` is given as a C# array, and changed in place by `Set` while the Record is detached. The View reads each value where the Log keeps it: a `GhostString` as a `ReadOnlyGhostString`, which compares to a string without a copy; an array as a `ReadOnlyGhostSpan<T>`. A subscription that reads millions of Records allocates nothing for them; `ToString` and `ToArray` make the copy, when one is needed.
+A `GhostSpan<T>` is given as a C# array, and changed in place by `Set` while the Record is detached. The View reads each value where the Log keeps it: a text value object, `Note`, as its read-only form, `ReadOnlyNote`, which compares to a string without a copy, as a `ReadOnlyGhostString`; an array as a `ReadOnlyGhostSpan<T>`. A subscription that reads millions of Records allocates nothing for them; `ToString` and `ToArray` make the copy, when one is needed.
 
 ```csharp
 [Fact]
@@ -484,9 +538,9 @@ public void WriteAndReadEveryKindOfValue()
             TrackingNumber = "PX-4001",
             Size = ParcelSize.Large,
             Cost = 12.90m,
-            Stops = new[] { 69, 21, 75 },
+            Stops = new DepotNumber[] { 69, 21, 75 },
             Destination = new Position(48.8566, 2.3522),
-            Promised = Friday,
+            Promised = Instant.From(Friday),
             Note = "Leave at the reception"
         };
         route.Stops.Set(1, 71);
@@ -501,7 +555,7 @@ public void WriteAndReadEveryKindOfValue()
     Assert.Equal(2.3522, planned.Destination.Longitude);
     Assert.Equal(Friday, planned.Promised.Get());
 
-    // A ReadOnlyGhostString compares to a string without a copy; ToString makes the copy, when one is needed.
+    // A text value object, as a ReadOnlyGhostString, compares to a string without a copy; ToString makes the copy, when one is needed.
     Assert.True(planned.Note == "Leave at the reception");
     Assert.StartsWith("Leave", planned.Note.ToString());
 }
@@ -536,9 +590,9 @@ public void FreezeTheArraysOfARecordOnceAdded()
     using var store = TransactionalMemoryStore.NewInMemoryLogStore("lesson-04-frozen", StoreAccessMode.ReadWrite);
     using var log = new RouteLog(store);
     using var transaction = log.OpenTransaction();
-    var route = new RoutePlanned { TrackingNumber = "PX-4003", Stops = new[] { 69, 75 } }.Add();
+    var route = new RoutePlanned { TrackingNumber = "PX-4003", Stops = new DepotNumber[] { 69, 75 } }.Add();
     Assert.Throws<InvalidOperationException>(() => route.Stops.Set(0, 13));
-    Assert.Throws<InvalidOperationException>(() => route.Stops = new[] { 13 });
+    Assert.Throws<InvalidOperationException>(() => route.Stops = new DepotNumber[] { 13 });
     Assert.Equal([69, 75], route.Stops.ToArray());
     transaction.Commit();
 }
@@ -760,7 +814,7 @@ private sealed class Rounds
 }
 
 // A round of a depot: its scans, in one commit.
-private static void Round(ParcelLog log, string depot, params string[] trackingNumbers)
+private static void Round(ParcelLog log, Depot depot, params string[] trackingNumbers)
 {
     using var transaction = log.OpenTransaction();
     foreach (var trackingNumber in trackingNumbers)
@@ -988,16 +1042,16 @@ The model of Part 3 is a Repository of the parcels and their Log. Each Record na
 internal interface MParcel
 {
     [Property(1)]
-    string TrackingNumber { get; set; }
+    TrackingNumber TrackingNumber { get; set; }
 
     [Property(2)]
-    string Recipient { get; set; }
+    Name Recipient { get; set; }
 
     [Property(3)]
     ParcelStatus Status { get; set; }
 
     [Property(4)]
-    string Depot { get; set; }
+    Depot Depot { get; set; }
 
     [Property(5)]
     int Scans { get; set; }
@@ -1017,10 +1071,10 @@ internal interface MParcelRegistered
     ParcelRef Parcel { get; set; }
 
     [Property(2)]
-    string TrackingNumber { get; set; }
+    TrackingNumber TrackingNumber { get; set; }
 
     [Property(3)]
-    string Recipient { get; set; }
+    Name Recipient { get; set; }
 }
 
 [Record(32, 1, 2)]
@@ -1030,7 +1084,7 @@ internal interface MParcelScanned
     ParcelRef Parcel { get; set; }
 
     [Property(2)]
-    string Depot { get; set; }
+    Depot Depot { get; set; }
 }
 
 [Record(33, 1, 1)]
@@ -1056,14 +1110,14 @@ A command adds its Record, then gives its View to the handler of its type, which
 // the handler of its type, which changes the parcels; a replay gives the same Views to the same handlers (Lesson 10).
 internal static class Parcels
 {
-    public static ParcelRef Register(string trackingNumber, string recipient)
+    public static ParcelRef Register(TrackingNumber trackingNumber, Name recipient)
     {
         var registered = new ParcelRegistered { Parcel = ParcelRef.New(), TrackingNumber = trackingNumber, Recipient = recipient }.Add();
         Apply(registered.ToView());
         return registered.Parcel;
     }
 
-    public static void Scan(ParcelRef parcel, string depot) => Apply(new ParcelScanned { Parcel = parcel, Depot = depot }.Add().ToView());
+    public static void Scan(ParcelRef parcel, Depot depot) => Apply(new ParcelScanned { Parcel = parcel, Depot = depot }.Add().ToView());
 
     public static void Deliver(ParcelRef parcel) => Apply(new ParcelDelivered { Parcel = parcel }.Add().ToView());
 
@@ -1507,5 +1561,3 @@ In a model rebuilt from its Log, every change comes from a handler of a Record, 
 - A **replay** gives the model again, in memory at each opening, on disk on request: the same handlers, Replay transactions, identities taken from the Records.
 
 The next tutorial shows the chains of Stores, the transactions over several Stores, and the distribution.
-
-**Next tutorial:** [Tutorial Seven: Chains and Distribution](Seven-ChainsAndDistribution.md)

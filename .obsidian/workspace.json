@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "Documentation/Tutorials/One-TheBasics.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "One-TheBasics"
             }
           }
         ]
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "Documentation/Tutorials/One-TheBasics.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "Documentation/Tutorials/One-TheBasics.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md",
+                "file": "Documentation/Tutorials/One-TheBasics.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -190,6 +190,32 @@
   },
   "active": "b162e489810370b7",
   "lastOpenFiles": [
+    "README.md",
+    "Documentation/Benchmarks/BENCH-GBO-vs-EF-Postgres.md",
+    "Documentation/Tutorials/Two-Relationships.md",
+    "Documentation/Tutorials/Three-Composition.md",
+    "Documentation/Tutorials/Six-TheLog.md",
+    "Documentation/Tutorials/Seven-ChainsAndDistribution.md",
+    "Documentation/Tutorials/One-TheBasics.md",
+    "Documentation/Tutorials/Four-Edges.md",
+    "Documentation/Tutorials/Five-Indexes.md",
+    "Documentation/Tutorials",
+    "Documentation/Benchmarks/charts/gbo-vs-event-sourcing-restart-disk.svg",
+    "Documentation/Benchmarks/charts/gbo-vs-ycsb-f.svg",
+    "Documentation/Benchmarks/charts/gbo-vs-ycsb-q.svg",
+    "Documentation/Benchmarks/charts/gbo-vs-ycsb-m.svg",
+    "Documentation/Benchmarks/charts/gbo-vs-ycsb-a.svg",
+    "Documentation/Benchmarks/charts/gbo-vs-ycsb-c.svg",
+    "Documentation/Benchmarks/charts/gbo-vs-event-sourcing-throughput.svg",
+    "Documentation/Benchmarks/charts/gbo-vs-ef-query.svg",
+    "Documentation/Benchmarks/charts/gbo-vs-ef-read.svg",
+    "Documentation/Benchmarks/charts/gbo-vs-ef-insert.svg",
+    "Documentation/Benchmarks/charts",
+    "Documentation/Benchmarks/BENCH-GBO-vs-SQLite-RocksDB-Garnet.md",
+    "Documentation/Benchmarks/BENCH-GBO-vs-Event-Sourcing-Engines.md",
+    "Documentation/Benchmarks",
+    "Documentation",
+    "Nouveau dossier",
     "psDC81.tmp",
     "psA38D.tmp",
     "Two-Relationships.md",
@@ -197,15 +223,7 @@
     "Six-TheLog.md.tmp",
     "Five-Indexes.md.tmp",
     "Four-Edges.md.tmp",
-    "Three-Composition.md.tmp",
-    "Two-Relationships.md.tmp",
-    "One-TheBasics.md.tmp",
-    "README.md",
-    "README.md.tmp.42852.a8685e92181e",
     "Seven-ChainsAndDistribution.md",
-    "sedEjfWMR",
-    "ps1BCC.tmp",
-    "GBO-Logo.png",
     "Three-Composition.md",
     "Six-TheLog.md",
     "Four-Edges.md",

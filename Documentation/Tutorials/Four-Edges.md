@@ -21,6 +21,35 @@ A site of movie reviews: critics, movies, the ratings that critics give and the 
 
 Four models, each in a namespace of its own with its own Repository, as in Tutorials Two and Three: `Reviews` for Lessons 1 to 4, `Network` for Lessons 5 and 6, `Social` for Lessons 7 to 9, `Choices` for Lesson 10.
 
+**The values of the models come first**, each a value object ([Tutorial One, Lesson 18](One-TheBasics.md#lesson-18-give-each-value-its-type)). Those the four models share are declared once, in the namespace of the tutorial; each model declares at its head the values that it alone has. The values of an edge are given to its birth by their name, as any value: `critic.NewRating(movie, stars: 5)`.
+
+```csharp
+namespace TutorialFour
+{
+    [ValueObject<GhostString>]
+    internal readonly ref partial struct Name
+    {
+    }
+
+    [ValueObject<GhostString>]
+    internal readonly ref partial struct Title
+    {
+    }
+
+    /// <summary>A text written by a person: a notice, a post.</summary>
+    [ValueObject<GhostString>]
+    internal readonly ref partial struct FreeText
+    {
+    }
+
+    /// <summary>A moment, a date and a time.</summary>
+    [ValueObject<DateTime>(ImplicitConversion = true)]
+    internal readonly partial struct Instant
+    {
+    }
+}
+```
+
 Every declaration of the tutorial, and the lesson that shows it:
 
 | Declaration in the model | What GBO guarantees | Lessons |
@@ -40,6 +69,19 @@ Every declaration of the tutorial, and the lesson that shows it:
 A critic rates a movie with stars, on a date. The stars are neither a value of the critic, who rates many movies, nor of the movie, rated by many critics: they are the values of the relation itself. The rating is an **edge**: an `[Entity]` with `[Edge(nameof(MCritic), nameof(MMovie))]`, whose interface starts with `E`.
 
 ```csharp
+// The values of this model alone, first; the others are those of the tutorial.
+[ValueObject<int>(ImplicitConversion = true)]
+internal readonly partial struct Year
+{
+}
+
+/// <summary>The stars of a rating, from 0 to 5. A sum of ratings is no rating: it adds their values.</summary>
+[ValueObject<int>(ImplicitConversion = true)]
+internal readonly partial struct Stars
+{
+    private static bool IsValid(int stars) => stars is >= 0 and <= 5;
+}
+
 [Entity(1, 1, 1)]
 [Root]
 [Removable]
@@ -47,7 +89,7 @@ A critic rates a movie with stars, on a date. The stars are neither a value of t
 internal interface MCritic
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 }
 
 [Entity(2, 1, 2)]
@@ -57,10 +99,10 @@ internal interface MCritic
 internal interface MMovie
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     [Property(2)]
-    int Year { get; set; }
+    Year Year { get; set; }
 }
 
 [Entity(3, 1, 2)]
@@ -70,10 +112,10 @@ internal interface MMovie
 internal interface ERating
 {
     [Property(1)]
-    int Stars { get; set; }
+    Stars Stars { get; set; }
 
     [Property(2)]
-    DateTime At { get; set; }
+    Instant At { get; set; }
 }
 
 [Entity(4, 1, 1)]
@@ -82,7 +124,7 @@ internal interface ERating
 internal interface EScreening
 {
     [Property(1)]
-    DateTime At { get; set; }
+    Instant At { get; set; }
 }
 
 [GhostRepository]
@@ -121,7 +163,9 @@ public void RateAMovie()
     using (reviews.OpenTransaction(StoreAccessMode.ReadOnly))
     {
         var rating = RatingCollection.Single();
-        Assert.Equal(("Ada", "Dune", 5), (rating.Critic.Name, rating.Movie.Title, rating.Stars));
+        Assert.Equal("Ada", rating.Critic.Name);
+        Assert.Equal("Dune", rating.Movie.Title);
+        Assert.Equal(5, rating.Stars);
     }
 }
 ```
@@ -142,11 +186,11 @@ public void ReadTheRatingsFromBothEnds()
     bob.NewRating(dune, 4);
 
     // From the critic: the movies she rated, and her rating of one of them.
-    Assert.Equal(["Alien", "Dune"], ada.RatingEdges.Targets.Select(static m => m.Title).OrderBy(static t => t).ToList());
+    Assert.Equal(["Alien", "Dune"], ada.RatingEdges.Targets.Select(static m => m.Title).Order().ToList());
     Assert.Equal(3, ada.RatingEdges.To(alien).Get().Stars);
 
     // From the movie: the critics who rated it, and the rating of one of them.
-    Assert.Equal(["Ada", "Bob"], dune.RatingEdges.Sources.Select(static c => c.Name).OrderBy(static n => n).ToList());
+    Assert.Equal(["Ada", "Bob"], dune.RatingEdges.Sources.Select(static c => c.Name).Order().ToList());
     Assert.Equal(4, dune.RatingEdges.From(bob).Get().Stars);
 
     // A pair without rating.
@@ -209,7 +253,7 @@ public void RateAMovieOnce()
 }
 
 // Rates the movie: the rating of the pair, or a new one.
-private static void Rate(Critic critic, Movie movie, int stars) => critic.RatingEdges.GetOrNew(movie).Stars = stars;
+private static void Rate(Critic critic, Movie movie, Stars stars) => critic.RatingEdges.GetOrNew(movie).Stars = stars;
 ```
 
 A critic may see a movie several times: **`[Edge(..., Multiple = true)]`** allows several edges per pair. The screenings of a pair are then a sequence, `ada.ScreeningEdges.To(dune)`, and the movies she saw are each listed once in her `Targets`.
@@ -230,7 +274,7 @@ public void SeeAMovieSeveralTimes()
     Assert.Equal(3, ada.ScreeningEdges.Count());
     Assert.Equal(2, ada.ScreeningEdges.To(dune).Count());
     Assert.Equal(new DateTime(2026, 10, 1), ada.ScreeningEdges.To(dune).Max(static s => s.At));
-    Assert.Equal(["Alien", "Dune"], ada.ScreeningEdges.Targets.Select(static m => m.Title).OrderBy(static t => t).ToList());
+    Assert.Equal(["Alien", "Dune"], ada.ScreeningEdges.Targets.Select(static m => m.Title).Order().ToList());
     transaction.Commit();
 }
 ```
@@ -343,8 +387,8 @@ public void ReadTheRatingsOfAMovieByItsView()
     using var transaction = reviews.OpenTransaction(StoreAccessMode.ReadOnly);
     var dune = MovieViewCollection.Single(static m => m.Title == "Dune");
     Assert.Equal(3, dune.RatingEdges.Count());
-    Assert.Equal(9, dune.RatingEdges.Sum(static r => r.Stars));
-    Assert.Equal(["Ada", "Bob", "Cid"], dune.RatingEdges.Sources.Select(static c => c.Name).OrderBy(static n => n).ToList());
+    Assert.Equal(9, dune.RatingEdges.Sum(static r => r.Stars.Value));
+    Assert.Equal(["Ada", "Bob", "Cid"], dune.RatingEdges.Sources.Select(static c => c.Name).Order().ToList());
 
     // The rating of a pair, from either end, its other end given by its View.
     var bob = CriticViewCollection.Single(static c => c.Name == "Bob");
@@ -363,9 +407,9 @@ public void RankTheMovies()
     using var reviews = NewSite(store);
     using var transaction = reviews.OpenTransaction(StoreAccessMode.ReadOnly);
     var ranking = MovieViewCollection
-        .Select(static m => (m.Title, Average: (double)m.RatingEdges.Sum(static r => r.Stars) / m.RatingEdges.Count()))
-        .OrderBy(static m => -m.Average).ToList();
-    Assert.Equal(["Heat", "Alien", "Dune"], ranking.ConvertAll(static m => m.Title));
+        .OrderByDescending(static m => (double)m.RatingEdges.Sum(static r => r.Stars.Value) / m.RatingEdges.Count())
+        .Select(static m => m.Title).ToList();
+    Assert.Equal(["Heat", "Alien", "Dune"], ranking);
 }
 ```
 
@@ -392,7 +436,7 @@ public void WriteTheFewByTheirBody()
     using (reviews.OpenTransaction(StoreAccessMode.ReadOnly))
     {
         Assert.Equal(2, MovieViewCollection.Single(static m => m.Title == "Dune").RatingEdges.Count());
-        Assert.Equal(8, MovieViewCollection.Single(static m => m.Title == "Alien").RatingEdges.Sum(static r => r.Stars));
+        Assert.Equal(8, MovieViewCollection.Single(static m => m.Title == "Alien").RatingEdges.Sum(static r => r.Stars.Value));
     }
 }
 ```
@@ -404,6 +448,20 @@ public void WriteTheFewByTheirBody()
 The roads of a road map link cities to cities: an edge whose two ends are of one type, `[Edge(nameof(MCity), nameof(MCity))]`. Its ends are named **`From`** and **`To`**.
 
 ```csharp
+// The values of this model alone, first; the others are those of the tutorial.
+[ValueObject<double>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
+internal readonly partial struct Kilometers
+{
+    private static bool IsValid(double kilometers) => kilometers >= 0;
+}
+
+/// <summary>Whether a road is free or has a toll: a kind, an enum, not a bool.</summary>
+internal enum RoadKind
+{
+    Free,
+    Toll
+}
+
 [Entity(1, 1, 1)]
 [Root]
 [Removable]
@@ -412,7 +470,7 @@ The roads of a road map link cities to cities: an edge whose two ends are of one
 internal interface MCity
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 }
 
 [Entity(2, 1, 2)]
@@ -422,10 +480,10 @@ internal interface MCity
 internal interface ERoad
 {
     [Property(1)]
-    double Distance { get; set; }
+    Kilometers Distance { get; set; }
 
     [Property(2)]
-    bool Toll { get; set; }
+    RoadKind Kind { get; set; }
 }
 
 [GhostRepository]
@@ -458,7 +516,7 @@ public void ConnectTwoCitiesInOneDirection()
     transaction.Commit();
 }
 
-private static City NewCity(string name) => new(CityRef.New()) { Name = name };
+private static City NewCity(Name name) => new(CityRef.New()) { Name = name };
 ```
 
 A way back is another road:
@@ -490,12 +548,12 @@ public void HaveSeveralRoadsBetweenTwoCities()
     using var map = new RoadMapRepository(store);
     using var transaction = map.OpenTransaction(StoreAccessMode.ReadWrite);
     var (paris, lyon) = (NewCity("Paris"), NewCity("Lyon"));
-    paris.NewRoad(lyon, distance: 465, toll: true);
+    paris.NewRoad(lyon, distance: 465, kind: RoadKind.Toll);
     paris.NewRoad(lyon, distance: 490);
 
     Assert.Equal(2, paris.RoadEdges.To(lyon).Count());
     Assert.Equal(465, paris.RoadEdges.To(lyon).Min(static r => r.Distance));
-    Assert.Equal(490, paris.RoadEdges.To(lyon).Single(static r => !r.Toll).Distance);
+    Assert.Equal(490, paris.RoadEdges.To(lyon).Single(static r => r.Kind == RoadKind.Free).Distance);
 
     // Lyon is one target, whatever the number of roads to it.
     Assert.Equal(["Lyon"], paris.RoadEdges.Targets.Select(static c => c.Name).ToList());
@@ -520,14 +578,14 @@ private static RoadMapRepository NewMap(TransactionalMemoryStore store)
     var grenoble = NewCity("Grenoble");
     var marseille = NewCity("Marseille");
     var nice = NewCity("Nice");
-    paris.NewRoad(lyon, 465, toll: true);
+    paris.NewRoad(lyon, 465, kind: RoadKind.Toll);
     paris.NewRoad(dijon, 315);
     paris.NewRoad(lille, 225);
     dijon.NewRoad(lyon, 195);
-    lyon.NewRoad(marseille, 315, toll: true);
+    lyon.NewRoad(marseille, 315, kind: RoadKind.Toll);
     lyon.NewRoad(grenoble, 110);
     grenoble.NewRoad(marseille, 270);
-    marseille.NewRoad(nice, 200, toll: true);
+    marseille.NewRoad(nice, 200, kind: RoadKind.Toll);
     transaction.Commit();
     return map;
 }
@@ -592,17 +650,17 @@ public void FindTheShortestRoute()
     Assert.False(ShortestRoute(CityViewCollection.Single(static c => c.Name == "Nice"), paris, avoidTolls: false).Any());
 }
 
-private sealed record Route(List<string> Cities, double Distance);
+private sealed record Route(List<string> Cities, Kilometers Distance);
 
 // The shortest route, by Dijkstra's algorithm: the city of the shortest known distance first, each road that leaves it
 // giving a shorter distance to its target remembered. None when no route reaches the target.
 private static Option<Route> ShortestRoute(CityView from, CityView to, bool avoidTolls)
 {
-    var distances = new Dictionary<CityRef, double> { [from.Ref] = 0 };
+    var distances = new Dictionary<CityRef, Kilometers> { [from.Ref] = 0 };
     var previous = new Dictionary<CityRef, CityView>();
-    var queue = new PriorityQueue<CityView, double>();
+    var queue = new PriorityQueue<CityView, Kilometers>();
     queue.Enqueue(from, 0);
-    while (queue.TryDequeue(out var city, out double distance))
+    while (queue.TryDequeue(out var city, out Kilometers distance))
     {
         if (city.Ref == to.Ref)
             break;
@@ -610,18 +668,18 @@ private static Option<Route> ShortestRoute(CityView from, CityView to, bool avoi
             continue;
         foreach (var road in city.RoadEdges)
         {
-            if (avoidTolls && road.Toll)
+            if (avoidTolls && road.Kind == RoadKind.Toll)
                 continue;
             var target = road.To;
-            double through = distance + road.Distance;
-            if (distances.TryGetValue(target.Ref, out double known) && known <= through)
+            Kilometers through = distance + road.Distance;
+            if (distances.TryGetValue(target.Ref, out Kilometers known) && known <= through)
                 continue;
             distances[target.Ref] = through;
             previous[target.Ref] = city;
             queue.Enqueue(target, through);
         }
     }
-    if (!distances.TryGetValue(to.Ref, out double total))
+    if (!distances.TryGetValue(to.Ref, out Kilometers total))
         return default;
     var cities = new List<string> { to.Name };
     for (var at = to.Ref; previous.TryGetValue(at, out var before); at = before.Ref)
@@ -662,7 +720,7 @@ A friendship has no direction: Ada is the friend of Bob as Bob is the friend of 
 internal interface MPerson
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 }
 
 [Entity(2, 1, 1)]
@@ -672,7 +730,7 @@ internal interface MPerson
 internal interface EFriendship
 {
     [Property(1)]
-    DateTime Since { get; set; }
+    Instant Since { get; set; }
 }
 
 [Entity(3, 1, 1)]
@@ -682,7 +740,7 @@ internal interface EFriendship
 internal interface MGroup
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 }
 
 [Entity(4, 1, 1)]
@@ -692,7 +750,7 @@ internal interface MGroup
 internal interface MRole
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 }
 
 [Entity(5, 1, 2)]
@@ -706,7 +764,7 @@ internal interface EMembership
     MRole Role { get; set; }
 
     [Property(2)]
-    DateTime Since { get; set; }
+    Instant Since { get; set; }
 }
 
 [Entity(6, 1, 2)]
@@ -716,7 +774,7 @@ internal interface EMembership
 internal interface MCertificate
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     [Property(2)]
     [Strong]
@@ -730,7 +788,7 @@ internal interface MCertificate
 internal interface MNotice
 {
     [Property(1)]
-    string Text { get; set; }
+    FreeText Text { get; set; }
 
     [Property(2)]
     [Weak]
@@ -774,7 +832,7 @@ public void BefriendTwoPeople()
     transaction.Commit();
 }
 
-private static Person NewPerson(string name) => new(PersonRef.New()) { Name = name };
+private static Person NewPerson(Name name) => new(PersonRef.New()) { Name = name };
 ```
 
 Two steps give the friends of friends; your code ranks the people a person may know by the friends they have in common:
@@ -817,7 +875,7 @@ private static List<string> PeopleToKnow(PersonView person)
         {
             if (friends.Contains(other.Ref))
                 continue;
-            shared[other.Ref] = (other.Name, shared.TryGetValue(other.Ref, out var known) ? known.Count + 1 : 1);
+            shared[other.Ref] = (other.Name.ToString(), shared.TryGetValue(other.Ref, out var known) ? known.Count + 1 : 1);
         }
     }
     var ranked = new List<(string Name, int Count)>(shared.Values);
@@ -941,7 +999,7 @@ public async Task ChangeAnEdgeAndItsEndsConcurrently()
     {
         var friendship = FriendshipCollection.Single();
         Assert.Equal(new DateTime(2019, 6, 1), friendship.Since);
-        Assert.Contains("Ada Lovelace", new[] { friendship.From.Name, friendship.To.Name });
+        Assert.Contains("Ada Lovelace", new[] { friendship.From.Name.ToString(), friendship.To.Name.ToString() });
     }
 }
 ```
@@ -991,7 +1049,7 @@ public async Task ConflictOnTheSamePair()
 }
 
 // Makes two people friends since a date: their friendship, or a new one. The same code for the first try and for the retry.
-private static void Befriend(string first, string second, DateTime since)
+private static void Befriend(Name first, Name second, Instant since)
 {
     var person = PersonCollection.Single(first, static (p, name) => p.Name == name);
     var other = PersonCollection.Single(second, static (p, name) => p.Name == name);
@@ -1004,6 +1062,18 @@ private static void Befriend(string first, string second, DateTime since)
 A relation between two entities is an edge when three answers are yes: it carries values; it belongs to neither of its two ends; it must vanish with either. The forum and the bank of this lesson have one relation of each kind:
 
 ```csharp
+// The values of this model alone, first; the others are those of the tutorial.
+[ValueObject<GhostString>]
+internal readonly ref partial struct ReactionKind
+{
+}
+
+[ValueObject<decimal>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
+internal readonly partial struct Money
+{
+    private static bool IsValid(decimal amount) => amount >= 0;
+}
+
 [Entity(1, 1, 2)]
 [Root]
 [Removable]
@@ -1011,7 +1081,7 @@ A relation between two entities is an edge when three answers are yes: it carrie
 internal interface MUser
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     /// <summary>The posts the user likes: no value, a collection of weak references.</summary>
     [Property(2)]
@@ -1026,7 +1096,7 @@ internal interface MUser
 internal interface MPost
 {
     [Property(1)]
-    string Text { get; set; }
+    FreeText Text { get; set; }
 
     /// <summary>The users who like the post: the reverse of their likes.</summary>
     [ReverseWeakReference(nameof(MUser.Likes))]
@@ -1040,7 +1110,7 @@ internal interface MPost
 internal interface EReaction
 {
     [Property(1)]
-    string Kind { get; set; }
+    ReactionKind Kind { get; set; }
 }
 
 [Entity(4, 1, 1)]
@@ -1050,7 +1120,7 @@ internal interface EReaction
 internal interface MAccount
 {
     [Property(1)]
-    string Owner { get; set; }
+    Name Owner { get; set; }
 }
 
 [Entity(5, 1, 3)]
@@ -1060,7 +1130,7 @@ internal interface MAccount
 internal interface MTransfer
 {
     [Property(1)]
-    decimal Amount { get; set; }
+    Money Amount { get; set; }
 
     [Property(2)]
     [Strong]
@@ -1198,5 +1268,3 @@ The lessons went from an edge to what it does. This chapter goes the other way: 
 - An edge is **an aggregate of its own**: it changes in parallel with its ends.
 
 The next tutorial, Tutorial Five, goes further with the indexes and the custom collections.
-
-**Next tutorial:** [Tutorial Five: Indexes](Five-Indexes.md)

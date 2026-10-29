@@ -21,6 +21,24 @@ A coffee shop. Its products, found by the words of their names and of their desc
 
 Three models, each in a namespace of its own with its own Repository, as in the tutorials before: `Products` for Lessons 1 and 2, `Catalog` for Lessons 3 and 4, `Shop` for Lessons 5 to 12. In the `Shop`, each index is declared in the lesson that shows it: an index is an interface of the model, wherever it is.
 
+**The values of the models come first**, each a value object ([Tutorial One, Lesson 18](One-TheBasics.md#lesson-18-give-each-value-its-type)). Those the three models share are declared once, in the namespace of the tutorial; each model declares at its head the values that it alone has. **An index finds a value object by the value inside it**, with every option of that value: a `Money` rounded by `Decimals`, a `Date` by its parts, an `Email` whatever its case, a `Description` by its words.
+
+```csharp
+namespace TutorialFive
+{
+    [ValueObject<GhostString>]
+    internal readonly ref partial struct Name
+    {
+    }
+
+    [ValueObject<decimal>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
+    internal readonly partial struct Money
+    {
+        private static bool IsValid(decimal amount) => amount >= 0;
+    }
+}
+```
+
 Every declaration of the tutorial, and the lesson that shows it:
 
 | Declaration in the model | What GBO guarantees | Lessons |
@@ -46,6 +64,12 @@ A query by LINQ reads every entity, and every character of their texts: `Descrip
 The index is an interface with `[TextIndex(n)]`, its number in the Repository, stable; its name starts with `M`, as a model: `MProductTextIndex` gives `ProductTextIndex`, the class of its searches. Each property of a text names it by `[TextIndexed]`:
 
 ```csharp
+// The description of a product: a value of this model alone, its words in the text index.
+[ValueObject<GhostString>]
+internal readonly ref partial struct Description
+{
+}
+
 [TextIndex(1)]
 internal interface MProductTextIndex
 {
@@ -60,14 +84,14 @@ internal interface MProduct
     // [TextIndexed]: the words of the property are in the index that it names.
     [Property(1)]
     [TextIndexed(nameof(MProductTextIndex))]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     [Property(2)]
     [TextIndexed(nameof(MProductTextIndex))]
-    string Description { get; set; }
+    Description Description { get; set; }
 
     [Property(3)]
-    decimal Price { get; set; }
+    Money Price { get; set; }
 }
 
 [GhostRepository]
@@ -252,6 +276,17 @@ public void FindTheWordsThatLookAlike()
 The properties of several entity types may name the same index: the products and their brands share the catalog index, one search box for both. The second model, the catalog, declares it, with a second index for the tags of the products (Lesson 4):
 
 ```csharp
+// The values of this model alone, first; the others are those of the tutorial.
+[ValueObject<GhostString>]
+internal readonly ref partial struct Tags
+{
+}
+
+[ValueObject<GhostString>]
+internal readonly ref partial struct Story
+{
+}
+
 [TextIndex(1)]
 internal interface MCatalogTextIndex
 {
@@ -271,7 +306,7 @@ internal interface MProduct
 {
     [Property(1)]
     [TextIndexed(nameof(MCatalogTextIndex))]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     // TextIndexing.Commit (Lesson 4): the words of a long text, written many times, are cut once, at the first search or at the commit.
     [Property(2)]
@@ -280,10 +315,10 @@ internal interface MProduct
 
     [Property(3)]
     [TextIndexed(nameof(MTagTextIndex))]
-    string Tags { get; set; }
+    Tags Tags { get; set; }
 
     [Property(4)]
-    decimal Price { get; set; }
+    Money Price { get; set; }
 }
 
 [Entity(2, 1, 2)]
@@ -294,11 +329,11 @@ internal interface MBrand
 {
     [Property(1)]
     [TextIndexed(nameof(MCatalogTextIndex))]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     [Property(2)]
     [TextIndexed(nameof(MCatalogTextIndex))]
-    string Story { get; set; }
+    Story Story { get; set; }
 }
 
 [GhostRepository]
@@ -447,9 +482,45 @@ public void CutALongTextAtTheCommit()
 
 ### Lesson 5: Find by a value
 
-The third model, the shop, is the one of the rest of the tutorial: its customers and its orders.
+The third model, the shop, is the one of the rest of the tutorial: its customers and its orders, and the values that it alone has.
 
 ```csharp
+[ValueObject<GhostString>]
+internal readonly ref partial struct Email
+{
+}
+
+[ValueObject<DateOnly>(ImplicitConversion = true)]
+internal readonly partial struct Date
+{
+}
+
+[ValueObject<DateTime>(ImplicitConversion = true)]
+internal readonly partial struct Instant
+{
+}
+
+[ValueObject<long>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
+internal readonly partial struct LoyaltyPoints
+{
+    private static bool IsValid(long points) => points >= 0;
+}
+
+[ValueObject<int>(ImplicitConversion = true)]
+internal readonly partial struct CardNumber
+{
+}
+
+[ValueObject<int>(ImplicitConversion = true)]
+internal readonly partial struct OrderNumber
+{
+}
+
+[ValueObject<GhostString>]
+internal readonly ref partial struct Note
+{
+}
+
 internal enum OrderStatus
 {
     Pending,
@@ -475,20 +546,20 @@ internal enum OrderOptions
 internal interface MCustomer
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     [Property(2)]
-    string Email { get; set; }
+    Email Email { get; set; }
 
     [Property(3)]
-    DateOnly Birthday { get; set; }
+    Date Birthday { get; set; }
 
     [Property(4)]
-    long Points { get; set; }
+    LoyaltyPoints Points { get; set; }
 
     // A loyalty card, absent until given (Lesson 9).
     [Property(5)]
-    Option<int> Card { get; set; }
+    Option<CardNumber> Card { get; set; }
 }
 
 [Entity(2, 1, 8)]
@@ -498,23 +569,23 @@ internal interface MCustomer
 internal interface MOrder
 {
     [Property(1)]
-    int Number { get; set; }
+    OrderNumber Number { get; set; }
 
     [Property(2)]
     OrderStatus Status { get; set; }
 
     [Property(3)]
-    DateTime Placed { get; set; }
+    Instant Placed { get; set; }
 
     [Property(4)]
-    decimal Total { get; set; }
+    Money Total { get; set; }
 
     [Property(5)]
     OrderOptions Options { get; set; }
 
     // The day of shipping, absent until the order ships (Lesson 8).
     [Property(6)]
-    Option<DateOnly> Shipped { get; set; }
+    Option<Date> Shipped { get; set; }
 
     // The customer of the order; a guest order has none.
     [Property(7)]
@@ -524,7 +595,7 @@ internal interface MOrder
     // The note of the customer, in a text index (Lesson 10).
     [Property(8)]
     [TextIndexed(nameof(MOrderTextIndex))]
-    string Note { get; set; }
+    Note Note { get; set; }
 }
 
 [GhostRepository]
@@ -569,7 +640,7 @@ private static ShopRepository NewShop(TransactionalMemoryStore store)
     return shop;
 }
 
-private static List<int> Numbers(ValueIndexResult<OrderView, Order, ShopRepositoryTag> found) => found.Select(static order => order.Number).ToList();
+private static List<OrderNumber> Numbers(ValueIndexResult<OrderView, Order, ShopRepositoryTag> found) => found.Select(static order => order.Number).ToList();
 ```
 
 ```csharp
@@ -687,7 +758,7 @@ private static ShopRepository NewShop(TransactionalMemoryStore store)
     return shop;
 }
 
-private static List<int> Numbers(ValueIndexResult<OrderView, Order, ShopRepositoryTag> found) => found.Select(static order => order.Number).ToList();
+private static List<OrderNumber> Numbers(ValueIndexResult<OrderView, Order, ShopRepositoryTag> found) => found.Select(static order => order.Number).ToList();
 ```
 
 ```csharp
@@ -778,7 +849,7 @@ public void KeepTheResultExactWithARoundedIndex()
     for (int i = 0; i < totals.Length; i++)
         new Order { Number = i + 1, Total = totals[i] };
 
-    static List<decimal> Totals(ValueIndexResult<OrderView, Order, ShopRepositoryTag> found)
+    static List<Money> Totals(ValueIndexResult<OrderView, Order, ShopRepositoryTag> found)
         => found.Select(static order => order.Total).ToList();
     Assert.Equal([19.99m, 20.00m, 25.50m, 49.99m, 50.00m], Totals(OrderTotalIndex.From(19.99m)));
     Assert.Equal([10.50m, 19.50m, 19.99m], Totals(OrderTotalIndex.Between(10.50m, 20m)));
@@ -823,7 +894,7 @@ public void FindByThePartsOfADate()
     Assert.Equal(["Ada", "Cid"], CustomerBirthdayIndex.Is(10).Range(15, 31).Select(static c => c.Name).ToList());
 
     // The same birthdays by a query of the Views, which reads every customer.
-    Assert.Equal(2, CustomerViewCollection.Count(static c => c.Birthday.Month == 10 && c.Birthday.Day == 22));
+    Assert.Equal(2, CustomerViewCollection.Count(static c => c.Birthday.Value.Month == 10 && c.Birthday.Value.Day == 22));
     transaction.Commit();
 }
 ```
@@ -869,9 +940,9 @@ The index of a `[Flags]` enum finds an exact combination, and each flag:
 The numbers of the orders found, by a search and by a set:
 
 ```csharp
-private static List<int> Numbers(ValueIndexResult<OrderView, Order, ShopRepositoryTag> found) => found.Select(static order => order.Number).ToList();
+private static List<OrderNumber> Numbers(ValueIndexResult<OrderView, Order, ShopRepositoryTag> found) => found.Select(static order => order.Number).ToList();
 
-private static List<int> Numbers(IndexSetResult<OrderView, Order, ShopRepositoryTag> found) => found.Select(static order => order.Number).ToList();
+private static List<OrderNumber> Numbers(IndexSetResult<OrderView, Order, ShopRepositoryTag> found) => found.Select(static order => order.Number).ToList();
 ```
 
 ```csharp
@@ -911,9 +982,9 @@ public void FindTheAbsentValues()
     var monday = new DateOnly(2026, 10, 19);
     using (var transaction = shop.OpenTransaction(StoreAccessMode.ReadWrite))
     {
-        new Order { Number = 1, Shipped = monday };
+        new Order { Number = 1, Shipped = Date.From(monday) };
         new Order { Number = 2 };
-        new Order { Number = 3, Shipped = monday.AddDays(2) };
+        new Order { Number = 3, Shipped = Date.From(monday.AddDays(2)) };
         new Order { Number = 4 };
         transaction.Commit();
     }
@@ -926,7 +997,7 @@ public void FindTheAbsentValues()
 
         // Shipping an order: it leaves the absent values.
         foreach (var order in OrderShippedIndex.IsNone().Bodies())
-            order.Shipped = monday.AddDays(3);
+            order.Shipped = Date.From(monday.AddDays(3));
         Assert.Equal(0, OrderShippedIndex.IsNone().Count());
         Assert.Equal([3, 2, 4], Numbers(OrderShippedIndex.From(monday.AddDays(1))));
         transaction.Commit();
@@ -936,7 +1007,7 @@ public void FindTheAbsentValues()
 
 ### Lesson 9: A unique value
 
-`Unique = true` gives a value to one entity only, as a constraint `UNIQUE` of SQL. The email of a customer is unique whatever its case, `IgnoreCase = true`; a string is found by its exact value, never by a range. The loyalty card is unique too, and absent for the customers without one.
+`Unique = true` gives a value to one entity only, as a constraint `UNIQUE` of SQL. The email of a customer is unique whatever its case, `IgnoreCase = true`; a text is found by its exact value, never by a range. The loyalty card is unique too, and absent for the customers without one.
 
 ```csharp
 // The email of a customer: unique, whatever its case. A string is found by its exact value, never by a range.
@@ -990,7 +1061,7 @@ public void RefuseAValueTaken()
 }
 ```
 
-An **absent value is never refused**, as the `NULL` of SQL: many customers have no card, and a card is given once.
+An **absent value is never refused**, as the `NULL` of SQL: many customers have no card, and a card is given once. An `Option<CardNumber>` takes a `CardNumber`, `CardNumber.From(1001)`: C# never chains two conversions, from an `int` to a `CardNumber`, then to its `Option`.
 
 ```csharp
 [Fact]
@@ -1003,10 +1074,10 @@ public void NeverRefuseAnAbsentValue()
     var bob = new Customer { Name = "Bob", Email = "bob@example.com" };
     Assert.Equal(2, CustomerCardIndex.IsNone().Count());
 
-    ada.Card = 1001;
-    Assert.Throws<GhostUniquenessException>(() => bob.Card = 1001);
+    ada.Card = CardNumber.From(1001);
+    Assert.Throws<GhostUniquenessException>(() => bob.Card = CardNumber.From(1001));
     Assert.False(bob.Card.Any());
-    bob.Card = 1002;
+    bob.Card = CardNumber.From(1002);
     Assert.Equal("Bob", CustomerCardIndex.Is(1002).Single().Name);
     transaction.Commit();
 }
@@ -1092,7 +1163,7 @@ private static ShopRepository NewShop(TransactionalMemoryStore store)
     return shop;
 }
 
-private static List<int> Numbers(IndexSetResult<OrderView, Order, ShopRepositoryTag> found) => found.Select(static order => order.Number).OrderBy(static n => n).ToList();
+private static List<OrderNumber> Numbers(IndexSetResult<OrderView, Order, ShopRepositoryTag> found) => found.Select(static order => order.Number).OrderBy(static n => n).ToList();
 ```
 
 ```csharp
@@ -1437,5 +1508,3 @@ Every question has its tool. The path, from the most common to the rarest:
 - An index is **a part of the data**: up to date at the next instruction, rolled back, committed, kept over a restart, and made again from the entities when needed.
 
 The next tutorial shows the Log and the Record types: their subscription, and their replay.
-
-**Next tutorial:** [Tutorial Six: The Log](Six-TheLog.md)

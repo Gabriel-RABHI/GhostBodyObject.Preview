@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="374" viewBox="0 0 960 374" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>Insert orders</title>
+<desc>Orders of 20 lines inserted per second · one thread · linear scale. 100 per transaction, durable at each commit: GBO 21,496, EF Core + PostgreSQL 878, ×24.5; 10,000 per transaction, durable at each commit: GBO 52,784, EF Core + PostgreSQL 882, ×59.8; 100 per transaction, durable within a delay: GBO 32,550, EF Core + PostgreSQL 933, ×34.9; 10,000 per transaction, durable within a delay: GBO 49,273, EF Core + PostgreSQL 896, ×55.0.</desc>
+<rect width="960" height="374" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Insert orders</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Orders of 20 lines inserted per second · one thread · linear scale</text>
+<rect x="714" y="58" width="12" height="12" rx="3" fill="#3987e5"/>
+<text x="732" y="68" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">GBO</text>
+<rect x="778" y="58" width="12" height="12" rx="3" fill="#66757d"/>
+<text x="796" y="68" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">EF Core + PostgreSQL</text>
+<line x1="421.33333333333337" y1="100" x2="421.33333333333337" y2="310" stroke="#2b3a42" stroke-width="1"/>
+<line x1="600.6666666666667" y1="100" x2="600.6666666666667" y2="310" stroke="#2b3a42" stroke-width="1"/>
+<line x1="780" y1="100" x2="780" y2="310" stroke="#2b3a42" stroke-width="1"/>
+<text x="242" y="328" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">0</text>
+<text x="421.33333333333337" y="328" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">20k</text>
+<text x="600.6666666666667" y="328" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">40k</text>
+<text x="780" y="328" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">60k</text>
+<line x1="242" y1="100" x2="242" y2="310" stroke="#4a5a62" stroke-width="1"/>
+<text x="226" y="123" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">100 per transaction</text>
+<text x="226" y="139" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">durable at each commit</text>
+<path d="M242 110H430.7Q434.7 110 434.7 114V120Q434.7 124 430.7 124H242Z" fill="#3987e5"/>
+<text x="442.7474666666667" y="121.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">21,496</text>
+<path d="M242 128H245.9Q249.9 128 249.9 131.9363666666667V138.0636333333333Q249.9 142 245.9 142H242Z" fill="#66757d"/>
+<text x="257.8727333333334" y="139.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">878</text>
+<text x="928" y="133" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×24.5</text>
+<text x="226" y="175" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">10,000 per transaction</text>
+<text x="226" y="191" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">durable at each commit</text>
+<path d="M242 162H711.3Q715.3 162 715.3 166V172Q715.3 176 711.3 176H242Z" fill="#3987e5"/>
+<text x="723.2965333333334" y="173.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">52,784</text>
+<path d="M242 180H246.0Q249.9 180 249.9 183.9543V190.0457Q249.9 194 246.0 194H242Z" fill="#66757d"/>
+<text x="257.9086" y="191.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">882</text>
+<text x="928" y="185" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×59.8</text>
+<text x="226" y="227" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">100 per transaction</text>
+<text x="226" y="243" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">durable within a delay</text>
+<path d="M242 214H529.9Q533.9 214 533.9 218V224Q533.9 228 529.9 228H242Z" fill="#3987e5"/>
+<text x="541.865" y="225.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">32,550</text>
+<path d="M242 232H246.4Q250.4 232 250.4 236V242Q250.4 246 246.4 246H242Z" fill="#66757d"/>
+<text x="258.3659" y="243.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">933</text>
+<text x="928" y="237" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×34.9</text>
+<text x="226" y="279" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">10,000 per transaction</text>
+<text x="226" y="295" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">durable within a delay</text>
+<path d="M242 266H679.8Q683.8 266 683.8 270V276Q683.8 280 679.8 280H242Z" fill="#3987e5"/>
+<text x="691.8145666666667" y="277.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">49,273</text>
+<path d="M242 284H246.0Q250.0 284 250.0 288V294Q250.0 298 246.0 298H242Z" fill="#66757d"/>
+<text x="258.03413333333333" y="295.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">896</text>
+<text x="928" y="289" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×55.0</text>
+<text x="32" y="356" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Intel i9-9900K, NVMe SSD, Windows 10, .NET 10 · EF Core 10, PostgreSQL 18 · 100,000 orders, 2,000,000 lines · 2026-10-27</text>
+</svg>

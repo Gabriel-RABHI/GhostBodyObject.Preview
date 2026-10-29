@@ -1,8 +1,8 @@
-![Ghost Body Object](GBO-Logo.png)
+<p align="center"><img src="Documentation/gbo-git-logo.png" alt="Ghost Body Object" width="640"></p>
 
 # What is GBO?
 
-**GBO** (Ghost Body Object) is a high-performance, transactional, persistent and distributed memory manager. It manages millions of C# objects in collections that can be several times larger than the physical RAM. These large collections can be shared and spread over dozens of servers in real time, transparently. GBO can make this memory persistent on disk, and supports the best standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery).
+GBO (Ghost Body Object) is a high-performance, transactional, persistent and distributed memory manager. It manages millions of C# objects in collections that can be several times larger than the physical RAM. These large collections can be shared and spread over dozens of servers in real time, transparently. GBO can make this memory persistent on disk, and supports the best standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery).
 
 Its API is ambient: managing these objects takes no load and no save operation. You open a transaction, create or find the objects, change them, and commit the transaction. These collections of objects can hold the data of a business application, make independent systems communicate without a message broker, build a cache infrastructure, aggregate data in edge computing or IoT, or build complex distributed systems that combine all of these.
 
@@ -19,6 +19,14 @@ An agenda of appointments, kept on disk: the model in one file, the operations i
 A model is a set of interfaces: the generator of GBO reads them at each build, and writes the classes.
 
 ```csharp
+/// <summary>A subject value.</summary>
+[ValueObject<GhostString>]
+internal readonly ref partial struct Subject { }
+
+/// <summary>A day and time of the calendar.</summary>
+[ValueObject<DateTime>(ImplicitConversion = true)]
+internal readonly partial struct Date { }
+
 // An appointment: from this interface, the generator writes the class Appointment and AppointmentCollection.
 [Root]       // an appointment lives by itself
 [Enumerable] // AppointmentCollection enumerates the appointments
@@ -26,13 +34,13 @@ internal interface MAppointment
 {
     GhostString Subject { get; set; }
 
-    DateTime At { get; set; }
+    Date At { get; set; }
 }
 
 // Your own code in the generated class: computed at each read, never stored.
 internal partial class Appointment
 {
-    public bool IsToday => At.Date == DateTime.Today;
+    public bool Today => At.Date == DateTime.Today;
 }
 
 // The Repository of the model.
@@ -43,7 +51,7 @@ internal interface MAgendaRepository
 }
 ```
 
-This model is deliberately minimal: a model can declare many entity types, with complex relations, constraints and indexes ([Tutorials Two to Five](Two-Relationships.md)). A model that must evolve, read by both the old and the new versions of an application, gives its numbers, as [Tutorial One](One-TheBasics.md) shows.
+This model is deliberately minimal: a model can declare many entity types, with complex relations, constraints and indexes ([Tutorials Two to Five](Documentation/Tutorials/Two-Relationships.md)). A model that must evolve, read by both the old and the new versions of an application, gives its numbers, as [Tutorial One](Documentation/Tutorials/One-TheBasics.md) shows.
 
 #### 2. The operations: `Program.cs`
 
@@ -69,12 +77,9 @@ using (var tx = agenda.OpenTransaction(StoreAccessMode.ReadWrite))
 }
 
 // A Read transaction finds the appointments of today, as committed.
-// Notice that you can call any added entity member in LINQ queries.
-// IsToday is a calculated property, evaluated on the fly.
-// Collections are not IQueryable, but true IEnumerable.
 using (agenda.OpenTransaction(StoreAccessMode.ReadOnly))
 {
-    foreach (var appointment in AppointmentCollection.Where(static a => a.IsToday))
+    foreach (var appointment in AppointmentCollection.Where(static a => a.Today))
         Console.WriteLine($"{appointment.Subject} at {appointment.At:t}"); // Dentist at 10:30
 }
 ```
@@ -101,17 +106,17 @@ using var agenda = new AgendaRepository(store);
 Console.ReadLine();
 ```
 
-Each commit on one node is copied to the other, in the order of the commits: both nodes read and write the same appointments. Start the second node while the first one runs. Two nodes that both wrote while apart hold two different histories: when they meet, both stop rather than merge them ([Tutorial Seven](Seven-ChainsAndDistribution.md)).
+Each commit on one node is copied to the other, in the order of the commits: both nodes read and write the same appointments. Start the second node while the first one runs. Two nodes that both wrote while apart hold two different histories: when they meet, both stop rather than merge them ([Tutorial Seven](Documentation/Tutorials/Seven-ChainsAndDistribution.md)).
 
-You can read the first seven tutorials to discover what GBO can do :
+You can read the seven tutorials to discover what GBO can do:
 
-1. [Tutorial One: The Basics](One-TheBasics.md): GBO in a few words
-2. [Tutorial Two: Relationships](Two-Relationships.md): links, constraints and deterministic garbage collection
-3. [Tutorial Three: Composition](Three-Composition.md): Entity Component System and object composition model
-4. [Tutorial Four: Edges](Four-Edges.md): edges and graph oriented model
-5. [Tutorial Five: Indexes](Five-Indexes.md): indexes and custom collections
-6. [Tutorial Six: The Log](Six-TheLog.md): the Log and the Records
-7. [Tutorial Seven: Chains and Distribution](Seven-ChainsAndDistribution.md): several Stores, several servers
+- [Tutorial One: The Basics](Documentation/Tutorials/One-TheBasics.md): an overview of GBO, its models, its transactions and its queries.
+- [Tutorial Two: Relationships](Documentation/Tutorials/Two-Relationships.md): links, constraints and deterministic garbage collection.
+- [Tutorial Three: Composition](Documentation/Tutorials/Three-Composition.md): the Entity Component System and object composition.
+- [Tutorial Four: Edges](Documentation/Tutorials/Four-Edges.md): edges and graph-oriented models.
+- [Tutorial Five: Indexes](Documentation/Tutorials/Five-Indexes.md): text indexes, value indexes, unique values and custom collections.
+- [Tutorial Six: The Log](Documentation/Tutorials/Six-TheLog.md): Records, subscriptions and replay.
+- [Tutorial Seven: Chains and Distribution](Documentation/Tutorials/Seven-ChainsAndDistribution.md): several Stores in one transaction, on several servers.
 
 ## Why GBO?
 
@@ -133,7 +138,7 @@ One library in the process and one directory on the disk replace the database se
 
 ### **High performance**
 
-No serialization, no network round trip, no copy: the data is read where it is stored. Against EF Core with PostgreSQL, on the same machine, GBO inserts 25 to 60 times faster, reads orders by their key 311 times faster, and aggregates 3.5 to 6 times faster ([results](#gbo-vs-ef--postgresql)). On YCSB, it reads up to 4.7 M records/s on 8 threads, 15 times RocksDB and 7 times Garnet.
+No serialization, no network round trip, no copy: the data is read where it is stored. Against EF Core with PostgreSQL, on the same machine, GBO inserts 25 to 60 times faster, reads orders by their key 311 times faster, and aggregates 3.5 to 6 times faster ([results](Documentation/Benchmarks/BENCH-GBO-vs-EF-Postgres.md)). On YCSB, it reads up to 4.7 M records/s on 8 threads, 15 times RocksDB and 7 times Garnet ([results](Documentation/Benchmarks/BENCH-GBO-vs-SQLite-RocksDB-Garnet.md)).
 
 ### **Built for AI-assisted development**
 
@@ -165,138 +170,81 @@ Stores on disk are read through read-only views, so that a stray write of the ap
 
 ## GBO vs EF + PostgreSQL
 
-GBO is faster than almost all general purpose database engines and provide a more coherent experience that an ORM like Entity Framework. Here a benchmark between GBO and Entity Framework using PostgreSQL 18.
+GBO is faster than almost all general-purpose database engines, and gives a more coherent experience than an ORM such as Entity Framework. The same shop, 100,000 orders of 20 lines, built, read and changed in the same way by GBO and by EF Core with PostgreSQL 18, on the same machine; every read step checked equal on both sides.
 
-**Date:** 2026-10-27. **Machine:** Intel i9-9900K, 16 logical processors, Windows 10 22H2 (19045), .NET 10.0.12, workstation GC :
+![Insert orders: GBO against EF Core + PostgreSQL, orders per second](Documentation/Benchmarks/charts/gbo-vs-ef-insert.svg)
 
-- **GBO:** a persistent Repository Store on "C:", a WDC PC SN730 NVMe SSD.
-- **EF Core:** Microsoft.EntityFrameworkCore 10.0.9, Npgsql.EntityFrameworkCore.PostgreSQL 10.0.1, Npgsql 10.0.2.
-- **PostgreSQL:** 18.0, x86_64-windows, on the same machine, its default settings: `fsync` on, `wal_sync_method` open_datasync, `shared_buffers` 128 MB, `wal_writer_delay` 200 ms.
+**Inserts: 25 to 60 times faster.** EF Core sends one `INSERT` per row, about 19,000 rows/s, whatever the size of the transaction.
 
-**The same data model.**
+![Change orders: GBO against EF Core + PostgreSQL, orders per second](Documentation/Benchmarks/charts/gbo-vs-ef-change.svg)
 
-- **GBO:** `Product` and `Order` are Roots `[WithIdentity]`; an `OrderLine` is a part of its order, and designates its product by a `[Strong]` reference, whose reverse property `Product.Lines` gives the lines of a product. The Store is alone, the only writer of the process (its lock policy `Retain`); each other setting is at its default, the compactor included.
-- **EF Core:** three tables, the keys of the orders and the lines a bigint identity, the foreign keys indexed. A pooled DbContext per transaction, `AsNoTracking` for the reads, `Include` for the graph, the lazy loading by `ILazyLoader`, without proxies, in a model of its own. Npgsql prepares the statements it executes often (`Max Auto Prepare` 64), and the read by key is compiled (`EF.CompileQuery`). The reads open no transaction of their own: each query sees its own snapshot. Each load ends with a `VACUUM ANALYZE`.
+**Changes: 1.6 to 13 times faster.** Durable at each commit, a single change waits for the disk on both sides; flushed within a delay, GBO no longer waits.
 
-The dataset: 200 products, 100,000 orders of 20 lines each: 2,000,000 lines. An order has at most one line per product, so the number of orders of a product is the number of its lines.
+![Query with LINQ: GBO against EF Core + PostgreSQL, items per second](Documentation/Benchmarks/charts/gbo-vs-ef-query.svg)
 
-**The same data and the same work.**
+**Queries: 3 to 5 times faster,** although the aggregations run inside PostgreSQL.
 
-From the same seeds, both engines build the same shop, read the same orders, and change them in the same way. Each read step computes a check from its first transaction: the checks of the two engines are equal, step by step, such as 33,398 orders of a status, a total of 562,150,423.07 for every order, 2,000,000 orders and the same revenue for the products. The reads run on the last load, before its changes; the changes and the concurrent step follow.
+![Read and navigate: GBO against EF Core + PostgreSQL, items per second](Documentation/Benchmarks/charts/gbo-vs-ef-read.svg)
 
-**The durability of the writes.**
+**Navigation is no longer a problem.** A round trip per object is where an ORM loses the most: GBO reads orders by key 311 times faster, and lazy loading 259 times. This comparison is unfair: GBO has no data to transport, every entity is at hand. Even one query for 100 orders leaves GBO 10.5 times faster.
 
-| Mode                   | GBO                                                                                              | PostgreSQL                                                                               |
-| ---------------------- | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
-| Durable at each commit | `FlushPolicy.DurableOnDisk`: the commit returns once the transaction survives a power loss       | `synchronous_commit = on`: `COMMIT` returns once the WAL is flushed                      |
-| Durable within a delay | `FlushPolicy.FastOnDisk`: flushed within 1 ms or 8 MB, each flush followed by `FlushFileBuffers` | `synchronous_commit = off`: the WAL writer flushes within 3 × `wal_writer_delay`, 600 ms |
+![Concurrent write and read: GBO against EF Core + PostgreSQL, one writer and 1 to 8 readers](Documentation/Benchmarks/charts/gbo-vs-ef-concurrent.svg)
 
-One thread, 30 s per timed step; each load inserts the 100,000 orders into an empty Store, or a database created again.
+**Concurrent write and read:** from 1 to 8 readers, the writer of GBO stays 8 to 12 times faster, and its readers 3.5 to 4.3 times: 39.6 M lines/s with 8 readers, against 9.2 M.
 
-### The results
-
-| Step                                                         | GBO             | EF Core + PostgreSQL | GBO / EF |
-| ------------------------------------------------------------ | --------------- | -------------------- | -------- |
-| Insert 100 orders per transaction, durable at each commit    | 21,496 orders/s | 878 orders/s         | ×24.5    |
-| Insert 10,000 orders per transaction, durable at each commit | 52,784 orders/s | 882 orders/s         | ×59.8    |
-| Insert 100 orders per transaction, durable within a delay    | 32,550 orders/s | 933 orders/s         | ×34.9    |
-| Insert 10,000 orders per transaction, durable within a delay | 49,273 orders/s | 896 orders/s         | ×55.0    |
-
-| Step                                                                                                     | GBO                 | EF Core + PostgreSQL | GBO / EF |
-| -------------------------------------------------------------------------------------------------------- | ------------------- | -------------------- | -------- |
-| Change 1 order per transaction (a line removed, a line added, the order changed), durable at each commit | 1,753 orders/s      | 1,112 orders/s       | ×1.6     |
-| Change 10 orders per transaction, durable at each commit                                                 | 10,642 orders/s     | 3,871 orders/s       | ×2.7     |
-| Change 1 order per transaction, durable within a delay                                                   | 16,400 orders/s     | 1,250 orders/s       | ×13.1    |
-| Change 10 orders per transaction, durable within a delay                                                 | 15,548 orders/s     | 4,045 orders/s       | ×3.8     |
-
-| Step (using LINQ)                                                  | GBO                 | EF Core + PostgreSQL | GBO / EF |
-| ------------------------------------------------------------------ | ------------------- | -------------------- | -------- |
-| Count the orders of a status (`Order.Where`)                       | 55,467,198 orders/s | 18,235,132 orders/s  | ×3.0     |
-| The total of each order: its lines and the price of their products | 12,574,367 lines/s  | 2,353,104 lines/s    | ×5.3     |
-| The same, EF: a `GROUP BY` of the lines                            | 12,574,367 lines/s  | 2,083,536 lines/s    | ×6.0     |
-| The orders and the sales of each product, by the reverse           | 5,298,306 lines/s   | 1,508,254 lines/s    | ×3.5     |
-| The same, EF: a `GROUP BY` of the lines                            | 5,298,306 lines/s   | 1,197,182 lines/s    | ×4.4     |
-
-| Step                                                                                                     | GBO                 | EF Core + PostgreSQL | GBO / EF |
-| -------------------------------------------------------------------------------------------------------- | ------------------- | -------------------- | -------- |
-| Read 100 random orders per transaction, one by one                                                       | 3,205,427 orders/s  | 10,299 orders/s      | ×311.2   |
-| The same, EF: one query for the 100                                                                      | 3,205,427 orders/s  | 304,814 orders/s     | ×10.5    |
-| Load and read 1,000 random orders, their lines and products, per transaction                             | 271,859 orders/s    | 12,421 orders/s      | ×21.9    |
-| Lazy loading: 1,000 objects per transaction, Order → OrderLine → Product                                 | 1,364,387 objects/s | 5,271 objects/s      | ×258.8   |
-
-**This last comparison is unfair:** GBO has no data to transport, since every entity is instantly accessible. It simply shows that navigating between entities is no longer a problem with GBO. For its part, EF Core re-hydrating 304k entities per second is a strong result.
-
-### Concurrent: one writer, 1 to 8 readers
-
-One thread changes 1 order per transaction, durable within a delay, while 1 to 8 threads compute the totals of every order, each in a loop, 30 s per number of readers. A total of every order reads the 2,000,000 lines.
-
-| Readers | GBO: changes, orders/s | EF: changes, orders/s | GBO / EF | GBO: totals of every order /s | EF: totals of every order /s | GBO / EF |
-|---|---|---|---|---|---|---|
-| 1 | 9,777 | 1,205 | ×8.1 | 3.0 | 0.9 | ×3.5 |
-| 2 | 13,488 | 1,124 | ×12.0 | 5.8 | 1.6 | ×3.7 |
-| 4 | 11,918 | 1,045 | ×11.4 | 11.0 | 2.9 | ×3.9 |
-| 8 | 10,686 | 867 | ×12.3 | 19.8 | 4.6 | ×4.3 |
-
-GBO reads 39.6 M lines/s with 8 readers, and EF Core with PostgreSQL 9.2 M lines/s.
+The method, the durability settings and every figure: [GBO vs EF Core + PostgreSQL](Documentation/Benchmarks/BENCH-GBO-vs-EF-Postgres.md).
 
 ## GBO vs Event Sourcing solutions
 
-GBO is implementing a new Event Sourcing pattern, called **Mutation Sourcing**. A Mutation is a single work record with Command (Intent) and Event (Decision) stored in the log. GBO can be used to implement Event Sourcing too, with persistent projections, including the one used to "Decide" the Command processing.
+GBO implements a new Event Sourcing pattern, **Mutation Sourcing**. A Mutation is a single work record that holds both the command (the intent) and its event (the decision), stored in the Log. GBO can also implement classic Event Sourcing, with persistent projections, including the one used to decide the commands. The same shop, 2,000,000 commands played in the same order by each engine, against KurrentDB and Marten on PostgreSQL, on the same machine.
 
-| Engine | Durability | The aggregates | The Read model | A conflict |
-|---|---|---|---|---|
-| **GBO, Mutation Sourcing** | `FastOnDisk`, a flush to the disk within 1 ms; or `DurableOnDisk`, a flush at each commit | The Write model in memory; a command is a Mutation, decided and applied by the pump of the base, in batches of up to 256 Mutations or 1 ms | In memory, in the transaction of the Mutation | None: the pump is the only writer |
-| **GBO, Event Sourcing** | `FastOnDisk` | The Write model in memory; a transaction of the chain per command, its Events in the Event Log | In memory, in the transaction of the command | `TryCommit` gives it back; the command runs again |
-| **KurrentDB 26.2.3** | Its default, a flush at each write | A stream per aggregate, cached in the process; a command appended by `AppendRecords`, atomic over its streams, the revision of each stream it read checked | In memory, by a catch-up subscription to `$all` | An exception of the client; its streams caught up, the command runs again |
-| **Marten 9.54.2, PostgreSQL 18** | `synchronous_commit = off`, `wal_writer_delay = 1ms`: durable within about 3 ms | A stream per aggregate, its snapshot projected inline; locked by `FetchForExclusiveWriting`, the customer then the products in the order of their keys; Quick appends | Documents projected inline, in the transaction of the command | None: the locks wait |
-| **Axon Framework 5.4.1, Axon Server 2026.1.7** | Its events forced to the disk every 1 ms; its default, 1,000 ms, in one more run | Dynamic Consistency Boundaries: an event per fact, tagged with each entity it concerns; the entities sourced from their tags, a snapshot every 100 events | In memory, by a subscribing processor, each event applied once the unit of work commits | An exception, the append rejected by its condition; the command runs again |
+![Event Sourcing engines: commands per second of the mix, on 1 and 8 threads](Documentation/Benchmarks/charts/gbo-vs-event-sourcing-throughput.svg)
 
-The settings of the installation for the rest: PostgreSQL with its 128 MB of shared buffers; KurrentDB, Axon Server and GBO with their defaults.
+- **32 to 40 times Marten, with the same durability** (a flush within 1 to 3 ms), and 2.3 to 5.1 times KurrentDB with a flush at each commit, as KurrentDB does by default. Pipelined, Mutation Sourcing runs 17,729 commands/s on one thread.
+- **No conflict in Mutation Sourcing:** the pump is the only writer, so 8 threads never run a command twice. On 8 threads, KurrentDB runs each command again 3.3 times on average, and Marten waits on its locks.
+- **A command in 42 µs** at the median on one thread, 534 µs durable at each commit, against 1.2 ms for KurrentDB and 4.6 ms for Marten.
 
-What each engine writes for a command:
-- **KurrentDB and Marten** append an event to each stream whose aggregate the command changes. A `PlaceOrder` writes its order, its customer and each of its products.
-- **Axon** writes one event, tagged with all of them.
-- **GBO** writes one Mutation in Mutation Sourcing, and the Events of the command in Event Sourcing.
+![Event Sourcing engines: commands replayed per second at the restart, and bytes on the disk per command](Documentation/Benchmarks/charts/gbo-vs-event-sourcing-restart-disk.svg)
 
-### The results
+- **The restart replays the Log:** 47,000 to 66,000 commands/s into both models, Write and Read; KurrentDB rebuilds its Read model only, at 5,200 to 5,400 commands/s. Marten has nothing to replay: its snapshots and its Read model are tables.
+- **A Mutation takes 182 to 271 bytes on the disk:** about 9 times less than the events of KurrentDB, in JSON, and 50 times less than the WAL that Marten writes.
 
-| Engine | Threads | Catalog, commands/s | Mix, commands/s | Conflicts | Latency p50, µs | p99, µs | p99.9, µs | On the disk, B per command | Commands played | Restart, s | Replayed, commands/s | Working set, MB |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| GBO, Mutation Sourcing | 1 | 19,258 | 7,083 | 0 | 42 | 1,892 | 3,625 | 264 | 520,000 | 10.46 | 49,713 | 1,036 |
-| GBO, Mutation Sourcing | 8 | 44,864 | 8,728 | 0 | 630 | 4,116 | 10,387 | 211 | 648,000 | 11.80 | 54,915 | 1,447 |
-| GBO, Mutation Sourcing, pipelined | 1 | 103,212 | 17,729 | 0 | — | — | — | 187 | 1,269,000 | 20.94 | 60,602 | 9,961 |
-| GBO, Mutation Sourcing, durable | 1 | 2,090 | 1,745 | 0 | 534 | 1,526 | 2,398 | 271 | 136,000 | 2.05 | 66,341 | 495 |
-| GBO, Mutation Sourcing, durable | 8 | 7,623 | 5,170 | 0 | 1,358 | 4,194 | 6,369 | 182 | 381,000 | 6.31 | 60,380 | 815 |
-| GBO, Event Sourcing | 1 | 31,620 | 8,298 | 0 | 28 | 1,858 | 3,652 | 424 | 606,000 | 12.98 | 46,687 | 1,390 |
-| GBO, Event Sourcing | 8 | 33,757 | 6,508 | 303,371 | 60 | 14,328 | 29,852 | 428 | 482,000 | 9.48 | 50,844 | 1,142 |
-| KurrentDB | 1 | 742 | 754 | 0 | 1,220 | 2,978 | 13,705 | 2,371 | 65,000 | 11.96 | 5,435 | 1,542 |
-| KurrentDB | 8 | 3,424 | 1,014 | 199,477 | 2,122 | 126,353 | 333,971 | 2,374 | 85,000 | 16.28 | 5,221 | 1,570 |
-| Marten | 1 | 1,062 | 178 | 0 | 4,600 | 22,479 | 25,051 | 13,458 | 25,000 | 0.16 | — | 476 |
-| Marten | 8 | 4,601 | 273 | 0 | 6,492 | 124,912 | 165,937 | 13,142 | 33,000 | 0.25 | — | 535 |
-| Axon | 1 | 306 | 209 | 0 | 4,084 | 15,262 | 26,984 | — | 27,000 | 1.73 | 15,607 | 2,296 |
-| Axon | 8 | 967 | 134 | 13,906 | 23,331 | 708,313 | 2,336,227 | — | 24,000 | 1.63 | 14,724 | 2,895 |
-| Axon, sync 1,000 ms | 1 | 304 | 210 | 0 | 4,098 | 14,713 | 27,886 | — | 27,000 | 5.82 | 4,639 | 2,314 |
-| Axon, without snapshots | 1 | 305 | 205 | 0 | 4,094 | 20,660 | 34,931 | — | 27,000 | 1.60 | 16,875 | 2,299 |
+The engines, their settings and every figure: [GBO vs Event Sourcing engines](Documentation/Benchmarks/BENCH-GBO-vs-Event-Sourcing-Engines.md).
 
-How to read the columns:
-- **Mix:** the commands done in the 60 s measured; the refused ones count, 0 to 0.5 % of them, more as the mix goes on.
-- **Conflicts:** the executions again of a command whose engine met a concurrent one.
-- **Latency:** in the pipelined row, a thread posts without waiting, so the latency of a post means nothing.
-- **On the disk**, what each engine wrote for its commands of the mix:
-  - GBO: its Log;
-  - KurrentDB: its log, by the positions of `$all`, its chunks being files of 256 MB allocated at once;
-  - Marten: the WAL of PostgreSQL;
-  - Axon Server: not measured, its segments allocated at once.
-- **Commands played:** the catalog and the mix, to the checkpoint after the measure; the Read model of each engine holds them, and its restart rebuilds them.
-- **Restart:** the application stopped and started again, until its first command can run.
-  - GBO replays its Log into both models, Write and Read (it rebuild the projections).
-  - KurrentDB and Axon rebuild their Read model in memory from the first event; their aggregates load again at their first command, out of this time.
-  - Marten has nothing to rebuild: its snapshots and its Read model are tables.
-- **Replayed:** the commands played divided by the time of the restart.
-- **Working set:** the process of the benchmark and its servers, at the end of the mix, for the commands played. For PostgreSQL, the private bytes of its processes and its shared buffers once.
+## GBO vs SQLite, RocksDB and Garnet
+
+**These results are preliminary and will evolve.** GBO trails in several write workloads, and three improvements may raise its ingestion results:
+- optimized and configurable indexes: each message of workload Q moves its sensor in the index of the levels;
+- a better support of the `[Mergeable]` types, which the meters of workload M and the sensors and sites of workload Q use;
+- an internal sharding of a Store, so that several threads commit in parallel: today, the commits of a Store are serialized.
+
+Three workloads of YCSB and two of ingestion, meters and sensors, on 1,000,000 records: GBO against SQLite and RocksDB, embedded in the process, and Garnet, a Redis server reached through the loopback. Every engine is durable within about 1 ms, except SQLite, synced at its checkpoints. Each workload runs on 1 or 8 threads, with 1 or 100 operations per transaction; the ratio compares GBO with the fastest of the three others.
+
+![Workload A, update heavy: GBO, SQLite, RocksDB and Garnet, operations per second](Documentation/Benchmarks/charts/gbo-vs-ycsb-a.svg)
+
+**Updates:** GBO leads on one thread with one operation per transaction (×1.5); Garnet leads once the operations are batched or spread over 8 threads, up to 6.7 times GBO.
+
+![Workload C, read only: GBO, SQLite, RocksDB and Garnet, reads per second](Documentation/Benchmarks/charts/gbo-vs-ycsb-c.svg)
+
+**Reads: GBO leads every configuration,** 1.8 to 7.2 times the fastest other engine: 4.69 M reads/s on 8 threads, 15 times RocksDB and 7 times Garnet.
+
+![Workload F, read-modify-write: GBO, SQLite, RocksDB and Garnet, operations per second](Documentation/Benchmarks/charts/gbo-vs-ycsb-f.svg)
+
+**Read-modify-writes:** GBO leads on one thread (×2.2 and ×1.2); on 8 threads, Garnet leads, 1.4 to 3.9 times GBO.
+
+![Workload M, meters: GBO, SQLite, RocksDB and Garnet, events per second](Documentation/Benchmarks/charts/gbo-vs-ycsb-m.svg)
+
+**Meters:** with one event per transaction, RocksDB and its merge operator lead, 2 to 2.7 times GBO; with 100, the two are even on one thread, and GBO leads on 8 threads (×1.2).
+
+![Workload Q, sensors and sites: GBO, SQLite, RocksDB and Garnet, messages and queries per second](Documentation/Benchmarks/charts/gbo-vs-ycsb-q.svg)
+
+**Sensors and sites:** a query, a range of levels, an aggregate or the snapshot of a site and its 1,000 sensors, runs 31 to 137.5 times faster in GBO than in the fastest other engine, by its value indexes. GBO writes the messages slower: RocksDB writes 2.2 to 48 times more.
+
+The engines and their settings, the loads and the reopen, the latencies, the memory and every figure: [GBO vs SQLite, RocksDB and Garnet](Documentation/Benchmarks/BENCH-GBO-vs-SQLite-RocksDB-Garnet.md).
+
 ## Spreadsheet
 
-GBO on one page: what the engine does, how each guarantee is obtained, and the industry principle it follows. The details are in the [tutorials](One-TheBasics.md).
+GBO on one page: what the engine does, how each guarantee is obtained, and the industry principle it follows. The details are in the [specifications](Documentation/Specifications/SPEC-Registry.md) and the [tutorials](Documentation/Tutorials/One-TheBasics.md).
 
 #### At a glance
 

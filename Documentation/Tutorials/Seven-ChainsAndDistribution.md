@@ -40,7 +40,32 @@ Every declaration and every call of the tutorial, and the lesson that shows it:
 
 A Repository opens on a Store, and its transactions are those of its Store. Two models in two Stores, the parcels and the pages of their tracking, would take two transactions: a parcel changed and its page not yet, or the page and not the parcel, when one of them fails.
 
-The model of the tutorial has two Repositories. The parcels, as the carrier works with them:
+The model of the tutorial has two Repositories. Its values come first, each a value object ([Tutorial One, Lesson 18](One-TheBasics.md#lesson-18-give-each-value-its-type)); a count of steps or of parcels names no value, and stays a number:
+
+```csharp
+[ValueObject<GhostString>]
+internal readonly ref partial struct TrackingNumber
+{
+}
+
+[ValueObject<GhostString>]
+internal readonly ref partial struct Name
+{
+}
+
+[ValueObject<GhostString>]
+internal readonly ref partial struct Depot
+{
+}
+
+/// <summary>What the customer reads of a parcel: "Registered", "In transit at Lyon", "Delivered".</summary>
+[ValueObject<GhostString>]
+internal readonly ref partial struct StatusLabel
+{
+}
+```
+
+The parcels, as the carrier works with them:
 
 ```csharp
 internal enum ParcelStatus
@@ -58,16 +83,16 @@ internal enum ParcelStatus
 internal interface MParcel
 {
     [Property(1)]
-    string TrackingNumber { get; set; }
+    TrackingNumber TrackingNumber { get; set; }
 
     [Property(2)]
-    string Recipient { get; set; }
+    Name Recipient { get; set; }
 
     [Property(3)]
     ParcelStatus Status { get; set; }
 
     [Property(4)]
-    string Depot { get; set; }
+    Depot Depot { get; set; }
 }
 
 [GhostRepository]
@@ -89,14 +114,14 @@ And their tracking, as the customers read it: a page for each parcel, a board fo
 internal interface MTrackingPage
 {
     [Property(1)]
-    string TrackingNumber { get; set; }
+    TrackingNumber TrackingNumber { get; set; }
 
     [Property(2)]
-    string Recipient { get; set; }
+    Name Recipient { get; set; }
 
     // What the customer reads: "Registered", "In transit at Lyon", "Delivered".
     [Property(3)]
-    string Status { get; set; }
+    StatusLabel Status { get; set; }
 
     [Property(4)]
     int Steps { get; set; }
@@ -110,7 +135,7 @@ internal interface MTrackingPage
 internal interface MDepotBoard
 {
     [Property(1)]
-    string Depot { get; set; }
+    Depot Depot { get; set; }
 
     [Property(2)]
     int Parcels { get; set; }
@@ -284,7 +309,7 @@ A conflict in any Store fails the commit of the whole chain, as a conflict of on
 
 ```csharp
 // A parcel arrives at a depot: the parcel, and the board of the depot, one more parcel there.
-private static void Arrive(ParcelRef parcel, string depot)
+private static void Arrive(ParcelRef parcel, Depot depot)
 {
     var body = parcel.Resolve();
     body.Status = ParcelStatus.InTransit;
@@ -334,7 +359,8 @@ public async Task ConflictOnAnyStoreOfTheChain()
     // The board changed since the first transaction opened: its commit failed, its parcel unchanged with it.
     using (carrier.OpenTransaction(StoreAccessMode.ReadOnly))
     {
-        Assert.Equal(("", "Lyon"), (first.Resolve().Depot, second.Resolve().Depot));
+        Assert.Equal("", first.Resolve().Depot);
+        Assert.Equal("Lyon", second.Resolve().Depot);
         Assert.Equal(1, DepotBoardViewCollection.Single(static board => board.Depot == "Lyon").Parcels);
     }
 }
@@ -354,10 +380,10 @@ internal interface MParcelRegistered
     ParcelRef Parcel { get; set; }
 
     [Property(2)]
-    string TrackingNumber { get; set; }
+    TrackingNumber TrackingNumber { get; set; }
 
     [Property(3)]
-    string Recipient { get; set; }
+    Name Recipient { get; set; }
 }
 
 [Record(22, 1, 2)]
@@ -367,7 +393,7 @@ internal interface MParcelScanned
     ParcelRef Parcel { get; set; }
 
     [Property(2)]
-    string Depot { get; set; }
+    Depot Depot { get; set; }
 }
 
 [Record(23, 1, 1)]
@@ -393,14 +419,14 @@ The commands and their handlers: each handler changes both models, the parcel, i
 // parcels and their tracking: in the ambient transactions of the chain, at a command and at a replay alike.
 internal static class Parcels
 {
-    public static ParcelRef Register(string trackingNumber, string recipient)
+    public static ParcelRef Register(TrackingNumber trackingNumber, Name recipient)
     {
         var registered = new ParcelRegistered { Parcel = ParcelRef.New(), TrackingNumber = trackingNumber, Recipient = recipient }.Add();
         Apply(registered.ToView());
         return registered.Parcel;
     }
 
-    public static void Scan(ParcelRef parcel, string depot) => Apply(new ParcelScanned { Parcel = parcel, Depot = depot }.Add().ToView());
+    public static void Scan(ParcelRef parcel, Depot depot) => Apply(new ParcelScanned { Parcel = parcel, Depot = depot }.Add().ToView());
 
     public static void Deliver(ParcelRef parcel) => Apply(new ParcelDelivered { Parcel = parcel }.Add().ToView());
 
@@ -415,13 +441,14 @@ internal static class Parcels
     {
         var parcel = e.Parcel.Resolve();
         Leave(parcel.Depot);
-        (parcel.Status, parcel.Depot) = (ParcelStatus.InTransit, e.Depot);
+        parcel.Status = ParcelStatus.InTransit;
+        parcel.Depot = e.Depot;
         // The board of the depot, or a new one at the first parcel there.
-        var board = DepotBoardCollection.FirstOrNone(e.Depot, static (board, depot) => board.Depot == depot)
-            .GetOr(e.Depot, static depot => new DepotBoard { Depot = depot });
+        var board = DepotBoardCollection.FirstOrNone(e.Depot, static (board, depot) => board.Depot == depot).TryGet(out var found) ? found : new DepotBoard { Depot = e.Depot };
         board.Parcels++;
         var page = TrackingPageRef.Of(e.Parcel).Resolve();
-        (page.Status, page.Steps) = ($"In transit at {e.Depot}", page.Steps + 1);
+        page.Status = $"In transit at {e.Depot}";
+        page.Steps++;
         return LogStoreSubscription.Continue;
     }
 
@@ -429,14 +456,16 @@ internal static class Parcels
     {
         var parcel = e.Parcel.Resolve();
         Leave(parcel.Depot);
-        (parcel.Status, parcel.Depot) = (ParcelStatus.Delivered, "");
+        parcel.Status = ParcelStatus.Delivered;
+        parcel.Depot = "";
         var page = TrackingPageRef.Of(e.Parcel).Resolve();
-        (page.Status, page.Steps) = ("Delivered", page.Steps + 1);
+        page.Status = "Delivered";
+        page.Steps++;
         return LogStoreSubscription.Continue;
     }
 
     // A parcel leaves its depot, if it is at one: one parcel fewer on its board.
-    private static void Leave(string depot)
+    private static void Leave(Depot depot)
     {
         if (depot.Length > 0)
             DepotBoardCollection.Single(depot, static (board, depot) => board.Depot == depot).Parcels--;
@@ -651,7 +680,8 @@ public async Task CopyTheCommitsOfAWriterToAReplica()
     // Each commit of the writer reaches the replica.
     using (var transaction = writer.OpenTransaction(StoreAccessMode.ReadWrite))
     {
-        (ada.Resolve().Status, ada.Resolve().Depot) = (ParcelStatus.InTransit, "Lyon");
+        ada.Resolve().Status = ParcelStatus.InTransit;
+        ada.Resolve().Depot = "Lyon";
         transaction.Commit();
     }
     await Cluster.CaughtUp(replicaStore, writerStore);
@@ -719,7 +749,8 @@ public async Task MoveTheWriteTokenBetweenTwoWriters()
     // The depot scans the parcel: its commit takes the token.
     using (var transaction = depot.OpenTransaction(StoreAccessMode.ReadWrite))
     {
-        (ada.Resolve().Status, ada.Resolve().Depot) = (ParcelStatus.InTransit, "Lyon");
+        ada.Resolve().Status = ParcelStatus.InTransit;
+        ada.Resolve().Depot = "Lyon";
         transaction.Commit();
     }
     Assert.True(depotEndPoint.GetStatus(depotStore).IsWritable);
@@ -740,7 +771,10 @@ public async Task MoveTheWriteTokenBetweenTwoWriters()
     Assert.Equal(officeStore.CurrentEpoch, depotStore.CurrentEpoch);
     foreach (var repository in new[] { office, depot })
         using (repository.OpenTransaction(StoreAccessMode.ReadOnly))
-            Assert.Equal(("Ada Lovelace", "Lyon"), (ada.Resolve().Recipient, ada.Resolve().Depot));
+        {
+            Assert.Equal("Ada Lovelace", ada.Resolve().Recipient);
+            Assert.Equal("Lyon", ada.Resolve().Depot);
+        }
 }
 ```
 
@@ -823,7 +857,8 @@ public async Task ConflictOnAParcelChangedOnAnotherServer()
     await Task.Run(() =>
     {
         using var transaction = depot.OpenTransaction(StoreAccessMode.ReadWrite);
-        (ada.Resolve().Status, ada.Resolve().Depot) = (ParcelStatus.InTransit, "Lyon");
+        ada.Resolve().Status = ParcelStatus.InTransit;
+        ada.Resolve().Depot = "Lyon";
         transaction.Commit();
     });
     committed.SetResult();
@@ -832,7 +867,10 @@ public async Task ConflictOnAParcelChangedOnAnotherServer()
     // The commit of the depot is kept on both servers; the change of the office is on none.
     await Cluster.CaughtUp(officeStore, depotStore);
     using (office.OpenTransaction(StoreAccessMode.ReadOnly))
-        Assert.Equal(("Ada", "Lyon"), (ada.Resolve().Recipient, ada.Resolve().Depot));
+    {
+        Assert.Equal("Ada", ada.Resolve().Recipient);
+        Assert.Equal("Lyon", ada.Resolve().Depot);
+    }
 }
 ```
 
@@ -953,7 +991,10 @@ public async Task CopyEachStoreOfTheChainToTheServersThatHoldIt()
     }
     await Cluster.CaughtUp(siteTracking, tracking);
     using (site.OpenTransaction(StoreAccessMode.ReadOnly))
-        Assert.Equal(("Delivered", 0), (TrackingPageRef.Of(ada).Resolve().Status, DepotBoardViewCollection.Single(static board => board.Depot == "Lyon").Parcels));
+    {
+        Assert.Equal("Delivered", TrackingPageRef.Of(ada).Resolve().Status);
+        Assert.Equal(0, DepotBoardViewCollection.Single(static board => board.Depot == "Lyon").Parcels);
+    }
     await Cluster.CaughtUp(notifierJournal, journal);
     notifierLog.Store.DeliverTransactions(subscription);
     Assert.Equal(["Your parcel is at Lyon", "Your parcel is delivered"], notices);
@@ -1020,7 +1061,7 @@ public async Task GoOnWhenAWriterLeavesAndCopyTheStoreToAServerThatJoins()
     Assert.Contains(siteEndPoint.EndPointId, officeEndPoint.KnownEndPoints);
 }
 
-private static void Register(CarrierRepository carrier, string trackingNumber)
+private static void Register(CarrierRepository carrier, TrackingNumber trackingNumber)
 {
     using var transaction = carrier.OpenTransaction(StoreAccessMode.ReadWrite);
     new Parcel(ParcelRef.New()) { TrackingNumber = trackingNumber, Recipient = "Ada", Depot = "" };

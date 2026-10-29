@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="384" viewBox="0 0 960 384" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>Event Sourcing engines, commands per second</title>
+<desc>Commands per second of the mix, on 1 and 8 threads. Durable within 1 to 3 ms, GBO, Mutation Sourcing: 7,083 on 1 thread, 8,728 on 8 threads; Durable within 1 to 3 ms, GBO, Mutation Sourcing, pipelined: 17,729 on 1 thread; Durable within 1 to 3 ms, GBO, Event Sourcing: 8,298 on 1 thread, 6,508 on 8 threads; Durable within 1 to 3 ms, Marten, PostgreSQL: 178 on 1 thread, 273 on 8 threads; Durable at each commit, GBO, Mutation Sourcing: 1,745 on 1 thread, 5,170 on 8 threads; Durable at each commit, KurrentDB: 754 on 1 thread, 1,014 on 8 threads.</desc>
+<rect width="960" height="384" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Event Sourcing engines</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Commands per second of the mix · the same commands in the same order, the same machine</text>
+<rect x="760.2" y="58" width="12" height="12" rx="3" fill="#3987e5"/>
+<text x="778.2" y="68" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">GBO</text>
+<rect x="824.2" y="58" width="12" height="12" rx="3" fill="#66757d"/>
+<text x="842.2" y="68" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">Other engines</text>
+<text x="290" y="102" font-size="12" font-weight="600" fill="#aebcc4" text-anchor="start">1 thread</text>
+<text x="626" y="102" font-size="12" font-weight="600" fill="#aebcc4" text-anchor="start">8 threads</text>
+<line x1="351" y1="112" x2="351" y2="320" stroke="#2b3a42" stroke-width="1"/>
+<line x1="412" y1="112" x2="412" y2="320" stroke="#2b3a42" stroke-width="1"/>
+<line x1="473" y1="112" x2="473" y2="320" stroke="#2b3a42" stroke-width="1"/>
+<line x1="534" y1="112" x2="534" y2="320" stroke="#2b3a42" stroke-width="1"/>
+<line x1="290" y1="112" x2="290" y2="320" stroke="#4a5a62" stroke-width="1"/>
+<text x="290" y="338" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">0</text>
+<text x="412" y="338" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">10k</text>
+<text x="534" y="338" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">20k</text>
+<line x1="687" y1="112" x2="687" y2="320" stroke="#2b3a42" stroke-width="1"/>
+<line x1="748" y1="112" x2="748" y2="320" stroke="#2b3a42" stroke-width="1"/>
+<line x1="809" y1="112" x2="809" y2="320" stroke="#2b3a42" stroke-width="1"/>
+<line x1="870" y1="112" x2="870" y2="320" stroke="#2b3a42" stroke-width="1"/>
+<line x1="626" y1="112" x2="626" y2="320" stroke="#4a5a62" stroke-width="1"/>
+<text x="626" y="338" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">0</text>
+<text x="748" y="338" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">10k</text>
+<text x="870" y="338" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">20k</text>
+<text x="32" y="130" font-size="11" font-weight="600" fill="#7f9199" text-anchor="start">DURABLE WITHIN 1 TO 3 MS</text>
+<text x="276" y="151.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="end">GBO, Mutation Sourcing</text>
+<path d="M290 140H372.4Q376.4 140 376.4 144V150Q376.4 154 372.4 154H290Z" fill="#3987e5"/>
+<text x="384.4126" y="151.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">7,083</text>
+<path d="M626 140H728.5Q732.5 140 732.5 144V150Q732.5 154 728.5 154H626Z" fill="#3987e5"/>
+<text x="740.4816" y="151.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">8,728</text>
+<text x="276" y="177.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="end">GBO, Mutation Sourcing, pipelined</text>
+<path d="M290 166H502.3Q506.3 166 506.3 170V176Q506.3 180 502.3 180H290Z" fill="#3987e5"/>
+<text x="514.2938" y="177.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">17,729</text>
+<text x="632" y="177.5" font-size="13" font-weight="400" fill="#7f9199" text-anchor="start">—</text>
+<text x="276" y="203.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="end">GBO, Event Sourcing</text>
+<path d="M290 192H387.2Q391.2 192 391.2 196V202Q391.2 206 387.2 206H290Z" fill="#3987e5"/>
+<text x="399.2356" y="203.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">8,298</text>
+<path d="M626 192H701.4Q705.4 192 705.4 196V202Q705.4 206 701.4 206H626Z" fill="#3987e5"/>
+<text x="713.3976" y="203.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">6,508</text>
+<text x="276" y="229.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="end">Marten, PostgreSQL</text>
+<path d="M290 218H291.1Q292.2 218 292.2 219.0858V230.9142Q292.2 232 291.1 232H290Z" fill="#66757d"/>
+<text x="300.1716" y="229.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">178</text>
+<path d="M626 218H627.7Q629.3 218 629.3 219.6653V230.3347Q629.3 232 627.7 232H626Z" fill="#66757d"/>
+<text x="637.3306" y="229.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">273</text>
+<text x="32" y="262" font-size="11" font-weight="600" fill="#7f9199" text-anchor="start">DURABLE AT EACH COMMIT</text>
+<text x="276" y="283.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="end">GBO, Mutation Sourcing</text>
+<path d="M290 272H307.3Q311.3 272 311.3 276V282Q311.3 286 307.3 286H290Z" fill="#3987e5"/>
+<text x="319.289" y="283.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">1,745</text>
+<path d="M626 272H685.1Q689.1 272 689.1 276V282Q689.1 286 685.1 286H626Z" fill="#3987e5"/>
+<text x="697.074" y="283.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">5,170</text>
+<text x="276" y="309.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="end">KurrentDB</text>
+<path d="M290 298H295.2Q299.2 298 299.2 302V308Q299.2 312 295.2 312H290Z" fill="#66757d"/>
+<text x="307.1988" y="309.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">754</text>
+<path d="M626 298H634.4Q638.4 298 638.4 302V308Q638.4 312 634.4 312H626Z" fill="#66757d"/>
+<text x="646.3708" y="309.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">1,014</text>
+<text x="32" y="366" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Intel i9-9900K, NVMe SSD, Windows 10, .NET 10 · KurrentDB 26.2, Marten 9.54 on PostgreSQL 18 · 60 s measured · 2026-10-28</text>
+</svg>

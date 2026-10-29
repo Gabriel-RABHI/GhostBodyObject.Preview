@@ -29,6 +29,30 @@ The technical management of a building: door locks, cameras and thermostats, the
 
 Three models, each in a namespace of its own with its own Repository, as in Tutorial Two: `Capabilities` for Lessons 1 to 3, `Devices` for Lessons 4 to 7, `Parties` for Lessons 8 to 10.
 
+**The values of the models come first**, each a value object ([Tutorial One, Lesson 18](One-TheBasics.md#lesson-18-give-each-value-its-type)). Those the three models share are declared once, in the namespace of the tutorial; each model declares at its head the values that it alone has: a `Room` and an `AlarmKind` for the locks, a `Building`, a `Floor` and a `FirmwareVersion` for the devices, a `Money` and a `PaymentTerm` for the parties.
+
+```csharp
+namespace TutorialThree
+{
+    [ValueObject<GhostString>]
+    internal readonly ref partial struct Name
+    {
+    }
+
+    [ValueObject<GhostString>]
+    internal readonly ref partial struct Reason
+    {
+    }
+
+    /// <summary>The charge of a battery, in percent, from 0 to 100.</summary>
+    [ValueObject<int>(ImplicitConversion = true)]
+    internal readonly partial struct ChargeLevel
+    {
+        private static bool IsValid(int percent) => percent is >= 0 and <= 100;
+    }
+}
+```
+
 Every way of composing of the tutorial, and the lesson that shows it:
 
 | Declaration in the model | Nature | What GBO guarantees | Lessons |
@@ -49,6 +73,29 @@ Every way of composing of the tutorial, and the lesson that shows it:
 Some locks run on a battery, others are wired. A battery level is not a value of every lock: it is a **capability** that some locks have, with values of its own, that comes and goes. A **component** declares it: an `[Entity]` with `[ComponentFor(nameof(MDoorLock))]`, whose interface starts with `C`.
 
 ```csharp
+// The values of this model alone, first; the others are those of the tutorial.
+[ValueObject<GhostString>]
+internal readonly ref partial struct Room
+{
+}
+
+/// <summary>What an alarm reports: "Forced", "Left open".</summary>
+[ValueObject<GhostString>]
+internal readonly ref partial struct AlarmKind
+{
+}
+
+[ValueObject<GhostString>]
+internal readonly ref partial struct Title
+{
+}
+
+/// <summary>A moment, a date and a time.</summary>
+[ValueObject<DateTime>(ImplicitConversion = true)]
+internal readonly partial struct Instant
+{
+}
+
 [Entity(1, 1, 2)]
 [Root]
 [Removable]
@@ -56,10 +103,10 @@ Some locks run on a battery, others are wired. A battery level is not a value of
 internal interface MDoorLock
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     [Property(2)]
-    string Room { get; set; }
+    Room Room { get; set; }
 }
 
 [Entity(2, 1, 2)]
@@ -68,10 +115,10 @@ internal interface MDoorLock
 internal interface CBattery
 {
     [Property(1)]
-    int Level { get; set; }
+    ChargeLevel Level { get; set; }
 
     [Property(2)]
-    DateTime Replaced { get; set; }
+    Instant Replaced { get; set; }
 }
 
 [Entity(3, 1, 1)]
@@ -87,10 +134,10 @@ internal interface CAlarmLog
 internal interface MAlarm
 {
     [Property(1)]
-    string Kind { get; set; }
+    AlarmKind Kind { get; set; }
 
     [Property(2)]
-    DateTime At { get; set; }
+    Instant At { get; set; }
 
     [OwnedFrom]
     CAlarmLog Log { get; }
@@ -102,7 +149,7 @@ internal interface MAlarm
 internal interface CMaintenance
 {
     [Property(1)]
-    string Reason { get; set; }
+    Reason Reason { get; set; }
 
     [Property(2)]
     [Strong]
@@ -116,7 +163,7 @@ internal interface CMaintenance
 internal interface MTechnician
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 }
 
 [Entity(7, 1, 3)]
@@ -126,7 +173,7 @@ internal interface MTechnician
 internal interface MWorkOrder
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     [Property(2)]
     [Strong]
@@ -453,6 +500,23 @@ public void ForgetARemovedCapability()
 A capability is rarely the property of one type: a camera and a lock may both run on a battery, every device has a place in the building. A `[ComponentFor]` **repeated** attaches the same component to each of these types:
 
 ```csharp
+// The values of this model alone, first; the others are those of the tutorial.
+[ValueObject<GhostString>]
+internal readonly ref partial struct Building
+{
+}
+
+[ValueObject<int>(ImplicitConversion = true)]
+internal readonly partial struct Floor
+{
+}
+
+/// <summary>The version of a firmware, "2.1": versions compare as their texts.</summary>
+[ValueObject<GhostString>]
+internal readonly ref partial struct FirmwareVersion
+{
+}
+
 [Entity(1, 1, 1)]
 [Root]
 [Removable]
@@ -460,7 +524,7 @@ A capability is rarely the property of one type: a camera and a lock may both ru
 internal interface MCamera
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 }
 
 [Entity(2, 1, 1)]
@@ -470,7 +534,7 @@ internal interface MCamera
 internal interface MDoorLock
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 }
 
 [Entity(3, 1, 1)]
@@ -480,7 +544,7 @@ internal interface MDoorLock
 internal interface MThermostat
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 }
 
 [Entity(4, 1, 1)]
@@ -490,7 +554,7 @@ internal interface MThermostat
 internal interface CBattery
 {
     [Property(1)]
-    int Level { get; set; }
+    ChargeLevel Level { get; set; }
 }
 
 [Entity(5, 1, 2)]
@@ -501,10 +565,10 @@ internal interface CBattery
 internal interface CLocation
 {
     [Property(1)]
-    string Building { get; set; }
+    Building Building { get; set; }
 
     [Property(2)]
-    int Floor { get; set; }
+    Floor Floor { get; set; }
 }
 
 [Entity(6, 1, 1)]
@@ -515,7 +579,7 @@ internal interface CLocation
 internal interface CFirmware
 {
     [Property(1)]
-    string Version { get; set; }
+    FirmwareVersion Version { get; set; }
 }
 
 [Entity(7, 1, 1)]
@@ -525,7 +589,7 @@ internal interface CFirmware
 internal interface CMaintenance
 {
     [Property(1)]
-    string Reason { get; set; }
+    Reason Reason { get; set; }
 }
 
 [GhostRepository]
@@ -592,12 +656,16 @@ public void QueryTheDevicesByTheirCapability()
         // The Views of the places of the second floor, and the name of the device of each, whatever its type.
         var second = LocationViewCollection.Where(2, static (place, floor) => place.Floor == floor)
             .Select(static place => place.DoorLock.Any() ? place.DoorLock.Get().Name : place.Thermostat.Any() ? place.Thermostat.Get().Name : place.Camera.Get().Name)
-            .OrderBy(static name => name).ToList();
+            .Order().ToList();
         Assert.Equal(["Office door", "Office thermostat"], second);
     }
 }
 
-private static void Place(Location location, string building, int floor) => (location.Building, location.Floor) = (building, floor);
+private static void Place(Location location, Building building, Floor floor)
+{
+    location.Building = building;
+    location.Floor = floor;
+}
 ```
 
 There is no base class `Device`, no common table, no type to test: the capability is the type.
@@ -609,14 +677,14 @@ The model has no inheritance: no `Device` base type, no reference typed by an in
 ```csharp
 internal interface ILocated
 {
-    string Name { get; }
+    Name Name { get; }
 
     Option<Location> Place { get; }
 }
 
 internal interface IPowered
 {
-    string Name { get; }
+    Name Name { get; }
 
     Option<Battery> Power { get; }
 }
@@ -662,14 +730,14 @@ public void WriteOneMethodForEveryDevice()
     Assert.Equal(["Hall camera: floor 1", "Front door: no place", "Office thermostat: floor 2"], located.Select(Describe).ToList());
 
     List<IPowered> powered = [camera, door];
-    Assert.Equal(["Hall camera"], powered.Where(static device => NeedsCharge(device, 20)).Select(static device => device.Name).ToList());
+    Assert.Equal(["Hall camera"], powered.Where(static device => NeedsCharge(device, 20)).Select(static device => device.Name.ToString()).ToList());
     transaction.Commit();
 }
 
 // Your code over the capabilities: it knows the interfaces, not the types of devices.
 private static string Describe(ILocated device) => device.Place.TryGet(out var place) ? $"{device.Name}: floor {place.Floor}" : $"{device.Name}: no place";
 
-private static bool NeedsCharge(IPowered device, int threshold) => device.Power.TryGet(out var battery) && battery.Level < threshold;
+private static bool NeedsCharge(IPowered device, ChargeLevel threshold) => device.Power.TryGet(out var battery) && battery.Level < threshold;
 ```
 
 The interface exists in C# only: neither the model, nor the Store, nor the engine of GBO know it.
@@ -735,7 +803,7 @@ public void EnumerateTheEntitiesThatHaveTheCapabilities()
     using var transaction = devices.OpenTransaction(StoreAccessMode.ReadOnly);
 
     // The lab door is under maintenance, the server room door is wired: neither is in the system.
-    Assert.Equal(["Front door", "Office door"], PoweredLockSystemCollection.Select(static s => s.Lock.Name).OrderBy(static n => n).ToList());
+    Assert.Equal(["Front door", "Office door"], PoweredLockSystemCollection.Select(static s => s.Lock.Name).Order().ToList());
 
     // An optional capability reads as an Option.
     var front = PoweredLockSystemCollection.Single(static s => s.Lock.Name == "Front door");
@@ -822,7 +890,7 @@ A system is a `readonly partial struct`: your methods join its members, and read
 internal readonly partial struct FirmwareCameraSystem
 {
     /// <summary>The camera runs a firmware older than <paramref name="version"/>, and can take the update: wired, or charged enough.</summary>
-    public bool CanUpdateTo(string version) => string.CompareOrdinal(Firmware.Version, version) < 0 && (!Battery.Any() || Battery.Get().Level >= 50);
+    public bool CanUpdateTo(FirmwareVersion version) => version.CompareTo(Firmware.Version) > 0 && (!Battery.Any() || Battery.Get().Level >= 50);
 }
 
 [Fact]
@@ -846,7 +914,7 @@ public void WriteARuleInTheSystem()
     using (devices.OpenTransaction(StoreAccessMode.ReadOnly))
     {
         var ready = FirmwareCameraSystemCollection.Where("3.0", static (s, version) => s.CanUpdateTo(version))
-            .Select(static s => s.Camera.Name).OrderBy(static n => n).ToList();
+            .Select(static s => s.Camera.Name).Order().ToList();
         Assert.Equal(["Charged camera", "Wired camera"], ready);
     }
 }
@@ -861,6 +929,30 @@ With inheritance, a customer is a subclass of a party: `class Customer : Party`.
 With components, **a party is one entity, and its roles are its capabilities**:
 
 ```csharp
+// The values of this model alone, first; the others are those of the tutorial.
+[ValueObject<decimal>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
+internal readonly partial struct Money
+{
+    private static bool IsValid(decimal amount) => amount >= 0;
+}
+
+/// <summary>The term of payment of a supplier, in days.</summary>
+[ValueObject<int>(ImplicitConversion = true)]
+internal readonly partial struct PaymentTerm
+{
+    private static bool IsValid(int days) => days >= 0;
+}
+
+[ValueObject<GhostString>]
+internal readonly ref partial struct ProductName
+{
+}
+
+[ValueObject<GhostString>]
+internal readonly ref partial struct Badge
+{
+}
+
 [Entity(1, 1, 1)]
 [Root]
 [Removable]
@@ -868,7 +960,7 @@ With components, **a party is one entity, and its roles are its capabilities**:
 internal interface MParty
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 }
 
 [Entity(2, 1, 1)]
@@ -877,7 +969,7 @@ internal interface MParty
 internal interface CCustomer
 {
     [Property(1)]
-    decimal CreditLimit { get; set; }
+    Money CreditLimit { get; set; }
 }
 
 [Entity(3, 1, 2)]
@@ -886,7 +978,7 @@ internal interface CCustomer
 internal interface CSupplier
 {
     [Property(1)]
-    int PaymentDays { get; set; }
+    PaymentTerm PaymentDays { get; set; }
 
     [Property(2)]
     IEntityCollection<MOffer> Offers { get; }
@@ -897,10 +989,10 @@ internal interface CSupplier
 internal interface MOffer
 {
     [Property(1)]
-    string Product { get; set; }
+    ProductName Product { get; set; }
 
     [Property(2)]
-    decimal Price { get; set; }
+    Money Price { get; set; }
 
     [OwnedFrom]
     CSupplier Supplier { get; }
@@ -912,7 +1004,7 @@ internal interface MOffer
 internal interface CEmployee
 {
     [Property(1)]
-    string Badge { get; set; }
+    Badge Badge { get; set; }
 }
 
 [Entity(6, 1, 1)]
@@ -920,7 +1012,7 @@ internal interface CEmployee
 internal interface CBlocked
 {
     [Property(1)]
-    string Reason { get; set; }
+    Reason Reason { get; set; }
 }
 
 [Entity(7, 1, 2)]
@@ -930,7 +1022,7 @@ internal interface CBlocked
 internal interface MOrder
 {
     [Property(1)]
-    decimal Amount { get; set; }
+    Money Amount { get; set; }
 
     [Property(2)]
     [Strong]
@@ -1038,7 +1130,7 @@ public void JoinTheRolesThatAQuestionNeeds()
     using (business.OpenTransaction(StoreAccessMode.ReadOnly))
     {
         Assert.Equal(["Acme"], TradingPartnerSystemCollection.Select(static s => s.Party.Name).ToList());
-        Assert.Equal(["Acme", "Ada"], ActiveCustomerSystemCollection.Select(static s => s.Party.Name).OrderBy(static n => n).ToList());
+        Assert.Equal(["Acme", "Ada"], ActiveCustomerSystemCollection.Select(static s => s.Party.Name).Order().ToList());
         Assert.Equal("E-17", ActiveCustomerSystemCollection.Single(static s => s.Employee.Any()).Employee.Get().Badge);
     }
 }
@@ -1081,7 +1173,8 @@ public async Task ChangeARoleAndItsPartyConcurrently()
     using (business.OpenTransaction(StoreAccessMode.ReadOnly))
     {
         var acme = PartyCollection.Single();
-        Assert.Equal(("Acme Corporation", 25_000m), (acme.Name, acme.Customer.Get().CreditLimit));
+        Assert.Equal("Acme Corporation", acme.Name);
+        Assert.Equal(25_000m, acme.Customer.Get().CreditLimit);
     }
 }
 ```
@@ -1131,7 +1224,7 @@ public async Task ConflictOnTheCapabilitiesOfOneEntity()
 }
 
 // The credit limit of the party, in its customer role, or in a new one: the same code for the first try and for the retry.
-private static void GrantCredit(decimal limit) => PartyCollection.Single().Customer.GetOrNew().CreditLimit = limit;
+private static void GrantCredit(Money limit) => PartyCollection.Single().Customer.GetOrNew().CreditLimit = limit;
 ```
 
 ### Lesson 10: What composes what
@@ -1260,5 +1353,3 @@ The lessons went from a component to what it does. This chapter goes the other w
 - A component is **an aggregate of its own**: it changes in parallel with its entity.
 
 [Tutorial Four](Four-Edges.md) goes further with the edges and the graph oriented model.
-
-**Next tutorial:** [Tutorial Four: Edges](Four-Edges.md)

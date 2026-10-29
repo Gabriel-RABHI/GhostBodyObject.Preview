@@ -18,6 +18,43 @@ A music label and a streaming service: artists, their albums and their tracks; t
 
 The model grows with the tutorial. Each lesson, or group of lessons, declares its own model, enriched with the concepts of the lesson: thirteen small models, from the three links of Lesson 1 to the whole catalog of Lesson 20, and the capabilities of Lesson 21.
 
+**The values of the models come first.** Each value says what it is by its type, a value object ([Tutorial One, Lesson 18](One-TheBasics.md#lesson-18-give-each-value-its-type)): a name is not a title, a duration is not a year. The values that every model of the tutorial shares are declared once, in its namespace, at the head of the first model; a model declares at its head the values that it alone has.
+
+```csharp
+namespace TutorialTwo
+{
+    [ValueObject<GhostString>]
+    internal readonly ref partial struct Name
+    {
+    }
+
+    [ValueObject<GhostString>]
+    internal readonly ref partial struct Title
+    {
+    }
+
+    /// <summary>A text written by a person: the words of a song, a note, a review.</summary>
+    [ValueObject<GhostString>]
+    internal readonly ref partial struct FreeText
+    {
+    }
+
+    [ValueObject<int>(ImplicitConversion = true)]
+    internal readonly partial struct Year
+    {
+    }
+
+    /// <summary>A duration, in seconds: never negative, added and subtracted.</summary>
+    [ValueObject<int>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
+    internal readonly partial struct Seconds
+    {
+        private static bool IsValid(int seconds) => seconds >= 0;
+    }
+}
+```
+
+A text value object is read in place, as a `GhostString`, and compared to a `string`: `album.Title == "Low"`. It is a `ref struct`, which no tuple holds: an assertion compares one value at a time, `Assert.Equal("Low", album.Title)`.
+
 > **Tip: Twelve models in one project**
 >
 > Each model of this tutorial lives in a namespace of its own, with its own Repository. The generator makes the collections of a Repository, `AlbumCollection`, `TrackCollection`..., visible in the whole project: twelve models give twelve `AlbumCollection`. So each lesson starts its namespace with one line, which chooses the collections of its own Repository:
@@ -60,7 +97,7 @@ The first model has three Roots: a genre, an artist, and an album that designate
 internal interface MGenre
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 }
 
 [Entity(2, 1, 1)]
@@ -70,7 +107,7 @@ internal interface MGenre
 internal interface MArtist
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 }
 
 [Entity(3, 1, 5)]
@@ -80,10 +117,10 @@ internal interface MArtist
 internal interface MAlbum
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     [Property(2)]
-    int Year { get; set; }
+    Year Year { get; set; }
 
     // A link is a property whose type is an entity of the model. [Strong]: the album retains its artist (Lesson 2). A T, not
     // an Option<T>: an album always has an artist, given to its constructor.
@@ -146,7 +183,8 @@ public void CreateAnAlbumWithItsArtist()
     using (catalog.OpenTransaction(StoreAccessMode.ReadOnly))
     {
         var low = AlbumCollection.Single();
-        Assert.Equal(("David Bowie", "Art rock"), (low.Artist.Name, low.Genre.Get().Name));
+        Assert.Equal("David Bowie", low.Artist.Name);
+        Assert.Equal("Art rock", low.Genre.Get().Name);
 
         // A View follows the links too, without creating any Body (Tutorial One, Lesson 10).
         var view = AlbumViewCollection.Single();
@@ -169,11 +207,13 @@ public void SeeTheTargetAsItIs()
     var heroes = new Album(bowie) { Title = "Heroes" };
 
     bowie.Name = "Bowie";
-    Assert.Equal(("Bowie", "Bowie"), (low.Artist.Name, heroes.Artist.Name));
+    Assert.Equal("Bowie", low.Artist.Name);
+    Assert.Equal("Bowie", heroes.Artist.Name);
 
     // Setting a link changes the target, not the entity it designated.
     heroes.Artist = new Artist { Name = "Brian Eno" };
-    Assert.Equal(("Bowie", "Brian Eno"), (low.Artist.Name, heroes.Artist.Name));
+    Assert.Equal("Bowie", low.Artist.Name);
+    Assert.Equal("Brian Eno", heroes.Artist.Name);
     transaction.Commit();
 }
 ```
@@ -376,6 +416,18 @@ public void CompareAStrongAndAWeakReference()
 A link with neither `[Strong]` nor `[Weak]` is a **composition**: the Owner holds its parts, as an order holds its lines. An artist owns its albums; an album owns its tracks, its release and its booklet.
 
 ```csharp
+// The values of this model alone, first; the others are those of the tutorial.
+[ValueObject<GhostString>]
+internal readonly ref partial struct CatalogNumber
+{
+}
+
+[ValueObject<int>(ImplicitConversion = true)]
+internal readonly partial struct PageCount
+{
+    private static bool IsValid(int pages) => pages >= 0;
+}
+
 [Entity(1, 1, 2)]
 [Root]
 [Removable]
@@ -383,7 +435,7 @@ A link with neither `[Strong]` nor `[Weak]` is a **composition**: the Owner hold
 internal interface MArtist
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     // A collection of parts: IEntityCollection<T>, without Setter. Its parts are born in it.
     [Property(2)]
@@ -395,10 +447,10 @@ internal interface MArtist
 internal interface MAlbum
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     [Property(2)]
-    int Year { get; set; }
+    Year Year { get; set; }
 
     // A required composition, a T: the release of the album is born with it, and never leaves it.
     [Property(3)]
@@ -426,10 +478,10 @@ internal interface MAlbum
 internal interface MRelease
 {
     [Property(1)]
-    string Label { get; set; }
+    Name Label { get; set; }
 
     [Property(2)]
-    string CatalogNumber { get; set; }
+    CatalogNumber CatalogNumber { get; set; }
 }
 
 [Entity(4, 1, 2)]
@@ -437,10 +489,10 @@ internal interface MRelease
 internal interface MTrack
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     [Property(2)]
-    int Seconds { get; set; }
+    Seconds Seconds { get; set; }
 
     [OwnedFrom]
     MAlbum Album { get; }
@@ -451,7 +503,7 @@ internal interface MTrack
 internal interface MBooklet
 {
     [Property(1)]
-    int Pages { get; set; }
+    PageCount Pages { get; set; }
 }
 ```
 
@@ -484,9 +536,11 @@ public void CreateAnAggregate()
         low.Release.CatalogNumber = "PL 12030";
 
         var speed = low.Tracks.New();
-        (speed.Title, speed.Seconds) = ("Speed of Life", 166);
+        speed.Title = "Speed of Life";
+        speed.Seconds = 166;
         var sound = low.Tracks.New();
-        (sound.Title, sound.Seconds) = ("Sound and Vision", 183);
+        sound.Title = "Sound and Vision";
+        sound.Seconds = 183;
 
         // Each part reads its Owner.
         Assert.Same(low, speed.Album);
@@ -497,7 +551,9 @@ public void CreateAnAggregate()
     using (catalog.OpenTransaction(StoreAccessMode.ReadOnly))
     {
         var low = ArtistCollection.Single().Albums.Single();
-        Assert.Equal(("Low", "RCA", 349), (low.Title, low.Release.Label, low.Tracks.Sum(static t => t.Seconds)));
+        Assert.Equal("Low", low.Title);
+        Assert.Equal("RCA", low.Release.Label);
+        Assert.Equal(349, low.Tracks.Sum(static t => t.Seconds));
     }
 }
 ```
@@ -543,7 +599,8 @@ public void ReadAnAggregateWithViews()
     {
         var artist = ArtistViewCollection.Single();
         var low = artist.Albums.Single();
-        Assert.Equal(("Low", 11, 1980), (low.Title, low.Tracks.Count(), low.Tracks.Sum(static t => t.Seconds)));
+        Assert.Equal("Low", low.Title);
+        Assert.Equal((11, 1980), (low.Tracks.Count(), low.Tracks.Sum(static t => t.Seconds)));
         Assert.Equal("David Bowie", low.Artist.Name);
     }
 }
@@ -687,7 +744,7 @@ A part may have several types of Owner. The library of a listener holds folders;
 internal interface MListener
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     [Property(2)]
     IEntityCollection<MFolder> Folders { get; }
@@ -698,7 +755,7 @@ internal interface MListener
 internal interface MFolder
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     [Property(2)]
     IEntityCollection<MFolder> Folders { get; }
@@ -719,7 +776,7 @@ internal interface MFolder
 internal interface MPlaylist
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     [OwnedFrom]
     MFolder Folder { get; }
@@ -788,6 +845,11 @@ public void MoveAndRemoveASubtree()
 A radio station and its broadcasts, as many as the years give:
 
 ```csharp
+[ValueObject<int>(ImplicitConversion = true)]
+internal readonly partial struct Day
+{
+}
+
 [Entity(1, 1, 2)]
 [Root]
 [Removable]
@@ -795,7 +857,7 @@ A radio station and its broadcasts, as many as the years give:
 internal interface MStation
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     [Property(2)]
     IEntityCollection<MBroadcast> Broadcasts { get; }
@@ -806,10 +868,10 @@ internal interface MBroadcast
 {
     // The business order of the broadcasts is a property: the collection has none.
     [Property(1)]
-    int Day { get; set; }
+    Day Day { get; set; }
 
     [Property(2)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     [OwnedFrom]
     MStation Station { get; }
@@ -829,7 +891,8 @@ public void OrderACollectionByAProperty()
     foreach (int day in new[] { 3, 1, 2 })
     {
         var broadcast = station.Broadcasts.New();
-        (broadcast.Day, broadcast.Title) = (day, $"Day {day}");
+        broadcast.Day = day;
+        broadcast.Title = $"Day {day}";
     }
 
     Assert.Equal(["Day 1", "Day 2", "Day 3"], station.Broadcasts.OrderBy(static b => b.Day).Select(static b => b.Title).ToList());
@@ -886,7 +949,7 @@ A playlist does not own the tracks it plays: they belong to the albums of their 
 internal interface MTrack
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     // A remix designates its original track, on the same album or on another one.
     [Property(2)]
@@ -904,7 +967,7 @@ internal interface MTrack
 internal interface MPlaylist
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     [Property(2)]
     IEntityCollection<MEntry> Entries { get; }
@@ -990,7 +1053,7 @@ In Lesson 9, a retained track refused the removal of its artist. Declared `[Orph
 internal interface MAlbum
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     [Property(2)]
     IEntityCollection<MTrack> Tracks { get; }
@@ -1022,7 +1085,8 @@ public void KeepTheRetainedAlbumsOfARemovedArtist()
 
         // Low survives, with its two tracks, and no artist; Lodger is gone.
         var orphan = AlbumCollection.Single();
-        Assert.Equal(("Low", 2), (orphan.Title, orphan.Tracks.Count()));
+        Assert.Equal("Low", orphan.Title);
+        Assert.Equal(2, orphan.Tracks.Count());
         Assert.False(orphan.Artist.Any());
         transaction.Commit();
     }
@@ -1106,7 +1170,7 @@ A recording is neither a Root nor a part: no composition holds it, and nothing r
 internal interface MTrack
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     // A strong reference to a type that no composition holds, and that is not Root: a shared object. Required, a T.
     [Property(2)]
@@ -1122,7 +1186,7 @@ internal interface MTrack
 internal interface MRecording
 {
     [Property(1)]
-    int Seconds { get; set; }
+    Seconds Seconds { get; set; }
 
     // A shared object may designate another one: an Option, a strong slot (Lesson 12).
     [Property(2)]
@@ -1135,7 +1199,7 @@ internal interface MRecording
 internal interface MLyrics
 {
     [Property(1)]
-    string Text { get; set; }
+    FreeText Text { get; set; }
 }
 ```
 
@@ -1299,7 +1363,7 @@ A festival books artists, and shows posters, which the editions of the next year
 internal interface MFestival
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     // A collection of strong references to Roots: each booked artist is retained.
     [Property(2)]
@@ -1317,7 +1381,7 @@ internal interface MFestival
 internal interface MPoster
 {
     [Property(1)]
-    string Design { get; set; }
+    Name Design { get; set; }
 }
 ```
 
@@ -1387,7 +1451,7 @@ The listeners, their favorite albums, and the album they play now:
 internal interface MListener
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     [Property(2)]
     [Weak]
@@ -1447,7 +1511,7 @@ A link reads in one direction: from the listener to its favorite albums. The oth
 internal interface MAlbum
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     [Property(2)]
     [Strong]
@@ -1464,7 +1528,7 @@ internal interface MAlbum
 internal interface MGenre
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     // The albums that designate this genre, by their strong reference Genre (Lesson 15).
     [ReverseStrongReference(nameof(MAlbum.Genre))]
@@ -1519,7 +1583,7 @@ public void ReadTheAlbumsOfAGenre()
     using (audience.OpenTransaction(StoreAccessMode.ReadOnly))
     {
         var rock = GenreCollection.Single(static g => g.Name == "Rock");
-        Assert.Equal(["Heroes", "Low"], rock.Albums.Select(static a => a.Title).OrderBy(static t => t).ToList());
+        Assert.Equal(["Heroes", "Low"], rock.Albums.Select(static a => a.Title).Order().ToList());
 
         // The Views read the reverse properties as well, without any Body.
         var view = GenreViewCollection.Single(static g => g.Name == "Jazz");
@@ -1548,11 +1612,11 @@ Here, an album keeps its duration, the sum of the durations of its tracks; a not
 internal interface MAlbum
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     // The sum of the durations of the tracks, kept by the rules of the partial classes below.
     [Property(2)]
-    int Seconds { get; set; }
+    Seconds Seconds { get; set; }
 
     [Property(3)]
     IEntityCollection<MTrack> Tracks { get; }
@@ -1568,7 +1632,7 @@ internal interface MAlbum
 internal interface MNote
 {
     [Property(1)]
-    string Text { get; set; }
+    FreeText Text { get; set; }
 }
 
 // The rules of the album, in its partial class, as in Tutorial One, Lesson 11.
@@ -1581,12 +1645,13 @@ internal partial class Album
     internal void Recount() => Seconds = Tracks.Sum(static t => t.Seconds);
 
     /// <summary>A new track, refused before anything is written when the album is full (Lesson 17).</summary>
-    public Track AddTrack(string title, int seconds)
+    public Track AddTrack(Title title, Seconds seconds)
     {
         if (Tracks.Count() >= MaxTracks)
             throw new InvalidOperationException($"The album {Title} holds {MaxTracks} tracks at most.");
         var track = Tracks.New();
-        (track.Title, track.Seconds) = (title, seconds);
+        track.Title = title;
+        track.Seconds = seconds;
         return track;
     }
 
@@ -1663,7 +1728,7 @@ public void ArchiveEveryRemovedAlbum()
     {
         Assert.Equal(0, AlbumCollection.Count());
         Assert.Equal(["Heroes, by David Bowie, removed", "Low, by David Bowie, removed"],
-            NoteCollection.Select(static n => n.Text).OrderBy(static t => t).ToList());
+            NoteCollection.Select(static n => n.Text).Order().ToList());
     }
 }
 ```
@@ -1843,7 +1908,7 @@ An entity with a business identity, `[WithIdentity]`, has a reference type that 
 internal interface MArtist
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     [Property(2)]
     IEntityCollection<MAlbum> Albums { get; }
@@ -1855,7 +1920,7 @@ internal interface MArtist
 internal interface MAlbum
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     [Property(2)]
     MRelease Release { get; }
@@ -1872,7 +1937,7 @@ internal interface MAlbum
 internal interface MRelease
 {
     [Property(1)]
-    string Label { get; set; }
+    Name Label { get; set; }
 }
 
 [Entity(4, 1, 1)]
@@ -1881,7 +1946,7 @@ internal interface MRelease
 internal interface MTrack
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     [OwnedFrom]
     MAlbum Album { get; }
@@ -1945,7 +2010,8 @@ public void CreateTheSameGraphByACommandAndByAReplay()
         using (catalog.OpenTransaction(StoreAccessMode.ReadOnly))
         {
             var album = released.Album.Resolve();
-            Assert.Equal(("Low", released.Artist, released.Release), (album.Title, album.Artist.Ref, album.Release.Ref));
+            Assert.Equal("Low", album.Title);
+            Assert.Equal((released.Artist, released.Release), (album.Artist.Ref, album.Release.Ref));
             Assert.Same(album, released.Tracks[1].Resolve().Album);
         }
 }
@@ -2006,7 +2072,7 @@ The last model holds every link of the tutorial in one catalog. Genres, which no
 internal interface MGenre
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 }
 
 [Entity(2, 1, 2)]
@@ -2016,7 +2082,7 @@ internal interface MGenre
 internal interface MArtist
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     [Property(2)]
     IEntityCollection<MAlbum> Albums { get; }
@@ -2028,7 +2094,7 @@ internal interface MArtist
 internal interface MAlbum
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     [Property(2)]
     [Strong]
@@ -2046,7 +2112,7 @@ internal interface MAlbum
 internal interface MTrack
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 
     [Property(2)]
     [Strong]
@@ -2061,7 +2127,7 @@ internal interface MTrack
 internal interface MRecording
 {
     [Property(1)]
-    int Seconds { get; set; }
+    Seconds Seconds { get; set; }
 
     [Property(2)]
     [Strong]
@@ -2073,7 +2139,7 @@ internal interface MRecording
 internal interface MLyrics
 {
     [Property(1)]
-    string Text { get; set; }
+    FreeText Text { get; set; }
 }
 
 [Entity(7, 1, 2)]
@@ -2083,7 +2149,7 @@ internal interface MLyrics
 internal interface MPlaylist
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     [Property(2)]
     IEntityCollection<MEntry> Entries { get; }
@@ -2104,7 +2170,7 @@ internal interface MEntry
 internal interface MListener
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     [Property(2)]
     [Weak]
@@ -2118,7 +2184,7 @@ internal interface MListener
 internal interface MFestival
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 
     [Property(2)]
     [Strong]
@@ -2150,7 +2216,8 @@ public void FollowEveryRetentionOfACatalog()
     // David Bowie: Low, two tracks; Lodger, one track. The lyrics of "Sound and Vision", shared with a cover by Brian Eno.
     var bowie = new Artist { Name = "David Bowie" };
     var low = bowie.Albums.New();
-    (low.Title, low.Genre) = ("Low", rock);
+    low.Title = "Low";
+    low.Genre = rock;
     var sound = low.Tracks.New(new Recording.Init());
     sound.Title = "Sound and Vision";
     var lyrics = sound.Recording.Lyrics.New();
@@ -2216,6 +2283,28 @@ A removal costs what it removes, an aggregate, never the size of the Store; and 
 An artist may tour, be verified, retire. These are not values of every artist: they are **capabilities** that some artists have, each with values of its own, and that come and go. A **component** declares one: an `[Entity]` with `[ComponentFor(nameof(MArtist))]`, its interface starting with `C`. The reviews are a capability of the artists and of the albums: a component may repeat `[ComponentFor]`. A **system** joins an entity and its components: an interface `[SystemFor(nameof(MArtist))]`, its interface starting with `S`. [Tutorial Three](Three-Composition.md) is about them.
 
 ```csharp
+// The values of this model alone, first; the others are those of the tutorial.
+[ValueObject<GhostString>]
+internal readonly ref partial struct City
+{
+}
+
+[ValueObject<DateTime>(ImplicitConversion = true)]
+internal readonly partial struct Instant
+{
+}
+
+[ValueObject<GhostString>]
+internal readonly ref partial struct Reason
+{
+}
+
+[ValueObject<int>(ImplicitConversion = true)]
+internal readonly partial struct Rating
+{
+    private static bool IsValid(int stars) => stars is >= 0 and <= 5;
+}
+
 [Entity(1, 1, 1)]
 [Root]
 [Removable]
@@ -2223,7 +2312,7 @@ An artist may tour, be verified, retire. These are not values of every artist: t
 internal interface MArtist
 {
     [Property(1)]
-    string Name { get; set; }
+    Name Name { get; set; }
 }
 
 [Entity(2, 1, 1)]
@@ -2233,7 +2322,7 @@ internal interface MArtist
 internal interface MAlbum
 {
     [Property(1)]
-    string Title { get; set; }
+    Title Title { get; set; }
 }
 
 // A capability of an artist: a tour, and its concerts, parts of the component.
@@ -2251,10 +2340,10 @@ internal interface CTour
 internal interface MConcert
 {
     [Property(1)]
-    string City { get; set; }
+    City City { get; set; }
 
     [Property(2)]
-    DateTime Date { get; set; }
+    Instant Date { get; set; }
 
     [OwnedFrom]
     CTour Tour { get; }
@@ -2265,7 +2354,7 @@ internal interface MConcert
 internal interface CVerified
 {
     [Property(1)]
-    DateTime Since { get; set; }
+    Instant Since { get; set; }
 }
 
 [Entity(6, 1, 1)]
@@ -2273,7 +2362,7 @@ internal interface CVerified
 internal interface CRetired
 {
     [Property(1)]
-    string Reason { get; set; }
+    Reason Reason { get; set; }
 }
 
 // A capability of two entity types: what the listeners review.
@@ -2291,10 +2380,10 @@ internal interface CReviews
 internal interface MReview
 {
     [Property(1)]
-    string Text { get; set; }
+    FreeText Text { get; set; }
 
     [Property(2)]
-    int Stars { get; set; }
+    Rating Stars { get; set; }
 
     [OwnedFrom]
     CReviews Reviews { get; }
@@ -2396,7 +2485,7 @@ public void ShareACapabilityBetweenTwoTypes()
 
     // "Everything that can be reviewed" is the collection of the component, whatever the types of their entities.
     Assert.Equal(2, ReviewsCollection.Count());
-    Assert.Equal(9, ReviewsCollection.Sum(static r => r.Items.Sum(static i => i.Stars)));
+    Assert.Equal(9, ReviewsCollection.Sum(static r => r.Items.Sum(static i => i.Stars.Value)));
     transaction.Commit();
 }
 ```
@@ -2424,14 +2513,14 @@ public void JoinTheArtistsAndTheirCapabilities()
     using (var transaction = label.OpenTransaction(StoreAccessMode.ReadWrite))
     {
         // The members of a system are Views: the enumeration creates no Body.
-        Assert.Equal(["Bowie", "Eno"], OnTourSystemCollection.Select(static s => s.Artist.Name).OrderBy(static n => n).ToList());
+        Assert.Equal(["Bowie", "Eno"], OnTourSystemCollection.Select(static s => s.Artist.Name).Order().ToList());
         Assert.Equal(["Bowie"], OnTourSystemCollection.Where(static s => s.Verified.Any()).Select(static s => s.Artist.Name).ToList());
 
         // The capabilities that the transaction gives or takes are seen at the next instruction.
         var iggy = ArtistCollection.Single(static a => a.Name == "Iggy");
         iggy.Tour.New();
         ArtistCollection.Single(static a => a.Name == "Eno").Retired.New();
-        Assert.Equal(["Bowie", "Iggy"], OnTourSystemCollection.Select(static s => s.Artist.Name).OrderBy(static n => n).ToList());
+        Assert.Equal(["Bowie", "Iggy"], OnTourSystemCollection.Select(static s => s.Artist.Name).Order().ToList());
 
         // The system of one artist, when it has the capabilities of the system.
         Assert.True(OnTourSystem.Of(iggy).Any());
@@ -2618,5 +2707,3 @@ Choose an aggregate by the rule it protects: an order and its lines, for the tot
 - A **component** is a capability that an entity gains and loses without knowing it, removed with its entity; a **system** joins an entity and its components, and reads only what may belong to it.
 
 [Tutorial Three](Three-Composition.md) goes further with the components and the systems: the composition model of GBO.
-
-**Next tutorial:** [Tutorial Three: Composition](Three-Composition.md)
