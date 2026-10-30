@@ -24,29 +24,23 @@ The model grows with the tutorial. Each lesson, or group of lessons, declares it
 namespace TutorialTwo
 {
     [ValueObject<GhostString>]
-    internal readonly ref partial struct Name
-    {
-    }
+    internal interface VName { }
 
     [ValueObject<GhostString>]
-    internal readonly ref partial struct Title
-    {
-    }
+    internal interface VTitle { }
 
     /// <summary>A text written by a person: the words of a song, a note, a review.</summary>
     [ValueObject<GhostString>]
-    internal readonly ref partial struct FreeText
-    {
-    }
+    internal interface VFreeText { }
 
     [ValueObject<int>(ImplicitConversion = true)]
-    internal readonly partial struct Year
-    {
-    }
+    internal interface VYear { }
 
     /// <summary>A duration, in seconds: never negative, added and subtracted.</summary>
     [ValueObject<int>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
-    internal readonly partial struct Seconds
+    internal interface VSeconds { }
+
+    internal partial struct Seconds
     {
         private static bool IsValid(int seconds) => seconds >= 0;
     }
@@ -92,58 +86,45 @@ A link is a property whose type is another entity of the model. Reading it gives
 The first model has three Roots: a genre, an artist, and an album that designates both, and the album that came before it.
 
 ```csharp
-[Entity(1, 1, 1)]
-[Root]
+[Entity(1, 1, 1), Root]
 internal interface MGenre
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 }
 
-[Entity(2, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(2, 1, 1), Root, Removable, Enumerable]
 internal interface MArtist
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 }
 
-[Entity(3, 1, 5)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(3, 1, 5), Root, Removable, Enumerable]
 internal interface MAlbum
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
     [Property(2)]
-    Year Year { get; set; }
+    VYear Year { get; set; }
 
     // A link is a property whose type is an entity of the model. [Strong]: the album retains its artist (Lesson 2). A T, not
     // an Option<T>: an album always has an artist, given to its constructor.
-    [Property(3)]
-    [Strong]
+    [Property(3), Strong]
     MArtist Artist { get; set; }
 
     // An Option<T>: an album may have no genre.
-    [Property(4)]
-    [Strong]
+    [Property(4), Strong]
     Option<MGenre> Genre { get; set; }
 
     // [Weak]: the album does not retain the previous one (Lesson 3). A weak link is always an Option<T>: its target may
     // disappear.
-    [Property(5)]
-    [Weak]
+    [Property(5), Weak]
     Option<MAlbum> Previous { get; set; }
 }
 
-[GhostRepository]
-[IncludeEntityModel(nameof(MGenre))]
-[IncludeEntityModel(nameof(MArtist))]
-[IncludeEntityModel(nameof(MAlbum))]
+[GhostRepository, IncludeEntityModel(nameof(MGenre)), IncludeEntityModel(nameof(MArtist)), IncludeEntityModel(nameof(MAlbum))]
 internal interface MCatalogRepository
 {
 }
@@ -418,39 +399,35 @@ A link with neither `[Strong]` nor `[Weak]` is a **composition**: the Owner hold
 ```csharp
 // The values of this model alone, first; the others are those of the tutorial.
 [ValueObject<GhostString>]
-internal readonly ref partial struct CatalogNumber
-{
-}
+internal interface VCatalogNumber { }
 
 [ValueObject<int>(ImplicitConversion = true)]
-internal readonly partial struct PageCount
+internal interface VPageCount { }
+
+internal partial struct PageCount
 {
     private static bool IsValid(int pages) => pages >= 0;
 }
 
-[Entity(1, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(1, 1, 2), Root, Removable, Enumerable]
 internal interface MArtist
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
     // A collection of parts: IEntityCollection<T>, without Setter. Its parts are born in it.
     [Property(2)]
     IEntityCollection<MAlbum> Albums { get; }
 }
 
-[Entity(2, 1, 6)]
-[Enumerable]
+[Entity(2, 1, 6), Enumerable]
 internal interface MAlbum
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
     [Property(2)]
-    Year Year { get; set; }
+    VYear Year { get; set; }
 
     // A required composition, a T: the release of the album is born with it, and never leaves it.
     [Property(3)]
@@ -473,37 +450,34 @@ internal interface MAlbum
     MArtist Artist { get; }
 }
 
-[Entity(3, 1, 2)]
-[Enumerable]
+[Entity(3, 1, 2), Enumerable]
 internal interface MRelease
 {
     [Property(1)]
-    Name Label { get; set; }
+    VName Label { get; set; }
 
     [Property(2)]
-    CatalogNumber CatalogNumber { get; set; }
+    VCatalogNumber CatalogNumber { get; set; }
 }
 
-[Entity(4, 1, 2)]
-[Enumerable]
+[Entity(4, 1, 2), Enumerable]
 internal interface MTrack
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
     [Property(2)]
-    Seconds Seconds { get; set; }
+    VSeconds Seconds { get; set; }
 
     [OwnedFrom]
     MAlbum Album { get; }
 }
 
-[Entity(5, 1, 1)]
-[Enumerable]
+[Entity(5, 1, 1), Enumerable]
 internal interface MBooklet
 {
     [Property(1)]
-    PageCount Pages { get; set; }
+    VPageCount Pages { get; set; }
 }
 ```
 
@@ -738,24 +712,21 @@ public void MoveAPartToAnotherOwner()
 A part may have several types of Owner. The library of a listener holds folders; a folder holds playlists, and other folders. A folder lives in a listener, at the top of the library, or in another folder:
 
 ```csharp
-[Entity(1, 1, 2)]
-[Root]
-[Removable]
+[Entity(1, 1, 2), Root, Removable]
 internal interface MListener
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
     [Property(2)]
     IEntityCollection<MFolder> Folders { get; }
 }
 
-[Entity(2, 1, 3)]
-[Enumerable]
+[Entity(2, 1, 3), Enumerable]
 internal interface MFolder
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
     [Property(2)]
     IEntityCollection<MFolder> Folders { get; }
@@ -771,12 +742,11 @@ internal interface MFolder
     Option<MFolder> Parent { get; }
 }
 
-[Entity(3, 1, 1)]
-[Enumerable]
+[Entity(3, 1, 1), Enumerable]
 internal interface MPlaylist
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
     [OwnedFrom]
     MFolder Folder { get; }
@@ -846,18 +816,13 @@ A radio station and its broadcasts, as many as the years give:
 
 ```csharp
 [ValueObject<int>(ImplicitConversion = true)]
-internal readonly partial struct Day
-{
-}
+internal interface VDay { }
 
-[Entity(1, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(1, 1, 2), Root, Removable, Enumerable]
 internal interface MStation
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
     [Property(2)]
     IEntityCollection<MBroadcast> Broadcasts { get; }
@@ -868,10 +833,10 @@ internal interface MBroadcast
 {
     // The business order of the broadcasts is a property: the collection has none.
     [Property(1)]
-    Day Day { get; set; }
+    VDay Day { get; set; }
 
     [Property(2)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
     [OwnedFrom]
     MStation Station { get; }
@@ -944,41 +909,34 @@ public void HoldAsManyPartsAsNeeded()
 A playlist does not own the tracks it plays: they belong to the albums of their artists. Each entry of a playlist designates its track by a strong reference: it retains it. A remix designates its original track, on the same album or on another one. The artist and the album are those of Lesson 4, with fewer properties:
 
 ```csharp
-[Entity(3, 1, 2)]
-[Enumerable]
+[Entity(3, 1, 2), Enumerable]
 internal interface MTrack
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
     // A remix designates its original track, on the same album or on another one.
-    [Property(2)]
-    [Strong]
+    [Property(2), Strong]
     Option<MTrack> RemixOf { get; set; }
 
     [OwnedFrom]
     MAlbum Album { get; }
 }
 
-[Entity(4, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(4, 1, 2), Root, Removable, Enumerable]
 internal interface MPlaylist
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
     [Property(2)]
     IEntityCollection<MEntry> Entries { get; }
 }
 
-[Entity(5, 1, 1)]
-[Enumerable]
+[Entity(5, 1, 1), Enumerable]
 internal interface MEntry
 {
-    [Property(1)]
-    [Strong]
+    [Property(1), Strong]
     MTrack Track { get; set; }
 }
 ```
@@ -1047,13 +1005,11 @@ public void RetainNothingFromInsideAndMoveTheRetainedTrack()
 In Lesson 9, a retained track refused the removal of its artist. Declared `[Orphanable]`, an album may survive its Owner instead. Its `[OwnedFrom]` is then an `Option<T>`: an orphan has no Owner.
 
 ```csharp
-[Entity(2, 1, 2)]
-[Orphanable]
-[Enumerable]
+[Entity(2, 1, 2), Orphanable, Enumerable]
 internal interface MAlbum
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
     [Property(2)]
     IEntityCollection<MTrack> Tracks { get; }
@@ -1170,36 +1126,32 @@ A recording is neither a Root nor a part: no composition holds it, and nothing r
 internal interface MTrack
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
     // A strong reference to a type that no composition holds, and that is not Root: a shared object. Required, a T.
-    [Property(2)]
-    [Strong]
+    [Property(2), Strong]
     MRecording Recording { get; set; }
 
     [OwnedFrom]
     MAlbum Album { get; }
 }
 
-[Entity(4, 1, 2)]
-[Enumerable]
+[Entity(4, 1, 2), Enumerable]
 internal interface MRecording
 {
     [Property(1)]
-    Seconds Seconds { get; set; }
+    VSeconds Seconds { get; set; }
 
     // A shared object may designate another one: an Option, a strong slot (Lesson 12).
-    [Property(2)]
-    [Strong]
+    [Property(2), Strong]
     Option<MLyrics> Lyrics { get; set; }
 }
 
-[Entity(5, 1, 1)]
-[Enumerable]
+[Entity(5, 1, 1), Enumerable]
 internal interface MLyrics
 {
     [Property(1)]
-    FreeText Text { get; set; }
+    VFreeText Text { get; set; }
 }
 ```
 
@@ -1357,31 +1309,26 @@ Each kind of entity has its own birth:
 A festival books artists, and shows posters, which the editions of the next years may show again:
 
 ```csharp
-[Entity(2, 1, 3)]
-[Root]
-[Removable]
+[Entity(2, 1, 3), Root, Removable]
 internal interface MFestival
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
     // A collection of strong references to Roots: each booked artist is retained.
-    [Property(2)]
-    [Strong]
+    [Property(2), Strong]
     IEntityCollection<MArtist> Lineup { get; }
 
     // A collection of strong references to shared objects: each poster lives while a festival shows it.
-    [Property(3)]
-    [Strong]
+    [Property(3), Strong]
     IEntityCollection<MPoster> Posters { get; }
 }
 
-[Entity(3, 1, 1)]
-[Enumerable]
+[Entity(3, 1, 1), Enumerable]
 internal interface MPoster
 {
     [Property(1)]
-    Name Design { get; set; }
+    VName Design { get; set; }
 }
 ```
 
@@ -1444,22 +1391,17 @@ A collection of references is a set, as the collections of parts (Lesson 8): an 
 The listeners, their favorite albums, and the album they play now:
 
 ```csharp
-[Entity(3, 1, 3)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(3, 1, 3), Root, Removable, Enumerable]
 internal interface MListener
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
-    [Property(2)]
-    [Weak]
+    [Property(2), Weak]
     Option<MAlbum> NowPlaying { get; set; }
 
     // A collection of weak references: it holds albums, and retains none.
-    [Property(3)]
-    [Weak]
+    [Property(3), Weak]
     IEntityCollection<MAlbum> Favorites { get; }
 }
 ```
@@ -1504,17 +1446,13 @@ public void TakeARemovedAlbumOutOfEveryFavorites()
 A link reads in one direction: from the listener to its favorite albums. The other direction, the listeners of an album, is a **reverse property**, declared on the album, without `[Property(n)]` nor Setter:
 
 ```csharp
-[Entity(2, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(2, 1, 2), Root, Removable, Enumerable]
 internal interface MAlbum
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
-    [Property(2)]
-    [Strong]
+    [Property(2), Strong]
     Option<MGenre> Genre { get; set; }
 
     // The listeners whose favorites hold this album (Lesson 15).
@@ -1522,13 +1460,11 @@ internal interface MAlbum
     IEntityCollection<MListener> Fans { get; }
 }
 
-[Entity(1, 1, 1)]
-[Root]
-[Enumerable]
+[Entity(1, 1, 1), Root, Enumerable]
 internal interface MGenre
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
     // The albums that designate this genre, by their strong reference Genre (Lesson 15).
     [ReverseStrongReference(nameof(MAlbum.Genre))]
@@ -1607,16 +1543,15 @@ The partial methods of Tutorial One, `On...Changed`, exist for the links too: `O
 Here, an album keeps its duration, the sum of the durations of its tracks; a note of an archive records each removed album:
 
 ```csharp
-[Entity(2, 1, 3)]
-[Enumerable]
+[Entity(2, 1, 3), Enumerable]
 internal interface MAlbum
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
     // The sum of the durations of the tracks, kept by the rules of the partial classes below.
     [Property(2)]
-    Seconds Seconds { get; set; }
+    VSeconds Seconds { get; set; }
 
     [Property(3)]
     IEntityCollection<MTrack> Tracks { get; }
@@ -1625,14 +1560,11 @@ internal interface MAlbum
     MArtist Artist { get; }
 }
 
-[Entity(4, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(4, 1, 1), Root, Removable, Enumerable]
 internal interface MNote
 {
     [Property(1)]
-    FreeText Text { get; set; }
+    VFreeText Text { get; set; }
 }
 
 // The rules of the album, in its partial class, as in Tutorial One, Lesson 11.
@@ -1901,26 +1833,21 @@ public async Task NeverDesignateATargetRemovedConcurrently()
 An entity with a business identity, `[WithIdentity]`, has a reference type that an event, a message or another system keeps: an `ArtistRef`, an `AlbumRef`, a `ReleaseRef`, a `TrackRef`.
 
 ```csharp
-[Entity(1, 1, 2)]
-[Root]
-[Removable]
-[WithIdentity]
+[Entity(1, 1, 2), Root, Removable, WithIdentity]
 internal interface MArtist
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
     [Property(2)]
     IEntityCollection<MAlbum> Albums { get; }
 }
 
-[Entity(2, 1, 3)]
-[WithIdentity]
-[Enumerable]
+[Entity(2, 1, 3), WithIdentity, Enumerable]
 internal interface MAlbum
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
     [Property(2)]
     MRelease Release { get; }
@@ -1932,21 +1859,18 @@ internal interface MAlbum
     MArtist Artist { get; }
 }
 
-[Entity(3, 1, 1)]
-[WithIdentity]
+[Entity(3, 1, 1), WithIdentity]
 internal interface MRelease
 {
     [Property(1)]
-    Name Label { get; set; }
+    VName Label { get; set; }
 }
 
-[Entity(4, 1, 1)]
-[WithIdentity]
-[Enumerable]
+[Entity(4, 1, 1), WithIdentity, Enumerable]
 internal interface MTrack
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
     [OwnedFrom]
     MAlbum Album { get; }
@@ -2066,38 +1990,30 @@ public void RefuseANullOrARepeatedIdentity()
 The last model holds every link of the tutorial in one catalog. Genres, which nothing removes; artists, their `[Orphanable]` albums and their tracks; recordings and lyrics, shared; the playlists that retain tracks; the favorites, which do not; the festivals that book artists.
 
 ```csharp
-[Entity(1, 1, 1)]
-[Root]
-[Enumerable]
+[Entity(1, 1, 1), Root, Enumerable]
 internal interface MGenre
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 }
 
-[Entity(2, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(2, 1, 2), Root, Removable, Enumerable]
 internal interface MArtist
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
     [Property(2)]
     IEntityCollection<MAlbum> Albums { get; }
 }
 
-[Entity(3, 1, 3)]
-[Orphanable]
-[Enumerable]
+[Entity(3, 1, 3), Orphanable, Enumerable]
 internal interface MAlbum
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
-    [Property(2)]
-    [Strong]
+    [Property(2), Strong]
     Option<MGenre> Genre { get; set; }
 
     [Property(3)]
@@ -2107,49 +2023,41 @@ internal interface MAlbum
     Option<MArtist> Artist { get; }
 }
 
-[Entity(4, 1, 2)]
-[Enumerable]
+[Entity(4, 1, 2), Enumerable]
 internal interface MTrack
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
-    [Property(2)]
-    [Strong]
+    [Property(2), Strong]
     MRecording Recording { get; set; }
 
     [OwnedFrom]
     MAlbum Album { get; }
 }
 
-[Entity(5, 1, 2)]
-[Enumerable]
+[Entity(5, 1, 2), Enumerable]
 internal interface MRecording
 {
     [Property(1)]
-    Seconds Seconds { get; set; }
+    VSeconds Seconds { get; set; }
 
-    [Property(2)]
-    [Strong]
+    [Property(2), Strong]
     Option<MLyrics> Lyrics { get; set; }
 }
 
-[Entity(6, 1, 1)]
-[Enumerable]
+[Entity(6, 1, 1), Enumerable]
 internal interface MLyrics
 {
     [Property(1)]
-    FreeText Text { get; set; }
+    VFreeText Text { get; set; }
 }
 
-[Entity(7, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(7, 1, 2), Root, Removable, Enumerable]
 internal interface MPlaylist
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
     [Property(2)]
     IEntityCollection<MEntry> Entries { get; }
@@ -2158,36 +2066,27 @@ internal interface MPlaylist
 [Entity(8, 1, 1)]
 internal interface MEntry
 {
-    [Property(1)]
-    [Strong]
+    [Property(1), Strong]
     MTrack Track { get; set; }
 }
 
-[Entity(9, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(9, 1, 2), Root, Removable, Enumerable]
 internal interface MListener
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
-    [Property(2)]
-    [Weak]
+    [Property(2), Weak]
     IEntityCollection<MAlbum> Favorites { get; }
 }
 
-[Entity(10, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(10, 1, 2), Root, Removable, Enumerable]
 internal interface MFestival
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
-    [Property(2)]
-    [Strong]
+    [Property(2), Strong]
     IEntityCollection<MArtist> Lineup { get; }
 }
 ```
@@ -2285,91 +2184,73 @@ An artist may tour, be verified, retire. These are not values of every artist: t
 ```csharp
 // The values of this model alone, first; the others are those of the tutorial.
 [ValueObject<GhostString>]
-internal readonly ref partial struct City
-{
-}
+internal interface VCity { }
 
 [ValueObject<DateTime>(ImplicitConversion = true)]
-internal readonly partial struct Instant
-{
-}
+internal interface VInstant { }
 
 [ValueObject<GhostString>]
-internal readonly ref partial struct Reason
-{
-}
+internal interface VReason { }
 
 [ValueObject<int>(ImplicitConversion = true)]
-internal readonly partial struct Rating
+internal interface VRating { }
+
+internal partial struct Rating
 {
     private static bool IsValid(int stars) => stars is >= 0 and <= 5;
 }
 
-[Entity(1, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(1, 1, 1), Root, Removable, Enumerable]
 internal interface MArtist
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 }
 
-[Entity(2, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(2, 1, 1), Root, Removable, Enumerable]
 internal interface MAlbum
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 }
 
 // A capability of an artist: a tour, and its concerts, parts of the component.
-[Entity(3, 1, 1)]
-[ComponentFor(nameof(MArtist))]
-[Enumerable]
+[Entity(3, 1, 1), ComponentFor(nameof(MArtist)), Enumerable]
 internal interface CTour
 {
     [Property(1)]
     IEntityCollection<MConcert> Concerts { get; }
 }
 
-[Entity(4, 1, 2)]
-[Enumerable]
+[Entity(4, 1, 2), Enumerable]
 internal interface MConcert
 {
     [Property(1)]
-    City City { get; set; }
+    VCity City { get; set; }
 
     [Property(2)]
-    Instant Date { get; set; }
+    VInstant Date { get; set; }
 
     [OwnedFrom]
     CTour Tour { get; }
 }
 
-[Entity(5, 1, 1)]
-[ComponentFor(nameof(MArtist))]
+[Entity(5, 1, 1), ComponentFor(nameof(MArtist))]
 internal interface CVerified
 {
     [Property(1)]
-    Instant Since { get; set; }
+    VInstant Since { get; set; }
 }
 
-[Entity(6, 1, 1)]
-[ComponentFor(nameof(MArtist))]
+[Entity(6, 1, 1), ComponentFor(nameof(MArtist))]
 internal interface CRetired
 {
     [Property(1)]
-    Reason Reason { get; set; }
+    VReason Reason { get; set; }
 }
 
 // A capability of two entity types: what the listeners review.
-[Entity(7, 1, 1)]
-[ComponentFor(nameof(MArtist))]
-[ComponentFor(nameof(MAlbum))]
-[Enumerable]
+[Entity(7, 1, 1), ComponentFor(nameof(MArtist)), ComponentFor(nameof(MAlbum)), Enumerable]
 internal interface CReviews
 {
     [Property(1)]
@@ -2380,19 +2261,17 @@ internal interface CReviews
 internal interface MReview
 {
     [Property(1)]
-    FreeText Text { get; set; }
+    VFreeText Text { get; set; }
 
     [Property(2)]
-    Rating Stars { get; set; }
+    VRating Stars { get; set; }
 
     [OwnedFrom]
     CReviews Reviews { get; }
 }
 
 // The artists on tour, maybe verified, and not retired.
-[SystemFor(nameof(MArtist))]
-[ExcludeComponent(nameof(CRetired))]
-[Enumerable]
+[SystemFor(nameof(MArtist)), ExcludeComponent(nameof(CRetired)), Enumerable]
 internal interface SOnTour
 {
     MArtist Artist { get; }

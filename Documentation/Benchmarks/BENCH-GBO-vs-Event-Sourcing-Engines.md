@@ -2,7 +2,7 @@
 
 The same shop on four engines, the same commands in the same order: GBO in Mutation Sourcing, GBO in Event Sourcing, KurrentDB, and Marten on PostgreSQL.
 
-**Date:** 2026-10-28. **Machine:** Intel Core i9-9900K at 3.6 GHz, 8 cores, 64 GB, an NVMe WD SN730 of 1 TB (C:), Windows 10 Pro 19045; every engine and its server on it, natively, on the SSD C:, over the loopback. **Runtime:** .NET 10 (SDK 10.0.401).
+**Date:** 2026-10-28; the rows of GBO run again on 2026-10-30. **Machine:** Intel Core i9-9900K at 3.6 GHz, 8 cores, 64 GB, an NVMe WD SN730 of 1 TB (C:), Windows 10 Pro 19045; every engine and its server on it, natively, on the SSD C:, over the loopback. **Runtime:** .NET 10 (SDK 10.0.401).
 
 ## Mutation Sourcing
 
@@ -43,13 +43,13 @@ What each engine writes for a command:
 
 | Engine | Threads | Catalog, commands/s | Mix, commands/s | Conflicts | Latency p50, µs | p99, µs | p99.9, µs | On the disk, B per command | Commands played | Restart, s | Replayed, commands/s | Working set, MB |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| GBO, Mutation Sourcing | 1 | 19,258 | 7,083 | 0 | 42 | 1,892 | 3,625 | 264 | 520,000 | 10.46 | 49,713 | 1,036 |
-| GBO, Mutation Sourcing | 8 | 44,864 | 8,728 | 0 | 630 | 4,116 | 10,387 | 211 | 648,000 | 11.80 | 54,915 | 1,447 |
-| GBO, Mutation Sourcing, pipelined | 1 | 103,212 | 17,729 | 0 | — | — | — | 187 | 1,269,000 | 20.94 | 60,602 | 9,961 |
-| GBO, Mutation Sourcing, durable | 1 | 2,090 | 1,745 | 0 | 534 | 1,526 | 2,398 | 271 | 136,000 | 2.05 | 66,341 | 495 |
-| GBO, Mutation Sourcing, durable | 8 | 7,623 | 5,170 | 0 | 1,358 | 4,194 | 6,369 | 182 | 381,000 | 6.31 | 60,380 | 815 |
-| GBO, Event Sourcing | 1 | 31,620 | 8,298 | 0 | 28 | 1,858 | 3,652 | 424 | 606,000 | 12.98 | 46,687 | 1,390 |
-| GBO, Event Sourcing | 8 | 33,757 | 6,508 | 303,371 | 60 | 14,328 | 29,852 | 428 | 482,000 | 9.48 | 50,844 | 1,142 |
+| GBO, Mutation Sourcing | 1 | 21,495 | 7,619 | 0 | 39 | 1,700 | 3,521 | 277 | 557,000 | 10.95 | 50,868 | 1,203 |
+| GBO, Mutation Sourcing | 8 | 45,629 | 9,021 | 0 | 613 | 3,985 | 8,389 | 203 | 672,000 | 11.70 | 57,436 | 1,486 |
+| GBO, Mutation Sourcing, pipelined | 1 | 108,612 | 18,907 | 0 | — | — | — | 188 | 1,353,000 | 21.42 | 63,165 | 10,328 |
+| GBO, Mutation Sourcing, durable | 1 | 2,168 | 1,792 | 0 | 521 | 1,478 | 2,288 | 264 | 139,000 | 2.01 | 69,154 | 622 |
+| GBO, Mutation Sourcing, durable | 8 | 9,123 | 5,191 | 0 | 1,355 | 4,186 | 7,025 | 225 | 385,000 | 5.91 | 65,144 | 905 |
+| GBO, Event Sourcing | 1 | 31,575 | 8,475 | 0 | 28 | 1,714 | 3,559 | 440 | 622,000 | 12.74 | 48,823 | 1,656 |
+| GBO, Event Sourcing | 8 | 34,266 | 6,671 | 309,575 | 60 | 13,623 | 29,016 | 418 | 494,000 | 9.57 | 51,620 | 1,272 |
 | KurrentDB | 1 | 742 | 754 | 0 | 1,220 | 2,978 | 13,705 | 2,371 | 65,000 | 11.96 | 5,435 | 1,542 |
 | KurrentDB | 8 | 3,424 | 1,014 | 199,477 | 2,122 | 126,353 | 333,971 | 2,374 | 85,000 | 16.28 | 5,221 | 1,570 |
 | Marten | 1 | 1,062 | 178 | 0 | 4,600 | 22,479 | 25,051 | 13,458 | 25,000 | 0.16 | — | 476 |
@@ -73,25 +73,25 @@ How to read the columns:
 
 ## What the figures say
 
-- **The commands of the mix, the same durability within 1 to 3 ms:** GBO in Mutation Sourcing runs 7,083 commands/s on one thread against 178 for Marten, ×39.8; 8,728 against 273 on 8 threads, ×32.0.
-- **Durable at each write, against KurrentDB:** GBO durable runs 1,745 against 754 commands/s on one thread, ×2.3; 5,170 against 1,014 on 8, ×5.1.
-- **The pipelined pump:** 17,729 commands/s on one thread, 2.5 times the same pump waited one by one.
+- **The commands of the mix, the same durability within 1 to 3 ms:** GBO in Mutation Sourcing runs 7,619 commands/s on one thread against 178 for Marten, ×42.8; 9,021 against 273 on 8 threads, ×33.0.
+- **Durable at each write, against KurrentDB:** GBO durable runs 1,792 against 754 commands/s on one thread, ×2.4; 5,191 against 1,014 on 8, ×5.1.
+- **The pipelined pump:** 18,907 commands/s on one thread, 2.5 times the same pump waited one by one.
 - **The latency of one command, on one thread:**
-  - GBO: 28 µs at the median in Event Sourcing, 42 µs in Mutation Sourcing, 534 µs durable at each commit;
+  - GBO: 28 µs at the median in Event Sourcing, 39 µs in Mutation Sourcing, 521 µs durable at each commit;
   - KurrentDB: 1.2 ms;
   - Marten: 4.6 ms.
 - **The conflicts make the 8 threads:**
   - Most orders share the most popular products with the orders in flight beside them: about one order in two holds the most popular one.
   - KurrentDB executes a command 3.3 times again on average; its p99 rises to 126 ms.
-  - GBO in Event Sourcing executes 0.78 times again per command: 6,508 commands/s on 8 threads, against 8,298 on one.
-  - In Mutation Sourcing, the pump is the only writer: no conflict, 8,728 commands/s on 8 threads.
+  - GBO in Event Sourcing executes 0.77 times again per command: 6,671 commands/s on 8 threads, against 8,475 on one.
+  - In Mutation Sourcing, the pump is the only writer: no conflict, 9,021 commands/s on 8 threads.
   - Marten waits on its locks instead: 273 commands/s, p99 125 ms.
-- **The restart:** GBO replays 47,000 to 66,000 commands per second into its two models; KurrentDB 5,200 to 5,400 per second, into its Read model only.
+- **The restart:** GBO replays 49,000 to 69,000 commands per second into its two models; KurrentDB 5,200 to 5,400 per second, into its Read model only.
 - **The disk per command:**
-  - GBO: 182 to 271 B for a Mutation, its intention and its decision once; 424 to 428 B for the Events of a command;
+  - GBO: 188 to 277 B for a Mutation, its intention and its decision once; 418 to 440 B for the Events of a command;
   - KurrentDB: 2,371 B, an event in each stream of the command, in JSON;
   - Marten: 13.1 to 13.5 KB of WAL, its events, its snapshots and its documents rewritten.
-- **The memory:** the working sets hold different numbers of commands, from 25,000 to 1,269,000. GBO holds both models in memory: 1,036 MB for 520,000 commands.
+- **The memory:** the working sets hold different numbers of commands, from 25,000 to 1,353,000. GBO holds both models in memory: 1,203 MB for 557,000 commands.
 
 ## Limits
 

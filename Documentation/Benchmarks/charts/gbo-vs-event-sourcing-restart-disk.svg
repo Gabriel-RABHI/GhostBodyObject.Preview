@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="960" height="304" viewBox="0 0 960 304" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
 <title>Event Sourcing engines, restart and disk</title>
-<desc>On one thread. Commands replayed per second at the restart: GBO, Mutation Sourcing 49,713, GBO, Event Sourcing 46,687, KurrentDB 5,435, Marten, PostgreSQL nothing to replay. Bytes written on the disk per command: GBO, Mutation Sourcing 264, GBO, Event Sourcing 424, KurrentDB 2,371, Marten, PostgreSQL 13,458.</desc>
+<desc>On one thread. Commands replayed per second at the restart: GBO, Mutation Sourcing 50,868, GBO, Event Sourcing 48,823, KurrentDB 5,435, Marten, PostgreSQL nothing to replay. Bytes written on the disk per command: GBO, Mutation Sourcing 277, GBO, Event Sourcing 440, KurrentDB 2,371, Marten, PostgreSQL 13,458.</desc>
 <rect width="960" height="304" rx="14" fill="#1a252b"/>
 <text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Event Sourcing engines: restart and disk</text>
 <text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">One thread · GBO replays its Log into its two models at each start</text>
@@ -27,23 +27,23 @@
 <text x="774" y="258" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">10k</text>
 <text x="864" y="258" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">15k</text>
 <text x="206" y="135.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="end">GBO, Mutation Sourcing</text>
-<path d="M220 124H439.7Q443.7 124 443.7 128V134Q443.7 138 439.7 138H220Z" fill="#3987e5"/>
-<text x="451.70849999999996" y="135.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">49,713</text>
-<path d="M594 124H596.4Q598.8 124 598.8 126.37599999999998V135.62400000000002Q598.8 138 596.4 138H594Z" fill="#3987e5"/>
-<text x="606.752" y="135.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">264</text>
+<path d="M220 124H444.9Q448.9 124 448.9 128V134Q448.9 138 444.9 138H220Z" fill="#3987e5"/>
+<text x="456.89730251644437" y="135.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">50,868</text>
+<path d="M594 124H596.5Q599.0 124 599.0 126.49254718383118V135.5074528161688Q599.0 138 596.5 138H594Z" fill="#3987e5"/>
+<text x="606.9850943676623" y="135.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">277</text>
 <text x="206" y="165.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="end">GBO, Event Sourcing</text>
-<path d="M220 154H426.1Q430.1 154 430.1 158V164Q430.1 168 426.1 168H220Z" fill="#3987e5"/>
-<text x="438.0915" y="165.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">46,687</text>
-<path d="M594 154H597.8Q601.6 154 601.6 157.81599999999997V164.18400000000003Q601.6 168 597.8 168H594Z" fill="#3987e5"/>
-<text x="609.632" y="165.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">424</text>
+<path d="M220 154H435.7Q439.7 154 439.7 158V164Q439.7 168 435.7 168H220Z" fill="#3987e5"/>
+<text x="447.6951521734758" y="165.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">48,823</text>
+<path d="M594 154H598.0Q601.9 154 601.9 157.9592807252192V164.0407192747808Q601.9 168 598.0 168H594Z" fill="#3987e5"/>
+<text x="609.9185614504383" y="165.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">440</text>
 <text x="206" y="195.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="end">KurrentDB</text>
 <path d="M220 184H240.5Q244.5 184 244.5 188V194Q244.5 198 240.5 198H220Z" fill="#66757d"/>
-<text x="252.4575" y="195.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">5,435</text>
+<text x="252.45657071590932" y="195.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">5,435</text>
 <path d="M594 184H632.7Q636.7 184 636.7 188V194Q636.7 198 632.7 198H594Z" fill="#66757d"/>
-<text x="644.678" y="195.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">2,371</text>
+<text x="644.6702481795214" y="195.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">2,371</text>
 <text x="206" y="225.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="end">Marten, PostgreSQL</text>
 <text x="226" y="225.5" font-size="13" font-weight="400" fill="#7f9199" text-anchor="start">nothing to replay</text>
 <path d="M594 214H832.2Q836.2 214 836.2 218V224Q836.2 228 832.2 228H594Z" fill="#66757d"/>
-<text x="844.244" y="225.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">13,458</text>
-<text x="32" y="286" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Intel i9-9900K, NVMe SSD, Windows 10, .NET 10 · KurrentDB 26.2, Marten 9.54 on PostgreSQL 18 · 2026-10-28</text>
+<text x="844.2" y="225.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">13,458</text>
+<text x="32" y="286" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Intel i9-9900K, NVMe SSD, Windows 10, .NET 10 · KurrentDB 26.2, Marten 9.54 on PostgreSQL 18 · 2026-10-28, GBO 2026-10-30</text>
 </svg>

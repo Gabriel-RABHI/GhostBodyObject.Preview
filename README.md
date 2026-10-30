@@ -20,19 +20,20 @@ A model is a set of interfaces: the generator of GBO reads them at each build, a
 ```csharp
 /// <summary>A subject value.</summary>
 [ValueObject<GhostString>]
-internal readonly ref partial struct Subject { }
+internal interface VSubject { }
 
 /// <summary>A day and time of the calendar.</summary>
 [ValueObject<DateTime>(ImplicitConversion = true)]
-internal readonly partial struct Date { }
+internal interface VDate { }
 
 // An appointment: from this interface, the generator writes the class Appointment and AppointmentCollection.
-[Root, Enumerable]       // an appointment lives by itself, with AppointmentCollection
+[Root]       // an appointment lives by itself
+[Enumerable] // AppointmentCollection enumerates the appointments
 internal interface MAppointment
 {
-    GhostString Subject { get; set; }
+    VSubject Subject { get; set; }
 
-    Date At { get; set; }
+    VDate At { get; set; }
 }
 
 // Your own code in the generated class: computed at each read, never stored.
@@ -42,8 +43,7 @@ internal partial class Appointment
 }
 
 // The Repository of the model.
-[GhostRepository(Schema = GhostSchema.Deduced)]
-[IncludeEntityModel(nameof(MAppointment))]
+[GhostRepository(Schema = GhostSchema.Deduced), IncludeEntityModel(nameof(MAppointment))]
 internal interface MAgendaRepository
 {
 }
@@ -136,7 +136,7 @@ One library in the process and one directory on the disk replace the database se
 
 ### **High performance**
 
-No serialization, no network round trip, no copy: the data is read where it is stored. Against EF Core with PostgreSQL, on the same machine, GBO inserts 25 to 60 times faster, reads orders by their key 311 times faster, and aggregates 3.5 to 6 times faster ([results](Documentation/Benchmarks/BENCH-GBO-vs-EF-Postgres.md)). On YCSB, it reads up to 4.7 M records/s on 8 threads, 15 times RocksDB and 7 times Garnet ([results](Documentation/Benchmarks/BENCH-GBO-vs-SQLite-RocksDB-Garnet.md)).
+No serialization, no network round trip, no copy: the data is read where it is stored. Against EF Core with PostgreSQL, on the same machine, GBO inserts 24 to 53 times faster, reads orders by their key 335 times faster, and aggregates 3.3 to 7 times faster ([results](Documentation/Benchmarks/BENCH-GBO-vs-EF-Postgres.md)). On YCSB, it reads up to 6.19 M records/s on 8 threads, 9.2 times Garnet, the fastest of the other engines ([results](Documentation/Benchmarks/BENCH-GBO-vs-SQLite-RocksDB-Garnet.md)).
 
 ### **Built for AI-assisted development**
 
@@ -170,9 +170,15 @@ Stores on disk are read through read-only views, so that a stray write of the ap
 
 GBO is faster than almost all general-purpose database engines, and gives a more coherent experience than an ORM such as Entity Framework. The same shop, 100,000 orders of 20 lines, built, read and changed in the same way by GBO and by EF Core with PostgreSQL 18, on the same machine; every read step checked equal on both sides.
 
+| Mode                   | GBO                                                                                                             | PostgreSQL                                                                                   |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Durable at each commit | `FlushPolicy.DurableOnDisk`: the commit returns once the transaction survives a power loss (`FlushFileBuffers`) | `synchronous_commit = on`: `COMMIT` returns once the WAL is flushed                          |
+| Durable within a delay | `FlushPolicy.FastOnDisk`: flushed within **1 ms** or 8 MB, each flush followed by `FlushFileBuffers`            | `synchronous_commit = off`: the WAL writer flushes within 3 × `wal_writer_delay`, **600 ms** |
+
+
 ![Insert orders: GBO against EF Core + PostgreSQL, orders per second](Documentation/Benchmarks/charts/gbo-vs-ef-insert.svg)
 
-**Inserts: 25 to 60 times faster.** EF Core sends one `INSERT` per row, about 19,000 rows/s, whatever the size of the transaction.
+**Inserts: 24 to 53 times faster.** EF Core sends one `INSERT` per row, about 19,000 rows/s, whatever the size of the transaction.
 
 ![Change orders: GBO against EF Core + PostgreSQL, orders per second](Documentation/Benchmarks/charts/gbo-vs-ef-change.svg)
 
@@ -180,15 +186,15 @@ GBO is faster than almost all general-purpose database engines, and gives a more
 
 ![Query with LINQ: GBO against EF Core + PostgreSQL, items per second](Documentation/Benchmarks/charts/gbo-vs-ef-query.svg)
 
-**Queries: 3 to 5 times faster,** although the aggregations run inside PostgreSQL.
+**Queries: 3 to 6 times faster,** although the aggregations run inside PostgreSQL.
 
 ![Read and navigate: GBO against EF Core + PostgreSQL, items per second](Documentation/Benchmarks/charts/gbo-vs-ef-read.svg)
 
-**Navigation is no longer a problem.** A round trip per object is where an ORM loses the most: GBO reads orders by key 311 times faster, and lazy loading 259 times. This comparison is unfair: GBO has no data to transport, every entity is at hand. Even one query for 100 orders leaves GBO 10.5 times faster.
+**Navigation is no longer a problem.** A round trip per object is where an ORM loses the most: GBO reads orders by key 335 times faster, and lazy loading 265 times. This comparison is unfair: GBO has no data to transport, every entity is at hand. Even one query for 100 orders leaves GBO 11.2 times faster.
 
 ![Concurrent write and read: GBO against EF Core + PostgreSQL, one writer and 1 to 8 readers](Documentation/Benchmarks/charts/gbo-vs-ef-concurrent.svg)
 
-**Concurrent write and read:** from 1 to 8 readers, the writer of GBO stays 8 to 12 times faster, and its readers 3.5 to 4.3 times: 39.6 M lines/s with 8 readers, against 9.2 M.
+**Concurrent write and read:** from 1 to 8 readers, the writer of GBO stays 9.7 to 12.5 times faster, and its readers 3.8 to 4.1 times: 41.0 M lines/s with 8 readers, against 10.0 M.
 
 The method, the durability settings and every figure: [GBO vs EF Core + PostgreSQL](Documentation/Benchmarks/BENCH-GBO-vs-EF-Postgres.md).
 
@@ -198,14 +204,14 @@ GBO implements a new Event Sourcing pattern, **Mutation Sourcing**. A Mutation i
 
 ![Event Sourcing engines: commands per second of the mix, on 1 and 8 threads](Documentation/Benchmarks/charts/gbo-vs-event-sourcing-throughput.svg)
 
-- **32 to 40 times Marten, with the same durability** (a flush within 1 to 3 ms), and 2.3 to 5.1 times KurrentDB with a flush at each commit, as KurrentDB does by default. Pipelined, Mutation Sourcing runs 17,729 commands/s on one thread.
+- **33 to 43 times Marten, with the same durability** (a flush within 1 to 3 ms), and 2.4 to 5.1 times KurrentDB with a flush at each commit, as KurrentDB does by default. Pipelined, Mutation Sourcing runs 18,907 commands/s on one thread.
 - **No conflict in Mutation Sourcing:** the pump is the only writer, so 8 threads never run a command twice. On 8 threads, KurrentDB runs each command again 3.3 times on average, and Marten waits on its locks.
-- **A command in 42 µs** at the median on one thread, 534 µs durable at each commit, against 1.2 ms for KurrentDB and 4.6 ms for Marten.
+- **A command in 39 µs** at the median on one thread, 521 µs durable at each commit, against 1.2 ms for KurrentDB and 4.6 ms for Marten.
 
 ![Event Sourcing engines: commands replayed per second at the restart, and bytes on the disk per command](Documentation/Benchmarks/charts/gbo-vs-event-sourcing-restart-disk.svg)
 
-- **The restart replays the Log:** 47,000 to 66,000 commands/s into both models, Write and Read; KurrentDB rebuilds its Read model only, at 5,200 to 5,400 commands/s. Marten has nothing to replay: its snapshots and its Read model are tables.
-- **A Mutation takes 182 to 271 bytes on the disk:** about 9 times less than the events of KurrentDB, in JSON, and 50 times less than the WAL that Marten writes.
+- **The restart replays the Log:** 49,000 to 69,000 commands/s into both models, Write and Read; KurrentDB rebuilds its Read model only, at 5,200 to 5,400 commands/s. Marten has nothing to replay: its snapshots and its Read model are tables.
+- **A Mutation takes 188 to 277 bytes on the disk:** about 9 times less than the events of KurrentDB, in JSON, and 50 times less than the WAL that Marten writes.
 
 The engines, their settings and every figure: [GBO vs Event Sourcing engines](Documentation/Benchmarks/BENCH-GBO-vs-Event-Sourcing-Engines.md).
 
@@ -220,23 +226,23 @@ Three workloads of YCSB and two of ingestion, meters and sensors, on 1,000,000 r
 
 ![Workload A, update heavy: GBO, SQLite, RocksDB and Garnet, operations per second](Documentation/Benchmarks/charts/gbo-vs-ycsb-a.svg)
 
-**Updates:** GBO leads on one thread with one operation per transaction (×1.5); Garnet leads once the operations are batched or spread over 8 threads, up to 6.7 times GBO.
+**Updates:** GBO leads with one operation per transaction, on one thread (×3.2) and on 8 (×1.3); with 100, GBO and Garnet are even on one thread, and Garnet leads on 8 threads, 5.5 times GBO.
 
 ![Workload C, read only: GBO, SQLite, RocksDB and Garnet, reads per second](Documentation/Benchmarks/charts/gbo-vs-ycsb-c.svg)
 
-**Reads: GBO leads every configuration,** 1.8 to 7.2 times the fastest other engine: 4.69 M reads/s on 8 threads, 15 times RocksDB and 7 times Garnet.
+**Reads: GBO leads every configuration,** 6.1 to 10.9 times the fastest other engine: 6.19 M reads/s on 8 threads, 9.2 times Garnet.
 
 ![Workload F, read-modify-write: GBO, SQLite, RocksDB and Garnet, operations per second](Documentation/Benchmarks/charts/gbo-vs-ycsb-f.svg)
 
-**Read-modify-writes:** GBO leads on one thread (×2.2 and ×1.2); on 8 threads, Garnet leads, 1.4 to 3.9 times GBO.
+**Read-modify-writes:** GBO leads on one thread (×3.6 and ×1.4), and on 8 threads with one operation per transaction (×1.3); with 100 on 8 threads, Garnet leads, 3 times GBO.
 
 ![Workload M, meters: GBO, SQLite, RocksDB and Garnet, events per second](Documentation/Benchmarks/charts/gbo-vs-ycsb-m.svg)
 
-**Meters:** with one event per transaction, RocksDB and its merge operator lead, 2 to 2.7 times GBO; with 100, the two are even on one thread, and GBO leads on 8 threads (×1.2).
+**Meters:** GBO and RocksDB with its merge operator run neck and neck: GBO leads with one event per transaction on one thread (×1.2), RocksDB with 100 on one thread (1.1 times GBO), and the two are even on 8 threads.
 
 ![Workload Q, sensors and sites: GBO, SQLite, RocksDB and Garnet, messages and queries per second](Documentation/Benchmarks/charts/gbo-vs-ycsb-q.svg)
 
-**Sensors and sites:** a query, a range of levels, an aggregate or the snapshot of a site and its 1,000 sensors, runs 31 to 137.5 times faster in GBO than in the fastest other engine, by its value indexes. GBO writes the messages slower: RocksDB writes 2.2 to 48 times more.
+**Sensors and sites:** a query, a range of levels, an aggregate or the snapshot of a site and its 1,000 sensors, runs 36 to 167 times faster in GBO than in the fastest other engine, by its value indexes. GBO writes the messages slower: RocksDB writes 2.2 to 24 times more.
 
 The engines and their settings, the loads and the reopen, the latencies, the memory and every figure: [GBO vs SQLite, RocksDB and Garnet](Documentation/Benchmarks/BENCH-GBO-vs-SQLite-RocksDB-Garnet.md).
 

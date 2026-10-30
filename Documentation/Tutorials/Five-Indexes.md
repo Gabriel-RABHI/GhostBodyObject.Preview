@@ -27,12 +27,12 @@ Three models, each in a namespace of its own with its own Repository, as in the 
 namespace TutorialFive
 {
     [ValueObject<GhostString>]
-    internal readonly ref partial struct Name
-    {
-    }
+    internal interface VName { }
 
     [ValueObject<decimal>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
-    internal readonly partial struct Money
+    internal interface VMoney { }
+
+    internal partial struct Money
     {
         private static bool IsValid(decimal amount) => amount >= 0;
     }
@@ -66,36 +66,28 @@ The index is an interface with `[TextIndex(n)]`, its number in the Repository, s
 ```csharp
 // The description of a product: a value of this model alone, its words in the text index.
 [ValueObject<GhostString>]
-internal readonly ref partial struct Description
-{
-}
+internal interface VDescription { }
 
 [TextIndex(1)]
 internal interface MProductTextIndex
 {
 }
 
-[Entity(1, 1, 3)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(1, 1, 3), Root, Removable, Enumerable]
 internal interface MProduct
 {
     // [TextIndexed]: the words of the property are in the index that it names.
-    [Property(1)]
-    [TextIndexed(nameof(MProductTextIndex))]
-    Name Name { get; set; }
+    [Property(1), TextIndexed(nameof(MProductTextIndex))]
+    VName Name { get; set; }
 
-    [Property(2)]
-    [TextIndexed(nameof(MProductTextIndex))]
-    Description Description { get; set; }
+    [Property(2), TextIndexed(nameof(MProductTextIndex))]
+    VDescription Description { get; set; }
 
     [Property(3)]
-    Money Price { get; set; }
+    VMoney Price { get; set; }
 }
 
-[GhostRepository]
-[IncludeEntityModel(nameof(MProduct))]
+[GhostRepository, IncludeEntityModel(nameof(MProduct))]
 internal interface MProductRepository
 {
 }
@@ -278,14 +270,10 @@ The properties of several entity types may name the same index: the products and
 ```csharp
 // The values of this model alone, first; the others are those of the tutorial.
 [ValueObject<GhostString>]
-internal readonly ref partial struct Tags
-{
-}
+internal interface VTags { }
 
 [ValueObject<GhostString>]
-internal readonly ref partial struct Story
-{
-}
+internal interface VStory { }
 
 [TextIndex(1)]
 internal interface MCatalogTextIndex
@@ -298,47 +286,34 @@ internal interface MTagTextIndex
 {
 }
 
-[Entity(1, 1, 4)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(1, 1, 4), Root, Removable, Enumerable]
 internal interface MProduct
 {
-    [Property(1)]
-    [TextIndexed(nameof(MCatalogTextIndex))]
-    Name Name { get; set; }
+    [Property(1), TextIndexed(nameof(MCatalogTextIndex))]
+    VName Name { get; set; }
 
     // TextIndexing.Commit (Lesson 4): the words of a long text, written many times, are cut once, at the first search or at the commit.
-    [Property(2)]
-    [TextIndexed(nameof(MCatalogTextIndex), TextIndexing.Commit)]
+    [Property(2), TextIndexed(nameof(MCatalogTextIndex), TextIndexing.Commit)]
     GhostString Description { get; set; }
 
-    [Property(3)]
-    [TextIndexed(nameof(MTagTextIndex))]
-    Tags Tags { get; set; }
+    [Property(3), TextIndexed(nameof(MTagTextIndex))]
+    VTags Tags { get; set; }
 
     [Property(4)]
-    Money Price { get; set; }
+    VMoney Price { get; set; }
 }
 
-[Entity(2, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(2, 1, 2), Root, Removable, Enumerable]
 internal interface MBrand
 {
-    [Property(1)]
-    [TextIndexed(nameof(MCatalogTextIndex))]
-    Name Name { get; set; }
+    [Property(1), TextIndexed(nameof(MCatalogTextIndex))]
+    VName Name { get; set; }
 
-    [Property(2)]
-    [TextIndexed(nameof(MCatalogTextIndex))]
-    Story Story { get; set; }
+    [Property(2), TextIndexed(nameof(MCatalogTextIndex))]
+    VStory Story { get; set; }
 }
 
-[GhostRepository]
-[IncludeEntityModel(nameof(MProduct))]
-[IncludeEntityModel(nameof(MBrand))]
+[GhostRepository, IncludeEntityModel(nameof(MProduct)), IncludeEntityModel(nameof(MBrand))]
 internal interface MCatalogRepository
 {
 }
@@ -486,40 +461,30 @@ The third model, the shop, is the one of the rest of the tutorial: its customers
 
 ```csharp
 [ValueObject<GhostString>]
-internal readonly ref partial struct Email
-{
-}
+internal interface VEmail { }
 
 [ValueObject<DateOnly>(ImplicitConversion = true)]
-internal readonly partial struct Date
-{
-}
+internal interface VDate { }
 
 [ValueObject<DateTime>(ImplicitConversion = true)]
-internal readonly partial struct Instant
-{
-}
+internal interface VInstant { }
 
 [ValueObject<long>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
-internal readonly partial struct LoyaltyPoints
+internal interface VLoyaltyPoints { }
+
+internal partial struct LoyaltyPoints
 {
     private static bool IsValid(long points) => points >= 0;
 }
 
 [ValueObject<int>(ImplicitConversion = true)]
-internal readonly partial struct CardNumber
-{
-}
+internal interface VCardNumber { }
 
 [ValueObject<int>(ImplicitConversion = true)]
-internal readonly partial struct OrderNumber
-{
-}
+internal interface VOrderNumber { }
 
 [ValueObject<GhostString>]
-internal readonly ref partial struct Note
-{
-}
+internal interface VNote { }
 
 internal enum OrderStatus
 {
@@ -539,68 +504,58 @@ internal enum OrderOptions
     Fragile = 4
 }
 
-[Entity(1, 1, 5)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(1, 1, 5), Root, Removable, Enumerable]
 internal interface MCustomer
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
     [Property(2)]
-    Email Email { get; set; }
+    VEmail Email { get; set; }
 
     [Property(3)]
-    Date Birthday { get; set; }
+    VDate Birthday { get; set; }
 
     [Property(4)]
-    LoyaltyPoints Points { get; set; }
+    VLoyaltyPoints Points { get; set; }
 
     // A loyalty card, absent until given (Lesson 9).
     [Property(5)]
-    Option<CardNumber> Card { get; set; }
+    Option<VCardNumber> Card { get; set; }
 }
 
-[Entity(2, 1, 8)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(2, 1, 8), Root, Removable, Enumerable]
 internal interface MOrder
 {
     [Property(1)]
-    OrderNumber Number { get; set; }
+    VOrderNumber Number { get; set; }
 
     [Property(2)]
     OrderStatus Status { get; set; }
 
     [Property(3)]
-    Instant Placed { get; set; }
+    VInstant Placed { get; set; }
 
     [Property(4)]
-    Money Total { get; set; }
+    VMoney Total { get; set; }
 
     [Property(5)]
     OrderOptions Options { get; set; }
 
     // The day of shipping, absent until the order ships (Lesson 8).
     [Property(6)]
-    Option<Date> Shipped { get; set; }
+    Option<VDate> Shipped { get; set; }
 
     // The customer of the order; a guest order has none.
-    [Property(7)]
-    [Weak]
+    [Property(7), Weak]
     Option<MCustomer> Customer { get; set; }
 
     // The note of the customer, in a text index (Lesson 10).
-    [Property(8)]
-    [TextIndexed(nameof(MOrderTextIndex))]
-    Note Note { get; set; }
+    [Property(8), TextIndexed(nameof(MOrderTextIndex))]
+    VNote Note { get; set; }
 }
 
-[GhostRepository]
-[IncludeEntityModel(nameof(MCustomer))]
-[IncludeEntityModel(nameof(MOrder))]
+[GhostRepository, IncludeEntityModel(nameof(MCustomer)), IncludeEntityModel(nameof(MOrder))]
 internal interface MShopRepository
 {
 }
@@ -609,14 +564,12 @@ internal interface MShopRepository
 A **value index** orders the entities of a type by the values of its components. It is an interface with `[ValueIndex(nameof(MOrder), n)]`, the entity type it indexes and its number among the indexes of the Repository, and one `[ValueIndexComponent]` per component, each at its position, from 1. Its name starts with `M`: `MOrderNumberIndex` gives `OrderNumberIndex`. A Repository has the value indexes of the entity types it includes.
 
 ```csharp
-[ValueIndex(nameof(MOrder), 1)]
-[ValueIndexComponent(1, nameof(MOrder.Number))]
+[ValueIndex(nameof(MOrder), 1), ValueIndexComponent(1, nameof(MOrder.Number))]
 internal interface MOrderNumberIndex
 {
 }
 
-[ValueIndex(nameof(MOrder), 2)]
-[ValueIndexComponent(1, nameof(MOrder.Placed))]
+[ValueIndex(nameof(MOrder), 2), ValueIndexComponent(1, nameof(MOrder.Placed))]
 internal interface MOrderPlacedIndex
 {
 }
@@ -732,9 +685,7 @@ public void ReadTheMostRecentFirst()
 An index of several components orders its entities by the first, then by the second for equal firsts, as the words of a dictionary: the status, then the day. `DatePrecision.Day` keeps the day of the date: the orders of a day share it.
 
 ```csharp
-[ValueIndex(nameof(MOrder), 3)]
-[ValueIndexComponent(1, nameof(MOrder.Status))]
-[ValueIndexComponent(2, nameof(MOrder.Placed), DatePrecision.Day)]
+[ValueIndex(nameof(MOrder), 3), ValueIndexComponent(1, nameof(MOrder.Status)), ValueIndexComponent(2, nameof(MOrder.Placed), DatePrecision.Day)]
 internal interface MOrderStatusDayIndex
 {
 }
@@ -814,23 +765,19 @@ An index may keep less than a value: a date at the day (Lesson 6), a decimal at 
 
 ```csharp
 // The total of an order, by the euro: Decimals = 0 keeps no decimal of a decimal. A decimal in an index always says its decimals.
-[ValueIndex(nameof(MOrder), 4)]
-[ValueIndexComponent(1, nameof(MOrder.Total), Decimals = 0)]
+[ValueIndex(nameof(MOrder), 4), ValueIndexComponent(1, nameof(MOrder.Total), Decimals = 0)]
 internal interface MOrderTotalIndex
 {
 }
 
 // The points of a customer, by the thousand: Step = 1000.
-[ValueIndex(nameof(MCustomer), 5)]
-[ValueIndexComponent(1, nameof(MCustomer.Points), Step = 1000)]
+[ValueIndex(nameof(MCustomer), 5), ValueIndexComponent(1, nameof(MCustomer.Points), Step = 1000)]
 internal interface MCustomerPointsIndex
 {
 }
 
 // The birthday of a customer: two parts of a date, the month then the day of the month, whatever the year.
-[ValueIndex(nameof(MCustomer), 6)]
-[ValueIndexComponent(1, nameof(MCustomer.Birthday), DatePart.MonthOfYear)]
-[ValueIndexComponent(2, nameof(MCustomer.Birthday), DatePart.DayOfMonth)]
+[ValueIndex(nameof(MCustomer), 6), ValueIndexComponent(1, nameof(MCustomer.Birthday), DatePart.MonthOfYear), ValueIndexComponent(2, nameof(MCustomer.Birthday), DatePart.DayOfMonth)]
 internal interface MCustomerBirthdayIndex
 {
 }
@@ -912,14 +859,12 @@ public void FindByThePartsOfADate()
 The options of an order are a `[Flags]` enum, several at once; its day of shipping is an `Option<DateOnly>`, absent until it ships.
 
 ```csharp
-[ValueIndex(nameof(MOrder), 7)]
-[ValueIndexComponent(1, nameof(MOrder.Options))]
+[ValueIndex(nameof(MOrder), 7), ValueIndexComponent(1, nameof(MOrder.Options))]
 internal interface MOrderOptionsIndex
 {
 }
 
-[ValueIndex(nameof(MOrder), 8)]
-[ValueIndexComponent(1, nameof(MOrder.Shipped))]
+[ValueIndex(nameof(MOrder), 8), ValueIndexComponent(1, nameof(MOrder.Shipped))]
 internal interface MOrderShippedIndex
 {
 }
@@ -1011,15 +956,13 @@ public void FindTheAbsentValues()
 
 ```csharp
 // The email of a customer: unique, whatever its case. A string is found by its exact value, never by a range.
-[ValueIndex(nameof(MCustomer), 9, Unique = true)]
-[ValueIndexComponent(1, nameof(MCustomer.Email), IgnoreCase = true)]
+[ValueIndex(nameof(MCustomer), 9, Unique = true), ValueIndexComponent(1, nameof(MCustomer.Email), IgnoreCase = true)]
 internal interface MCustomerEmailIndex
 {
 }
 
 // The loyalty card of a customer: unique, and absent for the customers without one.
-[ValueIndex(nameof(MCustomer), 10, Unique = true)]
-[ValueIndexComponent(1, nameof(MCustomer.Card))]
+[ValueIndex(nameof(MCustomer), 10, Unique = true), ValueIndexComponent(1, nameof(MCustomer.Card))]
 internal interface MCustomerCardIndex
 {
 }
@@ -1233,9 +1176,7 @@ public void ChangeTheEntitiesOfACombination()
 A collection of the model (Tutorial Two) is a set that your code fills, by `Add` and `Remove`. An index gives another kind of collection: the entities of a value, computed at each read, that your code never fills. Write it as a member of your partial declarations (Tutorial One, Lesson 11): `customer.Orders`, the orders whose customer is this one, by an index of the customer and the instant.
 
 ```csharp
-[ValueIndex(nameof(MOrder), 12)]
-[ValueIndexComponent(1, nameof(MOrder.Customer))]
-[ValueIndexComponent(2, nameof(MOrder.Placed))]
+[ValueIndex(nameof(MOrder), 12), ValueIndexComponent(1, nameof(MOrder.Customer)), ValueIndexComponent(2, nameof(MOrder.Placed))]
 internal interface MOrderCustomerIndex
 {
 }
@@ -1507,4 +1448,4 @@ Every question has its tool. The path, from the most common to the rarest:
 - **Your own collections** are members over the indexes: always up to date, ordered, counted, never stored.
 - An index is **a part of the data**: up to date at the next instruction, rolled back, committed, kept over a restart, and made again from the entities when needed.
 
-The next tutorial shows the Log and the Record types: their subscription, and their replay.
+[Tutorial Six](Six-TheLog.md) shows the Log and the Record types: their subscription, and their replay.

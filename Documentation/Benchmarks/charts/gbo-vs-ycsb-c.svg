@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="960" height="444" viewBox="0 0 960 444" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
 <title>Workload C, read only</title>
-<desc>Reads per second · each row on its own linear scale. 1 thread, 1 read per transaction: GBO 284,229, SQLite 40,266, RocksDB 68,152, Garnet 14,045, ×4.2; 1 thread, 100 reads per transaction: GBO 731,719, SQLite 51,977, RocksDB 67,433, Garnet 149,929, ×4.9; 8 threads, 1 read per transaction: GBO 588,541, SQLite 100,693, RocksDB 335,521, Garnet 82,613, ×1.8; 8 threads, 100 reads per transaction: GBO 4,688,931, SQLite 103,179, RocksDB 305,530, Garnet 648,783, ×7.2.</desc>
+<desc>Reads per second · each row on its own linear scale. 1 thread, 1 read per transaction: GBO 480,276, SQLite 44,181, RocksDB 39,306, Garnet 13,833, ×10.9; 1 thread, 100 reads per transaction: GBO 881,148, SQLite 57,759, RocksDB 39,727, Garnet 145,541, ×6.1; 8 threads, 1 read per transaction: GBO 1,505,578, SQLite 113,449, RocksDB 155,231, Garnet 85,120, ×9.7; 8 threads, 100 reads per transaction: GBO 6,185,526, SQLite 119,891, RocksDB 156,727, Garnet 673,480, ×9.2.</desc>
 <rect width="960" height="444" rx="14" fill="#1a252b"/>
 <text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Workload C, read only</text>
 <text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Reads per second · each row on its own linear scale</text>
@@ -14,61 +14,61 @@
 <text x="222" y="154.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">1 read per transaction</text>
 <text x="286" y="123.5" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="end">GBO</text>
 <path d="M296 114H792.0Q796.0 114 796.0 118V121Q796.0 125 792.0 125H296Z" fill="#3987e5"/>
-<text x="803" y="123.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start">284,229</text>
+<text x="803" y="123.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start">480,276</text>
 <text x="286" y="137.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">SQLite</text>
-<path d="M296 128H362.8Q366.8 128 366.8 132V135Q366.8 139 362.8 139H296Z" fill="#66757d"/>
-<text x="373.83372914093917" y="137.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">40,266</text>
+<path d="M296 128H338.0Q342.0 128 342.0 132V135Q342.0 139 338.0 139H296Z" fill="#66757d"/>
+<text x="348.99542762911324" y="137.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">44,181</text>
 <text x="286" y="151.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">RocksDB</text>
-<path d="M296 142H411.9Q415.9 142 415.9 146V149Q415.9 153 411.9 153H296Z" fill="#66757d"/>
-<text x="422.8892442361617" y="151.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">68,152</text>
+<path d="M296 142H332.9Q336.9 142 336.9 146V149Q336.9 153 332.9 153H296Z" fill="#66757d"/>
+<text x="343.920220872998" y="151.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">39,306</text>
 <text x="286" y="165.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">Garnet</text>
-<path d="M296 156H316.7Q320.7 156 320.7 160V163Q320.7 167 316.7 167H296Z" fill="#66757d"/>
-<text x="327.7071903289249" y="165.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">14,045</text>
-<text x="928" y="146.5" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×4.2</text>
+<path d="M296 156H306.4Q310.4 156 310.4 160V163Q310.4 167 306.4 167H296Z" fill="#66757d"/>
+<text x="317.4010943707368" y="165.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">13,833</text>
+<text x="928" y="146.5" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×10.9</text>
 <text x="222" y="215.5" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">1 thread</text>
 <text x="222" y="231.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">100 reads per transaction</text>
 <text x="286" y="200.5" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="end">GBO</text>
 <path d="M296 191H792.0Q796.0 191 796.0 195V198Q796.0 202 792.0 202H296Z" fill="#3987e5"/>
-<text x="803" y="200.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start">731,719</text>
+<text x="803" y="200.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start">881,148</text>
 <text x="286" y="214.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">SQLite</text>
-<path d="M296 205H327.5Q331.5 205 331.5 209V212Q331.5 216 327.5 216H296Z" fill="#66757d"/>
-<text x="338.5170495777751" y="214.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">51,977</text>
+<path d="M296 205H324.8Q328.8 205 328.8 209V212Q328.8 216 324.8 216H296Z" fill="#66757d"/>
+<text x="335.7748573451906" y="214.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">57,759</text>
 <text x="286" y="228.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">RocksDB</text>
-<path d="M296 219H338.1Q342.1 219 342.1 223V226Q342.1 230 338.1 230H296Z" fill="#66757d"/>
-<text x="349.0784809469209" y="228.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">67,433</text>
+<path d="M296 219H314.5Q318.5 219 318.5 223V226Q318.5 230 314.5 230H296Z" fill="#66757d"/>
+<text x="325.5427510474971" y="228.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">39,727</text>
 <text x="286" y="242.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">Garnet</text>
-<path d="M296 233H394.4Q398.4 233 398.4 237V240Q398.4 244 394.4 244H296Z" fill="#66757d"/>
-<text x="405.44984755076746" y="242.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">149,929</text>
-<text x="928" y="223.5" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×4.9</text>
+<path d="M296 233H374.6Q378.6 233 378.6 237V240Q378.6 244 374.6 244H296Z" fill="#66757d"/>
+<text x="385.58601279240264" y="242.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">145,541</text>
+<text x="928" y="223.5" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×6.1</text>
 <text x="222" y="292.5" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">8 threads</text>
 <text x="222" y="308.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">1 read per transaction</text>
 <text x="286" y="277.5" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="end">GBO</text>
 <path d="M296 268H792.0Q796.0 268 796.0 272V275Q796.0 279 792.0 279H296Z" fill="#3987e5"/>
-<text x="803" y="277.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start">588,541</text>
+<text x="803" y="277.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start">1.51 M</text>
 <text x="286" y="291.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">SQLite</text>
-<path d="M296 282H377.5Q381.5 282 381.5 286V289Q381.5 293 377.5 293H296Z" fill="#66757d"/>
-<text x="388.5445924752906" y="291.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">100,693</text>
+<path d="M296 282H329.7Q333.7 282 333.7 286V289Q333.7 293 329.7 293H296Z" fill="#66757d"/>
+<text x="340.67622800014345" y="291.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">113,449</text>
 <text x="286" y="305.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">RocksDB</text>
-<path d="M296 296H577.0Q581.0 296 581.0 300V303Q581.0 307 577.0 307H296Z" fill="#66757d"/>
-<text x="588.0447122630369" y="305.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">335,521</text>
+<path d="M296 296H343.6Q347.6 296 347.6 300V303Q347.6 307 343.6 307H296Z" fill="#66757d"/>
+<text x="354.55196210359077" y="305.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">155,231</text>
 <text x="286" y="319.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">Garnet</text>
-<path d="M296 310H362.2Q366.2 310 366.2 314V317Q366.2 321 362.2 321H296Z" fill="#66757d"/>
-<text x="373.18457507633286" y="319.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">82,613</text>
-<text x="928" y="300.5" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×1.8</text>
+<path d="M296 310H320.3Q324.3 310 324.3 314V317Q324.3 321 320.3 321H296Z" fill="#66757d"/>
+<text x="331.26821327091653" y="319.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">85,120</text>
+<text x="928" y="300.5" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×9.7</text>
 <text x="222" y="369.5" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">8 threads</text>
 <text x="222" y="385.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">100 reads per transaction</text>
 <text x="286" y="354.5" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="end">GBO</text>
 <path d="M296 345H792.0Q796.0 345 796.0 349V352Q796.0 356 792.0 356H296Z" fill="#3987e5"/>
-<text x="803" y="354.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start">4.69 M</text>
+<text x="803" y="354.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start">6.19 M</text>
 <text x="286" y="368.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">SQLite</text>
-<path d="M296 359H303.0Q307.0 359 307.0 363V366Q307.0 370 303.0 370H296Z" fill="#66757d"/>
-<text x="314.00240118696564" y="368.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">103,179</text>
+<path d="M296 359H301.7Q305.7 359 305.7 363V366Q305.7 370 301.7 370H296Z" fill="#66757d"/>
+<text x="312.69125341967685" y="368.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">119,891</text>
 <text x="286" y="382.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">RocksDB</text>
-<path d="M296 373H324.6Q328.6 373 328.6 377V380Q328.6 384 324.6 384H296Z" fill="#66757d"/>
-<text x="335.579920668485" y="382.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">305,530</text>
+<path d="M296 373H304.7Q308.7 373 308.7 377V380Q308.7 384 304.7 384H296Z" fill="#66757d"/>
+<text x="315.6688498278077" y="382.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">156,727</text>
 <text x="286" y="396.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">Garnet</text>
-<path d="M296 387H361.2Q365.2 387 365.2 391V394Q365.2 398 361.2 398H296Z" fill="#66757d"/>
-<text x="372.18239999692895" y="396.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">648,783</text>
-<text x="928" y="377.5" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×7.2</text>
-<text x="32" y="426" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Intel i9-9900K, NVMe SSD, Windows 10, .NET 10 · SQLite 3.50, RocksDB 11.8, Garnet 2.2 · 1,000,000 records, 15 s per configuration · 2026-10-27</text>
+<path d="M296 387H346.4Q350.4 387 350.4 391V394Q350.4 398 346.4 398H296Z" fill="#66757d"/>
+<text x="357.43999427049533" y="396.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">673,480</text>
+<text x="928" y="377.5" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×9.2</text>
+<text x="32" y="426" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Intel i9-9900K, NVMe SSD, Windows 10, .NET 10 · SQLite 3.50, RocksDB 11.8, Garnet 2.2 · 1,000,000 records, 15 s per configuration · 2026-10-30</text>
 </svg>

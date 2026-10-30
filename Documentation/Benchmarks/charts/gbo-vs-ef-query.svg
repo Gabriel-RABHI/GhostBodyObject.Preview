@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="960" height="304" viewBox="0 0 960 304" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
 <title>Query with LINQ</title>
-<desc>Items read per second · one thread · each row on its own linear scale. Count the orders of a status, orders/s: GBO 55,467,198, EF Core + PostgreSQL 18,235,132, ×3.0; The total of every order, its lines and the prices of their products, lines/s: GBO 12,574,367, EF Core + PostgreSQL 2,353,104, ×5.3; The sales of each product, by the reverse of its lines, lines/s: GBO 5,298,306, EF Core + PostgreSQL 1,508,254, ×3.5.</desc>
+<desc>Items read per second · one thread · each row on its own linear scale. Count the orders of a status, orders/s: GBO 57,013,136, EF Core + PostgreSQL 18,315,018, ×3.1; The total of every order, its lines and the prices of their products, lines/s: GBO 14,992,838, EF Core + PostgreSQL 2,449,743, ×6.1; The sales of each product, by the reverse of its lines, lines/s: GBO 5,374,622, EF Core + PostgreSQL 1,616,327, ×3.3.</desc>
 <rect width="960" height="304" rx="14" fill="#1a252b"/>
 <text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Query with LINQ</text>
 <text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Items read per second · one thread · each row on its own linear scale</text>
@@ -12,23 +12,23 @@
 <text x="266" y="123" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">Count the orders of a status</text>
 <text x="266" y="139" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">orders/s</text>
 <path d="M282 110H776.0Q780.0 110 780.0 114V120Q780.0 124 776.0 124H282Z" fill="#3987e5"/>
-<text x="788" y="121.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">55.5 M</text>
-<path d="M282 128H441.7Q445.7 128 445.7 132V138Q445.7 142 441.7 142H282Z" fill="#66757d"/>
-<text x="453.72010960423853" y="139.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">18.2 M</text>
-<text x="928" y="133" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×3.0</text>
+<text x="788" y="121.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">57.0 M</text>
+<path d="M282 128H438.0Q442.0 128 442.0 132V138Q442.0 142 438.0 142H282Z" fill="#66757d"/>
+<text x="449.9785523813319" y="139.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">18.3 M</text>
+<text x="928" y="133" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×3.1</text>
 <text x="266" y="175" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">The total of every order</text>
 <text x="266" y="191" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">its lines and the prices of their products, lines/s</text>
 <path d="M282 162H776.0Q780.0 162 780.0 166V172Q780.0 176 776.0 176H282Z" fill="#3987e5"/>
-<text x="788" y="173.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">12.6 M</text>
-<path d="M282 180H371.2Q375.2 180 375.2 184V190Q375.2 194 371.2 194H282Z" fill="#66757d"/>
-<text x="383.1932233248799" y="191.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">2.35 M</text>
-<text x="928" y="185" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×5.3</text>
+<text x="788" y="173.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">15.0 M</text>
+<path d="M282 180H359.4Q363.4 180 363.4 184V190Q363.4 194 359.4 194H282Z" fill="#66757d"/>
+<text x="371.3703192150812" y="191.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">2.45 M</text>
+<text x="928" y="185" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×6.1</text>
 <text x="266" y="227" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">The sales of each product</text>
 <text x="266" y="243" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">by the reverse of its lines, lines/s</text>
 <path d="M282 214H776.0Q780.0 214 780.0 218V224Q780.0 228 776.0 228H282Z" fill="#3987e5"/>
-<text x="788" y="225.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">5.30 M</text>
-<path d="M282 232H419.8Q423.8 232 423.8 236V242Q423.8 246 419.8 246H282Z" fill="#66757d"/>
-<text x="431.7642718257496" y="243.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">1.51 M</text>
-<text x="928" y="237" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×3.5</text>
-<text x="32" y="286" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Intel i9-9900K, NVMe SSD, Windows 10, .NET 10 · EF Core 10, PostgreSQL 18 · 100,000 orders, 2,000,000 lines · 2026-10-27</text>
+<text x="788" y="225.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">5.37 M</text>
+<path d="M282 232H427.8Q431.8 232 431.8 236V242Q431.8 246 427.8 246H282Z" fill="#66757d"/>
+<text x="439.76510831831524" y="243.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">1.62 M</text>
+<text x="928" y="237" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×3.3</text>
+<text x="32" y="286" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Intel i9-9900K, NVMe SSD, Windows 10, .NET 10 · EF Core 10, PostgreSQL 18 · 100,000 orders, 2,000,000 lines · 2026-10-30</text>
 </svg>

@@ -18,6 +18,7 @@ This tutorial shows how it works:
 - **The shared capabilities.** One component for several types of entities: every device that runs on a battery, whatever its type, without any base class.
 - **The systems.** An entity and its components, declared once: the entities that have some components, maybe others, and not some more, read as Views; and your rules about them, written in the system.
 - **The roles.** A party plays several roles at once, gains and loses them, and stays the same party: a company may be a customer, a supplier, both, and stop being one of them.
+- **The Records.** Values that go together, an address, travel in an entity as one property; a history and an inbox are bags of them.
 
 None of this takes code of yours: you declare the capabilities in the model, and GBO keeps each one with its entity, at each instruction, in the transaction and at the commit.
 
@@ -27,7 +28,7 @@ Each lesson is a test class of the project `GhostBodyObject.TutorialThree`. Read
 
 The technical management of a building: door locks, cameras and thermostats, their batteries, their places in the building, their firmwares and their maintenances. Then the parties of a business: companies and people, the customers, the suppliers and the employees that they are, the offers of the suppliers and the orders of the customers.
 
-Three models, each in a namespace of its own with its own Repository, as in Tutorial Two: `Capabilities` for Lessons 1 to 3, `Devices` for Lessons 4 to 7, `Parties` for Lessons 8 to 10.
+Four models, each in a namespace of its own with its own Repository, as in Tutorial Two: `Capabilities` for Lessons 1 to 3, `Devices` for Lessons 4 to 7, `Parties` for Lessons 8 to 10, `Contacts` for Lesson 11.
 
 **The values of the models come first**, each a value object ([Tutorial One, Lesson 18](One-TheBasics.md#lesson-18-give-each-value-its-type)). Those the three models share are declared once, in the namespace of the tutorial; each model declares at its head the values that it alone has: a `Room` and an `AlarmKind` for the locks, a `Building`, a `Floor` and a `FirmwareVersion` for the devices, a `Money` and a `PaymentTerm` for the parties.
 
@@ -35,18 +36,16 @@ Three models, each in a namespace of its own with its own Repository, as in Tuto
 namespace TutorialThree
 {
     [ValueObject<GhostString>]
-    internal readonly ref partial struct Name
-    {
-    }
+    internal interface VName { }
 
     [ValueObject<GhostString>]
-    internal readonly ref partial struct Reason
-    {
-    }
+    internal interface VReason { }
 
     /// <summary>The charge of a battery, in percent, from 0 to 100.</summary>
     [ValueObject<int>(ImplicitConversion = true)]
-    internal readonly partial struct ChargeLevel
+    internal interface VChargeLevel { }
+
+    internal partial struct ChargeLevel
     {
         private static bool IsValid(int percent) => percent is >= 0 and <= 100;
     }
@@ -65,6 +64,8 @@ Every way of composing of the tutorial, and the lesson that shows it:
 | `partial class Camera : ILocated` | A C# interface over the capabilities | One method of yours for every type that implements it | 5 |
 | `[SystemFor(nameof(MDoorLock))]` | System | The entities that have its capabilities, as Views, seen at each instruction | 6, 7, 8 |
 | `[ExcludeComponent(nameof(CMaintenance))]` | An excluded capability | The entities that have it are out of the system | 6, 10 |
+| `RAddress Home`, `Option<RAddress> Billing` | A Record property | A value of several fields, read and replaced whole; never absent, or optional | 11 |
+| `RecordBag<RMove> Moves`, `RecordBag Inbox` | A bag of Records | Its Records in their order, of these types, or of any type | 11 |
 
 ## Part 1: Capabilities
 
@@ -75,123 +76,90 @@ Some locks run on a battery, others are wired. A battery level is not a value of
 ```csharp
 // The values of this model alone, first; the others are those of the tutorial.
 [ValueObject<GhostString>]
-internal readonly ref partial struct Room
-{
-}
+internal interface VRoom { }
 
 /// <summary>What an alarm reports: "Forced", "Left open".</summary>
 [ValueObject<GhostString>]
-internal readonly ref partial struct AlarmKind
-{
-}
+internal interface VAlarmKind { }
 
 [ValueObject<GhostString>]
-internal readonly ref partial struct Title
-{
-}
+internal interface VTitle { }
 
 /// <summary>A moment, a date and a time.</summary>
 [ValueObject<DateTime>(ImplicitConversion = true)]
-internal readonly partial struct Instant
-{
-}
+internal interface VInstant { }
 
-[Entity(1, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(1, 1, 2), Root, Removable, Enumerable]
 internal interface MDoorLock
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
     [Property(2)]
-    Room Room { get; set; }
+    VRoom Room { get; set; }
 }
 
-[Entity(2, 1, 2)]
-[ComponentFor(nameof(MDoorLock))]
-[Enumerable]
+[Entity(2, 1, 2), ComponentFor(nameof(MDoorLock)), Enumerable]
 internal interface CBattery
 {
     [Property(1)]
-    ChargeLevel Level { get; set; }
+    VChargeLevel Level { get; set; }
 
     [Property(2)]
-    Instant Replaced { get; set; }
+    VInstant Replaced { get; set; }
 }
 
-[Entity(3, 1, 1)]
-[ComponentFor(nameof(MDoorLock))]
+[Entity(3, 1, 1), ComponentFor(nameof(MDoorLock))]
 internal interface CAlarmLog
 {
     [Property(1)]
     IEntityCollection<MAlarm> Alarms { get; }
 }
 
-[Entity(4, 1, 2)]
-[Enumerable]
+[Entity(4, 1, 2), Enumerable]
 internal interface MAlarm
 {
     [Property(1)]
-    AlarmKind Kind { get; set; }
+    VAlarmKind Kind { get; set; }
 
     [Property(2)]
-    Instant At { get; set; }
+    VInstant At { get; set; }
 
     [OwnedFrom]
     CAlarmLog Log { get; }
 }
 
-[Entity(5, 1, 2)]
-[ComponentFor(nameof(MDoorLock))]
-[Enumerable]
+[Entity(5, 1, 2), ComponentFor(nameof(MDoorLock)), Enumerable]
 internal interface CMaintenance
 {
     [Property(1)]
-    Reason Reason { get; set; }
+    VReason Reason { get; set; }
 
-    [Property(2)]
-    [Strong]
+    [Property(2), Strong]
     MTechnician Technician { get; set; }
 }
 
-[Entity(6, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(6, 1, 1), Root, Removable, Enumerable]
 internal interface MTechnician
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 }
 
-[Entity(7, 1, 3)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(7, 1, 3), Root, Removable, Enumerable]
 internal interface MWorkOrder
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
-    [Property(2)]
-    [Strong]
+    [Property(2), Strong]
     Option<CMaintenance> Maintenance { get; set; }
 
-    [Property(3)]
-    [Weak]
+    [Property(3), Weak]
     Option<CBattery> Battery { get; set; }
 }
 
-[GhostRepository]
-[IncludeEntityModel(nameof(MDoorLock))]
-[IncludeEntityModel(nameof(CBattery))]
-[IncludeEntityModel(nameof(CAlarmLog))]
-[IncludeEntityModel(nameof(MAlarm))]
-[IncludeEntityModel(nameof(CMaintenance))]
-[IncludeEntityModel(nameof(MTechnician))]
-[IncludeEntityModel(nameof(MWorkOrder))]
+[GhostRepository, IncludeEntityModel(nameof(MDoorLock)), IncludeEntityModel(nameof(CBattery)), IncludeEntityModel(nameof(CAlarmLog)), IncludeEntityModel(nameof(MAlarm)), IncludeEntityModel(nameof(CMaintenance)), IncludeEntityModel(nameof(MTechnician)), IncludeEntityModel(nameof(MWorkOrder))]
 internal interface MFacilityRepository
 {
 }
@@ -502,106 +470,68 @@ A capability is rarely the property of one type: a camera and a lock may both ru
 ```csharp
 // The values of this model alone, first; the others are those of the tutorial.
 [ValueObject<GhostString>]
-internal readonly ref partial struct Building
-{
-}
+internal interface VBuilding { }
 
 [ValueObject<int>(ImplicitConversion = true)]
-internal readonly partial struct Floor
-{
-}
+internal interface VFloor { }
 
 /// <summary>The version of a firmware, "2.1": versions compare as their texts.</summary>
 [ValueObject<GhostString>]
-internal readonly ref partial struct FirmwareVersion
-{
-}
+internal interface VFirmwareVersion { }
 
-[Entity(1, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(1, 1, 1), Root, Removable, Enumerable]
 internal interface MCamera
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 }
 
-[Entity(2, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(2, 1, 1), Root, Removable, Enumerable]
 internal interface MDoorLock
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 }
 
-[Entity(3, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(3, 1, 1), Root, Removable, Enumerable]
 internal interface MThermostat
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 }
 
-[Entity(4, 1, 1)]
-[ComponentFor(nameof(MCamera))]
-[ComponentFor(nameof(MDoorLock))]
-[Enumerable]
+[Entity(4, 1, 1), ComponentFor(nameof(MCamera)), ComponentFor(nameof(MDoorLock)), Enumerable]
 internal interface CBattery
 {
     [Property(1)]
-    ChargeLevel Level { get; set; }
+    VChargeLevel Level { get; set; }
 }
 
-[Entity(5, 1, 2)]
-[ComponentFor(nameof(MCamera))]
-[ComponentFor(nameof(MDoorLock))]
-[ComponentFor(nameof(MThermostat))]
-[Enumerable]
+[Entity(5, 1, 2), ComponentFor(nameof(MCamera)), ComponentFor(nameof(MDoorLock)), ComponentFor(nameof(MThermostat)), Enumerable]
 internal interface CLocation
 {
     [Property(1)]
-    Building Building { get; set; }
+    VBuilding Building { get; set; }
 
     [Property(2)]
-    Floor Floor { get; set; }
+    VFloor Floor { get; set; }
 }
 
-[Entity(6, 1, 1)]
-[ComponentFor(nameof(MCamera))]
-[ComponentFor(nameof(MDoorLock))]
-[ComponentFor(nameof(MThermostat))]
-[Enumerable]
+[Entity(6, 1, 1), ComponentFor(nameof(MCamera)), ComponentFor(nameof(MDoorLock)), ComponentFor(nameof(MThermostat)), Enumerable]
 internal interface CFirmware
 {
     [Property(1)]
-    FirmwareVersion Version { get; set; }
+    VFirmwareVersion Version { get; set; }
 }
 
-[Entity(7, 1, 1)]
-[ComponentFor(nameof(MCamera))]
-[ComponentFor(nameof(MDoorLock))]
-[Enumerable]
+[Entity(7, 1, 1), ComponentFor(nameof(MCamera)), ComponentFor(nameof(MDoorLock)), Enumerable]
 internal interface CMaintenance
 {
     [Property(1)]
-    Reason Reason { get; set; }
+    VReason Reason { get; set; }
 }
 
-[GhostRepository]
-[IncludeEntityModel(nameof(MCamera))]
-[IncludeEntityModel(nameof(MDoorLock))]
-[IncludeEntityModel(nameof(MThermostat))]
-[IncludeEntityModel(nameof(CBattery))]
-[IncludeEntityModel(nameof(CLocation))]
-[IncludeEntityModel(nameof(CFirmware))]
-[IncludeEntityModel(nameof(CMaintenance))]
-[IncludeEntityModel(nameof(SPoweredLock))]
-[IncludeEntityModel(nameof(SFirmwareCamera))]
+[GhostRepository, IncludeEntityModel(nameof(MCamera)), IncludeEntityModel(nameof(MDoorLock)), IncludeEntityModel(nameof(MThermostat)), IncludeEntityModel(nameof(CBattery)), IncludeEntityModel(nameof(CLocation)), IncludeEntityModel(nameof(CFirmware)), IncludeEntityModel(nameof(CMaintenance)), IncludeEntityModel(nameof(SPoweredLock)), IncludeEntityModel(nameof(SFirmwareCamera))]
 internal interface MDeviceRepository
 {
 }
@@ -753,9 +683,7 @@ The interface exists in C# only: neither the model, nor the Store, nor the engin
 The maintenance team asks for the locks that run on a battery and are not under maintenance, with their place when they have one. A query over the locks would test three capabilities on each lock. A **system** says it once, in the model:
 
 ```csharp
-[SystemFor(nameof(MDoorLock))]
-[ExcludeComponent(nameof(CMaintenance))]
-[Enumerable]
+[SystemFor(nameof(MDoorLock)), ExcludeComponent(nameof(CMaintenance)), Enumerable]
 internal interface SPoweredLock
 {
     MDoorLock Lock { get; }
@@ -845,8 +773,7 @@ The generator checks a system: one member of its entity type, the others compone
 The cameras with a firmware, and their battery when they run on one, are a system of the model too:
 
 ```csharp
-[SystemFor(nameof(MCamera))]
-[Enumerable]
+[SystemFor(nameof(MCamera)), Enumerable]
 internal interface SFirmwareCamera
 {
     MCamera Camera { get; }
@@ -931,114 +858,90 @@ With components, **a party is one entity, and its roles are its capabilities**:
 ```csharp
 // The values of this model alone, first; the others are those of the tutorial.
 [ValueObject<decimal>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
-internal readonly partial struct Money
+internal interface VMoney { }
+
+internal partial struct Money
 {
     private static bool IsValid(decimal amount) => amount >= 0;
 }
 
 /// <summary>The term of payment of a supplier, in days.</summary>
 [ValueObject<int>(ImplicitConversion = true)]
-internal readonly partial struct PaymentTerm
+internal interface VPaymentTerm { }
+
+internal partial struct PaymentTerm
 {
     private static bool IsValid(int days) => days >= 0;
 }
 
 [ValueObject<GhostString>]
-internal readonly ref partial struct ProductName
-{
-}
+internal interface VProductName { }
 
 [ValueObject<GhostString>]
-internal readonly ref partial struct Badge
-{
-}
+internal interface VBadge { }
 
-[Entity(1, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(1, 1, 1), Root, Removable, Enumerable]
 internal interface MParty
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 }
 
-[Entity(2, 1, 1)]
-[ComponentFor(nameof(MParty))]
-[Enumerable]
+[Entity(2, 1, 1), ComponentFor(nameof(MParty)), Enumerable]
 internal interface CCustomer
 {
     [Property(1)]
-    Money CreditLimit { get; set; }
+    VMoney CreditLimit { get; set; }
 }
 
-[Entity(3, 1, 2)]
-[ComponentFor(nameof(MParty))]
-[Enumerable]
+[Entity(3, 1, 2), ComponentFor(nameof(MParty)), Enumerable]
 internal interface CSupplier
 {
     [Property(1)]
-    PaymentTerm PaymentDays { get; set; }
+    VPaymentTerm PaymentDays { get; set; }
 
     [Property(2)]
     IEntityCollection<MOffer> Offers { get; }
 }
 
-[Entity(4, 1, 2)]
-[Enumerable]
+[Entity(4, 1, 2), Enumerable]
 internal interface MOffer
 {
     [Property(1)]
-    ProductName Product { get; set; }
+    VProductName Product { get; set; }
 
     [Property(2)]
-    Money Price { get; set; }
+    VMoney Price { get; set; }
 
     [OwnedFrom]
     CSupplier Supplier { get; }
 }
 
-[Entity(5, 1, 1)]
-[ComponentFor(nameof(MParty))]
-[Enumerable]
+[Entity(5, 1, 1), ComponentFor(nameof(MParty)), Enumerable]
 internal interface CEmployee
 {
     [Property(1)]
-    Badge Badge { get; set; }
+    VBadge Badge { get; set; }
 }
 
-[Entity(6, 1, 1)]
-[ComponentFor(nameof(MParty))]
+[Entity(6, 1, 1), ComponentFor(nameof(MParty))]
 internal interface CBlocked
 {
     [Property(1)]
-    Reason Reason { get; set; }
+    VReason Reason { get; set; }
 }
 
-[Entity(7, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(7, 1, 2), Root, Removable, Enumerable]
 internal interface MOrder
 {
     [Property(1)]
-    Money Amount { get; set; }
+    VMoney Amount { get; set; }
 
-    [Property(2)]
-    [Strong]
+    [Property(2), Strong]
     CCustomer Customer { get; set; }
 }
 
-[GhostRepository]
-[IncludeEntityModel(nameof(MParty))]
-[IncludeEntityModel(nameof(CCustomer))]
-[IncludeEntityModel(nameof(CSupplier))]
-[IncludeEntityModel(nameof(MOffer))]
-[IncludeEntityModel(nameof(CEmployee))]
-[IncludeEntityModel(nameof(CBlocked))]
-[IncludeEntityModel(nameof(MOrder))]
-[IncludeEntityModel(nameof(STradingPartner))]
-[IncludeEntityModel(nameof(SActiveCustomer))]
+[GhostRepository, IncludeEntityModel(nameof(MParty)), IncludeEntityModel(nameof(CCustomer)), IncludeEntityModel(nameof(CSupplier)), IncludeEntityModel(nameof(MOffer)), IncludeEntityModel(nameof(CEmployee)), IncludeEntityModel(nameof(CBlocked)), IncludeEntityModel(nameof(MOrder)), IncludeEntityModel(nameof(STradingPartner)), IncludeEntityModel(nameof(SActiveCustomer))]
 internal interface MPartyRepository
 {
 }
@@ -1085,8 +988,7 @@ public void GainAndLoseRoles()
 A system joins the roles that a question needs: the parties that are customers and suppliers at once, whose balances can be netted; the customers that are not blocked, with their badge when they are employees too.
 
 ```csharp
-[SystemFor(nameof(MParty))]
-[Enumerable]
+[SystemFor(nameof(MParty)), Enumerable]
 internal interface STradingPartner
 {
     MParty Party { get; }
@@ -1096,9 +998,7 @@ internal interface STradingPartner
     CSupplier Supplier { get; }
 }
 
-[SystemFor(nameof(MParty))]
-[ExcludeComponent(nameof(CBlocked))]
-[Enumerable]
+[SystemFor(nameof(MParty)), ExcludeComponent(nameof(CBlocked)), Enumerable]
 internal interface SActiveCustomer
 {
     MParty Party { get; }
@@ -1293,6 +1193,191 @@ public void ChangeWhatTheSystemsSee()
 }
 ```
 
+## Part 5: Values that travel together
+
+### Lesson 11: Values that travel together
+
+A value object holds one value: a city, a day. An address is several of them that always go together: a street, a city, a postal code. A **Record** declares them once, an interface starting with `R`, and any entity, or any other Record, holds it as one property: the home of a client, the address that a move left. A Record has no identity and no link: it is a value, read whole, replaced whole.
+
+```csharp
+[Record(2, 1, 3)]
+internal interface RAddress
+{
+    [Property(1)]
+    VStreet Street { get; set; }
+
+    [Property(2)]
+    VCity City { get; set; }
+
+    [Property(3)]
+    VPostalCode PostalCode { get; set; }
+}
+
+[Record(3, 1, 2)]
+internal interface RMove
+{
+    [Property(1)]
+    VDay On { get; set; }
+
+    [Property(2)]
+    RAddress From { get; set; }        // a Record holds Records too
+}
+
+[Entity(1, 1, 5), Root, Enumerable]
+internal interface MClient
+{
+    [Property(1)]
+    VName Name { get; set; }
+
+    [Property(2)]
+    RAddress Home { get; set; }        // never absent: an empty address until written
+
+    [Property(3)]
+    Option<RAddress> Billing { get; set; }
+
+    [Property(4)]
+    RecordBag<RMove> Moves { get; set; }
+
+    [Property(5)]
+    RecordBag Inbox { get; set; }
+}
+
+// The messages of the inbox are named by no property of the model: the Repository includes them by their names.
+[GhostRepository, IncludeEntityModel(nameof(MClient)), IncludeEntityModel(nameof(RCallBack)), IncludeEntityModel(nameof(RSendBrochure))]
+internal interface MClientRepository
+{
+}
+```
+
+`RCallBack` and `RSendBrochure` are two more Records, a message for the call center and one for the mailing service, each of one value.
+
+**An address is a value.** A Record is born anywhere, `new Address { … }`, then assigned: its values are copied into the client. To change one of them, copy the address with `ToBody()`, change the copy, assign it back. An address read before keeps its values: it is a value, not an object that changes under your eyes.
+
+```csharp
+[Fact]
+public void AnAddressIsAValue()
+{
+    using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-11-address", StoreAccessMode.ReadWrite);
+    using var clients = new ClientRepository(store);
+    using (var transaction = clients.OpenTransaction(StoreAccessMode.ReadWrite))
+    {
+        // A Record is born anywhere, then assigned: its values are copied into the client.
+        var ada = new Client { Name = "Ada" };
+        Assert.Equal("", ada.Home.City.ToString());
+        ada.Home = new Address { Street = "1 rue de Rivoli", City = "Paris", PostalCode = "75001" };
+        Assert.False(ada.Billing.Any());
+        transaction.Commit();
+    }
+    using (var transaction = clients.OpenTransaction(StoreAccessMode.ReadWrite))
+    {
+        var ada = ClientCollection.Single();
+        var before = ada.Home;
+        // To change one of its values: copy the address, change the copy, assign it back.
+        var home = ada.Home.ToBody();
+        home.City = "Lyon";
+        home.PostalCode = "69001";
+        ada.Home = home;
+        Assert.Equal("Lyon", ada.Home.City.ToString());
+        // The address read before is a value: it has not changed.
+        Assert.Equal("Paris", before.City.ToString());
+        // The copy is a Record of its own: the client sees its next change only when it is assigned again.
+        home.Street = "2 quai Saint-Antoine";
+        Assert.Equal("1 rue de Rivoli", ada.Home.Street.ToString());
+        ada.Billing = home;
+        transaction.Commit();
+    }
+    using (clients.OpenTransaction(StoreAccessMode.ReadOnly))
+    {
+        // Read through the Views, an address is read in place, as any value of its entity.
+        Assert.Equal(1, ClientViewCollection.Count(static c => c.Home.City == "Lyon"));
+        var ada = ClientViewCollection.Single();
+        Assert.True(ada.Billing.TryGet(out var billing) && billing.Street == "2 quai Saint-Antoine" && billing.City == "Lyon");
+    }
+}
+```
+
+**A history is a bag.** A list of values that the entity owns, the moves of a client, is a bag of Records, `RecordBag<RMove>`: written through the client, without an assignment, its Records in the order of their `Add`. `Enumerate<MoveView>()` reads them with the operators of the sequences.
+
+```csharp
+[Fact]
+public void KeepAHistoryInABag()
+{
+    using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-11-history", StoreAccessMode.ReadWrite);
+    using var clients = new ClientRepository(store);
+    using (var transaction = clients.OpenTransaction(StoreAccessMode.ReadWrite))
+    {
+        var ada = new Client { Name = "Ada", Home = new Address { City = "Paris" } };
+        // A move: the address left joins the history, then the new one is assigned. The bag of the client changes the client.
+        ada.Moves.Add(new Move { On = new DateOnly(2024, 3, 1), From = ada.Home });
+        ada.Home = new Address { City = "Lyon" };
+        ada.Moves.Add(new Move { On = new DateOnly(2026, 9, 15), From = ada.Home });
+        ada.Home = new Address { City = "Nice" };
+        transaction.Commit();
+    }
+    using (clients.OpenTransaction(StoreAccessMode.ReadOnly))
+    {
+        var ada = ClientViewCollection.Single();
+        Assert.Equal(2, ada.Moves.Count());
+        // Enumerate gives the Records of a type in their order, with the operators of the sequences.
+        Assert.Equal(["Paris", "Lyon"], ada.Moves.Enumerate<MoveView>().Select(static m => m.From.City.ToString()).ToList());
+        Assert.True(ada.Moves.Enumerate<MoveView>().LastOrNone().TryGet(out var last) && last.On == new DateOnly(2026, 9, 15));
+        Assert.Equal("Nice", ada.Home.City.ToString());
+    }
+}
+```
+
+**An inbox carries messages for several services.** A bag of any Record, `RecordBag`, holds the messages that the services of the business leave for a client: each service reads the types it knows and leaves the others. A service that knows several types walks the bag once, a handler per type, `static` lambdas whose state comes first. To take a message: `IndexOf<T>` finds the first of its type, `TryGetAt` reads it, `RemoveAt` removes it; the others stay in their order. To take them all, one after the other: the first, while there is one.
+
+```csharp
+[Fact]
+public void CarryMessagesForSeveralServices()
+{
+    using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-11-inbox", StoreAccessMode.ReadWrite);
+    using var clients = new ClientRepository(store);
+    using (var transaction = clients.OpenTransaction(StoreAccessMode.ReadWrite))
+    {
+        var ada = new Client { Name = "Ada" };
+        ada.Inbox.Add(new SendBrochure { Subject = "Winter offers" });
+        ada.Inbox.Add(new CallBack { Reason = "Damaged parcel" });
+        ada.Inbox.Add(new SendBrochure { Subject = "New depots" });
+        transaction.Commit();
+    }
+    using (clients.OpenTransaction(StoreAccessMode.ReadOnly))
+    {
+        // The mailing service knows one type: the other messages are skipped.
+        var inbox = ClientViewCollection.Single().Inbox;
+        Assert.Equal(3, inbox.Count());
+        Assert.Equal(["Winter offers", "New depots"], inbox.Enumerate<SendBrochureView>().Select(static b => b.Subject.ToString()).ToList());
+        // A service that knows both walks the inbox once, a handler per type; the handlers capture nothing, their state comes first.
+        var work = new List<string>();
+        inbox.Enumerate(work,
+            static (List<string> w, SendBrochureView brochure) => w.Add("mail " + brochure.Subject),
+            static (List<string> w, CallBackView call) => w.Add("call " + call.Reason));
+        Assert.Equal(["mail Winter offers", "call Damaged parcel", "mail New depots"], work);
+    }
+    using (var transaction = clients.OpenTransaction(StoreAccessMode.ReadWrite))
+    {
+        // The call center takes its message: found by its type, read, then removed; the others stay in their order.
+        var ada = ClientCollection.Single();
+        Assert.True(ada.Inbox.IndexOf<CallBackView>(out int at) && ada.Inbox.TryGetAt(at, out CallBackView call));
+        ada.Inbox.RemoveAt(at);
+        Assert.Equal("Damaged parcel", call.Reason.ToString());
+        // The mailing service takes the first message, as long as there is one.
+        var sent = new List<string>();
+        while (ada.Inbox.Count() > 0)
+        {
+            if (ada.Inbox.TryGetAt(0, out SendBrochureView brochure))
+                sent.Add(brochure.Subject.ToString());
+            ada.Inbox.RemoveAt(0);
+        }
+        Assert.Equal(["Winter offers", "New depots"], sent);
+        transaction.Commit();
+    }
+}
+```
+
+**A Record is not a part.** The lines of an order, changed one by one, found, referenced, are parts of their aggregate (Tutorial Two): each has its identity, its links, its conflicts of its own. A Record is the value that several places reuse; a bag, a list that its entity reads whole. Keep few Records in an entity: an entity of many Records couples the evolution of all their hosts, and none of their fields is indexed.
+
 ## From the need to the component
 
 The lessons went from a component to what it does. This chapter goes the other way: from what your business needs to the composition that gives it, from the most general question to the most specific. The examples come from the applications that every developer meets: a shop, a document store, a school, a fleet of devices.
@@ -1341,6 +1426,9 @@ The lessons went from a component to what it does. This chapter goes the other w
 | Does a question join several capabilities? | A system | `[SystemFor(nameof(MX))]`, its interface starting with `S` | 6, 7 |
 | Is it a role of a party? | A component of the party | `[ComponentFor(nameof(MParty))]` | 8 |
 | Does it change at another pace than its entity? | A component, an aggregate of its own | `[ComponentFor]` | 9 |
+| Do several values go together, read and replaced whole, reused in several places? | A Record property, few per entity | `RAddress Home`, its interface starting with `R` | 11 |
+| Does the entity own a list of such values, read whole? | A bag of these types | `RecordBag<RMove> Moves` | 11 |
+| Does it carry messages of several types for several services? | A bag of any Record | `RecordBag Inbox` | 11 |
 
 ## What you learned
 
@@ -1351,5 +1439,6 @@ The lessons went from a component to what it does. This chapter goes the other w
 - A **system** joins an entity and its capabilities, required, optional and excluded: a collection of Views, `Of(entity)`, and your rules in its partial struct; it reads only what may belong to it, and sees each change of the transaction at once.
 - **Roles replace subclasses**: a party plays several roles at once, gains and loses them, and stays one party.
 - A component is **an aggregate of its own**: it changes in parallel with its entity.
+- A **Record** is a value of several fields, held by an entity or by another Record: read whole, changed by its copy, `ToBody()`, then assigned. A **bag** holds Records in their order, of a few types or of any type: a history, an inbox for several services. A Record is never a part of an aggregate.
 
 [Tutorial Four](Four-Edges.md) goes further with the edges and the graph oriented model.

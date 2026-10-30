@@ -36,32 +36,28 @@ A small library of books. One entity type, `Book`, and one Repository, `LibraryR
 
 A model is a set of C# interfaces. You never implement them: the generator reads them and writes the classes. An interface whose name starts with `M` gives a class without the `M`: `MBook` gives `Book`.
 
-**The values of the model come first.** Each value of a book has a type that says what it is: a value object. A `decimal` does not say whether it is a price or a rate, nor a `string` whether it is a title or an author; a `Money` is not a `Percent`, and a title given for an author no longer compiles. You declare a value object and its rule; the generator writes the rest, and the code that runs is the code of the value inside it. [Lesson 18](#lesson-18-give-each-value-its-type) shows them in detail.
+**The values of the model come first.** Each value of a book has a type that says what it is: a value object. A `decimal` does not say whether it is a price or a rate, nor a `string` whether it is a title or an author; a `Money` is not a `Percent`, and a title given for an author no longer compiles. You declare a value object and its rule; the generator writes the rest, and the code that runs is the code of the value inside it. Until [Part 6](#part-6-values-that-say-what-they-are), which explains the concept in depth and shows what GBO writes for them, read them as the values they hold: `Title = "Dune"`, `Price = 9.90m`.
 
 ```csharp
-// [ValueObject<GhostString>] on a readonly ref partial struct: a text value object, made from a string ("Dune"), compared to one, stored
+// [ValueObject<GhostString>] on an interface VTitle: a text value object, made from a string ("Dune"), compared to one, stored
 // as a text. GBO writes two types: Title, that a book reads and writes in place, and ReadOnlyTitle, that a BookView reads.
 [ValueObject<GhostString>]
-internal readonly ref partial struct Title
-{
-}
+internal interface VTitle { }
 
 [ValueObject<GhostString>]
-internal readonly ref partial struct AuthorName
-{
-}
+internal interface VAuthorName { }
 
 // [ValueObject<int>]: a number value object, stored as an int. ImplicitConversion = true: an int converts to it, Year = 1965, checked as
 // Year.From(1965) is; to an int, Value.
 [ValueObject<int>(ImplicitConversion = true)]
-internal readonly partial struct Year
-{
-}
+internal interface VYear { }
 
 // Operators: the operators between two amounts, + and -, by which Sum adds them. IsValid: the rule of a value, checked at each
 // conversion; an amount below zero does not exist.
 [ValueObject<decimal>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
-internal readonly partial struct Money
+internal interface VMoney { }
+
+internal partial struct Money
 {
     private static bool IsValid(decimal amount) => amount >= 0;
 
@@ -70,7 +66,9 @@ internal readonly partial struct Money
 
 // The 13 digits of an ISBN in a long, compared and stored as a long; TryRead reads one from a text (Lesson 18).
 [ValueObject<long>]
-internal readonly partial struct Isbn
+internal interface VIsbn { }
+
+internal partial struct Isbn
 {
     private static bool IsValid(long digits) => digits is >= 0 and < 10_000_000_000_000;
 
@@ -80,7 +78,9 @@ internal readonly partial struct Isbn
 }
 
 [ValueObject<decimal>(ImplicitConversion = true)]
-internal readonly partial struct Percent
+internal interface VPercent { }
+
+internal partial struct Percent
 {
     private static bool IsValid(decimal value) => value is >= 0 and <= 100;
 
@@ -89,7 +89,9 @@ internal readonly partial struct Percent
 
 // The mark of the shelf of a book, "SF-12": a text that checks its form.
 [ValueObject<GhostString>]
-internal readonly ref partial struct ShelfMark
+internal interface VShelfMark { }
+
+internal partial struct ShelfMark
 {
     private static bool IsValid(ReadOnlySpan<char> text) => text.Length is > 2 and <= 8 && text.IndexOf('-') > 0;
 }
@@ -105,25 +107,22 @@ internal enum Availability
 Then the entity, whose properties are typed by these values:
 
 ```csharp
-[Entity(1, 1, 10)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(1, 1, 10), Root, Removable, Enumerable]
 internal interface MBook
 {
     // [Property(n)]: the identifier of the property. GBO stores the value under its identifier, not under its name: you may
     // rename a property, but never give its identifier to another one.
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
     [Property(2)]
-    AuthorName Author { get; set; }
+    VAuthorName Author { get; set; }
 
     [Property(3)]
-    Year Year { get; set; }
+    VYear Year { get; set; }
 
     [Property(4)]
-    Money Price { get; set; }
+    VMoney Price { get; set; }
 
     [Property(5)]
     Availability Availability { get; set; }
@@ -134,17 +133,17 @@ internal interface MBook
     int PriceChanges { get; set; }
 
     [Property(7)]
-    Isbn Isbn { get; set; }
+    VIsbn Isbn { get; set; }
 
     // A deposit and a discount, both optional: absent until given (Lesson 9).
     [Property(8)]
-    Option<Money> Deposit { get; set; }
+    Option<VMoney> Deposit { get; set; }
 
     [Property(9)]
-    Option<Percent> MemberDiscount { get; set; }
+    Option<VPercent> MemberDiscount { get; set; }
 
     [Property(10)]
-    ShelfMark Shelf { get; set; }
+    VShelfMark Shelf { get; set; }
 }
 ```
 
@@ -164,8 +163,7 @@ internal interface MBook
 The Repository gathers the entity types:
 
 ```csharp
-[GhostRepository]
-[IncludeEntityModel(nameof(MBook))]
+[GhostRepository, IncludeEntityModel(nameof(MBook))]
 internal interface MLibraryRepository
 {
 }
@@ -1404,20 +1402,31 @@ public async Task BoundTheWaitOfAnExclusiveTransaction()
 
 ## Part 6: Values that say what they are
 
+[Lesson 1](#lesson-1-declare-a-model) declared the values of a book before the book itself, and every lesson since has used them as plain values: `Title = "Dune"`, `Price = 9.90m`, `book.Year == 1965`. This part tells why they exist, what GBO writes for them, and what they cost.
+
 ### Lesson 18: Give each value its type
 
-A `decimal` does not say whether it is a price, a deposit or a rate; a `string`, whether it is a title or an author. **A value object** names its concept, checks its values, and holds its operators: a deposit given where a rate is due no longer compiles. Every value of `MBook` is one, declared at the head of the model, in [Lesson 1](#lesson-1-declare-a-model): `Title`, `AuthorName`, `Year`, `Money`, `Isbn`, `Percent`, `ShelfMark`. This lesson shows what GBO writes for them.
+**A `string` does not say what it is.** A title, an author, a shelf mark: all strings, and the compiler cannot tell them apart. A method `Lend(string title, string author)` called with its two arguments swapped compiles, runs, and stores an author as a title; nothing fails until a reader sees it. A `decimal` is a price, a deposit or a rate, and nothing says which; an `int`, a year, a count or an amount in cents. The value is valid for its type and wrong for its meaning: the most common silent error of a business code, so common that it has a name, *primitive obsession*.
 
-**You declare a value object and its rules; GBO writes the rest**, and the code that runs is the code of the value inside it: reading a `Year` costs what reading an `int` costs.
+**A value object is a value with a meaning.** It has no identity: it is its value, and it is compared by its value. Two `Money` of 20.00 are the same amount, as two `int` of 20 are the same number, while two books of the same title stay two books. Around the bare value, it holds four things:
+
+- **Its name**, the word of the business. A signature says what it takes, `Lend(Title title, AuthorName author)`, and a call that swaps them no longer compiles. The references of `Isbn` are every place where an ISBN is read or written; the references of `long` say nothing.
+- **Its rule.** An amount below zero, a rate above 100 %, a shelf mark without its hyphen do not exist. The rule is checked once, where the value is made, from a text, a form or a message; any code that receives a `Money` knows that it is valid, and never checks it again.
+- **Its operations**, those of the concept and only those. Two amounts add up; an amount multiplied by an amount means nothing, and does not compile. A discount is applied by its own method, `Percent.Of`: the rule lives with the rate, not copied into each code that uses it.
+- **Its form**: its display and its reading. An ISBN shows its 13 digits, an amount its two decimals, everywhere the same.
+
+The compiler becomes the first reviewer of the model: a deposit given where a rate is due, an author for a title, a year for a price are refused at the build, before any test runs. Code written by an AI agent gains the most: the types tell it what each value means, and refuse its confusions at once.
+
+**In GBO, a value object costs nothing.** Value objects are a building block of domain-driven design, yet in most .NET code they cost code: a type written by hand, its equality, its checks, and a converter for each database and each serializer; the temptation is to keep the `string`. In GBO, you declare a value object and its rules, as Lesson 1 did for `Title`, `AuthorName`, `Year`, `Money`, `Isbn`, `Percent` and `ShelfMark`; the generator writes the rest, and the code that runs is the code of the value inside it: reading a `Year` costs what reading an `int` costs. You declare it as the rest of the model, by an interface: `VYear` gives the struct `Year`, which your code uses, and a property of the model names the interface, `VYear Year { get; set; }`, as a link names `MAuthor`. Your rules go in a `partial struct Year`, as a Body is completed, only when the value has some. A `GhostSpan` takes a struct: a span of years is a `GhostSpan<Year>`.
 
 | You write | GBO writes |
 | --- | --- |
-| `[ValueObject<T>]` on a `readonly partial struct`, `T` a number, a date, a time or a `Guid` | `Value`; `From`, which throws when your rule refuses the value, and `TryFrom`, which says false; the equality; the order; `Parse` and `TryParse`; the formats of `T` |
+| `[ValueObject<T>]` on an interface `VYear`, `T` a number, a date, a time or a `Guid`; a property of the model names it, `VYear Year` | The struct `Year`: `Value`; `From`, which throws when your rule refuses the value, and `TryFrom`, which says false; the equality; the order; `Parse` and `TryParse`; the formats of `T` |
 | `Operators = ValueOperators.Add \| ...` | The operators between two values, `+`, `-`, `*`, `/`: `Sum` adds by `+`. Never by default: an amount added to an amount makes sense, an amount multiplied by an amount does not |
 | `ImplicitConversion = true` | `Price = 9.90m`, `Year = 1965`, checked as by `From`. Never by default: a number does not say its unit, 1250 cents or 1250 euros; the library asks for it, so that its values read as they are written |
-| `static bool IsValid(T value)` | The check of each value that `From`, `TryFrom`, `Parse` and a conversion create. `default` is the default value, never checked; a value read back from the Store is not checked again |
-| `ToString()` | Nothing more: your display wins |
-| `[ValueObject<GhostString>]` on a `readonly ref partial struct` | A text in disguise, in two types as `GhostString` and `ReadOnlyGhostString`: `Title`, that a `Book` reads and writes in place, each text checked by your rule, and `ReadOnlyTitle`, that a `BookView` reads; made from a `string`, `ShelfMark shelf = "SF-12";`, compared to one, never copied but by `ToString()` |
+| `static bool IsValid(T value)`, in your `partial struct Year`, beside your other members | The check of each value that `From`, `TryFrom`, `Parse` and a conversion create. `default` is the default value, never checked; a value read back from the Store is not checked again |
+| `ToString()`, in the same partial struct | Nothing more: your display wins |
+| `[ValueObject<GhostString>]` on an interface `VTitle` | A text in disguise, in two types as `GhostString` and `ReadOnlyGhostString`: `Title`, that a `Book` reads and writes in place, each text checked by your rule, and `ReadOnlyTitle`, that a `BookView` reads; made from a `string`, `ShelfMark shelf = "SF-12";`, compared to one, never copied but by `ToString()` |
 
 GBO stores each value object as the value inside it: a `Money` as a `decimal`, a `Title` as a text. Its indexes, its ranges, its sums and its merges are those of that value.
 
@@ -1504,7 +1513,9 @@ public void ReadTheTextsInPlace()
 
 ```csharp
 [ValueObject<long>(Operators = ValueOperators.Add | ValueOperators.Subtract)]
-internal readonly partial struct Cents
+internal interface VCents { }
+
+internal partial struct Cents
 {
     private static bool IsValid(long cents) => cents >= 0;
 
@@ -1534,6 +1545,6 @@ public void CountInCents()
 - An absence is an **`Option<T>`**, never `null`.
 - **Views** read many entities for free; **Bodies** change the few you need.
 - Transactions run **concurrently** under MVCC; a conflict is reported at the commit, and an **exclusive** transaction never meets one.
-- Every value is a **value object**: you declare it with `[ValueObject<T>]` and its rules, GBO writes the rest; its operators work in the queries, at the speed of the value inside it, and a text is read in place.
+- Every value is a **value object**, never a bare `string` or `decimal`: its name, its rule, its operations and its form, its confusions refused by the compiler. You declare it with `[ValueObject<T>]` and its rules, GBO writes the rest; its operators work in the queries, at the speed of the value inside it, and a text is read in place.
 
-The next tutorials go further, from where this one stops.
+[Tutorial Two](Two-Relationships.md) goes further, from where this one stops: the links, the constraints and the deterministic garbage collection.

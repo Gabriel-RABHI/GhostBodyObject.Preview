@@ -24,22 +24,18 @@ Two models, each in a namespace of its own, as in the tutorials before: `Journal
 namespace TutorialSix
 {
     [ValueObject<GhostString>]
-    internal readonly ref partial struct TrackingNumber
-    {
-    }
+    internal interface VTrackingNumber { }
 
     [ValueObject<GhostString>]
-    internal readonly ref partial struct Name
-    {
-    }
+    internal interface VName { }
 
     [ValueObject<GhostString>]
-    internal readonly ref partial struct Depot
-    {
-    }
+    internal interface VDepot { }
 
     [ValueObject<DateTime>(ImplicitConversion = true)]
-    internal readonly partial struct Instant
+    internal interface VInstant { }
+
+    internal partial struct Instant
     {
         /// <summary>The time between two moments: an operator of yours, beside those that GBO writes.</summary>
         public static TimeSpan operator -(Instant later, Instant earlier) => later.Value - earlier.Value;
@@ -51,7 +47,7 @@ Every declaration of the tutorial, and the lesson that shows it:
 
 | Declaration in the model | What GBO guarantees | Lessons |
 | ------------------------ | ------------------- | ------- |
-| `[Record(n, version, max)]` on `MParcelRegistered` | A Record type, its number stable in the Log: the class `ParcelRegistered`, created anywhere, frozen once added; its View `ParcelRegisteredView` | 1, 3 |
+| `[Record(n, version, max)]` on `RParcelRegistered` | A Record type, its number stable in the Log: the class `ParcelRegistered`, created anywhere, frozen once added; its View `ParcelRegisteredView` | 1, 3 |
 | `[GhostLog]` and `[IncludeRecordModel]` on `MParcelLog` | A Log of these Record types: the class `ParcelLog`, its transactions, its subscriptions; `ParcelLogCollections.ParcelCollection`, the Records of a transaction | 1, 2 |
 | An enum, a value object, a `GhostSpan<T>`, a struct of an explicit layout, an `Option<T>`, a text value object in a Record | The values of a Record, read in place by its View, without a copy | 4 |
 | A `*Ref` in a Record | The identity of an entity, never a link: a fact names what it is about | 9 |
@@ -61,66 +57,65 @@ Every declaration of the tutorial, and the lesson that shows it:
 
 ### Lesson 1: Declare a Record and a Log
 
-A Record is declared as an entity: an interface whose name starts with `M`, its properties numbered by `[Property(n)]`, and `[Record(type, version, maxPropertyIdentifier)]` in place of `[Entity]`. Its number is stable: the Log stores it with each Record. `MParcelRegistered` gives the class `ParcelRegistered`, and its View `ParcelRegisteredView`.
+A Record is declared as an entity: an interface, whose name starts with `R` for a Record as an entity's starts with `M`, its properties numbered by `[Property(n)]`, and `[Record(type, version, maxPropertyIdentifier)]` in place of `[Entity]`. Its number is stable: the Log stores it with each Record. `RParcelRegistered` gives the class `ParcelRegistered`, and its View `ParcelRegisteredView`.
 
 The Log is an interface with `[GhostLog]`, which includes its Record types by `[IncludeRecordModel]`, as a Repository includes its entity types. `MParcelLog` gives the class `ParcelLog`, and `ParcelLogCollections.ParcelCollection`, the Records of its transaction:
 
 ```csharp
 // The weight of a parcel, in grams: a value of this model alone.
 [ValueObject<int>(ImplicitConversion = true)]
-internal readonly partial struct Grams
+internal interface VGrams { }
+
+internal partial struct Grams
 {
     private static bool IsValid(int grams) => grams >= 0;
 }
 
 // [Record(type, version, maxPropertyIdentifier)]: a Record type, as [Entity] declares an entity type. Its number is stable: the
-// Log stores it with each Record. The interface starts with M: MParcelRegistered gives the class ParcelRegistered.
+// Log stores it with each Record. The interface starts with M: RParcelRegistered gives the class ParcelRegistered.
 [Record(1, 1, 4)]
-internal interface MParcelRegistered
+internal interface RParcelRegistered
 {
     [Property(1)]
-    TrackingNumber TrackingNumber { get; set; }
+    VTrackingNumber TrackingNumber { get; set; }
 
     [Property(2)]
-    Name Recipient { get; set; }
+    VName Recipient { get; set; }
 
     [Property(3)]
-    Grams Grams { get; set; }
+    VGrams Grams { get; set; }
 
     [Property(4)]
-    Instant Registered { get; set; }
+    VInstant Registered { get; set; }
 }
 
 [Record(2, 1, 3)]
-internal interface MParcelScanned
+internal interface RParcelScanned
 {
     [Property(1)]
-    TrackingNumber TrackingNumber { get; set; }
+    VTrackingNumber TrackingNumber { get; set; }
 
     // The depot where the parcel was scanned.
     [Property(2)]
-    Depot Depot { get; set; }
+    VDepot Depot { get; set; }
 
     [Property(3)]
-    Instant Scanned { get; set; }
+    VInstant Scanned { get; set; }
 }
 
 [Record(3, 1, 2)]
-internal interface MParcelDelivered
+internal interface RParcelDelivered
 {
     [Property(1)]
-    TrackingNumber TrackingNumber { get; set; }
+    VTrackingNumber TrackingNumber { get; set; }
 
     [Property(2)]
-    Instant Delivered { get; set; }
+    VInstant Delivered { get; set; }
 }
 
 // [GhostLog]: a Log, and the Record types it holds, each by [IncludeRecordModel]. MParcelLog gives the class ParcelLog, opened on
 // a Store of its own, and ParcelLogCollections.ParcelCollection, the Records of its transaction.
-[GhostLog]
-[IncludeRecordModel(nameof(MParcelRegistered))]
-[IncludeRecordModel(nameof(MParcelScanned))]
-[IncludeRecordModel(nameof(MParcelDelivered))]
+[GhostLog, IncludeRecordModel(nameof(RParcelRegistered)), IncludeRecordModel(nameof(RParcelScanned)), IncludeRecordModel(nameof(RParcelDelivered))]
 internal interface MParcelLog
 {
 }
@@ -459,20 +454,18 @@ internal enum ParcelSize
 }
 
 [ValueObject<decimal>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
-internal readonly partial struct Money
+internal interface VMoney { }
+
+internal partial struct Money
 {
     private static bool IsValid(decimal amount) => amount >= 0;
 }
 
 [ValueObject<int>(ImplicitConversion = true)]
-internal readonly partial struct DepotNumber
-{
-}
+internal interface VDepotNumber { }
 
 [ValueObject<GhostString>]
-internal readonly ref partial struct Note
-{
-}
+internal interface VNote { }
 
 // A struct of your own, stored as its bytes are: its layout declared, explicit, a [FieldOffset] on each field, every byte covered
 // by a field, 32 bytes at most. Here 16 bytes, two doubles.
@@ -487,17 +480,17 @@ internal readonly struct Position(double latitude, double longitude)
 }
 
 [Record(11, 1, 7)]
-internal interface MRoutePlanned
+internal interface RRoutePlanned
 {
     [Property(1)]
-    TrackingNumber TrackingNumber { get; set; }
+    VTrackingNumber TrackingNumber { get; set; }
 
     // An enum, a value object: the values of an entity are the values of a Record.
     [Property(2)]
     ParcelSize Size { get; set; }
 
     [Property(3)]
-    Money Cost { get; set; }
+    VMoney Cost { get; set; }
 
     // A GhostSpan: an array of values, the numbers of the depots of the route, in the Record; of value objects, as of numbers.
     [Property(4)]
@@ -508,15 +501,14 @@ internal interface MRoutePlanned
 
     // An Option: a promised day of delivery, or none.
     [Property(6)]
-    Option<Instant> Promised { get; set; }
+    Option<VInstant> Promised { get; set; }
 
     // A text value object: a text read in place by the View, without a copy, as a GhostString.
     [Property(7)]
-    Note Note { get; set; }
+    VNote Note { get; set; }
 }
 
-[GhostLog]
-[IncludeRecordModel(nameof(MRoutePlanned))]
+[GhostLog, IncludeRecordModel(nameof(RRoutePlanned))]
 internal interface MRouteLog
 {
 }
@@ -1034,70 +1026,62 @@ The Log of Part 1 told what happened; a model tells how things are now. Both tog
 The model of Part 3 is a Repository of the parcels and their Log. Each Record names its parcel by its identity, `ParcelRef`, drawn by the command and kept in the Record:
 
 ```csharp
-[Entity(21, 1, 5)]
-[Root]
-[Removable]
-[WithIdentity]
-[Enumerable]
+[Entity(21, 1, 5), Root, Removable, WithIdentity, Enumerable]
 internal interface MParcel
 {
     [Property(1)]
-    TrackingNumber TrackingNumber { get; set; }
+    VTrackingNumber TrackingNumber { get; set; }
 
     [Property(2)]
-    Name Recipient { get; set; }
+    VName Recipient { get; set; }
 
     [Property(3)]
     ParcelStatus Status { get; set; }
 
     [Property(4)]
-    Depot Depot { get; set; }
+    VDepot Depot { get; set; }
 
     [Property(5)]
     int Scans { get; set; }
 }
 
-[GhostRepository]
-[IncludeEntityModel(nameof(MParcel))]
+[GhostRepository, IncludeEntityModel(nameof(MParcel))]
 internal interface MCarrierRepository
 {
 }
 
 [Record(31, 1, 3)]
-internal interface MParcelRegistered
+internal interface RParcelRegistered
 {
     // The identity of the parcel, drawn by the command, in the Record: its replay gives the parcel the same identity.
     [Property(1)]
     ParcelRef Parcel { get; set; }
 
     [Property(2)]
-    TrackingNumber TrackingNumber { get; set; }
+    VTrackingNumber TrackingNumber { get; set; }
 
     [Property(3)]
-    Name Recipient { get; set; }
+    VName Recipient { get; set; }
 }
 
 [Record(32, 1, 2)]
-internal interface MParcelScanned
+internal interface RParcelScanned
 {
     [Property(1)]
     ParcelRef Parcel { get; set; }
 
     [Property(2)]
-    Depot Depot { get; set; }
+    VDepot Depot { get; set; }
 }
 
 [Record(33, 1, 1)]
-internal interface MParcelDelivered
+internal interface RParcelDelivered
 {
     [Property(1)]
     ParcelRef Parcel { get; set; }
 }
 
-[GhostLog]
-[IncludeRecordModel(nameof(MParcelRegistered))]
-[IncludeRecordModel(nameof(MParcelScanned))]
-[IncludeRecordModel(nameof(MParcelDelivered))]
+[GhostLog, IncludeRecordModel(nameof(RParcelRegistered)), IncludeRecordModel(nameof(RParcelScanned)), IncludeRecordModel(nameof(RParcelDelivered))]
 internal interface MCarrierLog
 {
 }
@@ -1560,4 +1544,4 @@ In a model rebuilt from its Log, every change comes from a handler of a Record, 
 - A model **chained** with its Log is written with it, in one transaction; a command adds its Record, and its handler changes the model.
 - A **replay** gives the model again, in memory at each opening, on disk on request: the same handlers, Replay transactions, identities taken from the Records.
 
-The next tutorial shows the chains of Stores, the transactions over several Stores, and the distribution.
+[Tutorial Seven](Seven-ChainsAndDistribution.md) shows the chains of Stores, the transactions over several Stores, and the distribution.

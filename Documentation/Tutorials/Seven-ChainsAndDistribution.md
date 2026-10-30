@@ -44,25 +44,17 @@ The model of the tutorial has two Repositories. Its values come first, each a va
 
 ```csharp
 [ValueObject<GhostString>]
-internal readonly ref partial struct TrackingNumber
-{
-}
+internal interface VTrackingNumber { }
 
 [ValueObject<GhostString>]
-internal readonly ref partial struct Name
-{
-}
+internal interface VName { }
 
 [ValueObject<GhostString>]
-internal readonly ref partial struct Depot
-{
-}
+internal interface VDepot { }
 
 /// <summary>What the customer reads of a parcel: "Registered", "In transit at Lyon", "Delivered".</summary>
 [ValueObject<GhostString>]
-internal readonly ref partial struct StatusLabel
-{
-}
+internal interface VStatusLabel { }
 ```
 
 The parcels, as the carrier works with them:
@@ -75,28 +67,23 @@ internal enum ParcelStatus
     Delivered
 }
 
-[Entity(1, 1, 4)]
-[Root]
-[Removable]
-[WithIdentity]
-[Enumerable]
+[Entity(1, 1, 4), Root, Removable, WithIdentity, Enumerable]
 internal interface MParcel
 {
     [Property(1)]
-    TrackingNumber TrackingNumber { get; set; }
+    VTrackingNumber TrackingNumber { get; set; }
 
     [Property(2)]
-    Name Recipient { get; set; }
+    VName Recipient { get; set; }
 
     [Property(3)]
     ParcelStatus Status { get; set; }
 
     [Property(4)]
-    Depot Depot { get; set; }
+    VDepot Depot { get; set; }
 }
 
-[GhostRepository]
-[IncludeEntityModel(nameof(MParcel))]
+[GhostRepository, IncludeEntityModel(nameof(MParcel))]
 internal interface MCarrierRepository
 {
 }
@@ -106,44 +93,35 @@ And their tracking, as the customers read it: a page for each parcel, a board fo
 
 ```csharp
 // The page of a parcel on the site of the carrier: its identity derived from the one of its parcel, TrackingPageRef.Of(parcel).
-[Entity(11, 1, 4)]
-[Root]
-[Removable]
-[WithIdentity]
-[Enumerable]
+[Entity(11, 1, 4), Root, Removable, WithIdentity, Enumerable]
 internal interface MTrackingPage
 {
     [Property(1)]
-    TrackingNumber TrackingNumber { get; set; }
+    VTrackingNumber TrackingNumber { get; set; }
 
     [Property(2)]
-    Name Recipient { get; set; }
+    VName Recipient { get; set; }
 
     // What the customer reads: "Registered", "In transit at Lyon", "Delivered".
     [Property(3)]
-    StatusLabel Status { get; set; }
+    VStatusLabel Status { get; set; }
 
     [Property(4)]
     int Steps { get; set; }
 }
 
 // The board of a depot: the parcels there now.
-[Entity(12, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(12, 1, 2), Root, Removable, Enumerable]
 internal interface MDepotBoard
 {
     [Property(1)]
-    Depot Depot { get; set; }
+    VDepot Depot { get; set; }
 
     [Property(2)]
     int Parcels { get; set; }
 }
 
-[GhostRepository]
-[IncludeEntityModel(nameof(MTrackingPage))]
-[IncludeEntityModel(nameof(MDepotBoard))]
+[GhostRepository, IncludeEntityModel(nameof(MTrackingPage)), IncludeEntityModel(nameof(MDepotBoard))]
 internal interface MTrackingRepository
 {
 }
@@ -374,39 +352,36 @@ The Log of the carrier, as in Tutorial Six:
 
 ```csharp
 [Record(21, 1, 3)]
-internal interface MParcelRegistered
+internal interface RParcelRegistered
 {
     [Property(1)]
     ParcelRef Parcel { get; set; }
 
     [Property(2)]
-    TrackingNumber TrackingNumber { get; set; }
+    VTrackingNumber TrackingNumber { get; set; }
 
     [Property(3)]
-    Name Recipient { get; set; }
+    VName Recipient { get; set; }
 }
 
 [Record(22, 1, 2)]
-internal interface MParcelScanned
+internal interface RParcelScanned
 {
     [Property(1)]
     ParcelRef Parcel { get; set; }
 
     [Property(2)]
-    Depot Depot { get; set; }
+    VDepot Depot { get; set; }
 }
 
 [Record(23, 1, 1)]
-internal interface MParcelDelivered
+internal interface RParcelDelivered
 {
     [Property(1)]
     ParcelRef Parcel { get; set; }
 }
 
-[GhostLog]
-[IncludeRecordModel(nameof(MParcelRegistered))]
-[IncludeRecordModel(nameof(MParcelScanned))]
-[IncludeRecordModel(nameof(MParcelDelivered))]
+[GhostLog, IncludeRecordModel(nameof(RParcelRegistered)), IncludeRecordModel(nameof(RParcelScanned)), IncludeRecordModel(nameof(RParcelDelivered))]
 internal interface MCarrierLog
 {
 }
@@ -878,8 +853,7 @@ A unique value is unique in the whole cluster. The model gives each tracking num
 
 ```csharp
 // A tracking number belongs to one parcel, in the whole cluster (Tutorial Five, Lesson 9).
-[ValueIndex(nameof(MParcel), 1, Unique = true)]
-[ValueIndexComponent(1, nameof(MParcel.TrackingNumber))]
+[ValueIndex(nameof(MParcel), 1, Unique = true), ValueIndexComponent(1, nameof(MParcel.TrackingNumber))]
 internal interface MParcelTrackingIndex
 {
 }

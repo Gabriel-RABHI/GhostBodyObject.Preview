@@ -27,26 +27,18 @@ Four models, each in a namespace of its own with its own Repository, as in Tutor
 namespace TutorialFour
 {
     [ValueObject<GhostString>]
-    internal readonly ref partial struct Name
-    {
-    }
+    internal interface VName { }
 
     [ValueObject<GhostString>]
-    internal readonly ref partial struct Title
-    {
-    }
+    internal interface VTitle { }
 
     /// <summary>A text written by a person: a notice, a post.</summary>
     [ValueObject<GhostString>]
-    internal readonly ref partial struct FreeText
-    {
-    }
+    internal interface VFreeText { }
 
     /// <summary>A moment, a date and a time.</summary>
     [ValueObject<DateTime>(ImplicitConversion = true)]
-    internal readonly partial struct Instant
-    {
-    }
+    internal interface VInstant { }
 }
 ```
 
@@ -71,67 +63,52 @@ A critic rates a movie with stars, on a date. The stars are neither a value of t
 ```csharp
 // The values of this model alone, first; the others are those of the tutorial.
 [ValueObject<int>(ImplicitConversion = true)]
-internal readonly partial struct Year
-{
-}
+internal interface VYear { }
 
 /// <summary>The stars of a rating, from 0 to 5. A sum of ratings is no rating: it adds their values.</summary>
 [ValueObject<int>(ImplicitConversion = true)]
-internal readonly partial struct Stars
+internal interface VStars { }
+
+internal partial struct Stars
 {
     private static bool IsValid(int stars) => stars is >= 0 and <= 5;
 }
 
-[Entity(1, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(1, 1, 1), Root, Removable, Enumerable]
 internal interface MCritic
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 }
 
-[Entity(2, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(2, 1, 2), Root, Removable, Enumerable]
 internal interface MMovie
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
     [Property(2)]
-    Year Year { get; set; }
+    VYear Year { get; set; }
 }
 
-[Entity(3, 1, 2)]
-[Edge(nameof(MCritic), nameof(MMovie))]
-[Removable]
-[Enumerable]
+[Entity(3, 1, 2), Edge(nameof(MCritic), nameof(MMovie)), Removable, Enumerable]
 internal interface ERating
 {
     [Property(1)]
-    Stars Stars { get; set; }
+    VStars Stars { get; set; }
 
     [Property(2)]
-    Instant At { get; set; }
+    VInstant At { get; set; }
 }
 
-[Entity(4, 1, 1)]
-[Edge(nameof(MCritic), nameof(MMovie), Multiple = true)]
-[Enumerable]
+[Entity(4, 1, 1), Edge(nameof(MCritic), nameof(MMovie), Multiple = true), Enumerable]
 internal interface EScreening
 {
     [Property(1)]
-    Instant At { get; set; }
+    VInstant At { get; set; }
 }
 
-[GhostRepository]
-[IncludeEntityModel(nameof(MCritic))]
-[IncludeEntityModel(nameof(MMovie))]
-[IncludeEntityModel(nameof(ERating))]
-[IncludeEntityModel(nameof(EScreening))]
+[GhostRepository, IncludeEntityModel(nameof(MCritic)), IncludeEntityModel(nameof(MMovie)), IncludeEntityModel(nameof(ERating)), IncludeEntityModel(nameof(EScreening))]
 internal interface MReviewRepository
 {
 }
@@ -450,7 +427,9 @@ The roads of a road map link cities to cities: an edge whose two ends are of one
 ```csharp
 // The values of this model alone, first; the others are those of the tutorial.
 [ValueObject<double>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
-internal readonly partial struct Kilometers
+internal interface VKilometers { }
+
+internal partial struct Kilometers
 {
     private static bool IsValid(double kilometers) => kilometers >= 0;
 }
@@ -462,33 +441,24 @@ internal enum RoadKind
     Toll
 }
 
-[Entity(1, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
-[WithIdentity]
+[Entity(1, 1, 1), Root, Removable, Enumerable, WithIdentity]
 internal interface MCity
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 }
 
-[Entity(2, 1, 2)]
-[Edge(nameof(MCity), nameof(MCity), Multiple = true)]
-[Removable]
-[Enumerable]
+[Entity(2, 1, 2), Edge(nameof(MCity), nameof(MCity), Multiple = true), Removable, Enumerable]
 internal interface ERoad
 {
     [Property(1)]
-    Kilometers Distance { get; set; }
+    VKilometers Distance { get; set; }
 
     [Property(2)]
     RoadKind Kind { get; set; }
 }
 
-[GhostRepository]
-[IncludeEntityModel(nameof(MCity))]
-[IncludeEntityModel(nameof(ERoad))]
+[GhostRepository, IncludeEntityModel(nameof(MCity)), IncludeEntityModel(nameof(ERoad))]
 internal interface MRoadMapRepository
 {
 }
@@ -712,97 +682,65 @@ public void AvoidTheTolls()
 A friendship has no direction: Ada is the friend of Bob as Bob is the friend of Ada. **`[Edge(..., Symmetric = true)]`**, between two entities of one type, gives each end one member, `FriendshipEdges`, whose other ends are its **`Others`**; the edge of a pair is **`With(bob)`**, from either end.
 
 ```csharp
-[Entity(1, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
-[WithIdentity]
+[Entity(1, 1, 1), Root, Removable, Enumerable, WithIdentity]
 internal interface MPerson
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 }
 
-[Entity(2, 1, 1)]
-[Edge(nameof(MPerson), nameof(MPerson), Symmetric = true)]
-[Removable]
-[Enumerable]
+[Entity(2, 1, 1), Edge(nameof(MPerson), nameof(MPerson), Symmetric = true), Removable, Enumerable]
 internal interface EFriendship
 {
     [Property(1)]
-    Instant Since { get; set; }
+    VInstant Since { get; set; }
 }
 
-[Entity(3, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(3, 1, 1), Root, Removable, Enumerable]
 internal interface MGroup
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 }
 
-[Entity(4, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(4, 1, 1), Root, Removable, Enumerable]
 internal interface MRole
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 }
 
-[Entity(5, 1, 2)]
-[Edge(nameof(MPerson), nameof(MGroup))]
-[Removable]
-[Enumerable]
+[Entity(5, 1, 2), Edge(nameof(MPerson), nameof(MGroup)), Removable, Enumerable]
 internal interface EMembership
 {
-    [Property(1)]
-    [Strong]
+    [Property(1), Strong]
     MRole Role { get; set; }
 
     [Property(2)]
-    Instant Since { get; set; }
+    VInstant Since { get; set; }
 }
 
-[Entity(6, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(6, 1, 2), Root, Removable, Enumerable]
 internal interface MCertificate
 {
     [Property(1)]
-    Title Title { get; set; }
+    VTitle Title { get; set; }
 
-    [Property(2)]
-    [Strong]
+    [Property(2), Strong]
     EMembership Membership { get; set; }
 }
 
-[Entity(7, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(7, 1, 2), Root, Removable, Enumerable]
 internal interface MNotice
 {
     [Property(1)]
-    FreeText Text { get; set; }
+    VFreeText Text { get; set; }
 
-    [Property(2)]
-    [Weak]
+    [Property(2), Weak]
     Option<EFriendship> Friendship { get; set; }
 }
 
-[GhostRepository]
-[IncludeEntityModel(nameof(MPerson))]
-[IncludeEntityModel(nameof(EFriendship))]
-[IncludeEntityModel(nameof(MGroup))]
-[IncludeEntityModel(nameof(MRole))]
-[IncludeEntityModel(nameof(EMembership))]
-[IncludeEntityModel(nameof(MCertificate))]
-[IncludeEntityModel(nameof(MNotice))]
+[GhostRepository, IncludeEntityModel(nameof(MPerson)), IncludeEntityModel(nameof(EFriendship)), IncludeEntityModel(nameof(MGroup)), IncludeEntityModel(nameof(MRole)), IncludeEntityModel(nameof(EMembership)), IncludeEntityModel(nameof(MCertificate)), IncludeEntityModel(nameof(MNotice))]
 internal interface MSocialRepository
 {
 }
@@ -1064,89 +1002,66 @@ A relation between two entities is an edge when three answers are yes: it carrie
 ```csharp
 // The values of this model alone, first; the others are those of the tutorial.
 [ValueObject<GhostString>]
-internal readonly ref partial struct ReactionKind
-{
-}
+internal interface VReactionKind { }
 
 [ValueObject<decimal>(Operators = ValueOperators.Add | ValueOperators.Subtract, ImplicitConversion = true)]
-internal readonly partial struct Money
+internal interface VMoney { }
+
+internal partial struct Money
 {
     private static bool IsValid(decimal amount) => amount >= 0;
 }
 
-[Entity(1, 1, 2)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(1, 1, 2), Root, Removable, Enumerable]
 internal interface MUser
 {
     [Property(1)]
-    Name Name { get; set; }
+    VName Name { get; set; }
 
     /// <summary>The posts the user likes: no value, a collection of weak references.</summary>
-    [Property(2)]
-    [Weak]
+    [Property(2), Weak]
     IEntityCollection<MPost> Likes { get; }
 }
 
-[Entity(2, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(2, 1, 1), Root, Removable, Enumerable]
 internal interface MPost
 {
     [Property(1)]
-    FreeText Text { get; set; }
+    VFreeText Text { get; set; }
 
     /// <summary>The users who like the post: the reverse of their likes.</summary>
     [ReverseWeakReference(nameof(MUser.Likes))]
     IEntityCollection<MUser> LikedBy { get; }
 }
 
-[Entity(3, 1, 1)]
-[Edge(nameof(MUser), nameof(MPost))]
-[Removable]
-[Enumerable]
+[Entity(3, 1, 1), Edge(nameof(MUser), nameof(MPost)), Removable, Enumerable]
 internal interface EReaction
 {
     [Property(1)]
-    ReactionKind Kind { get; set; }
+    VReactionKind Kind { get; set; }
 }
 
-[Entity(4, 1, 1)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(4, 1, 1), Root, Removable, Enumerable]
 internal interface MAccount
 {
     [Property(1)]
-    Name Owner { get; set; }
+    VName Owner { get; set; }
 }
 
-[Entity(5, 1, 3)]
-[Root]
-[Removable]
-[Enumerable]
+[Entity(5, 1, 3), Root, Removable, Enumerable]
 internal interface MTransfer
 {
     [Property(1)]
-    Money Amount { get; set; }
+    VMoney Amount { get; set; }
 
-    [Property(2)]
-    [Strong]
+    [Property(2), Strong]
     MAccount From { get; set; }
 
-    [Property(3)]
-    [Strong]
+    [Property(3), Strong]
     MAccount To { get; set; }
 }
 
-[GhostRepository]
-[IncludeEntityModel(nameof(MUser))]
-[IncludeEntityModel(nameof(MPost))]
-[IncludeEntityModel(nameof(EReaction))]
-[IncludeEntityModel(nameof(MAccount))]
-[IncludeEntityModel(nameof(MTransfer))]
+[GhostRepository, IncludeEntityModel(nameof(MUser)), IncludeEntityModel(nameof(MPost)), IncludeEntityModel(nameof(EReaction)), IncludeEntityModel(nameof(MAccount)), IncludeEntityModel(nameof(MTransfer))]
 internal interface MForumRepository
 {
 }
@@ -1267,4 +1182,4 @@ The lessons went from an edge to what it does. This chapter goes the other way: 
 - A **symmetric** edge has no direction; an edge has **the links of any entity**, and other entities link to it.
 - An edge is **an aggregate of its own**: it changes in parallel with its ends.
 
-The next tutorial, Tutorial Five, goes further with the indexes and the custom collections.
+[Tutorial Five](Five-Indexes.md) goes further with the indexes and the custom collections.
