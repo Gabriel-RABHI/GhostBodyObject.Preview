@@ -1448,4 +1448,4 @@ Every question has its tool. The path, from the most common to the rarest:
 - **Your own collections** are members over the indexes: always up to date, ordered, counted, never stored.
 - An index is **a part of the data**: up to date at the next instruction, rolled back, committed, kept over a restart, and made again from the entities when needed.
 
-[Tutorial Six](Six-TheLog.md) shows the Log and the Record types: their subscription, and their replay.
+[Tutorial Six](Six-Records.md) shows the Records: values of several fields, bags of them, and when not to use them.

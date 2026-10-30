@@ -104,17 +104,18 @@ using var agenda = new AgendaRepository(store);
 Console.ReadLine();
 ```
 
-Each commit on one node is copied to the other, in the order of the commits: both nodes read and write the same appointments. Start the second node while the first one runs. Two nodes that both wrote while apart hold two different histories: when they meet, both stop rather than merge them ([Tutorial Seven](Documentation/Tutorials/Seven-ChainsAndDistribution.md)).
+Each commit on one node is copied to the other, in the order of the commits: both nodes read and write the same appointments. Start the second node while the first one runs. Two nodes that both wrote while apart hold two different histories: when they meet, both stop rather than merge them ([Tutorial Eight](Documentation/Tutorials/Eight-ChainsAndDistribution.md)).
 
-You can read the seven tutorials to discover what GBO can do:
+You can read the eight tutorials to discover what GBO can do:
 
 - [Tutorial One: The Basics](Documentation/Tutorials/One-TheBasics.md): an overview of GBO, its models, its transactions and its queries.
 - [Tutorial Two: Relationships](Documentation/Tutorials/Two-Relationships.md): links, constraints and deterministic garbage collection.
 - [Tutorial Three: Composition](Documentation/Tutorials/Three-Composition.md): the Entity Component System and object composition.
 - [Tutorial Four: Edges](Documentation/Tutorials/Four-Edges.md): edges and graph-oriented models.
 - [Tutorial Five: Indexes](Documentation/Tutorials/Five-Indexes.md): text indexes, value indexes, unique values and custom collections.
-- [Tutorial Six: The Log](Documentation/Tutorials/Six-TheLog.md): Records, subscriptions and replay.
-- [Tutorial Seven: Chains and Distribution](Documentation/Tutorials/Seven-ChainsAndDistribution.md): several Stores in one transaction, on several servers.
+- [Tutorial Six: Records](Documentation/Tutorials/Six-Records.md): values of several fields, bags of Records, and when not to use them.
+- [Tutorial Seven: The Log](Documentation/Tutorials/Seven-TheLog.md): facts in their order, subscriptions and replay.
+- [Tutorial Eight: Chains and Distribution](Documentation/Tutorials/Eight-ChainsAndDistribution.md): several Stores in one transaction, on several servers.
 
 ## Why GBO?
 
@@ -124,7 +125,7 @@ The database, the message broker and the application are one: the data is C# obj
 
 ### **None of the pitfalls of an ORM**
 
-No N+1 queries: a navigation is a read of memory, not a round trip, and lazy loading costs nothing: 1.36 M objects/s against 5,271 for EF Core with PostgreSQL. No change tracker, no context to keep alive or dispose at the right moment, no detached entity, no stale copy: an object changed is changed in its transaction, and the others see it at its commit. No impedance mismatch: the model is the C# model, its relations included.
+No N+1 queries: a navigation is a read of memory, not a round trip, and lazy loading costs nothing: 1.39 M objects/s against 5,238 for EF Core with PostgreSQL. No change tracker, no context to keep alive or dispose at the right moment, no detached entity, no stale copy: an object changed is changed in its transaction, and the others see it at its commit. No impedance mismatch: the model is the C# model, its relations included.
 
 ### **Deterministic memory, by the model**
 
@@ -160,7 +161,7 @@ Each property has a number: a new version of the application reads the data of t
 
 ### **Fast and faithful tests**
 
-In-memory Stores run the same engine as the persistent ones: no database to start, no mock, a test in milliseconds; the thirty lessons of Tutorial Six run in half a second.
+In-memory Stores run the same engine as the persistent ones: no database to start, no mock, a test in milliseconds; the thirty tests of Tutorial Seven run in half a second.
 
 ### **Data that protects itself**
 
@@ -211,7 +212,7 @@ GBO implements a new Event Sourcing pattern, **Mutation Sourcing**. A Mutation i
 ![Event Sourcing engines: commands replayed per second at the restart, and bytes on the disk per command](Documentation/Benchmarks/charts/gbo-vs-event-sourcing-restart-disk.svg)
 
 - **The restart replays the Log:** 49,000 to 69,000 commands/s into both models, Write and Read; KurrentDB rebuilds its Read model only, at 5,200 to 5,400 commands/s. Marten has nothing to replay: its snapshots and its Read model are tables.
-- **A Mutation takes 188 to 277 bytes on the disk:** about 9 times less than the events of KurrentDB, in JSON, and 50 times less than the WAL that Marten writes.
+- **A Mutation takes 188 to 277 bytes on the disk:** about 9 times less than the events of KurrentDB, in JSON, and 49 times less than the WAL that Marten writes.
 
 The engines, their settings and every figure: [GBO vs Event Sourcing engines](Documentation/Benchmarks/BENCH-GBO-vs-Event-Sourcing-Engines.md).
 
@@ -314,7 +315,7 @@ GBO on one page: what the engine does, how each guarantee is obtained, and the i
 | Lifetime | An object lives while it is a Root, has an owner, or a strong reference designates it; removed at the instruction that ends this, its parts in cascade, its weak references cleared; no graph is ever traversed | Ownership and reference counting, deterministic (as Rust ownership or `ON DELETE CASCADE`) |
 | Queries | `Where`, `Count`, `FirstOrNone`... over the Views, with lambdas that capture nothing, so no allocation; a scan reads collections kept in order by the compactor | Language-integrated queries, sequential scans |
 | Text index | Words of the texts, whatever their case and accents; required words, alternatives, exclusions, wildcards, fuzzy terms; the most relevant first | Inverted index, BM25 ranking with the parameters of Lucene (`k1 = 1.2`, `b = 0.75`) |
-| Value indexes | Keys of any standard type, alone or composite, in sorted pages of 4 KB; each key's set of objects in the most compact container: array, bitmap, runs, inverted, full | B+tree-like sorted pages; Roaring bitmaps (Chambi, Lemire et al., 2016) |
+| Value indexes | Keys of any standard type, alone or composite, in sorted pages of 512 bytes; each key's set of objects in the most compact container: array, bitmap, runs, inverted, full | B+tree-like sorted pages; Roaring bitmaps (Chambi, Lemire et al., 2016) |
 | Hash index | A key found without order, its buckets in pages | Hash index |
 | Up to date | Every index is up to date at the next instruction, in the transaction too, rolled back with it, committed with it, rebuilt from the objects when needed | Transactional, synchronous indexes |
 | Logs and subscriptions | A subscription reads a Log from any transaction, then follows its new commits on a thread of its own; its handlers capture nothing | Catch-up subscriptions, as in EventStoreDB, or the offsets of Kafka |

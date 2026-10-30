@@ -1983,7 +1983,7 @@ public void RefuseANullOrARepeatedIdentity()
 
 > **Note: Commands and events**
 >
-> A command decides, an event records. The command draws the identities and checks the rules; the event carries the identities, and its application, the same code in the command and in the Replay, creates the same graph each time. Tutorial Nine builds on this.
+> A command decides, an event records. The command draws the identities and checks the rules; the event carries the identities, and its application, the same code in the command and in the Replay, creates the same graph each time. A later tutorial builds on this.
 
 ### Lesson 20: What dies, and when
 

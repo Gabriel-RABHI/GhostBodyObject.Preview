@@ -1376,7 +1376,7 @@ public void CarryMessagesForSeveralServices()
 }
 ```
 
-**A Record is not a part.** The lines of an order, changed one by one, found, referenced, are parts of their aggregate (Tutorial Two): each has its identity, its links, its conflicts of its own. A Record is the value that several places reuse; a bag, a list that its entity reads whole. Keep few Records in an entity: an entity of many Records couples the evolution of all their hosts, and none of their fields is indexed.
+**A Record is not a part** ([Tutorial Six](Six-Records.md) goes through the Records, and through when not to use them). The lines of an order, changed one by one, found, referenced, are parts of their aggregate (Tutorial Two): each has its identity, its links, its conflicts of its own. A Record is the value that several places reuse; a bag, a list that its entity reads whole. Keep few Records in an entity: an entity of many Records couples the evolution of all their hosts, and none of their fields is indexed.
 
 ## From the need to the component
 

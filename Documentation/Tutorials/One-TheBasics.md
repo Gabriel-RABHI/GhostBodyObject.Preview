@@ -13,8 +13,9 @@ GBO is a sophisticated, production-oriented software technology. Each tutorial i
 - **Tutorial Three**: Entity Component System and object composition model.
 - **Tutorial Four**: Edges and graph oriented model.
 - **Tutorial Five**: indexes and custom collections.
-- **Tutorial Six**: the Log and Record types, subscription and replay mode.
-- **Tutorial Seven**: the Store chains, the cross-Store transactions, and distribution.
+- **Tutorial Six**: Records and bags of Records, values of several fields.
+- **Tutorial Seven**: the Log, subscription and replay mode.
+- **Tutorial Eight**: the Store chains, the cross-Store transactions, and distribution.
 
 ### To come
 
