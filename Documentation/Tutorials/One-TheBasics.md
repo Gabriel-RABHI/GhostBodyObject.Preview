@@ -16,10 +16,13 @@ GBO is a sophisticated, production-oriented software technology. Each tutorial i
 - **Tutorial Six**: Records and bags of Records, values of several fields.
 - **Tutorial Seven**: the Log, subscription and replay mode.
 - **Tutorial Eight**: the Store chains, the cross-Store transactions, and distribution.
+- **Tutorial Nine**: transaction conflicts, auto-merge and explicit merge.
+- **Tutorial Ten**: claims, concurrency points and leases.
 
 ### To come
 
 - **Tutorial X**: managing the evolution of the model, and the migration policies.
+- **Tutorial X**: built-in OutBox messaging.
 - **Tutorial X**: the distribution models, the ACID configurations, and the large-scale distribution of data over the Internet with the Hub.
 - **Tutorial X**: architectural concepts with CRUD, Commands, Mutation Sourcing, Event Sourcing, CQRS.
 - **Tutorial X**: the Replay migration concept, and rolling server updates with failover.
@@ -29,7 +32,7 @@ GBO is a sophisticated, production-oriented software technology. Each tutorial i
 
 ## What you will build
 
-A small library of books. One entity type, `Book`, and one Repository, `LibraryRepository`, are enough to discover the basic API principles : declare a model, open a store, changing data, querying, run code and manage transactions.
+A small library of books. One entity type, `Book`, and one Repository, `LibraryRepository`, are enough to discover the basic principles of the API: declare a model, open a Store, change data, query, run code and manage transactions.
 
 ## Part 1: Your first data
 
@@ -65,7 +68,7 @@ internal partial struct Money
     public override string ToString() => Value.ToString("0.00", CultureInfo.InvariantCulture);
 }
 
-// The 13 digits of an ISBN in a long, compared and stored as a long; TryRead reads one from a text (Lesson 18).
+// The 13 digits of an ISBN in a long, compared and stored as a long; TryRead reads one from a text (Lesson 19).
 [ValueObject<long>]
 internal interface VIsbn { }
 
@@ -159,18 +162,20 @@ internal interface MBook
 
 > **Warning: Identifiers, not names**
 >
-> GBO stores a value under the identifier of its property, not under its name. You may rename a property; never give its identifier to another one. Version and Properties number permit to transparently read and write old objects models from the current one, on new unknown one too. It permit to check next versions definition mistakes too.
+> GBO stores a value under the identifier of its property, not under its name. You may rename a property; never give its identifier to another one. The version and the property numbers let the current model read and write older objects transparently, and newer, unknown ones too. They also catch the mistakes in the definition of the next versions.
 
 The Repository gathers the entity types:
 
 ```csharp
-[GhostRepository, IncludeEntityModel(nameof(MBook))]
+[GhostRepository(1), IncludeEntityModel(nameof(MBook))]
 internal interface MLibraryRepository
 {
 }
 ```
 
 From these two interfaces, the generator writes `LibraryRepository`, its transaction `LibraryRepositoryTransaction`, and the collections of its types. The first test only looks at what it wrote:
+
+![What the generator writes: from VTitle, MBook and MLibraryRepository, the types that your code uses](diagrams/one-generated-types.svg)
 
 ```csharp
 [Fact]
@@ -220,6 +225,8 @@ public void OpenAStoreInMemoryAndItsRepository()
 A Store in memory keeps its data in the memory of the process: nothing remains when the process stops. It is known by its name in the process. `StoreAccessMode.ReadWrite` allows the transactions that write.
 
 Now the same on disk. Look closely: **only the line that creates the Store changes.**
+
+![One Repository, two Stores: only the line that creates the Store differs, and it decides whether the data outlives the process](diagrams/one-store-one-line.svg)
 
 ```csharp
 [Fact]
@@ -286,6 +293,8 @@ public void CreateBooksAndCommitThem()
 > GBO is not a Unit of Work. In Entity Framework, a `DbContext` collects your changes and sends them to the database at `SaveChanges()`: until then, a query on a `DbSet` asks the database, does not find the entities you added, and filters on the values stored before your changes.
 >
 > In GBO, the transaction is the memory you work in: each creation, change or removal is visible at once to every read and every query of the transaction, as in a collection of .NET objects. `Commit()` makes the changes durable, and visible to the transactions that open after it.
+
+![Entity Framework and GBO at three moments: a query on a DbSet does not find the new books, a query of a transaction does](diagrams/one-visible-at-once.svg)
 
 On disk, exactly the same code makes the books persistent. The Store is closed, then opened again:
 
@@ -532,6 +541,8 @@ The collections of GBO have the operators of LINQ, written by GBO for them: `Cou
 
 A lambda that reads a variable from outside, a local, a parameter or `this`, makes .NET allocate an object at each call. GBO refuses it at compile time, with the error **GBO013**. The value a lambda needs is passed before it, as its **state**, and reaches it as a parameter, after the item: up to 4 values.
 
+![A lambda that captures a local value, refused by GBO013, and the same count with its state, passed before the lambda and received after the book](diagrams/one-lambda-state.svg)
+
 ```csharp
 [Fact]
 public void CountAndTestBooks()
@@ -656,6 +667,8 @@ public void FindABookOrNone()
 
 The operators that must find a value throw when there is none, or when there is more than one:
 
+![First, FirstOrNone, Single and SingleOrNone for no book, one book and two books: what each one gives, and when it throws](diagrams/one-option-operators.svg)
+
 ```csharp
 [Fact]
 public void ThrowWhenAValueIsDueAndMissing()
@@ -684,7 +697,7 @@ public void ThrowWhenAValueIsDueAndMissing()
 
 A `Book`, a Body, is an object: the transaction keeps each one it gives, so that one entity is always the same object. A `BookView` is a **read-only struct**: the transaction keeps nothing of it, and it allocates nothing.
 
-A general rule for performance, memory usage, expressivness and security is this one : **Search with Views, change with Bodies**
+A general rule for performance, memory usage, expressiveness and security is this one: **Search with Views, change with Bodies**
 
 To read or search many books, use the Views, `BookViewCollection`. To change the few you found, take their Bodies, with `ToBody()`.
 
@@ -716,6 +729,8 @@ public void SearchWithViews()
 ```
 
 The Views find the books; only those become Bodies, to be changed. A View reads the current version of its book: it sees the change made through the Body.
+
+![Three Views search, the two books found become Bodies kept by the transaction, and the commit writes their changes](diagrams/one-views-bodies.svg)
 
 ```csharp
 [Fact]
@@ -828,6 +843,8 @@ public void ComputeAndReactInTheEntity()
 >
 > In GBO, a query runs in your process, over the objects themselves: its lambda is plain C#. It may call any method, read any computed property, and even run another query.
 
+![The same method in a query: no translation to SQL in Entity Framework, which throws, and a plain call in your process in GBO](diagrams/one-query-in-process.svg)
+
 The collections are ambient: `BookCollection` finds the transaction of the context by itself. A lambda has no context to capture to query the books, so it stays static, and allocates nothing.
 
 ```csharp
@@ -928,6 +945,8 @@ private static Book Reprint(Book book, Year year) => new() { Title = book.Title,
 
 Three levels of calls below the transaction, the methods find it by themselves:
 
+![A tree of calls, none of which receives the transaction: each method reaches it by itself, and the test commits](diagrams/one-deep-methods.svg)
+
 ```csharp
 [Fact]
 public void ChangeTheBooksFromDeepMethods()
@@ -958,6 +977,8 @@ public void ChangeTheBooksFromDeepMethods()
 ```
 
 The lambda of a query is such a method too: it may change the books it reads, or create others.
+
+![A query meets four books: the lambda reprints the third, and the same query meets the reprint later](diagrams/one-enumerated-too.svg)
 
 ```csharp
 // Change or create, and say so: to be called in the lambda of a query.
@@ -1099,6 +1120,8 @@ public async Task FindTheTransactionAfterAnAwait()
 >
 > A change creates a new version of its entity, private to its transaction. A commit publishes the new versions of its transaction, all together. A transaction reads the versions that were committed when it opened: the Store as it was then, whatever is committed after. To see the commits made since, open a new transaction.
 
+![A timeline of three transactions: a reader opened before the commit counts 0, a transaction opened after it counts 1](diagrams/one-snapshot.svg)
+
 Each thread below runs in a `Task.Run` of its own, so that each one has its own execution context, and its own transaction. A `TaskCompletionSource` is a signal: one thread sets it, another one waits for it.
 
 ```csharp
@@ -1204,6 +1227,8 @@ public async Task WriteFromThreeThreadsAtTheSameTime()
 
 Two concurrent transactions may change the same book: each one changes its own version of it. **The first commit wins.** The second one finds that the book changed since its transaction opened: it throws a `TransactionConflictException`, and writes nothing. GBO never retries by itself: the application decides, with a new transaction, which reads the current version.
 
+![Two concurrent transactions: on the same book the later commit conflicts and a new transaction decides; on two books both commit](diagrams/one-first-commit-wins.svg)
+
 ```csharp
 [Fact]
 public async Task RefuseTheSecondChangeOfTheSameBook()
@@ -1303,15 +1328,199 @@ public async Task ChangeTwoBooksAtTheSameTime()
 
 The level of conflict is chosen when a transaction opens:
 
-| Level                      | What the commit checks                                                                             |
-| -------------------------- | -------------------------------------------------------------------------------------------------- |
-| `Optimistic` (the default) | A book changed or removed since the transaction opened is a conflict.                              |
-| `Pessimistic`              | As `Optimistic`, and a change of any entity of a type that the transaction read is a conflict too. |
-| `Exclusive`                | Nothing to check: no conflict can happen (Lesson 17).                                              |
+| Level                      | What the commit checks                                                                                         |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `Optimistic` (the default) | A book changed or removed since the transaction opened is a conflict.                                          |
+| `Pessimistic`              | As `Optimistic`, and a change of any entity of a type that the transaction read is a conflict too (Lesson 17). |
+| `Exclusive`                | Nothing to check: no conflict can happen (Lesson 18).                                                          |
 
-### Lesson 17: Exclusive transactions
+On the values that many transactions change, a conflict is not the only answer: `[Delta]`, `[Max]`, `[Min]` and the Mergers merge the concurrent changes ([Tutorial Nine](Nine-Transaction-Conflicts.md)). A decision on what a transaction read, a rule over the parts of an aggregate, a work outside a transaction need tools of their own: claims, concurrency points and leases ([Tutorial Ten](Ten-Claims-Points-And-Leases.md)).
+
+### Lesson 17: Pessimistic transactions
+
+The commit of Lesson 16 compares what a transaction writes, never what it reads. A decision taken on what it read, and written elsewhere, is not protected. The library keeps one book on its shelves, and two readers borrow two books at the same time. Each transaction reads two books available, and writes its own one. They write two different books: both commit, and the shelves are empty.
+
+![At the Optimistic level both commit and the shelves are empty; at the Pessimistic level the later commit conflicts](diagrams/one-pessimistic.svg)
+
+```csharp
+// Two books on the shelves.
+private static void Shelve(LibraryRepository library)
+{
+    using var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite);
+    new Book { Title = "Dune", Price = 9.90m };
+    new Book { Title = "Foundation", Price = 8.50m };
+    transaction.Commit();
+}
+
+// The rule of the library: a book leaves the shelves when another one stays on them. The decision reads every book, and writes one.
+private static bool Borrow(string title)
+{
+    if (BookCollection.Count(static book => book.Availability == Availability.Available) < 2)
+        return false;
+    BookCollection.First(title, static (book, title) => book.Title == title).Availability = Availability.Borrowed;
+    return true;
+}
+
+[Fact]
+public async Task EmptyTheShelvesAtTheOptimisticLevel()
+{
+    using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-17-optimistic", StoreAccessMode.ReadWrite);
+    using var library = new LibraryRepository(store);
+    Shelve(library);
+    var firstDecided = new TaskCompletionSource();
+    var secondCommitted = new TaskCompletionSource();
+
+    // Each transaction reads two books available, and borrows its own one.
+    var first = Task.Run(async () =>
+    {
+        using var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite);
+        Assert.True(Borrow("Dune"));
+        firstDecided.SetResult();
+        await secondCommitted.Task;
+
+        // Dune and Foundation are two entities: nothing conflicts.
+        transaction.Commit();
+    });
+    await firstDecided.Task;
+    await Task.Run(() =>
+    {
+        using var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite);
+        Assert.True(Borrow("Foundation"));
+        transaction.Commit();
+    });
+    secondCommitted.SetResult();
+    await first;
+
+    using (library.OpenTransaction(StoreAccessMode.ReadOnly))
+    {
+        Assert.Equal(0, BookCollection.Count(static book => book.Availability == Availability.Available));
+    }
+}
+```
+
+Each decision was right on what it read: no check in `Borrow` can fix this. The `Pessimistic` level adds the reads. It is chosen when the transaction opens, which then notes each entity type that it consults; its commit conflicts, of the kind `Collection`, when any entity of such a type changed since:
+
+```csharp
+[Fact]
+public async Task KeepABookOnTheShelvesAtThePessimisticLevel()
+{
+    using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-17-pessimistic", StoreAccessMode.ReadWrite);
+    using var library = new LibraryRepository(store);
+    Shelve(library);
+    var firstDecided = new TaskCompletionSource();
+    var secondCommitted = new TaskCompletionSource();
+
+    // The level is chosen when the transaction opens.
+    var first = Task.Run(async () =>
+    {
+        using var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite, TransactionConflictLevel.Pessimistic);
+        Assert.True(Borrow("Dune"));
+        firstDecided.SetResult();
+        await secondCommitted.Task;
+
+        // A book changed since this transaction read the books: its commit throws, and writes nothing.
+        var conflict = Assert.Throws<TransactionConflictException>(transaction.Commit);
+        Assert.Equal(TransactionConflictKind.Collection, conflict.Kind);
+    });
+    await firstDecided.Task;
+    await Task.Run(() =>
+    {
+        using var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite);
+        Assert.True(Borrow("Foundation"));
+        transaction.Commit();
+    });
+    secondCommitted.SetResult();
+    await first;
+
+    // The application runs the work again: one book available, and the decision refuses.
+    using (var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite, TransactionConflictLevel.Pessimistic))
+    {
+        Assert.False(Borrow("Dune"));
+        transaction.Commit();
+    }
+
+    using (library.OpenTransaction(StoreAccessMode.ReadOnly))
+    {
+        Assert.Equal(1, BookCollection.Count(static book => book.Availability == Availability.Available));
+    }
+}
+```
+
+The rule holds, at a price: the level watches a **type**, not a shelf. A new price of the other book refuses the commit, though that book stays on the shelves and the rule still holds:
+
+```csharp
+[Fact]
+public async Task ConflictOnAnyChangeOfATypeConsulted()
+{
+    using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-17-type", StoreAccessMode.ReadWrite);
+    using var library = new LibraryRepository(store);
+    Shelve(library);
+    var firstDecided = new TaskCompletionSource();
+    var secondCommitted = new TaskCompletionSource();
+    var first = Task.Run(async () =>
+    {
+        using var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite, TransactionConflictLevel.Pessimistic);
+        Assert.True(Borrow("Dune"));
+        firstDecided.SetResult();
+        await secondCommitted.Task;
+        var conflict = Assert.Throws<TransactionConflictException>(transaction.Commit);
+        Assert.Equal(TransactionConflictKind.Collection, conflict.Kind);
+    });
+    await firstDecided.Task;
+    await Task.Run(() =>
+    {
+        using var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite);
+        BookCollection.First(static book => book.Title == "Foundation").Price = 10.00m;
+        transaction.Commit();
+    });
+    secondCommitted.SetResult();
+    await first;
+}
+```
+
+A transaction that consulted no book has nothing to check:
+
+```csharp
+[Fact]
+public async Task CheckOnlyWhatTheTransactionConsulted()
+{
+    using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-17-read", StoreAccessMode.ReadWrite);
+    using var library = new LibraryRepository(store);
+    Shelve(library);
+    var firstAdded = new TaskCompletionSource();
+    var secondCommitted = new TaskCompletionSource();
+    var first = Task.Run(async () =>
+    {
+        using var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite, TransactionConflictLevel.Pessimistic);
+        new Book { Title = "Hyperion", Price = 11.00m };
+        firstAdded.SetResult();
+        await secondCommitted.Task;
+        transaction.Commit();
+    });
+    await firstAdded.Task;
+    await Task.Run(() =>
+    {
+        using var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite);
+        BookCollection.First(static book => book.Title == "Foundation").Price = 10.00m;
+        transaction.Commit();
+    });
+    secondCommitted.SetResult();
+    await first;
+
+    using (library.OpenTransaction(StoreAccessMode.ReadOnly))
+    {
+        Assert.Equal(3, BookCollection.Count());
+    }
+}
+```
+
+So a pessimistic transaction conflicts more often as the entities of the types it reads change more often. It suits a decision over a whole type that rarely changes: a list of rates, the rules of a catalog. For a decision on one entity, a claim watches that entity and nothing more ([Tutorial Ten](Ten-Claims-Points-And-Leases.md#lesson-1-a-decision-on-what-was-read)).
+
+### Lesson 18: Exclusive transactions
 
 A long transaction that changes many books risks a conflict at its commit, and then all its work is to do again. **An exclusive transaction never conflicts:** it takes the right to write when it opens, not when it commits, and keeps it until it closes. It reads the last version of each book, and no other commit can come before its own: the other commits wait for it. The transactions that read do not wait.
+
+![An exclusive transaction holds the right to write: a commit and a second exclusive opening wait for it, a transaction that reads does not](diagrams/one-exclusive.svg)
 
 > **Warning: Exclusive on the whole farm**
 >
@@ -1323,7 +1532,7 @@ It suits the work that must succeed without being replayed: a bulk load, a migra
 [Fact]
 public async Task CommitAnExclusiveTransactionFirst()
 {
-    using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-17-exclusive", StoreAccessMode.ReadWrite);
+    using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-18-exclusive", StoreAccessMode.ReadWrite);
     using var library = new LibraryRepository(store);
     using (var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite))
     {
@@ -1370,7 +1579,7 @@ An exclusive transaction waits for the right to write while another one holds it
 [Fact]
 public async Task BoundTheWaitOfAnExclusiveTransaction()
 {
-    using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-17-wait", StoreAccessMode.ReadWrite);
+    using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-18-wait", StoreAccessMode.ReadWrite);
     using var library = new LibraryRepository(store);
     var firstOpened = new TaskCompletionSource();
     var firstMayClose = new TaskCompletionSource();
@@ -1405,7 +1614,7 @@ public async Task BoundTheWaitOfAnExclusiveTransaction()
 
 [Lesson 1](#lesson-1-declare-a-model) declared the values of a book before the book itself, and every lesson since has used them as plain values: `Title = "Dune"`, `Price = 9.90m`, `book.Year == 1965`. This part tells why they exist, what GBO writes for them, and what they cost.
 
-### Lesson 18: Give each value its type
+### Lesson 19: Give each value its type
 
 **A `string` does not say what it is.** A title, an author, a shelf mark: all strings, and the compiler cannot tell them apart. A method `Lend(string title, string author)` called with its two arguments swapped compiles, runs, and stores an author as a title; nothing fails until a reader sees it. A `decimal` is a price, a deposit or a rate, and nothing says which; an `int`, a year, a count or an amount in cents. The value is valid for its type and wrong for its meaning: the most common silent error of a business code, so common that it has a name, *primitive obsession*.
 
@@ -1433,11 +1642,13 @@ GBO stores each value object as the value inside it: a `Money` as a `decimal`, a
 
 Check, then write: a value that breaks its rule never exists, and so never reaches a book.
 
+![Values and their rule: four pass and reach the book, five never exist](diagrams/one-value-rule.svg)
+
 ```csharp
 [Fact]
 public void StoreAndQueryTheValueObjectsOfTheBooks()
 {
-    using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-18-values", StoreAccessMode.ReadWrite);
+    using var store = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-19-values", StoreAccessMode.ReadWrite);
     using var library = new LibraryRepository(store);
     using (var transaction = library.OpenTransaction(StoreAccessMode.ReadWrite))
     {
@@ -1545,7 +1756,7 @@ public void CountInCents()
 - **Queries** are the operators of LINQ, with static lambdas and their states: no allocation, and any method of yours inside.
 - An absence is an **`Option<T>`**, never `null`.
 - **Views** read many entities for free; **Bodies** change the few you need.
-- Transactions run **concurrently** under MVCC; a conflict is reported at the commit, and an **exclusive** transaction never meets one.
+- Transactions run **concurrently** under MVCC; a conflict is reported at the commit, a **pessimistic** transaction also watches the types that it read, and an **exclusive** transaction never meets a conflict.
 - Every value is a **value object**, never a bare `string` or `decimal`: its name, its rule, its operations and its form, its confusions refused by the compiler. You declare it with `[ValueObject<T>]` and its rules, GBO writes the rest; its operators work in the queries, at the speed of the value inside it, and a text is read in place.
 
 [Tutorial Two](Two-Relationships.md) goes further, from where this one stops: the links, the constraints and the deterministic garbage collection.

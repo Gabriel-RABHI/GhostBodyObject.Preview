@@ -16,9 +16,9 @@ Each lesson is a test class of the project `GhostBodyObject.TutorialSeven`. Read
 
 A parcel carrier. First its journal, Records alone: a parcel registered, scanned at a depot, delivered, and the routes planned for the parcels. Then its model, the parcels as they are now, chained with the Log of what happened to them, and rebuilt from it.
 
-Two models, each in a namespace of its own, as in the tutorials before: `Journal` for Lessons 1 to 8, with two Logs, `ParcelLog` and `RouteLog`; `Carrier` for Lessons 9 to 11, a Repository of the parcels and their Log, `CarrierLog`.
+Two models, each in a namespace of its own, as in the tutorials before: `Journal` for Lessons 1 to 8 and 12, with two Logs, `ParcelLog` and `RouteLog`; `Carrier` for Lessons 9 to 11, a Repository of the parcels and their Log, `CarrierLog`.
 
-**The values of the models come first**, each a value object ([Tutorial One, Lesson 18](One-TheBasics.md#lesson-18-give-each-value-its-type)), a value of a Record as of an entity. Those the two models share are declared once, in the namespace of the tutorial; each model declares at its head the values that it alone has. An operator of yours joins those that GBO writes: the time between two moments.
+**The values of the models come first**, each a value object ([Tutorial One, Lesson 19](One-TheBasics.md#lesson-19-give-each-value-its-type)), a value of a Record as of an entity. Those the two models share are declared once, in the namespace of the tutorial; each model declares at its head the values that it alone has. An operator of yours joins those that GBO writes: the time between two moments.
 
 ```csharp
 namespace TutorialSeven
@@ -52,6 +52,7 @@ Every declaration of the tutorial, and the lesson that shows it:
 | An enum, a value object, a `GhostSpan<T>`, a struct of an explicit layout, an `Option<T>`, a text value object in a Record | The values of a Record, read in place by its View, without a copy | 4 |
 | A `*Ref` in a Record | The identity of an entity, never a link: a fact names what it is about | 9 |
 | `AddChildStore` and `repository.Chain(log)` | The Records and the entities in one transaction, or neither | 9 |
+| Two Logs on one Log Store, `journal.Replay(from)` and `log.On(replay)` | One reader of the Store, each Record to its handler in the order of the Store, whatever its Log | 12 |
 
 ## Part 1: Records and the Log
 
@@ -115,7 +116,7 @@ internal interface RParcelDelivered
 
 // [GhostLog]: a Log, and the Record types it holds, each by [IncludeRecordModel]. MParcelLog gives the class ParcelLog, opened on
 // a Store of its own, and ParcelLogCollections.ParcelCollection, the Records of its transaction.
-[GhostLog, IncludeRecordModel(nameof(RParcelRegistered)), IncludeRecordModel(nameof(RParcelScanned)), IncludeRecordModel(nameof(RParcelDelivered))]
+[GhostLog(1), IncludeRecordModel(nameof(RParcelRegistered)), IncludeRecordModel(nameof(RParcelScanned)), IncludeRecordModel(nameof(RParcelDelivered))]
 internal interface MParcelLog
 {
 }
@@ -124,6 +125,8 @@ internal interface MParcelLog
 A Log opens on a Store of its own, a **Log Store**, in memory here, on disk in Lesson 5. Its transactions are ambient, as the transactions of a Repository: a Record created, then added by `Add()`, belongs to the transaction open in this context. The commit appends the Records of the transaction to the Log, together, after the Records of the commits before:
 
 ```csharp
+private static readonly DateTime Monday = new(2026, 10, 19, 8, 0, 0, DateTimeKind.Utc);
+
 [Fact]
 public void AppendTheRecordsOfACommit()
 {
@@ -145,6 +148,8 @@ public void AppendTheRecordsOfACommit()
 ```
 
 Until the commit, the Log has none of them: `ParcelCollection` gives the Records added in the transaction, in the order of their `Add`. A transaction that does not commit, rolled back or disposed, appends nothing:
+
+![A commit appends the Records of its transaction to the Log; a rollback appends nothing](diagrams/seven-commit-or-nothing.svg)
 
 ```csharp
 [Fact]
@@ -247,6 +252,8 @@ private static void Journey(ParcelLog log)
 ```
 
 Every Record reaches the handler of its type, in the order of the Log. The Records of one commit share the number of its transaction; each commit after it has a greater one:
+
+![One Log of three commits, read by three subscriptions: a handler for each type, for one type, and one that answers Cancel](diagrams/seven-subscriptions.svg)
 
 ```csharp
 [Fact]
@@ -357,6 +364,8 @@ public void KeepAViewAfterItsDelivery()
 
 A Record lives in two times. **Created**, it is detached: it belongs to no transaction and to no Log yet. It can be created anywhere, on any thread, outside any transaction, and written as many times as needed, as an object of C#. **Added**, by `Add()` in a transaction of its Log, it takes its place in that transaction, after the Records added before it: the order of the Log is the order of the `Add`, not of the creation.
 
+![Two Records created on a thread of their own, then added in the other order: the Log holds the order of the Add](diagrams/seven-order-of-the-add.svg)
+
 ```csharp
 [Fact]
 public async Task CreateARecordAnywhereAndAddItLater()
@@ -387,6 +396,8 @@ public async Task CreateARecordAnywhereAndAddItLater()
 ```
 
 Once added, a Record is a **fact**: it is frozen. A write of it is refused, in its transaction and after it; it keeps its values, and the Log holds them as they were at the `Add`:
+
+![A Record at each instruction: written until its Add, then frozen, each later write refused](diagrams/seven-frozen.svg)
 
 ```csharp
 [Fact]
@@ -508,7 +519,7 @@ internal interface RRoutePlanned
     VNote Note { get; set; }
 }
 
-[GhostLog, IncludeRecordModel(nameof(RRoutePlanned))]
+[GhostLog(2), IncludeRecordModel(nameof(RRoutePlanned))]
 internal interface MRouteLog
 {
 }
@@ -669,7 +680,16 @@ private sealed class Board
 
 The board knows the Log as it was at Run, then each commit after it. To read the board at a known point, the test delivers on its own thread what the subscription has not received yet, after the delivery in progress, if any: `log.Store.DeliverTransactions(subscription)`. An application waits for nothing: its subscription delivers the commits as they come.
 
+![The replay on the calling thread, each new commit on a thread of its own, then the token cancelled, and the board after each delivery](diagrams/seven-follow.svg)
+
 ```csharp
+private static void Scan(ParcelLog log, TrackingNumber trackingNumber, Depot depot)
+{
+    using var transaction = log.OpenTransaction();
+    new ParcelScanned { TrackingNumber = trackingNumber, Depot = depot, Scanned = Monday }.Add();
+    transaction.Commit();
+}
+
 [Fact]
 public void DeliverTheNewCommitsAfterTheReplay()
 {
@@ -767,6 +787,8 @@ public void EndWithItsLogOrBeforeItsStart()
 The Records of a commit belong together: a parcel registered and its first scan, a round of a driver, a day of a depot. A subscription delivers them together, framed: `OnTransactionStart` before the first Record of each transaction, `OnTransactionEnd` after its last one, each with the number of the transaction. A subscriber applies a transaction as a whole there: it opens its work at the start, and closes it at the end.
 
 The rounds of the lesson count the scans of each transaction, and close each round at its end:
+
+![The calls of a subscription over two commits: the start, the Records and the end of each transaction, then the end of the replay](diagrams/seven-frames.svg)
 
 ```csharp
 // The rounds closed, each a transaction of the Log: its number, its depot, its count of scans; the last transaction handled.
@@ -995,6 +1017,8 @@ private static void Follow(ParcelLog log, ulong from, Tracker tracker)
 
 The tracker knows Lyon and Paris only. The subscription fails at the transaction of Atlantis, after completing the first one; the depot added, the tracker starts again after its position:
 
+![A first run fails at Atlantis after completing Lyon; a second run starts again after its position, and completes Atlantis and Paris](diagrams/seven-start-again.svg)
+
 ```csharp
 [Fact]
 public void StartAgainAfterTheLastTransactionCompleted()
@@ -1045,7 +1069,7 @@ internal interface MParcel
     int Scans { get; set; }
 }
 
-[GhostRepository, IncludeEntityModel(nameof(MParcel))]
+[GhostRepository(4), IncludeEntityModel(nameof(MParcel))]
 internal interface MCarrierRepository
 {
 }
@@ -1081,7 +1105,7 @@ internal interface RParcelDelivered
     ParcelRef Parcel { get; set; }
 }
 
-[GhostLog, IncludeRecordModel(nameof(RParcelRegistered)), IncludeRecordModel(nameof(RParcelScanned)), IncludeRecordModel(nameof(RParcelDelivered))]
+[GhostLog(3), IncludeRecordModel(nameof(RParcelRegistered)), IncludeRecordModel(nameof(RParcelScanned)), IncludeRecordModel(nameof(RParcelDelivered))]
 internal interface MCarrierLog
 {
 }
@@ -1161,6 +1185,8 @@ internal static class Parcels
 ```
 
 The Store of the Log is chained after the Store of the Repository, `AddChildStore`, before their first transaction, and the Log after the Repository, `Chain`. Each ReadWrite transaction of the Repository then opens a transaction of the Log, ambient, and its commit writes the parcels and the Records together:
+
+![A transaction of the Repository holds a transaction of the Log: the commit writes the parcel and its Records, the rollback neither](diagrams/seven-one-transaction.svg)
 
 ```csharp
 [Fact]
@@ -1245,7 +1271,11 @@ Tutorial Eight shows the chains of several Stores.
 
 The Log holds everything the model is made of: the model can live in memory only, and the Log on disk. At each opening, the model is empty, and **behind its Log**: `IsBehindLog`, until it reaches `LogTarget`, the last transaction of the Log. A transaction of the commands is refused meanwhile: it would change a model that is not there yet.
 
+![Two openings: the model empty and behind its Log, a command refused, the replay, and the commands going on](diagrams/seven-behind-its-log.svg)
+
 A **replay** brings the model there. A subscription from the start of the Log gives each Record to the same handler as its command, in a **Replay transaction**, `OpenTransaction(StoreAccessMode.ReadWrite, replay: true)`, which opens no transaction of the Log: the Records are there already. Its commit, `Commit(through)`, says which transaction of the Log the model reached. A Replay transaction may hold many transactions of the Log, for fewer commits, through the last of them. The commit through the last transaction of the Log makes the model ready, even one without Records, which no handler receives: `OnReplayEnd` gives its number.
+
+![A command adds its Record, a replay reads it from the Log, and both give its View to the same handler](diagrams/seven-same-handlers.svg)
 
 ```csharp
 // The replay of the Log into the model behind it: the same handlers as the commands, in Replay transactions, one for each `group`
@@ -1309,6 +1339,8 @@ internal sealed class Replay(CarrierRepository repository, int group)
 
 The lesson replays the Log transaction by transaction, then by groups of 100: four Replay commits for the four transactions of the commands, or one for all of them.
 
+![The same four transactions of the Log, in four Replay transactions or in one](diagrams/seven-replay-groups.svg)
+
 ```csharp
 [Theory]
 [InlineData(1)]
@@ -1319,7 +1351,7 @@ public void RebuildAModelInMemoryAtEachOpening(int group)
     if (Directory.Exists(directory))
         Directory.Delete(directory, recursive: true);
 
-    // The first opening: an empty Log, an empty model. Four commands, in four commits.
+    // The first opening: an empty Log, an empty model. Six commands, in four commits.
     List<string> expected;
     using (var chain = new InMemoryChain(directory))
     {
@@ -1465,6 +1497,8 @@ private sealed class FileChain : IDisposable
 
 The Log holds the Records, not the model: a change that no Record tells is lost at a rebuild. The lesson moves a parcel without a Record, then rebuilds the model: the parcel is where its Records say it is.
 
+![A model and its Log over four openings: a change without a Record, the rebuild, and the parcel back where its Records say](diagrams/seven-rebuild.svg)
+
 ```csharp
 [Fact]
 public void RebuildAModelOnDiskOnRequest()
@@ -1518,6 +1552,123 @@ public void RebuildAModelOnDiskOnRequest()
 
 In a model rebuilt from its Log, every change comes from a handler of a Record, and from nothing else.
 
+## Part 4: Several Logs
+
+### Lesson 12: Several Logs on one Store
+
+A Store takes several Repositories; a Log Store takes several Logs. Messages of several services, Jobs, Commands: each Log has its Records and its schema, and they share one journal, in one order. A Record type belongs to one Log, as to one model: two Logs never hold the same type. A Log of Mutations keeps a Store of its own.
+
+One reader of the Store, `journal.Replay(from)`: each Log registers its handlers on it, `On(replay)`, and each Record reaches its handler in the order of the Store, whatever its Log.
+
+![Two Logs commit by turns on one Log Store, and one reader gives each Record to the handler of its Log, in the order of the Store](diagrams/seven-one-reader.svg)
+
+```csharp
+// What the reader saw, in its order.
+private static LogStoreSubscription Note(List<string> seen, string text)
+{
+    seen.Add(text);
+    return LogStoreSubscription.Continue;
+}
+
+[Fact]
+public void ReadSeveralLogsInTheOrderOfTheirCommits()
+{
+    using var journal = TransactionalMemoryStore.NewInMemoryLogStore("lesson-12-journal", StoreAccessMode.ReadWrite);
+    using var parcels = new ParcelLog(journal);
+    using var routes = new RouteLog(journal);
+    using (var transaction = parcels.OpenTransaction())
+    {
+        new ParcelRegistered { TrackingNumber = "PX-1201", Recipient = "Ada", Grams = 800, Registered = Monday }.Add();
+        transaction.Commit();
+    }
+    using (var transaction = routes.OpenTransaction())
+    {
+        new RoutePlanned { TrackingNumber = "PX-1201" }.Add();
+        transaction.Commit();
+    }
+    using (var transaction = parcels.OpenTransaction())
+    {
+        new ParcelScanned { TrackingNumber = "PX-1201", Depot = "Lyon", Scanned = Monday.AddHours(1) }.Add();
+        transaction.Commit();
+    }
+
+    var seen = new List<string>();
+    var replay = journal.Replay(from: 0);
+    parcels.On(replay)
+        .Handle<ParcelRegisteredView, List<string>>(seen, static (_, e, seen) => Note(seen, $"registered {e.TrackingNumber}"))
+        .Handle<ParcelScannedView, List<string>>(seen, static (_, e, seen) => Note(seen, $"scanned {e.TrackingNumber}"));
+    routes.On(replay)
+        .Handle<RoutePlannedView, List<string>>(seen, static (_, e, seen) => Note(seen, $"planned {e.TrackingNumber}"));
+    replay.Run();
+
+    Assert.Equal(["registered PX-1201", "planned PX-1201", "scanned PX-1201"], seen);
+}
+```
+
+The handlers of the start and of the end of a transaction, and of the end of the replay, are set on any of the Logs, and belong to the reader. A subscription of one Log still reads its Log alone, the Records of the other one skipped.
+
+Two Logs chained to one Repository write together: one commit holds the entities and the Records of both, in the order of their `Add`, across the Logs. Without a Repository, two Logs commit by turns, and the order is the one of their commits.
+
+![Two Logs by turns, three commits, beside two Logs chained to one Repository, one commit in the order of the Add](diagrams/seven-order-of-two-logs.svg)
+
+The test chains them to a small model, a counter of a depot, where parcels are handed in:
+
+```csharp
+[Entity(41, 1, 1), Root, Enumerable]
+internal interface MCounter
+{
+    [Property(1)]
+    VDepot Depot { get; set; }
+}
+
+[GhostRepository(5), IncludeEntityModel(nameof(MCounter))]
+internal interface MCounterRepository
+{
+}
+```
+
+```csharp
+[Fact]
+public void KeepTheOrderOfTheAddOverSeveralLogs()
+{
+    using var counters = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-12-counters", StoreAccessMode.ReadWrite);
+    using var journal = counters.AddChildStore(TransactionalMemoryStore.NewInMemoryLogStore("lesson-12-chained", StoreAccessMode.ReadWrite));
+    using var repository = new CounterRepository(counters);
+    using var parcels = new ParcelLog(journal);
+    using var routes = new RouteLog(journal);
+    repository.Chain(parcels);
+    repository.Chain(routes);
+
+    using (var transaction = repository.OpenTransaction(StoreAccessMode.ReadWrite))
+    {
+        new Counter { Depot = "Lyon" };
+        new ParcelRegistered { TrackingNumber = "PX-1203", Recipient = "Bob", Grams = 300, Registered = Monday }.Add();
+        new RoutePlanned { TrackingNumber = "PX-1203" }.Add();
+        new ParcelScanned { TrackingNumber = "PX-1203", Depot = "Lyon", Scanned = Monday }.Add();
+        transaction.Commit();
+    }
+
+    var (seen, transactions) = (new List<string>(), new List<ulong>());
+    var replay = journal.Replay();
+    parcels.On(replay)
+        .Handle<ParcelRegisteredView, List<string>>(seen, static (_, e, seen) => Note(seen, $"registered {e.TrackingNumber}"))
+        .Handle<ParcelScannedView, List<string>>(seen, static (_, e, seen) => Note(seen, $"scanned {e.TrackingNumber}"))
+        .OnTransactionEnd(transactions, static (id, transactions) =>
+        {
+            transactions.Add(id);
+            return LogStoreSubscription.Continue;
+        });
+    routes.On(replay)
+        .Handle<RoutePlannedView, List<string>>(seen, static (_, e, seen) => Note(seen, $"planned {e.TrackingNumber}"));
+    replay.Run();
+
+    Assert.Equal(["registered PX-1203", "planned PX-1203", "scanned PX-1203"], seen);
+    Assert.Single(transactions);
+    using (repository.OpenTransaction(StoreAccessMode.ReadOnly))
+        Assert.Single(CounterCollection);
+}
+```
+
 ## From the need to the Log
 
 | The need | The answer | Lessons |
@@ -1531,6 +1682,8 @@ In a model rebuilt from its Log, every change comes from a handler of a Record, 
 | Change a model and record why, together | A chain, `AddChildStore`, `repository.Chain(log)` | 9 |
 | A model in memory, given again at each opening | A replay, `replay: true`, `Commit(through)` | 10 |
 | A model on disk, rebuilt by new handlers | `RebuildFromLog()`, then a replay | 11 |
+| Messages of several services in one journal | Several Logs on one Store, one reader, `journal.Replay`, `log.On(replay)` | 12 |
+| Two Logs written with a model, in one order | `repository.Chain(log)` of each, one commit in the order of the `Add` | 12 |
 
 ## What you learned
 
@@ -1543,5 +1696,6 @@ In a model rebuilt from its Log, every change comes from a handler of a Record, 
 - A **failure** of a handler ends its subscription, given to `Run` or to `Completion`; `Cancel` stops, never an exception.
 - A model **chained** with its Log is written with it, in one transaction; a command adds its Record, and its handler changes the model.
 - A **replay** gives the model again, in memory at each opening, on disk on request: the same handlers, Replay transactions, identities taken from the Records.
+- **Several Logs** share one Store, each with its types and its schema: one reader gives their Records in the order of the Store, and a commit over several Logs keeps the order of its `Add`.
 
 [Tutorial Eight](Eight-ChainsAndDistribution.md) shows the chains of Stores, the transactions over several Stores, and the distribution.

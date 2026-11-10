@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="424" viewBox="0 0 960 424" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>After the swaps, nothing is in order</title>
+<desc>Above, the memory of .NET: the List points to its objects in another order, and one record points to three strings far apart among the others. Below, the memory of GBO: the index points to Ghosts in another order, each one holding its strings side by side.</desc>
+<rect width="960" height="424" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">After the swaps, nothing is in order</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Each side went through the same dispersion. An object of .NET lost its strings; a Ghost took them with it.</text>
+<text x="32" y="104" font-size="14" font-weight="600" fill="#e8eef1" text-anchor="start">.NET</text>
+<text x="928" y="104" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="end">one record to read: its object, then one jump per string, each address read from the jump before</text>
+<line x1="32" y1="172" x2="928" y2="172" stroke="#4a5a62" stroke-width="1"/>
+<line x1="32" y1="206" x2="928" y2="206" stroke="#4a5a62" stroke-width="1"/>
+<rect x="40" y="172" width="24" height="34" rx="0" fill="#1f7a33" stroke="#1a252b" stroke-width="1.5"/>
+<text x="52" y="193" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">P1</text>
+<rect x="64" y="172" width="24" height="34" rx="0" fill="#1f7a33" stroke="#1a252b" stroke-width="1.5"/>
+<text x="76" y="193" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">P2</text>
+<rect x="88" y="172" width="24" height="34" rx="0" fill="#1f7a33" stroke="#1a252b" stroke-width="1.5"/>
+<text x="100" y="193" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">P3</text>
+<rect x="112" y="172" width="24" height="34" rx="0" fill="#1f7a33" stroke="#1a252b" stroke-width="1.5"/>
+<text x="124" y="193" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">P4</text>
+<text x="40" y="224" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">the List</text>
+<rect x="146" y="172" width="16" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="154" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">H</text>
+<rect x="162" y="172" width="6" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="168" y="172" width="36" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="186" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">D</text>
+<rect x="218" y="172" width="28" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="232" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">H2</text>
+<rect x="246" y="172" width="16" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="254" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">P</text>
+<rect x="262" y="172" width="16" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="270" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">P</text>
+<rect x="278" y="172" width="16" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="286" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">P</text>
+<rect x="308" y="172" width="16" height="34" rx="0" fill="#e8743b" stroke="#1a252b" stroke-width="1.5"/>
+<text x="316" y="193" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">H</text>
+<rect x="324" y="172" width="6" height="34" rx="0" fill="#1ba1dc" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="330" y="172" width="36" height="34" rx="0" fill="#17607f" stroke="#1a252b" stroke-width="1.5"/>
+<text x="348" y="193" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">D</text>
+<rect x="380" y="172" width="28" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="394" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">H4</text>
+<rect x="408" y="172" width="16" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="416" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">P</text>
+<rect x="424" y="172" width="16" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="432" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">P</text>
+<rect x="440" y="172" width="16" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="448" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">P</text>
+<rect x="470" y="172" width="16" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="478" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">H</text>
+<rect x="486" y="172" width="6" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="492" y="172" width="36" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="510" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">D</text>
+<rect x="542" y="172" width="28" height="34" rx="0" fill="#e8743b" stroke="#1a252b" stroke-width="1.5"/>
+<text x="556" y="193" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">H1</text>
+<rect x="570" y="172" width="16" height="34" rx="0" fill="#1f7a33" stroke="#1a252b" stroke-width="1.5"/>
+<text x="578" y="193" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">P</text>
+<rect x="586" y="172" width="16" height="34" rx="0" fill="#1f7a33" stroke="#1a252b" stroke-width="1.5"/>
+<text x="594" y="193" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">P</text>
+<rect x="602" y="172" width="16" height="34" rx="0" fill="#1f7a33" stroke="#1a252b" stroke-width="1.5"/>
+<text x="610" y="193" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">P</text>
+<rect x="632" y="172" width="16" height="34" rx="0" fill="#e8743b" stroke="#1a252b" stroke-width="1.5"/>
+<text x="640" y="193" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">H</text>
+<rect x="648" y="172" width="6" height="34" rx="0" fill="#1ba1dc" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="654" y="172" width="36" height="34" rx="0" fill="#17607f" stroke="#1a252b" stroke-width="1.5"/>
+<text x="672" y="193" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">D</text>
+<rect x="704" y="172" width="28" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="718" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">H3</text>
+<rect x="732" y="172" width="16" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="740" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">P</text>
+<rect x="748" y="172" width="16" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="756" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">P</text>
+<rect x="764" y="172" width="16" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="772" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">P</text>
+<rect x="794" y="172" width="16" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="802" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">H</text>
+<rect x="810" y="172" width="6" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="816" y="172" width="36" height="34" rx="0" fill="#2b3a42" stroke="#1a252b" stroke-width="1.5"/>
+<text x="834" y="193" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">D</text>
+<rect x="866" y="172" width="16" height="34" rx="0" fill="#e8743b" stroke="#1a252b" stroke-width="1.5"/>
+<text x="874" y="193" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">H</text>
+<rect x="882" y="172" width="6" height="34" rx="0" fill="#1ba1dc" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="888" y="172" width="36" height="34" rx="0" fill="#17607f" stroke="#1a252b" stroke-width="1.5"/>
+<text x="906" y="193" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">D</text>
+<path d="M52 172C52 122 556 122 556 165" fill="none" stroke="#e8eef1" stroke-width="1.6"/>
+<path d="M552 165L560 165L556 172Z" fill="#e8eef1"/>
+<path d="M76 172C76 116 232 116 232 165" fill="none" stroke="#7f9199" stroke-width="1.6"/>
+<path d="M228 165L236 165L232 172Z" fill="#7f9199"/>
+<path d="M100 172C100 110 718 110 718 165" fill="none" stroke="#7f9199" stroke-width="1.6"/>
+<path d="M714 165L722 165L718 172Z" fill="#7f9199"/>
+<path d="M124 172C124 104 394 104 394 165" fill="none" stroke="#7f9199" stroke-width="1.6"/>
+<path d="M390 165L398 165L394 172Z" fill="#7f9199"/>
+<path d="M578 206C578 240 316 240 316 213" fill="none" stroke="#e8eef1" stroke-width="1.6"/>
+<path d="M312 213L320 213L316 206Z" fill="#e8eef1"/>
+<path d="M594 206C594 246 640 246 640 213" fill="none" stroke="#e8eef1" stroke-width="1.6"/>
+<path d="M636 213L644 213L640 206Z" fill="#e8eef1"/>
+<path d="M610 206C610 252 874 252 874 213" fill="none" stroke="#e8eef1" stroke-width="1.6"/>
+<path d="M870 213L878 213L874 206Z" fill="#e8eef1"/>
+<text x="928" y="268" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">in color, one record and three of its strings</text>
+<text x="32" y="290" font-size="14" font-weight="600" fill="#e8eef1" text-anchor="start">GBO</text>
+<text x="928" y="290" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="end">one entity to read: one jump, its strings are in it</text>
+<line x1="32" y1="346" x2="928" y2="346" stroke="#4a5a62" stroke-width="1"/>
+<line x1="32" y1="380" x2="928" y2="380" stroke="#4a5a62" stroke-width="1"/>
+<rect x="40" y="346" width="24" height="34" rx="0" fill="#1f7a33" stroke="#1a252b" stroke-width="1.5"/>
+<text x="52" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">P1</text>
+<rect x="64" y="346" width="24" height="34" rx="0" fill="#1f7a33" stroke="#1a252b" stroke-width="1.5"/>
+<text x="76" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">P2</text>
+<rect x="88" y="346" width="24" height="34" rx="0" fill="#1f7a33" stroke="#1a252b" stroke-width="1.5"/>
+<text x="100" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">P3</text>
+<rect x="112" y="346" width="24" height="34" rx="0" fill="#1f7a33" stroke="#1a252b" stroke-width="1.5"/>
+<text x="124" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">P4</text>
+<text x="40" y="398" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">the index</text>
+<rect x="146" y="346" width="28" height="34" rx="0" fill="#a12a96" stroke="#1a252b" stroke-width="1.5"/>
+<text x="160" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">H3</text>
+<rect x="174" y="346" width="8" height="34" rx="0" fill="#1ba1dc" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="182" y="346" width="8" height="34" rx="0" fill="#1ba1dc" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="190" y="346" width="8" height="34" rx="0" fill="#1ba1dc" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="198" y="346" width="38" height="34" rx="0" fill="#17607f" stroke="#1a252b" stroke-width="1.5"/>
+<text x="217" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">D</text>
+<rect x="236" y="346" width="50" height="34" rx="0" fill="#17607f" stroke="#1a252b" stroke-width="1.5"/>
+<text x="261" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">D</text>
+<rect x="286" y="346" width="28" height="34" rx="0" fill="#17607f" stroke="#1a252b" stroke-width="1.5"/>
+<text x="300" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">D</text>
+<path d="M100 346C100 297 160 297 160 339" fill="none" stroke="#aebcc4" stroke-width="1.6"/>
+<path d="M156 339L164 339L160 346Z" fill="#aebcc4"/>
+<rect x="338" y="346" width="28" height="34" rx="0" fill="#a12a96" stroke="#1a252b" stroke-width="1.5"/>
+<text x="352" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">H1</text>
+<rect x="366" y="346" width="8" height="34" rx="0" fill="#1ba1dc" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="374" y="346" width="8" height="34" rx="0" fill="#1ba1dc" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="382" y="346" width="8" height="34" rx="0" fill="#1ba1dc" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="390" y="346" width="38" height="34" rx="0" fill="#17607f" stroke="#1a252b" stroke-width="1.5"/>
+<text x="409" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">D</text>
+<rect x="428" y="346" width="50" height="34" rx="0" fill="#17607f" stroke="#1a252b" stroke-width="1.5"/>
+<text x="453" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">D</text>
+<rect x="478" y="346" width="28" height="34" rx="0" fill="#17607f" stroke="#1a252b" stroke-width="1.5"/>
+<text x="492" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">D</text>
+<path d="M52 346C52 307 352 307 352 339" fill="none" stroke="#aebcc4" stroke-width="1.6"/>
+<path d="M348 339L356 339L352 346Z" fill="#aebcc4"/>
+<rect x="530" y="346" width="28" height="34" rx="0" fill="#a12a96" stroke="#1a252b" stroke-width="1.5"/>
+<text x="544" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">H4</text>
+<rect x="558" y="346" width="8" height="34" rx="0" fill="#1ba1dc" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="566" y="346" width="8" height="34" rx="0" fill="#1ba1dc" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="574" y="346" width="8" height="34" rx="0" fill="#1ba1dc" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="582" y="346" width="38" height="34" rx="0" fill="#17607f" stroke="#1a252b" stroke-width="1.5"/>
+<text x="601" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">D</text>
+<rect x="620" y="346" width="50" height="34" rx="0" fill="#17607f" stroke="#1a252b" stroke-width="1.5"/>
+<text x="645" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">D</text>
+<rect x="670" y="346" width="28" height="34" rx="0" fill="#17607f" stroke="#1a252b" stroke-width="1.5"/>
+<text x="684" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">D</text>
+<path d="M124 346C124 292 544 292 544 339" fill="none" stroke="#aebcc4" stroke-width="1.6"/>
+<path d="M540 339L548 339L544 346Z" fill="#aebcc4"/>
+<rect x="722" y="346" width="28" height="34" rx="0" fill="#a12a96" stroke="#1a252b" stroke-width="1.5"/>
+<text x="736" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">H2</text>
+<rect x="750" y="346" width="8" height="34" rx="0" fill="#1ba1dc" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="758" y="346" width="8" height="34" rx="0" fill="#1ba1dc" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="766" y="346" width="8" height="34" rx="0" fill="#1ba1dc" stroke="#1a252b" stroke-width="1.5"/>
+<rect x="774" y="346" width="38" height="34" rx="0" fill="#17607f" stroke="#1a252b" stroke-width="1.5"/>
+<text x="793" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">D</text>
+<rect x="812" y="346" width="50" height="34" rx="0" fill="#17607f" stroke="#1a252b" stroke-width="1.5"/>
+<text x="837" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">D</text>
+<rect x="862" y="346" width="28" height="34" rx="0" fill="#17607f" stroke="#1a252b" stroke-width="1.5"/>
+<text x="876" y="367" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">D</text>
+<path d="M76 346C76 302 736 302 736 339" fill="none" stroke="#aebcc4" stroke-width="1.6"/>
+<path d="M732 339L740 339L736 346Z" fill="#aebcc4"/>
+<text x="146" y="398" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">the numbers give the order of the collection</text>
+</svg>

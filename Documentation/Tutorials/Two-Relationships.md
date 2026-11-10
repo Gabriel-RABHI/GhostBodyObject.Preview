@@ -8,7 +8,7 @@ Tutorial One worked with one entity type. A real model is a graph: an album has 
 - **The constraints.** No link ever designates an entity that does not exist. A removal that would break a link is refused before anything changes.
 - **The deterministic garbage collection.** An entity that nothing holds any more is removed at the very instruction that releases it, with everything it owns.
 
-None of this takes code of yours. You declare the nature of each link in the model; GBO keeps every link right, at each instruction, in the transaction and at the commit. GBO provide the benefits of the Rust programming language using the data structure model : it avoid null reference errors and free the memory deterministically as soon as references that retain objects are broken. 
+None of this takes code of yours. You declare the nature of each link in the model; GBO keeps every link right, at each instruction, in the transaction and at the commit. GBO provides the benefits of the Rust programming language using the data structure model: it avoids null reference errors and frees the memory deterministically as soon as the references that retain objects are broken.
 
 Each lesson is a test class of the project `GhostBodyObject.TutorialTwo`. Read it here, run it, then change it and see what breaks. The tutorial follows Tutorial One: the transactions, the collections, `Option<T>`, the Views and the static lambdas are used here without being explained again.
 
@@ -18,7 +18,7 @@ A music label and a streaming service: artists, their albums and their tracks; t
 
 The model grows with the tutorial. Each lesson, or group of lessons, declares its own model, enriched with the concepts of the lesson: thirteen small models, from the three links of Lesson 1 to the whole catalog of Lesson 20, and the capabilities of Lesson 21.
 
-**The values of the models come first.** Each value says what it is by its type, a value object ([Tutorial One, Lesson 18](One-TheBasics.md#lesson-18-give-each-value-its-type)): a name is not a title, a duration is not a year. The values that every model of the tutorial shares are declared once, in its namespace, at the head of the first model; a model declares at its head the values that it alone has.
+**The values of the models come first.** Each value says what it is by its type, a value object ([Tutorial One, Lesson 19](One-TheBasics.md#lesson-19-give-each-value-its-type)): a name is not a title, a duration is not a year. The values that every model of the tutorial shares are declared once, in its namespace, at the head of the first model; a model declares at its head the values that it alone has.
 
 ```csharp
 namespace TutorialTwo
@@ -49,9 +49,9 @@ namespace TutorialTwo
 
 A text value object is read in place, as a `GhostString`, and compared to a `string`: `album.Title == "Low"`. It is a `ref struct`, which no tuple holds: an assertion compares one value at a time, `Assert.Equal("Low", album.Title)`.
 
-> **Tip: Twelve models in one project**
+> **Tip: Thirteen models in one project**
 >
-> Each model of this tutorial lives in a namespace of its own, with its own Repository. The generator makes the collections of a Repository, `AlbumCollection`, `TrackCollection`..., visible in the whole project: twelve models give twelve `AlbumCollection`. So each lesson starts its namespace with one line, which chooses the collections of its own Repository:
+> Each model of this tutorial lives in a namespace of its own, with its own Repository. The generator makes the collections of a Repository, `AlbumCollection`, `TrackCollection`..., visible in the whole project: thirteen models give thirteen `AlbumCollection`. So each lesson starts its namespace with one line, which chooses the collections of its own Repository:
 >
 > ```csharp
 > namespace TutorialTwo.Catalog
@@ -76,6 +76,8 @@ Every link of the tutorial, and the lesson that shows it:
 | `[ReverseWeakReference(...)]`, `[ReverseStrongReference(...)]` | Reverse property                | The entities that point to this one, up to date at each instruction                | 15      |
 | `[ComponentFor(nameof(MArtist))]` on a type                    | Component                       | At most one of a type per entity, which does not know it; removed with its entity  | 21      |
 | `[SystemFor(nameof(MArtist))]` on an interface                 | System                          | The entities that have its components, with their Views                            | 21      |
+
+![Three links, three answers: a strong reference refuses the removal of its target, a weak one becomes none, a composition removes its parts](diagrams/two-link-natures.svg)
 
 ## Part 1: References between Roots
 
@@ -124,7 +126,7 @@ internal interface MAlbum
     Option<MAlbum> Previous { get; set; }
 }
 
-[GhostRepository, IncludeEntityModel(nameof(MGenre)), IncludeEntityModel(nameof(MArtist)), IncludeEntityModel(nameof(MAlbum))]
+[GhostRepository(1), IncludeEntityModel(nameof(MGenre)), IncludeEntityModel(nameof(MArtist)), IncludeEntityModel(nameof(MAlbum))]
 internal interface MCatalogRepository
 {
 }
@@ -250,6 +252,8 @@ public void RefuseTheRemovalOfAnArtistThatAnAlbumDesignates()
 
 The artist can be removed once nothing designates it: another artist set on the album, or the album removed first. Each one releases its reference.
 
+![The strong references to an artist, counted at each instruction: its removal is refused at 1, and passes at 0](diagrams/two-strong-count.svg)
+
 ```csharp
 [Fact]
 public void RemoveTheArtistOnceNothingDesignatesIt()
@@ -269,7 +273,7 @@ public void RemoveTheArtistOnceNothingDesignatesIt()
         var low = AlbumCollection.Single(static a => a.Title == "Low");
         var heroes = AlbumCollection.Single(static a => a.Title == "Heroes");
 
-        // Setting another artist releases the reference to Bowie: one album still designates him.
+        // Setting another artist releases the reference to Bowie: one album still designates Bowie.
         low.Artist = new Artist { Name = "Brian Eno" };
         Assert.Throws<InvalidOperationException>(bowie.Remove);
 
@@ -489,6 +493,8 @@ A part is an entity that is not Root, and that a composition of its Owner holds.
 | `Option<MBooklet> Booklet { get; }`         | One part, or none: a slot | By `album.Booklet.New()`                        |
 | `MRelease Release { get; }`                 | Exactly one part      | With its Owner, by the constructor of the album     |
 | `[OwnedFrom] MArtist Artist { get; }`       | (The Owner of the part) | Read, never set                                   |
+
+![An aggregate: an artist holds an album, which holds its release, its booklet and its tracks](diagrams/two-aggregate.svg)
 
 A part has no public constructor: born out of any Owner, nothing would hold it, and GBO would remove it at once. So `new Album()` does not compile: an album is born in its artist.
 
@@ -780,6 +786,8 @@ public void BuildATreeOfFolders()
 
 A tree has no cycle: `MoveTo` refuses to place a folder under itself, or under one of its subfolders, before it changes anything. The removal of a folder removes its whole subtree.
 
+![A move of a folder under its own subfolder, refused, and a move under another folder, with its whole subtree](diagrams/two-tree-move.svg)
+
 ```csharp
 [Fact]
 public void MoveAndRemoveASubtree()
@@ -943,6 +951,8 @@ internal interface MEntry
 
 The track cannot be removed. Nor can its album, nor its artist: their removal would take the track with them, by the cascade of Lesson 5. A part requires its Owner, and its Owner requires its own: **retaining a track retains the chain of its Owners, up to the Root.** Each removal is refused at its call, by an exception that names the chain, from the removed entity to the retained one; nothing changes.
 
+![An entry of a playlist retains a track, its album and its artist: each of the three removals is refused](diagrams/two-retention-chain.svg)
+
 ```csharp
 [Fact]
 public void RefuseTheRemovalOfTheChainOfARetainedTrack()
@@ -1020,6 +1030,8 @@ internal interface MAlbum
 ```
 
 Removing the artist removes the albums that nothing retains. Each album that a playlist plays survives, whole, with all its tracks, without an artist: it is an **orphan**. The history stays readable: the playlist still plays the album, its other tracks and its title.
+
+![An album survives its artist as an orphan while an entry retains one of its tracks, and is removed with that retention](diagrams/two-orphan.svg)
 
 ```csharp
 [Fact]
@@ -1159,6 +1171,8 @@ A shared object is retained by the strong references that designate it. It is bo
 
 The track requires its recording, a `T`: the birth of the track takes a descriptor of it, `Recording.Init`. A new descriptor creates a new recording; an existing recording converts to its descriptor, and is designated.
 
+![A recording shared by two tracks: born with the first, removed with the last, its strong references counted at each step](diagrams/two-shared-recording.svg)
+
 ```csharp
 [Fact]
 public void ShareARecordingBetweenTwoAlbums()
@@ -1251,6 +1265,8 @@ public void ShareLyricsThroughAStrongSlot()
 ```
 
 Every release removes the object when it was its last retention, at that instruction. So the order of the instructions matters. To pass a shared object from one holder to another, take the new retention before releasing the old one:
+
+![The two orders of two instructions: retain then release keeps the lyrics; release then retain removes them, and the new reference is refused](diagrams/two-retention-order.svg)
 
 ```csharp
 [Fact]
@@ -1673,6 +1689,8 @@ public void ArchiveEveryRemovedAlbum()
 
 An operation can fail in two ways, and only one of them leaves the transaction usable.
 
+![The steps of an operation: an exception before the first write is a refusal, an exception after it condemns the transaction](diagrams/two-refused-condemned.svg)
+
 **Refused.** Every operation of GBO, a Setter, a birth, `New`, `Add`, `Remove`, `MoveTo`, a cascade, checks all its refusals before its first write: a removal that a strong reference forbids, a slot already full, a removed target. The exception changes nothing: catch it, and the transaction goes on, and commits. Write your own rules the same way: check, then write, as `Album.AddTrack` does.
 
 ```csharp
@@ -1740,6 +1758,8 @@ public void CondemnTheTransactionByAnExceptionAfterAWrite()
 ### Lesson 18: Links and concurrency
 
 An aggregate is a unit of conflict: a part added or removed changes its Owner. Two transactions that change the parts of the same album conflict at the second commit, as two changes of one entity do (Tutorial One, Lesson 16): a rule of the album, checked by each of them, could not be broken by both together. The parts of two albums never conflict.
+
+![Two concurrent transactions in three scenarios: the same album and a removed target conflict at the later commit, two albums do not](diagrams/two-conflicts.svg)
 
 ```csharp
 [Theory]
@@ -1906,6 +1926,8 @@ private static void Apply(AlbumReleased released)
 
 Replayed, in a Replay transaction, the event creates the same graph, with the same identities:
 
+![A command draws the identities, its event carries them, and one code creates the same graph in the command and in the Replay](diagrams/two-identities.svg)
+
 ```csharp
 [Fact]
 public void CreateTheSameGraphByACommandAndByAReplay()
@@ -1913,12 +1935,16 @@ public void CreateTheSameGraphByACommandAndByAReplay()
     // The command draws the identities, out of any transaction.
     var released = new AlbumReleased(ArtistRef.New(), "David Bowie", AlbumRef.New(), "Low", ReleaseRef.New(), [TrackRef.New(), TrackRef.New()]);
 
-    using var commandStore = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-19-command", StoreAccessMode.ReadWrite);
-    using var command = new CatalogRepository(commandStore);
-    using (var transaction = command.OpenTransaction(StoreAccessMode.ReadWrite))
+    // One transaction of the model at a time in this flow: the command writes its Store, then the Replay writes the other one.
+    using (var commandStore = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-19-command", StoreAccessMode.ReadWrite))
+    using (var command = new CatalogRepository(commandStore))
     {
-        Apply(released);
-        transaction.Commit();
+        using (var transaction = command.OpenTransaction(StoreAccessMode.ReadWrite))
+        {
+            Apply(released);
+            transaction.Commit();
+        }
+        AssertTheGraph(command, released);
     }
 
     using var replayStore = TransactionalMemoryStore.NewInMemoryRepositoryStore("lesson-19-replay", StoreAccessMode.ReadWrite);
@@ -1928,16 +1954,19 @@ public void CreateTheSameGraphByACommandAndByAReplay()
         Apply(released);
         transaction.Commit();
     }
+    AssertTheGraph(replay, released);
+}
 
-    // In both Stores, each identity resolves to its entity, in the same place of the graph.
-    foreach (var catalog in new[] { command, replay })
-        using (catalog.OpenTransaction(StoreAccessMode.ReadOnly))
-        {
-            var album = released.Album.Resolve();
-            Assert.Equal("Low", album.Title);
-            Assert.Equal((released.Artist, released.Release), (album.Artist.Ref, album.Release.Ref));
-            Assert.Same(album, released.Tracks[1].Resolve().Album);
-        }
+// In both Stores, each identity resolves to its entity, in the same place of the graph.
+private static void AssertTheGraph(CatalogRepository catalog, AlbumReleased released)
+{
+    using (catalog.OpenTransaction(StoreAccessMode.ReadOnly))
+    {
+        var album = released.Album.Resolve();
+        Assert.Equal("Low", album.Title);
+        Assert.Equal((released.Artist, released.Release), (album.Artist.Ref, album.Release.Ref));
+        Assert.Same(album, released.Tracks[1].Resolve().Album);
+    }
 }
 ```
 
@@ -1988,6 +2017,8 @@ public void RefuseANullOrARepeatedIdentity()
 ### Lesson 20: What dies, and when
 
 The last model holds every link of the tutorial in one catalog. Genres, which nothing removes; artists, their `[Orphanable]` albums and their tracks; recordings and lyrics, shared; the playlists that retain tracks; the favorites, which do not; the festivals that book artists.
+
+![The model of the catalog: its aggregates, its shared objects, and the strong and weak links between them](diagrams/two-catalog-model.svg)
 
 ```csharp
 [Entity(1, 1, 1), Root, Enumerable]
@@ -2103,6 +2134,8 @@ An entity lives while something holds it:
 
 GBO applies this rule at each instruction, to the entities that the instruction touches: it never walks the whole graph, and nothing passes later. When an instruction returns, what it released is gone, and what it refused is untouched. One catalog, and four instructions:
 
+![The lifetime of each entity of the catalog over the four instructions, each bar ending at the instruction that removes it](diagrams/two-what-dies.svg)
+
 ```csharp
 [Fact]
 public void FollowEveryRetentionOfACatalog()
@@ -2139,7 +2172,7 @@ public void FollowEveryRetentionOfACatalog()
     montreux.Lineup.Add(bowie);
     Assert.Equal((2, 3, 4, 4, 1), Census());
 
-    // 1. Bowie is booked: his removal is refused, and nothing changes.
+    // 1. Bowie is booked: the removal is refused, and nothing changes.
     Assert.Throws<InvalidOperationException>(bowie.Remove);
     Assert.Equal((2, 3, 4, 4, 1), Census());
 
@@ -2157,7 +2190,7 @@ public void FollowEveryRetentionOfACatalog()
     Assert.Equal((1, 1, 1, 1, 1), Census());
     Assert.Equal(0, ada.Favorites.Count());
 
-    // 4. Eno removed: his album, its track, its recording, and the lyrics, which nothing designates any more.
+    // 4. Eno removed: its album, its track, its recording, and the lyrics, which nothing designates any more.
     eno.Remove();
     Assert.Equal((0, 0, 0, 0, 0), Census());
 
@@ -2371,6 +2404,8 @@ public void ShareACapabilityBetweenTwoTypes()
 
 A **system** gives, for each entity that has its required components and none of its excluded ones, the Views of the entity and of its components: `Artist`, `Tour`, and `Verified`, an `Option`. A component that the transaction attaches or removes is seen at the next instruction. `Of` gives the system of one entity, or none.
 
+![Four artists and their components: the system holds those with a tour and not retired, before and after two changes](diagrams/two-system-members.svg)
+
 ```csharp
 [Fact]
 public void JoinTheArtistsAndTheirCapabilities()
@@ -2555,6 +2590,8 @@ Both are up to date at each instruction (Lesson 15). A reverse property of a str
 Choose an aggregate by the rule it protects: an order and its lines, for the total and the limit of lines; not a customer and all its orders, which no rule checks together.
 
 ### The whole path
+
+![Two ladders of questions: from a type to its kind of entity, and from a link to its declaration](diagrams/two-choose-a-link.svg)
 
 | The question | When the answer is yes | The declaration | Lessons |
 | ------------ | ---------------------- | --------------- | ------- |

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="440" viewBox="0 0 960 440" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A strong reference keeps a capability and its entity; a weak one forgets it</title>
+<desc>Two columns. A work order, Fix the bolt, designates the maintenance of the Front door by a strong reference: front.Maintenance.Remove() and front.Remove() are both refused, and nothing changes; once the order is removed, the lock can go, with its maintenance. A work order, Replace the battery, designates the battery of the Front door by a weak reference: front.Battery.Remove() removes the battery, the lock stays, and the link of the order becomes none.</desc>
+<rect width="960" height="440" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A strong reference keeps a capability and its entity; a weak one forgets it</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Two work orders, each designating a capability of the Front door, and the removal of that capability</text>
+<text x="32" y="108" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A strong reference</text>
+<text x="32" y="127" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">[Strong] Option&lt;CMaintenance&gt; Maintenance</text>
+<line x1="32" y1="140" x2="448" y2="140" stroke="#2b3a42" stroke-width="1"/>
+<rect x="32" y="160" width="120" height="46" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="92" y="180" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Work order</text><text x="92" y="196" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Fix the bolt</text>
+<path d="M152 183L237 183" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M236.8 179.4L244 183L236.8 186.6Z" fill="#aebcc4"/>
+<text x="198" y="175" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Maintenance</text>
+<rect x="244" y="160" width="104" height="46" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="296" y="187.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Maintenance</text>
+<line x1="348" y1="183" x2="364" y2="183" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="364" y="160" width="84" height="46" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="406" y="187.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Front door</text>
+<text x="240" y="246" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">front.Maintenance.Remove()</text>
+<text x="240" y="262" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">front.Remove()</text>
+<path d="M240 268L240 281" fill="none" stroke="#4a5a62" stroke-width="1.2"/><path d="M243.6 280.8L240 288L236.4 280.8Z" fill="#4a5a62"/>
+<rect x="32" y="298" width="120" height="46" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="92" y="318" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Work order</text><text x="92" y="334" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Fix the bolt</text>
+<path d="M152 321L237 321" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M236.8 317.4L244 321L236.8 324.6Z" fill="#f07a78"/>
+<text x="198" y="313" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Maintenance</text>
+<rect x="244" y="298" width="104" height="46" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="296" y="325.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Maintenance</text>
+<line x1="348" y1="321" x2="364" y2="321" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="364" y="298" width="84" height="46" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="406" y="325.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Front door</text>
+<text x="240" y="372" font-size="13" font-weight="600" fill="#f07a78" text-anchor="middle">Both refused: nothing changes</text>
+<text x="240" y="392" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">Once the order is removed, the lock can go, with its maintenance</text>
+<text x="512" y="108" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A weak reference</text>
+<text x="512" y="127" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">[Weak] Option&lt;CBattery&gt; Battery</text>
+<line x1="512" y1="140" x2="928" y2="140" stroke="#2b3a42" stroke-width="1"/>
+<rect x="512" y="160" width="120" height="46" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="572" y="180" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Work order</text><text x="572" y="196" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Replace the battery</text>
+<path d="M632 183L724 183" fill="none" stroke="#aebcc4" stroke-width="1.4" stroke-dasharray="5 4"/><path d="M716.8 179.4L724 183L716.8 186.6" fill="none" stroke="#aebcc4" stroke-width="1.4" stroke-linejoin="round"/>
+<text x="678" y="175" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Battery</text>
+<rect x="724" y="160" width="104" height="46" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="776" y="187.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Battery</text>
+<line x1="828" y1="183" x2="844" y2="183" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="844" y="160" width="84" height="46" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="886" y="187.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Front door</text>
+<text x="720" y="254" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">front.Battery.Remove()</text>
+<path d="M720 268L720 281" fill="none" stroke="#4a5a62" stroke-width="1.2"/><path d="M723.6 280.8L720 288L716.4 280.8Z" fill="#4a5a62"/>
+<rect x="512" y="298" width="120" height="46" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="572" y="318" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Work order</text><text x="572" y="334" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Replace the battery</text>
+<path d="M632 321L656 321" fill="none" stroke="#7f9199" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="664" y="325.5" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">none</text>
+<rect x="724" y="298" width="104" height="46" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="776" y="325.7" font-size="13" font-weight="600" fill="#7f9199" text-anchor="middle">Battery</text>
+<line x1="828" y1="321" x2="844" y2="321" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="844" y="298" width="84" height="46" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="886" y="325.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Front door</text>
+<text x="720" y="372" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The link becomes none</text>
+<text x="720" y="392" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">The work order forgets the battery; the lock stays</text>
+<path d="M32 418L51 418" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M50.8 414.4L58 418L50.8 421.6Z" fill="#aebcc4"/><text x="66" y="422" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">strong reference</text><path d="M180.8 418L206.8 418" fill="none" stroke="#aebcc4" stroke-width="1.4" stroke-dasharray="5 4"/><path d="M199.6 414.4L206.8 418L199.6 421.6" fill="none" stroke="#aebcc4" stroke-width="1.4" stroke-linejoin="round"/><text x="214.8" y="422" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">weak reference</text>
+<rect x="318" y="411" width="9" height="14" rx="2" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<line x1="327" y1="418" x2="336" y2="418" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="336" y="411" width="9" height="14" rx="2" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="353" y="422" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">a component, on its entity</text>
+</svg>

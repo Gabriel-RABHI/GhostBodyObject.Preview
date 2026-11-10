@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="396" viewBox="0 0 960 396" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A number is one type in a Store, whatever its name or its definition</title>
+<desc>The Store keeps the number 1, MParcel, of CarrierRepository, and the numbers 11, MTrackingPage, and 12, MDepotBoard, of TrackingRepository; 13 is free. A third Repository is refused with [Entity(11, 1, 1)] MInvoice, the number of the pages; with [Entity(11, 2, 5)] MTrackingPage, the same name in a higher version; and with [Entity(12, 1, 2)] MDepotBoard, strictly the same definition. With [Entity(13, 1, 1)] MInvoice, a number of its own, it is accepted. A refusal writes nothing, and the Repositories of the Store go on.</desc>
+<rect width="960" height="396" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A number is one type in a Store, whatever its name or its definition</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Each bind compares its model with the numbers the Store keeps: a number taken is refused, a free one accepted</text>
+<rect x="32" y="100" width="330" height="256" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="44" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The Store</text><text x="350" y="120" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">the numbers of its Repositories</text>
+<rect x="44" y="134" width="306" height="40" rx="6" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="58" y="159" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">1</text>
+<text x="96" y="158" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">MParcel</text>
+<text x="338" y="158" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">CarrierRepository</text>
+<rect x="44" y="190" width="306" height="40" rx="6" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="58" y="215" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">11</text>
+<text x="96" y="214" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">MTrackingPage</text>
+<text x="338" y="214" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">TrackingRepository</text>
+<rect x="44" y="246" width="306" height="40" rx="6" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="58" y="271" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">12</text>
+<text x="96" y="270" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">MDepotBoard</text>
+<text x="338" y="270" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">TrackingRepository</text>
+<rect x="44" y="302" width="306" height="40" rx="6" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="58" y="327" font-size="13" font-weight="600" fill="#7f9199" text-anchor="start">13</text>
+<text x="96" y="326" font-size="12" font-weight="400" fill="#7f9199" text-anchor="start">free</text>
+<text x="436" y="120" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">new InvoicingRepository(store)</text>
+<text x="708" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Its bind</text>
+<rect x="436" y="134" width="256" height="40" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="564" y="158.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">[Entity(11, 1, 1)] MInvoice</text>
+<text x="708" y="151" font-size="13" font-weight="600" fill="#f07a78" text-anchor="start">Refused</text>
+<text x="708" y="168" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">The number of the pages</text>
+<rect x="436" y="190" width="256" height="40" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="564" y="214.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">[Entity(11, 2, 5)] MTrackingPage</text>
+<text x="708" y="207" font-size="13" font-weight="600" fill="#f07a78" text-anchor="start">Refused</text>
+<text x="708" y="224" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">The same name, in a higher version</text>
+<rect x="436" y="246" width="256" height="40" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="564" y="270.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">[Entity(12, 1, 2)] MDepotBoard</text>
+<text x="708" y="263" font-size="13" font-weight="600" fill="#f07a78" text-anchor="start">Refused</text>
+<text x="708" y="280" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">Strictly the same definition</text>
+<rect x="436" y="302" width="256" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="564" y="326.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">[Entity(13, 1, 1)] MInvoice</text>
+<text x="708" y="319" font-size="13" font-weight="600" fill="#3987e5" text-anchor="start">Accepted</text>
+<text x="708" y="336" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">A number of its own</text>
+<path d="M436 154L406 154Q398 154 398 162L398 194Q398 202 390 202L357 202" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M357.2 205.6L350 202L357.2 198.4Z" fill="#f07a78"/>
+<path d="M436 216L357 216" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M357.2 219.6L350 216L357.2 212.4Z" fill="#f07a78"/>
+<path d="M436 266L357 266" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M357.2 269.6L350 266L357.2 262.4Z" fill="#f07a78"/>
+<path d="M436 322L357 322" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M357.2 325.6L350 322L357.2 318.4Z" fill="#3987e5"/>
+<text x="32" y="378" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Refused at the bind, with nothing written: the Repositories of the Store go on</text>
+</svg>

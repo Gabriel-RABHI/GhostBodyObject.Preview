@@ -30,7 +30,7 @@ The technical management of a building: door locks, cameras and thermostats, the
 
 Four models, each in a namespace of its own with its own Repository, as in Tutorial Two: `Capabilities` for Lessons 1 to 3, `Devices` for Lessons 4 to 7, `Parties` for Lessons 8 to 10, `Contacts` for Lesson 11.
 
-**The values of the models come first**, each a value object ([Tutorial One, Lesson 18](One-TheBasics.md#lesson-18-give-each-value-its-type)). Those the three models share are declared once, in the namespace of the tutorial; each model declares at its head the values that it alone has: a `Room` and an `AlarmKind` for the locks, a `Building`, a `Floor` and a `FirmwareVersion` for the devices, a `Money` and a `PaymentTerm` for the parties.
+**The values of the models come first**, each a value object ([Tutorial One, Lesson 19](One-TheBasics.md#lesson-19-give-each-value-its-type)). Those the four models share are declared once, in the namespace of the tutorial; each model declares at its head the values that it alone has: a `Room` and an `AlarmKind` for the locks, a `Building`, a `Floor` and a `FirmwareVersion` for the devices, a `Money` and a `PaymentTerm` for the parties.
 
 ```csharp
 namespace TutorialThree
@@ -63,7 +63,7 @@ Every way of composing of the tutorial, and the lesson that shows it:
 | `[ComponentFor]` repeated | A shared capability | One collection of every entity that has it, whatever its type | 4 |
 | `partial class Camera : ILocated` | A C# interface over the capabilities | One method of yours for every type that implements it | 5 |
 | `[SystemFor(nameof(MDoorLock))]` | System | The entities that have its capabilities, as Views, seen at each instruction | 6, 7, 8 |
-| `[ExcludeComponent(nameof(CMaintenance))]` | An excluded capability | The entities that have it are out of the system | 6, 10 |
+| `[ExcludeComponent(nameof(CMaintenance))]` | An excluded capability | The entities that have it are out of the system | 6, 8, 10 |
 | `RAddress Home`, `Option<RAddress> Billing` | A Record property | A value of several fields, read and replaced whole; never absent, or optional | 11 |
 | `RecordBag<RMove> Moves`, `RecordBag Inbox` | A bag of Records | Its Records in their order, of these types, or of any type | 11 |
 
@@ -159,7 +159,7 @@ internal interface MWorkOrder
     Option<CBattery> Battery { get; set; }
 }
 
-[GhostRepository, IncludeEntityModel(nameof(MDoorLock)), IncludeEntityModel(nameof(CBattery)), IncludeEntityModel(nameof(CAlarmLog)), IncludeEntityModel(nameof(MAlarm)), IncludeEntityModel(nameof(CMaintenance)), IncludeEntityModel(nameof(MTechnician)), IncludeEntityModel(nameof(MWorkOrder))]
+[GhostRepository(1), IncludeEntityModel(nameof(MDoorLock)), IncludeEntityModel(nameof(CBattery)), IncludeEntityModel(nameof(CAlarmLog)), IncludeEntityModel(nameof(MAlarm)), IncludeEntityModel(nameof(CMaintenance)), IncludeEntityModel(nameof(MTechnician)), IncludeEntityModel(nameof(MWorkOrder))]
 internal interface MFacilityRepository
 {
 }
@@ -204,6 +204,8 @@ public void GiveALockABattery()
 ```
 
 A lock has **one battery at most**: a component of a type per entity. A second `New()` is refused before anything changes, and the transaction goes on. `Remove()` takes the battery away, and the slot takes a new one. **`GetOrNew()`** gives the battery that the lock has, or a new one: one instruction, whether the lock has one or not:
+
+![The slot of a battery at each instruction: a second New() is refused, and the slot takes a new battery once it is empty](diagrams/three-one-battery.svg)
 
 ```csharp
 [Fact]
@@ -302,6 +304,8 @@ public void RemoveACapabilityWithItsParts()
 ```
 
 Removing the lock removes it with **every capability it has**, and their parts, as a removal removes the parts of an aggregate (Tutorial Two, Lesson 5). A capability never outlives what has it; the reverse never happens: a capability that leaves does not end what had it.
+
+![A capability removed with its parts leaves its entity; an entity removed takes its capabilities with it](diagrams/three-what-leaves.svg)
 
 ```csharp
 [Fact]
@@ -444,6 +448,8 @@ public void RetainACapabilityAndItsEntity()
 
 A **weak reference** to a component is set to none when the component goes: the work order forgets the battery it was to replace once the battery is removed.
 
+![A strong reference refuses the removal of a capability and of its entity; a weak one becomes none](diagrams/three-strong-weak.svg)
+
 ```csharp
 [Fact]
 public void ForgetARemovedCapability()
@@ -531,13 +537,15 @@ internal interface CMaintenance
     VReason Reason { get; set; }
 }
 
-[GhostRepository, IncludeEntityModel(nameof(MCamera)), IncludeEntityModel(nameof(MDoorLock)), IncludeEntityModel(nameof(MThermostat)), IncludeEntityModel(nameof(CBattery)), IncludeEntityModel(nameof(CLocation)), IncludeEntityModel(nameof(CFirmware)), IncludeEntityModel(nameof(CMaintenance)), IncludeEntityModel(nameof(SPoweredLock)), IncludeEntityModel(nameof(SFirmwareCamera))]
+[GhostRepository(2), IncludeEntityModel(nameof(MCamera)), IncludeEntityModel(nameof(MDoorLock)), IncludeEntityModel(nameof(MThermostat)), IncludeEntityModel(nameof(CBattery)), IncludeEntityModel(nameof(CLocation)), IncludeEntityModel(nameof(CFirmware)), IncludeEntityModel(nameof(CMaintenance)), IncludeEntityModel(nameof(SPoweredLock)), IncludeEntityModel(nameof(SFirmwareCamera))]
 internal interface MDeviceRepository
 {
 }
 ```
 
 `camera.Battery` and `door.Battery` are the same kind of battery. A component of several entity types reads its entity as an `Option` of each type, `battery.Camera` and `battery.DoorLock`, one of them set. The collection of the component holds every battery, whatever the device: "everything that runs on a battery" is `BatteryCollection`.
+
+![Devices of two types and their batteries, all in one collection; each battery reads its device as an Option of each type](diagrams/three-one-collection.svg)
 
 ```csharp
 [Fact]
@@ -704,6 +712,8 @@ Its interface starts with `S`. Its properties, read only, are:
 GBO writes the struct `PoweredLockSystem`, the name of the interface without its `S` and with `System`, and, with `[Enumerable]`, its collection `PoweredLockSystemCollection`. Its members are **Views**: a system reads many entities, and creates no Body.
 
 The lessons of this part start from four locks:
+
+![Four locks and their capabilities: the system holds the two on a battery and not under maintenance](diagrams/three-powered-lock.svg)
 
 ```csharp
 // Four locks: on a battery and located; on a battery, nowhere; on a battery, under maintenance; wired.
@@ -941,7 +951,7 @@ internal interface MOrder
     CCustomer Customer { get; set; }
 }
 
-[GhostRepository, IncludeEntityModel(nameof(MParty)), IncludeEntityModel(nameof(CCustomer)), IncludeEntityModel(nameof(CSupplier)), IncludeEntityModel(nameof(MOffer)), IncludeEntityModel(nameof(CEmployee)), IncludeEntityModel(nameof(CBlocked)), IncludeEntityModel(nameof(MOrder)), IncludeEntityModel(nameof(STradingPartner)), IncludeEntityModel(nameof(SActiveCustomer))]
+[GhostRepository(3), IncludeEntityModel(nameof(MParty)), IncludeEntityModel(nameof(CCustomer)), IncludeEntityModel(nameof(CSupplier)), IncludeEntityModel(nameof(MOffer)), IncludeEntityModel(nameof(CEmployee)), IncludeEntityModel(nameof(CBlocked)), IncludeEntityModel(nameof(MOrder)), IncludeEntityModel(nameof(STradingPartner)), IncludeEntityModel(nameof(SActiveCustomer))]
 internal interface MPartyRepository
 {
 }
@@ -950,6 +960,8 @@ internal interface MPartyRepository
 An order retains the customer role of the party that placed it: it is born with it, `new Order(customer)`, and a strong reference keeps it (Lesson 10).
 
 A party plays any role at once, gains one and loses another, and stays the same party, with the same identity and the same links. Each role has its own values, and its own parts: the offers of a supplier leave with its role.
+
+![Three stages of Acme: a class at each one with inheritance, one entity whose roles come and go with components](diagrams/three-roles.svg)
 
 ```csharp
 [Fact]
@@ -1081,6 +1093,8 @@ public async Task ChangeARoleAndItsPartyConcurrently()
 
 Giving or taking a capability changes the capabilities of its entity: two transactions that give or take capabilities of the same party at the same time **conflict** at the second commit, which retries. A party never ends up with two customer roles. Written with `GetOrNew()`, the retry runs the same code: it finds the role that the other transaction gave.
 
+![Two concurrent transactions: a role and its party both commit; a role given twice conflicts, and the retry runs the same code](diagrams/three-concurrency.svg)
+
 ```csharp
 [Fact]
 public async Task ConflictOnTheCapabilitiesOfOneEntity()
@@ -1130,6 +1144,10 @@ private static void GrantCredit(Money limit) => PartyCollection.Single().Custome
 ### Lesson 10: What composes what
 
 Every way of composing objects, in one model: a party and its roles, components; the offers of a supplier, parts of its role; the orders of a customer, Roots of their own that retain its role by a strong reference; a block, a component that a system excludes. What a removal does follows from these declarations, never from code of yours. The business of this lesson: a party that supplies two offers, and that placed an order as a customer.
+
+![The model of a party: its components, the offers, the orders, and what each system asks of the components](diagrams/three-party-model.svg)
+
+![Three stages of removals: a role leaves with its offers, a retained role is refused, then the order closed, the role and the party go](diagrams/three-removal.svg)
 
 ```csharp
 private static PartyRepository NewBusiness(TransactionalMemoryStore store)
@@ -1243,7 +1261,7 @@ internal interface MClient
 }
 
 // The messages of the inbox are named by no property of the model: the Repository includes them by their names.
-[GhostRepository, IncludeEntityModel(nameof(MClient)), IncludeEntityModel(nameof(RCallBack)), IncludeEntityModel(nameof(RSendBrochure))]
+[GhostRepository(4), IncludeEntityModel(nameof(MClient)), IncludeRecordModel(nameof(RCallBack)), IncludeRecordModel(nameof(RSendBrochure)), IncludeRecordModel(nameof(RAddress)), IncludeRecordModel(nameof(RMove))]
 internal interface MClientRepository
 {
 }
@@ -1252,6 +1270,8 @@ internal interface MClientRepository
 `RCallBack` and `RSendBrochure` are two more Records, a message for the call center and one for the mailing service, each of one value.
 
 **An address is a value.** A Record is born anywhere, `new Address { … }`, then assigned: its values are copied into the client. To change one of them, copy the address with `ToBody()`, change the copy, assign it back. An address read before keeps its values: it is a value, not an object that changes under your eyes.
+
+![Four addresses over six instructions: the address read keeps its values, the copy changes alone, each assignment copies](diagrams/three-address-value.svg)
 
 ```csharp
 [Fact]
@@ -1326,7 +1346,9 @@ public void KeepAHistoryInABag()
 }
 ```
 
-**An inbox carries messages for several services.** A bag of any Record, `RecordBag`, holds the messages that the services of the business leave for a client: each service reads the types it knows and leaves the others. A service that knows several types walks the bag once, a handler per type, `static` lambdas whose state comes first. To take a message: `IndexOf<T>` finds the first of its type, `TryGetAt` reads it, `RemoveAt` removes it; the others stay in their order. To take them all, one after the other: the first, while there is one.
+**An inbox carries messages for several services.** A bag of any Record, `RecordBag`, holds the messages that the services of the business leave for a client: each service reads the types it knows and leaves the others. Any Record of the model: each type is declared by `[IncludeRecordModel]` on its Repository, and a Record of another model does not compile (GBO056). A service that knows several types walks the bag once, a handler per type, `static` lambdas whose state comes first. To take a message: `IndexOf<T>` finds the first of its type, `TryGetAt` reads it, `RemoveAt` removes it; the others stay in their order. To take them all, one after the other: the first, while there is one.
+
+![An inbox of three messages: the mailing service reads its two, a service that knows both walks them all, the call center takes its own](diagrams/three-inbox.svg)
 
 ```csharp
 [Fact]
@@ -1393,7 +1415,7 @@ The lessons went from a component to what it does. This chapter goes the other w
 
 > **Tip: An empty property is a component in disguise**
 >
-> A property that most entities leave empty, or a group of properties that are set together and cleared together, is a component. As a component, it costs nothing to the entities that do not have it, and its values change without changing the entity.
+> A property that most entities leave empty, or a group of properties that are set together and cleared together, is a component. As a component, it costs nothing to the entities that do not have it, and its values change without changing the entity. A group read and replaced whole, as one value, is a Record instead: `Option<RAddress> Billing` (Lesson 11).
 
 ### 2. Is it shared by several types?
 

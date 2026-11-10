@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="356" viewBox="0 0 960 356" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>The View of an entity follows it, the View of a Record keeps what it read</title>
+<desc>Two stages. First, guest is the View of the guest Ada and before is the View of the Record in its Home: both read Paris. Then ada.Home takes a new address in Lyon, and ada.Name a much longer name. The View of the entity reads the guest as it is now: guest.Home.City is Lyon. The View of the Record is a value and keeps what it read: before.City is still Paris.</desc>
+<rect width="960" height="356" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">The View of an entity follows it, the View of a Record keeps what it read</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Two Views taken of Ada, and what each one reads after a change of the guest</text>
+<line x1="32" y1="94" x2="928" y2="94" stroke="#4a5a62" stroke-width="1"/><circle cx="246" cy="94" r="3.5" fill="#aebcc4"/><circle cx="714" cy="94" r="3.5" fill="#aebcc4"/>
+<text x="246" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">var guest = ada.ToView();</text>
+<text x="246" y="134" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">var before = ada.Home;</text>
+<rect x="32" y="152" width="428" height="44" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="46" y="178.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Ada</text>
+<rect x="128" y="158" width="326" height="32" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="138" y="178.3" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Home</text>
+<text x="444" y="178.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end">Paris</text>
+<rect x="32" y="256" width="204" height="78" rx="8" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="44" y="279" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">guest</text>
+<text x="224" y="279" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">the View of the guest</text>
+<rect x="44" y="292" width="180" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="54" y="311.3" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Home.City</text>
+<text x="214" y="311.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end">Paris</text>
+<rect x="256" y="256" width="204" height="78" rx="8" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="268" y="279" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">before</text>
+<text x="448" y="279" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">the View of the Record</text>
+<rect x="268" y="292" width="180" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="278" y="311.3" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">City</text>
+<text x="438" y="311.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end">Paris</text>
+<path d="M72 256L72 203" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M68.4 203.2L72 196L75.6 203.2Z" fill="#3987e5"/>
+<text x="84" y="230" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">reads the guest</text>
+<path d="M296 256L296 203" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M292.4 203.2L296 196L299.6 203.2Z" fill="#aebcc4"/>
+<text x="308" y="230" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">reads the Record</text>
+<text x="714" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ada.Home = new Address { City = "Lyon" };</text>
+<text x="714" y="134" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ada.Name = "A name long enough ...";</text>
+<rect x="500" y="152" width="428" height="44" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="514" y="178.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Ada</text>
+<rect x="596" y="158" width="326" height="32" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="606" y="178.3" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Home</text>
+<text x="912" y="178.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end">Lyon</text>
+<rect x="500" y="256" width="204" height="78" rx="8" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="512" y="279" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">guest</text>
+<text x="692" y="279" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">the View of the guest</text>
+<rect x="512" y="292" width="180" height="30" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="522" y="311.3" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Home.City</text>
+<text x="682" y="311.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end">Lyon</text>
+<rect x="724" y="256" width="204" height="78" rx="8" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="736" y="279" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">before</text>
+<text x="916" y="279" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">the View of the Record</text>
+<rect x="736" y="292" width="180" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="746" y="311.3" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">City</text>
+<text x="906" y="311.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end">Paris</text>
+<path d="M540 256L540 203" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M536.4 203.2L540 196L543.6 203.2Z" fill="#3987e5"/>
+<text x="552" y="230" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">reads it as it is now</text>
+<text x="776" y="230" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">keeps what it read</text>
+</svg>

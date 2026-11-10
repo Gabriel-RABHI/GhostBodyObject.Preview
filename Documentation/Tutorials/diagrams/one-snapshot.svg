@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="338" viewBox="0 0 960 338" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A transaction reads the Store as it was when it opened</title>
+<desc>A timeline. A reader opens while the Store holds no book. A writer then opens, creates the book Dune and commits: the Store holds Dune. The reader, still open, counts 0: the book was committed after it opened. A new transaction opens after the commit, and counts 1.</desc>
+<rect width="960" height="338" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A transaction reads the Store as it was when it opened</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Three transactions in time: a commit reaches only the transactions that open after it</text>
+<text x="158" y="122" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">reader</text>
+<line x1="170" y1="118" x2="690" y2="118" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="170" cy="118" r="4" fill="#aebcc4"/>
+<text x="170" y="108" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">opens</text>
+<circle cx="690" cy="118" r="4" fill="#aebcc4"/>
+<text x="690" y="108" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Count()</text>
+<text x="730" y="124" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">0</text>
+<text x="746" y="122" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">It does not see the book</text>
+<text x="288" y="178" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">writer</text>
+<line x1="300" y1="174" x2="580" y2="174" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="300" cy="174" r="4" fill="#aebcc4"/>
+<text x="300" y="164" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">opens</text>
+<circle cx="430" cy="174" r="4" fill="#aebcc4"/>
+<text x="430" y="164" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">new Book { Title = "Dune" }</text>
+<path d="M574 174L578.5 178.5L586 169.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="580" y="162" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<text x="768" y="234" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">a new transaction</text>
+<line x1="780" y1="230" x2="860" y2="230" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="780" cy="230" r="4" fill="#aebcc4"/>
+<text x="780" y="220" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">opens</text>
+<circle cx="860" cy="230" r="4" fill="#aebcc4"/>
+<text x="860" y="220" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Count()</text>
+<text x="900" y="236" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text>
+<text x="32" y="296" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The Store</text>
+<rect x="150" y="276" width="428" height="30" rx="6" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="365" y="296" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">no book</text>
+<rect x="582" y="276" width="346" height="30" rx="6" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="754" y="296" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text>
+<path d="M170 126L170 269" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M173.6 268.8L170 276L166.4 268.8Z" fill="#3987e5"/>
+<text x="180" y="264" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">It reads this Store until it closes</text>
+<path d="M580 186L580 269" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M583.6 268.8L580 276L576.4 268.8Z" fill="#aebcc4"/>
+<text x="590" y="264" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">The commit publishes the book</text>
+<path d="M780 238L780 269" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M783.6 268.8L780 276L776.4 268.8Z" fill="#3987e5"/>
+</svg>

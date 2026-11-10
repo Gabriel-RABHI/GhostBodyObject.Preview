@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="348" viewBox="0 0 960 348" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>Each change marks the nearest point, and stops there</title>
+<desc>A customer holds two orders, and each order holds its lines; the customer and the orders are concurrency points. A value of a line, a birth or a removal marks its order, and nothing higher, so the lines of two orders never conflict. A move to another order marks both orders. A value of an order marks the customer, so the values of two orders of one customer conflict. A value of the customer marks the customer.</desc>
+<rect width="960" height="348" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Each change marks the nearest point, and stops there</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">A customer and its orders, each a concurrency point: the lines of two orders never meet</text>
+<rect x="32" y="100" width="572" height="204" rx="10" fill="none" stroke="#3987e5" stroke-width="1.5"/><text x="44" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">[ConcurrencyPoint] Customer</text>
+<rect x="48" y="140" width="262" height="148" rx="10" fill="none" stroke="#3987e5" stroke-width="1.5"/><text x="60" y="160" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">[ConcurrencyPoint] Order B-1</text>
+<rect x="60" y="194" width="112" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="116" y="213" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Line</text><text x="116" y="229" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Carmen</text>
+<rect x="186" y="194" width="112" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="242" y="213" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Line</text><text x="242" y="229" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Tosca</text>
+<text x="179" y="266" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">its lines mark it, and nothing higher</text>
+<rect x="326" y="140" width="262" height="148" rx="10" fill="none" stroke="#3987e5" stroke-width="1.5"/><text x="338" y="160" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">[ConcurrencyPoint] Order B-2</text>
+<rect x="338" y="194" width="112" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="394" y="213" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Line</text><text x="394" y="229" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Carmen</text>
+<rect x="464" y="194" width="112" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="520" y="213" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Line</text><text x="520" y="229" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Tosca</text>
+<text x="457" y="266" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">its lines mark it, and nothing higher</text>
+<text x="640" y="112" font-size="12" font-weight="400" fill="#7f9199" text-anchor="start">The change</text>
+<text x="928" y="112" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">marks</text>
+<line x1="640" y1="124" x2="928" y2="124" stroke="#2b3a42" stroke-width="1"/>
+<text x="640" y="146" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start">A value of a line</text>
+<text x="928" y="146" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="end">its order</text>
+<line x1="640" y1="160" x2="928" y2="160" stroke="#2b3a42" stroke-width="1"/>
+<text x="640" y="182" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start">A birth, a removal of a line</text>
+<text x="928" y="182" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="end">its order</text>
+<line x1="640" y1="196" x2="928" y2="196" stroke="#2b3a42" stroke-width="1"/>
+<text x="640" y="218" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start">A move to another order</text>
+<text x="928" y="218" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="end">both orders</text>
+<line x1="640" y1="232" x2="928" y2="232" stroke="#2b3a42" stroke-width="1"/>
+<text x="640" y="254" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start">A value of an order</text>
+<text x="928" y="254" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="end">the customer</text>
+<line x1="640" y1="268" x2="928" y2="268" stroke="#2b3a42" stroke-width="1"/>
+<text x="640" y="290" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start">A value of the customer</text>
+<text x="928" y="290" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="end">the customer</text>
+<text x="32" y="332" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">A write of mergeable values only marks nothing, and neither does a claim or a lease.</text>
+</svg>

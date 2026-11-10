@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="414" viewBox="0 0 960 414" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>One walk gives each Record to the handler of its type, in their order</title>
+<desc>Two columns on the same four Records: CheckedIn room 12, RoomChanged 12 to 14, RoomChanged 14 to 16, CheckedOut. With three handlers, one walk gives each Record to the handler of its type, in their order, and the story reads in 12, to 14, to 16, out. With one handler, for RoomChanged, the Records of the other types are skipped, and rooms reads 14, 16.</desc>
+<rect width="960" height="414" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">One walk gives each Record to the handler of its type, in their order</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The history of a stay: four Records of three types, and the two RoomChanged go to one handler</text>
+<text x="32" y="108" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A handler per type</text>
+<text x="32" y="127" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Enumerate(story, h1, h2, h3)</text>
+<line x1="32" y1="140" x2="460" y2="140" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="160" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">One walk, in their order</text>
+<path d="M168 156L453 156" fill="none" stroke="#4a5a62" stroke-width="1.2"/><path d="M452.8 152.4L460 156L452.8 159.6Z" fill="#4a5a62"/>
+<rect x="32" y="170" width="100" height="46" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="82" y="190" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">CheckedIn</text>
+<text x="82" y="206" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Room 12</text>
+<rect x="141.3" y="170" width="100" height="46" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="191.3" y="190" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">RoomChanged</text>
+<text x="191.3" y="206" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">12 to 14</text>
+<rect x="250.6" y="170" width="100" height="46" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="300.6" y="190" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">RoomChanged</text>
+<text x="300.6" y="206" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">14 to 16</text>
+<rect x="359.9" y="170" width="100" height="46" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="409.9" y="190" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">CheckedOut</text>
+<path d="M82 216L82 249" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M85.6 248.8L82 256L78.4 248.8Z" fill="#aebcc4"/>
+<path d="M191.3 216L191.3 249" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M194.9 248.8L191.3 256L187.7 248.8Z" fill="#aebcc4"/>
+<path d="M300.6 216L300.6 249" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M304.2 248.8L300.6 256L297 248.8Z" fill="#aebcc4"/>
+<path d="M409.9 216L409.9 249" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M413.5 248.8L409.9 256L406.3 248.8Z" fill="#aebcc4"/>
+<rect x="32" y="256" width="100" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="82" y="280" font-size="11" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">CheckedInView</text>
+<rect x="141.3" y="256" width="209.3" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="246" y="280" font-size="11" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">RoomChangedView</text>
+<rect x="359.9" y="256" width="100" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="409.9" y="280" font-size="11" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">CheckedOutView</text>
+<path d="M82 296L82 333" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M85.6 332.8L82 340L78.4 332.8Z" fill="#aebcc4"/>
+<rect x="32" y="340" width="100" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="82" y="359.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">"in 12"</text>
+<path d="M191.3 296L191.3 333" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M194.9 332.8L191.3 340L187.7 332.8Z" fill="#aebcc4"/>
+<rect x="141.3" y="340" width="100" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="191.3" y="359.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">"to 14"</text>
+<path d="M300.6 296L300.6 333" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M304.2 332.8L300.6 340L297 332.8Z" fill="#aebcc4"/>
+<rect x="250.6" y="340" width="100" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="300.6" y="359.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">"to 16"</text>
+<path d="M409.9 296L409.9 333" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M413.5 332.8L409.9 340L406.3 332.8Z" fill="#aebcc4"/>
+<rect x="359.9" y="340" width="100" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="409.9" y="359.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">"out"</text>
+<text x="32" y="392" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">The list story, in the order of the Records</text>
+<text x="500" y="108" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A handler for one type</text>
+<text x="500" y="127" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Enumerate(rooms, h)</text>
+<line x1="500" y1="140" x2="928" y2="140" stroke="#2b3a42" stroke-width="1"/>
+<text x="500" y="160" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">One walk, in their order</text>
+<path d="M636 156L921 156" fill="none" stroke="#4a5a62" stroke-width="1.2"/><path d="M920.8 152.4L928 156L920.8 159.6Z" fill="#4a5a62"/>
+<rect x="500" y="170" width="100" height="46" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="550" y="190" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">CheckedIn</text>
+<text x="550" y="206" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Room 12</text>
+<rect x="609.3" y="170" width="100" height="46" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="659.3" y="190" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">RoomChanged</text>
+<text x="659.3" y="206" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">12 to 14</text>
+<rect x="718.6" y="170" width="100" height="46" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="768.6" y="190" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">RoomChanged</text>
+<text x="768.6" y="206" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">14 to 16</text>
+<rect x="827.9" y="170" width="100" height="46" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="877.9" y="190" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">CheckedOut</text>
+<path d="M659.3 216L659.3 249" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M662.9 248.8L659.3 256L655.7 248.8Z" fill="#aebcc4"/>
+<path d="M768.6 216L768.6 249" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M772.2 248.8L768.6 256L765 248.8Z" fill="#aebcc4"/>
+<rect x="609.3" y="256" width="209.3" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="714" y="280" font-size="11" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">RoomChangedView</text>
+<text x="550" y="280" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">skipped</text>
+<text x="877.9" y="280" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">skipped</text>
+<path d="M659.3 296L659.3 333" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M662.9 332.8L659.3 340L655.7 332.8Z" fill="#aebcc4"/>
+<rect x="609.3" y="340" width="100" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="659.3" y="359.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">14</text>
+<path d="M768.6 296L768.6 333" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M772.2 332.8L768.6 340L765 332.8Z" fill="#aebcc4"/>
+<rect x="718.6" y="340" width="100" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="768.6" y="359.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">16</text>
+<text x="500" y="392" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">The list rooms</text>
+</svg>

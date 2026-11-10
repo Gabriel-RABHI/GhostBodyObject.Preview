@@ -1,13 +1,16 @@
 ![GBO](Documentation/gbo-git-logo.png)
 # What is GBO?
+## Turn your app into a fast, distributed database
 
-GBO (Ghost Body Object) is a high-performance, transactional, persistent and distributed memory manager. It manages millions of C# objects in collections that can be several times larger than the physical RAM. These large collections can be shared and spread over dozens of servers in real time, transparently. It meets the highest standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery).
+**GBO (Ghost Body Object)** is a high-performance, transactional, persistent and distributed memory manager that turns your application into a database engine. Your code manages millions of C# objects in collections that can be several times larger than the physical RAM. These objects are not a transitory representation of stored data: **they are the data itself**. These large collections can be shared and spread across dozens of running applications in a server cluster, in real time and transparently. GBO brings the highest standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery) to your in-memory C# objects.
 
-Its API is ambient: managing these objects requires no load or save operation. You open a transaction, create or find the objects across deep call paths, change them, and commit the transaction. These collections of objects can hold the data of a business application, make independent systems communicate without a message broker, build a cache infrastructure, aggregate data in edge computing or IoT, or build complex distributed systems that combine all of these. GBO can be used alongside traditional DBMSs and message brokers, or replace them.
+**Its API is ambient:** managing these objects requires no load or save operation. You open a transaction, create or find the objects across deep call paths, change them, and commit the transaction. This is called **"orthogonal persistence"**, a principle seen as the holy grail of durable data management. These collections of objects can hold the data of a business application, make independent systems communicate without a message broker, build a cache infrastructure, aggregate data in edge computing or IoT, or build complex distributed systems that combine all of these. GBO can be used alongside traditional DBMSs and message brokers, or simply replace them.
 
-Transactions at the memory level bring a massive simplification and a smaller code base, from the smallest applications to the largest, modular and distributed ones. The data model combines object graphs, entity component systems and edge-based graphs, and supports various indexes, including text indexes.
+The GBO data model extends the capabilities of native C# objects. It combines object aggregates, weak and strong references, entity component systems (ECS) and edge-based graphs, and supports various indexes, including text indexes. It brings strong safety (no more `NullReferenceException`) and deterministic memory management: a combination similar to the one that makes Rust so effective in AI-assisted software development, but for the development of large, full-stack business applications.
 
-GBO introduces a new paradigm in error and memory management, easy for human developers and powerful for the next generation of AI Dark Software Factories. It combines strong safety (no more `NullReferenceException`), deterministic memory management and a sophisticated, constrained data model: the combination that makes Rust so efficient in AI-assisted software development.
+The result is a much smaller code base and a massive simplification, from the most basic applications to the largest, modular and distributed ones. GBO introduces a new paradigm in infrastructure, object data modeling, and error and memory management: easy for human developers to work with, and designed for the next generation of **AI Dark Software Factories**.
+
+GBO is the foundation of an upcoming AI Software Factory for .NET. This stack uses Blazor server-side and client-side rendering, a rich light weight component library, and specific, distributed and scalable modular architectures.
 
 ### A minimal sample
 
@@ -116,56 +119,179 @@ You can read the eight tutorials to discover what GBO can do:
 - [Tutorial Six: Records](Documentation/Tutorials/Six-Records.md): values of several fields, bags of Records, and when not to use them.
 - [Tutorial Seven: The Log](Documentation/Tutorials/Seven-TheLog.md): facts in their order, subscriptions and replay.
 - [Tutorial Eight: Chains and Distribution](Documentation/Tutorials/Eight-ChainsAndDistribution.md): several Stores in one transaction, on several servers.
+- [Tutorial Nine: Transaction Conflicts](Documentation/Tutorials/Nine-Transaction-Conflicts.md): auto-merge and explicit merge, with `[Delta]`, `[Max]`, `[Min]` and the Mergers.
+- [Tutorial Ten: Claims, Points and Leases](Documentation/Tutorials/Ten-Claims-Points-And-Leases.md): a decision on what was read, a rule over the parts of an aggregate, and entities held during a work outside a transaction.
 
 ## Why GBO?
 
-### **Extreme simplicity**
 
-The database, the message broker and the application are one: the data is C# objects in the memory of the process, found and changed in ambient transactions, with no query to load them, no save, no mapping and no cache to keep in sync accross an entire cluster. The state is always coherent: a transaction reads a snapshot, and commits all or nothing, over every model it touches and on every server. The code shrinks with it: no SQL, no DTOs, no mappers, no cache invalidation, no integration tests.
+<table width="100%">
+  <tr>
+    <td width="50%" valign="top">
+	    <h3 align="left">👉 Extreme simplicity</h3>
+	    <p>The database, the message broker and the application are one: the data is C# objects in the memory of the process, found and changed in ambient transactions, with no query to load them, no save, no mapping and no cache to keep in sync accross an entire cluster. The state is always coherent: a transaction reads a snapshot, and commits all or nothing, over every model it touches and on every server. The code shrinks with it: no SQL, no DTOs, no mappers, no cache invalidation, no integration tests.</p>
+		    <p></p>
+    </td>
+    <td width="50%" valign="top">
+	    <h3 align="left">👉 None of the pitfalls of an ORM</h3>
+	    <p>No N+1 queries. A navigation is a read of memory, not a round trip, and lazy loading costs nothing: 1.39 M objects/s against 5,238 for EF Core with PostgreSQL. No change tracker, no context to keep alive or dispose at the right moment, no detached entity, no stale copy, no deferred index updates : an object changed is changed in its transaction, and the others see it at its commit. No impedance mismatch: the model is the C# model, its relations included.</p>
+		    <p></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+	    <h3 align="left">👉 Deterministic memory, by the model</h3>
+	    <p>An object lives while the model says so. A root, a part of its owner, or designated by a strong reference. It is removed at the instruction that ends this, its parts with it, its weak references cleared: no orphan, no dangling reference, no null reference (Option). The data stays out of the .NET garbage collector, which never scans it, whatever its volume.</p>
+		    <p></p>
+    </td>
+    <td width="50%" valign="top">
+	    <h3 align="left">👉 Infrastructure collapse</h3>
+	    <p>One library in the process and one directory on the disk replace the database server, the ORM, the distributed cache and, for the events of the application, the message broker. Replicas copy the data where it is read, Logs and their subscriptions carry the events, a replay rebuilds a model. Fewer moving parts, less to deploy, to monitor, to secure and to pay for.</p>
+		    <p></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+	    <h3 align="left">👉 High performance</h3>
+	    <p>No serialization, no network round trip, no copy. The data is read where it is stored. Against EF Core with PostgreSQL, on the same machine, GBO inserts 24 to 53 times faster, reads orders by their key 335 times faster, and aggregates 3.3 to 7 times faster. On YCSB, it reads up to 6.19 M records/s on 8 threads, 9.2 times Garnet, the fastest of the other engines.</p>
+		    <p></p>
+    </td>
+    <td width="50%" valign="top">
+	    <h3 align="left">👉 Built for AI-assisted development</h3>
+	    <p>A constrained model, which the generator checks at each build with about forty diagnostics: the relations and their cycles, the lifetimes, the types of the properties, the lambdas that would capture or allocate. An agent meets its mistake as a compile error, not as a bug in production. There is less code to generate, to read and to review, and each test runs the real engine in memory.</p>
+		    <p></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+	    <h3 align="left">👉 Concurrency without locks</h3>
+	    <p>Threads, processes and servers share the data through transactions, not critical sections. No lock to forget, no deadlock, no race on a half-written state. An exception, a failed rule or a conflict rolls the whole transaction back: an error never leaves a partial state to repair.</p>
+		    <p></p>
+    </td>
+    <td width="50%" valign="top">
+	    <h3 align="left">👉 Distribution by configuration</h3>
+	    <p>A Store is replicated by adding it to an endpoint: read-only replicas for the front ends, several writers sharing one write token, each server with the part of the data it needs. The code of the application does not change.</p>
+		    <p></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+	    <h3 align="left">👉 Events and history built in</h3>
+	    <p>Logs of Records, subscriptions that replay then follow, chains that commit the models and their Log together: Event Sourcing, CQRS and Mutation Sourcing without an event store, a broker or a projection pipeline to run. A model rebuilt by a replay is a migration with no script to write.</p>
+		    <p></p>
+    </td>
+    <td width="50%" valign="top">
+	    <h3 align="left">👉 A model that evolves</h3>
+	    <p>Each property has a number: a new version of the application reads the data of the old one, and the old one the data of the new one. Rolling upgrades, and no migration for a property added.</p>
+		    <p></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+	    <h3 align="left">👉 Fast and faithful tests</h3>
+	    <p>In-memory Stores run the same engine as the persistent ones. No database to start, no mock, a test in milliseconds - the thirty tests of Tutorial Seven run in half a second.</p>
+		    <p></p>
+    </td>
+    <td width="50%" valign="top">
+	    <h3 align="left">👉 Data that protects itself</h3>
+	    <p>Stores on disk are read through read-only views, so that a stray write of the application cannot corrupt them. Each transaction carries its hash, checked at the opening and at each copy, so that a damaged or diverging replica is stopped, never replicated. A Store of 1,000,000 records reopens in 0.4 s, its index ready.</p>
+		    <p></p>
+    </td>
+  </tr>
+</table>
 
-### **None of the pitfalls of an ORM**
+## GBO vs .NET objects
 
-No N+1 queries: a navigation is a read of memory, not a round trip, and lazy loading costs nothing: 1.39 M objects/s against 5,238 for EF Core with PostgreSQL. No change tracker, no context to keep alive or dispose at the right moment, no detached entity, no stale copy: an object changed is changed in its transaction, and the others see it at its commit. No impedance mismatch: the model is the C# model, its relations included.
+The speed of GBO comes first from where it puts its bytes. Three comparisons show it with plain .NET objects on the same work: 10,000,000 items of ten unique strings and a date, on one thread, each side in a process of its own, on the same machine. The first two measure what the garbage collector pays, the third what a query pays.
 
-### **Deterministic memory, by the model**
+### Two ways to lay out an object
 
-An object lives while the model says so: a root, a part of its owner, or designated by a strong reference. It is removed at the instruction that ends this, its parts with it, its weak references cleared: no orphan, no dangling reference, no null reference (`Option<T>`). The data stays out of the .NET garbage collector, which never scans it, whatever its volume.
+In .NET, a record holds references: each string is an object of its own on the managed heap, with its own header. In GBO, an object is one block of bytes, its **Ghost**: its values, a small table, then the characters of its strings, side by side. What you hold in C#, a **Body** or a **View**, is a thin handle on this block, and a `GhostString` reads the characters where they are, without a copy.
 
-### **Infrastructure collapse**
+![One record of ten strings in memory: eleven objects in .NET, one block of bytes in GBO](Documentation/Benchmarks/charts/gbo-vs-dotnet-layout.svg)
 
-One library in the process and one directory on the disk replace the database server, the ORM, the distributed cache and, for the events of the application, the message broker: replicas copy the data where it is read, Logs and their subscriptions carry the events, a replay rebuilds a model. Fewer moving parts: less to deploy, to monitor, to secure and to pay for.
+### Comparison 1: Records in a List
 
-### **High performance**
+10,000,000 GBO Records kept in a `List<T>`, as records of .NET would be: a full collection with all of them alive, then the `List` cleared, then another full collection.
 
-No serialization, no network round trip, no copy: the data is read where it is stored. Against EF Core with PostgreSQL, on the same machine, GBO inserts 24 to 53 times faster, reads orders by their key 335 times faster, and aggregates 3.3 to 7 times faster ([results](Documentation/Benchmarks/BENCH-GBO-vs-EF-Postgres.md)). On YCSB, it reads up to 6.19 M records/s on 8 threads, 9.2 times Garnet, the fastest of the other engines ([results](Documentation/Benchmarks/BENCH-GBO-vs-SQLite-RocksDB-Garnet.md)).
+![The GC and 10,000,000 Records: full collections and managed heap, GBO against .NET](Documentation/Benchmarks/charts/gbo-vs-dotnet-gc-records.svg)
 
-### **Built for AI-assisted development**
+**Why is the GC so slow?** A full collection must prove what is alive: it follows every reference, and visits each object it reaches. A record of .NET is 11 objects, so 10,000,000 records are 110,000,000 visits: 4.10 s, during which every thread of the application waits.
 
-A constrained model, which the generator checks at each build with about forty diagnostics: the relations and their cycles, the lifetimes, the types of the properties, the lambdas that would capture or allocate. An agent meets its mistake as a compile error, not as a bug in production. There is less code to generate, to read and to review, and each test runs the real engine in memory.
+**Why is GBO faster?** It does not give the GC less data, it gives it fewer objects. A GBO Record is one Body, a C# object of 40 bytes, and its Ghost sits in pinned pages of 128 KB: arrays of bytes, in which the GC has no reference to follow. 10,000,000 GBO Bodies instead of 110,000,000 objects: 11 times fewer visits, 11.5 times less time. The cost of a collection follows the number of objects, not the volume of the data.
 
-### **Concurrency without locks**
+![What a full GC has to visit: 110,000,000 objects for .NET, 10,000,000 Bodies for GBO Records, a few Segments for GBO entities](Documentation/Benchmarks/charts/gbo-vs-dotnet-gc-visits.svg)
 
-Threads, processes and servers share the data through transactions, not critical sections: no lock to forget, no deadlock, no race on a half-written state. An exception, a failed rule or a conflict rolls the whole transaction back: an error never leaves a partial state to repair.
+**Why is the release faster, but not free?** Nothing is alive any more, so nothing is followed, but the GC still walks through the heap to find what it can free: 0.74 s across 110,000,000 dead objects, 73 ms across 10,000,000 Bodies.
 
-### **Distribution by configuration**
+The collections that nobody asks for pay the same price. During the creation, .NET spends 3.6 s of its 10.3 s in GC pauses, GBO 0.5 s of its 11.6 s. .NET still creates a little faster (×1.1): here GBO writes its fields one loop at a time, and a Ghost moves to a larger block as it grows.
 
-A Store is replicated by adding it to an endpoint: read-only replicas for the front ends, several writers sharing one write token, each server with the part of the data it needs. The code of the application does not change.
+**Why does GBO take 25 % less memory?** Both sides hold the same characters, in UTF-16, about 298 bytes per item. What differs is the price of a string. In .NET, 8 bytes for its reference, 22 for its object header, its length and its terminator, then padding to a multiple of 8: about 34 bytes, ten times over. In a Ghost, one entry of 8 bytes in its table, ten times over. With its Body, a Record takes 488 bytes against 654, the managed heap 4.5 GB against 6.1 GB, and the working set 6.4 GB against 8.1 GB.
 
-### **Events and history built in**
+### Comparison 2: entities in a Store
 
-Logs of Records, subscriptions that replay then follow, chains that commit the models and their Log together: Event Sourcing, CQRS and Mutation Sourcing without an event store, a broker or a projection pipeline to run. A model rebuilt by a replay is a migration with no script to write.
+10,000,000 entities created in one transaction of a GBO Repository, committed to a Store in memory, collected, removed, and collected again. .NET keeps the same objects in a `List<T>`: the collection that costs its GC the least, without a dictionary and without any identity.
 
-### **A model that evolves**
+**What is a commit, and what does it do?** In a transaction, everything you create or change is private: a Body and its Ghost, in the memory of the transaction. The commit turns this work into shared data, all of it or nothing. It checks that nothing committed since the snapshot of the transaction conflicts with its writes, copies each Ghost to the end of the Store, one writer at a time, updates the indexes, then publishes it all at once to the next transactions. On a Store on disk, the same bytes then reach the disk according to its durability. The Bodies and the memory of the transaction are left to the GC: the entity is now bytes in the Store.
 
-Each property has a number: a new version of the application reads the data of the old one, and the old one the data of the new one. Rolling upgrades, and no migration for a property added.
+![What a commit does: the Bodies and Ghosts of a transaction, four steps, then the Ghosts alone in the Store](Documentation/Benchmarks/charts/gbo-vs-dotnet-commit.svg)
 
-### **Fast and faithful tests**
+**What it costs here.** The 10,000,000 entities take 14.3 s to create, where .NET takes 10.3 s, then 2.6 s to commit: 3.9 M entities/s, 4 GB written in 146 Segments, the large blocks of a Store, whose size follows its data up to 64 MB.
 
-In-memory Stores run the same engine as the persistent ones: no database to start, no mock, a test in milliseconds; the thirty tests of Tutorial Seven run in half a second.
+![The GC and 10,000,000 entities: full collections and managed heap, GBO against .NET](Documentation/Benchmarks/charts/gbo-vs-dotnet-gc-entities.svg)
 
-### **Data that protects itself**
+**Why is the GC even faster than with Records?** Once committed, an entity is no longer a C# object, not even a Body. A query creates none either: a View is a struct, on the stack. All that is left for the GC is the 146 Segments of the Store, arrays of bytes without references: 71 ms against 4.04 s, 57 times faster. These 71 ms are mostly the walk through the 10,000,000 Bodies that the transaction left behind.
 
-Stores on disk are read through read-only views, so that a stray write of the application cannot corrupt them; each transaction carries its hash, checked at the opening and at each copy, so that a damaged or diverging replica is stopped, never replicated. A Store of 1,000,000 records reopens in 0.4 s, its index ready.
+**Why is the last collection so fast?** Removing the entities is the work of their transactions, 8.9 s by transactions of 10,000, where a `List` clears in 6 ms: GBO does this work at the instruction, not at some later collection. The Segments emptied by the removals are released, and the GC finds a few arrays to free: 7 ms, against the 0.76 s that .NET spends walking through 110,000,000 dead objects.
+
+Once committed, the managed heap holds 4.1 GB against 6.1 GB, 32 % less. The working set does not follow yet, 10.5 GB against 8.1 GB: the memory of the transaction has not gone back to the system.
+
+### Comparison 3: a query and the layout
+
+A query on five strings, then a query on the date, measured in the same way: by LINQ on the `List<T>`, by the operators of GBO on its Views, in a new read-only transaction at each pass. Three states: as created, once dispersed, then aligned by the compactor.
+
+![A query on 5 strings: GBO against .NET, as created, dispersed, and GBO aligned](Documentation/Benchmarks/charts/gbo-vs-dotnet-query-strings.svg)
+
+**Why is .NET 2.5 times faster at first?** Here the strings follow their object, memory is read in order on both sides, and the difference is the code of a read. A `string` of .NET is one reference away, and its methods are among the most tuned code of the platform. A `GhostString` first has to find its characters: through the View, the table of the version of its Ghost, then the entry of the string, each step checked. This cost is in the processor, not in the memory, and it is the next one to lower. A program that would allocate all its first names in a row, then all its last names, would read 55 M/s in .NET; no running program keeps that order.
+
+**Why does .NET then fall behind?** A program lives: it replaces its strings, and each new string lands elsewhere on the heap. The GC compacts the heap but keeps the order of the addresses, so it never brings a record and its strings back together. The benchmark gives both sides this life at once. In .NET, each field swaps its string with the same field of a record drawn at random, and the `List` is shuffled. In GBO, each entity swaps its ten strings with another one, in transactions of 1,000, and its new version goes to the end of the Store.
+
+![After the swaps: in .NET the objects and their strings are scattered, in GBO the Ghosts are scattered with their strings in them](Documentation/Benchmarks/charts/gbo-vs-dotnet-dispersion.svg)
+
+.NET falls from 24.8 to 2.6 M/s, 9.5 times slower: each string is now a chain of two random reads, the object then the string, five times per record. GBO falls from 9.8 to 4.5 M/s, 2.2 times slower: an entity is one random read, and its strings came with it.
+
+**How does GBO get its order back?** By its compactor, which .NET has no equivalent of. It copies the current version of each entity to the head of the Store, in the order of the identifiers, about 64 KB at a time, then releases the Segments it emptied. The order of a collection becomes the order of the memory again. Here it moves 4.5 GB in 6.7 s, and the query comes back to 8.2 M/s, 3.1 times .NET, whose strings stay dispersed until the end of the process. Entities written once have nothing to gain: a commit already writes them in order, and the compactor then moves 0 byte.
+
+![The compactor puts the entities back in order: the Ghosts 3, 1, 4, 2 apart from each other, then copied side by side from 1 to 4](Documentation/Benchmarks/charts/gbo-vs-dotnet-compactor.svg)
+
+Any GBO Store - In Memory, in virtual memory or persisted on disk - is permanently optimized in background for faster enumerations and LINQ queries, and to compact the memory to reduce fragmentation. Align memory access patterns and memory layout is a major performance advantage of GBO memory model.
+
+**Why these results on the date?**
+
+![A query on a date: GBO against .NET, as created, dispersed, and GBO aligned](Documentation/Benchmarks/charts/gbo-vs-dotnet-query-date.svg)
+
+In .NET the date is in the object: one read per record, no chain. The dispersion costs far less than on the strings: from 92.9 to 32.3 M/s. Yet a random read alone reaches only 6.1 M/s: the same objects, in the same order, read as a linked list. The difference is that random reads overlap. A `List` holds all its addresses in one array, so the processor knows the next ones in advance, and starts them without waiting for the last one. Each read takes as long as before, but about five of them run at once. A string cannot do that: its address is in the object being read.
+
+![Random reads overlap: from 6.1 M/s with one read at a time, as a linked list, to 32.1 M/s without limit](Documentation/Benchmarks/charts/gbo-vs-dotnet-overlapping-reads.svg)
+
+GBO does more than one read per item: each step of the enumeration finds the version that the transaction sees, checks it, and builds the View (it use MVCC - Multi Version Concurrency Control design). This is what gives a reader a stable snapshot while others write. As created, it reads 39.1 M/s, .NET 2.4 times faster. Dispersed, it changes Segment at almost every entity: 21.2 M/s, .NET 1.5 times faster. Once the entities are aligned, the enumeration goes straight ahead, loading the Ghosts 32 entities in advance: **61.6 M/s, 1.9 times .NET dispersed.** Only a .NET heap fresh from its creation stays ahead, a state that a program cannot get back.
+
+A value does not slow an enumeration: at a fixed place in its Ghost, it is read 4 to 7.5 times faster than the five strings, on the same Views.
+
+### What the layout brings
+
+- **No external allocation for arrays,** strings included: they live in their object, and cost no object of their own.
+- **Memory locality for the work on each object:** reading an entity is one jump from the base pointer, whatever its strings.
+- **The logical alignment of the entities in memory, in their collections:** a scan reads straight ahead, and the compactor restores this order both in in-memory Stores and persistent ones.
+- **A drastic reduction of the work of the GC,** a global and constant benefit: every collection of the process is shorter, for all its threads, whatever the volume of the data. In a heavy loaded .Net application, the GC overhead is drastically reduced.
+
+These choices follow from one fact: a data manager generally performs far more reads than changes, by a factor of 10, 100, 1,000 or more when the system aggregates a lot of data. Using Views, GhostString, GhostSpan and static lambdas, GBO perform aggregations (like a .Count operation) and filtering (like a .Where selection) without any memory allocations. It can turns a .Net application in a high performance data processing system.
+
+These figures are those of the workstation GC. The code of the measures: [RecordStringsBenchmark](GhostBodyObject.Runtime.Common.Benchmarks/RecordStringsBenchmark.cs), run by its code, from `REC01` to `REC04`:
+
+```bash
+dotnet run -c Release --project GhostBodyObject.Integrations -- REC01
+```
 
 ## GBO vs EF + PostgreSQL
 
@@ -216,7 +342,7 @@ GBO implements a new Event Sourcing pattern, **Mutation Sourcing**. A Mutation i
 
 The engines, their settings and every figure: [GBO vs Event Sourcing engines](Documentation/Benchmarks/BENCH-GBO-vs-Event-Sourcing-Engines.md).
 
-## GBO vs SQLite, RocksDB and Garnet
+## YCSB : GBO vs SQLite, RocksDB and Garnet
 
 **These results are preliminary and will evolve.** GBO trails in several write workloads, and three improvements may raise its ingestion results:
 - optimized and configurable indexes: each message of workload Q moves its sensor in the index of the levels;
@@ -246,6 +372,7 @@ Three workloads of YCSB and two of ingestion, meters and sensors, on 1,000,000 r
 **Sensors and sites:** a query, a range of levels, an aggregate or the snapshot of a site and its 1,000 sensors, runs 36 to 167 times faster in GBO than in the fastest other engine, by its value indexes. GBO writes the messages slower: RocksDB writes 2.2 to 24 times more.
 
 The engines and their settings, the loads and the reopen, the latencies, the memory and every figure: [GBO vs SQLite, RocksDB and Garnet](Documentation/Benchmarks/BENCH-GBO-vs-SQLite-RocksDB-Garnet.md).
+
 
 ## Spreadsheet
 
@@ -325,11 +452,14 @@ GBO on one page: what the engine does, how each guarantee is obtained, and the i
 #### Limits
 
 - **One writer at a time per chain.** The commits of a chain are serialized in the whole cluster: write throughput is that of one writer, without network round trips while it keeps the token. Writers scale by splitting the data into several chains.
-- **No SQL.** The queries are C#, over the Views and the indexes.
 - **Little-endian platforms only.**
 
-#### To come
+## To come
 
-- **Automatic fail-over.** The loss of the owner of the write token stops the writes of its chain, the reads going on, until the chain is restarted. It will perform a recovery with quorum.
-- **Internet Scale Distribution**. Will use Web Sockets.
-- **Transparent SQL connectors**, to fill an SQL server with every transaction done using GBO. EF entities included.
+- [ ] **Permissions.** Object level permission, with access, write, read restrictions over collections and entities.
+- [ ] **Automatic fail-over.** The loss of the owner of the write token stops the writes of its chain, the reads going on, until the chain is restarted. It will perform a recovery with quorum.
+- [ ] **Internet Scale Distribution**. Will use Web Sockets.
+- [ ] **Transparent SQL connectors**, to fill an SQL server with every transaction done using GBO. EF entities included.
+- [ ] **GBO Explorer** : dedicated tool with Schema Versions, live Query, model edition in real-time, complete suite.
+
+

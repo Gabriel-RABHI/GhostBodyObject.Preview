@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="398" viewBox="0 0 960 398" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>The write token goes to the replica that commits</title>
+<desc>Along the time, the office commits the parcel PX-5001 of Ada and holds the write token. The depot, a second writer, receives that commit; its commit of the status and of the depot Lyon takes the token. The office waits for that commit by CaughtUp, and its commit of the recipient Ada Lovelace takes the token back. Both replicas hold the three commits, in the same order, and TokenGeneration is at least generation + 2.</desc>
+<rect width="960" height="398" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">The write token goes to the replica that commits</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Two writers of one Store, along the time: a commit takes the token once its replica holds every commit before</text>
+<text x="32" y="148" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The office</text>
+<text x="32" y="165" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">ReadWrite</text>
+<line x1="164" y1="150" x2="928" y2="150" stroke="#4a5a62" stroke-width="1"/>
+<text x="32" y="252" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The depot</text>
+<text x="32" y="269" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">ReadWrite</text>
+<line x1="330" y1="254" x2="928" y2="254" stroke="#4a5a62" stroke-width="1"/>
+<path d="M250 147H510Q510 147 510 147V153Q510 153 510 153H250Z" fill="#3987e5"/>
+<path d="M510 251H750Q750 251 750 251V257Q750 257 750 257H510Z" fill="#3987e5"/>
+<path d="M750 147H928Q928 147 928 147V153Q928 153 928 153H750Z" fill="#3987e5"/>
+<path d="M510 150L510 247" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M513.6 246.8L510 254L506.4 246.8Z" fill="#3987e5"/>
+<path d="M750 254L750 157" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M746.4 157.2L750 150L753.6 157.2Z" fill="#3987e5"/>
+<path d="M256 155L409.9 244.5" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M411.6 241.3L416 248L408 247.5Z" fill="#aebcc4"/>
+<path d="M536 249L630.9 160.8" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M628.3 158.3L636 156L633.2 163.5Z" fill="#aebcc4"/>
+<path d="M776 155L861.1 243" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M863.6 240.4L866 248L858.5 245.3Z" fill="#aebcc4"/>
+<circle cx="420" cy="254" r="3.5" fill="#aebcc4"/>
+<text x="420" y="276" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">CaughtUp</text>
+<circle cx="870" cy="254" r="3.5" fill="#aebcc4"/>
+<text x="870" y="276" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">CaughtUp</text>
+<circle cx="250" cy="150" r="5" fill="#e8eef1"/>
+<text x="250" y="122" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<text x="250" y="138" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">PX-5001, Ada</text>
+<circle cx="530" cy="254" r="5" fill="#e8eef1"/>
+<text x="530" y="276" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<text x="530" y="292" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Depot = "Lyon"</text>
+<circle cx="640" cy="150" r="3.5" fill="#aebcc4"/>
+<text x="640" y="138" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">CaughtUp</text>
+<circle cx="770" cy="150" r="5" fill="#e8eef1"/>
+<text x="770" y="122" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<text x="770" y="138" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Recipient = "Ada Lovelace"</text>
+<text x="32" y="330" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start">Both replicas, one sequence</text>
+<rect x="224" y="312" width="150" height="32" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="299" y="332.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">PX-5001, Ada</text>
+<path d="M374 328L391 328" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M390.8 324.4L398 328L390.8 331.6Z" fill="#aebcc4"/>
+<rect x="398" y="312" width="170" height="32" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="483" y="332.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Depot = "Lyon"</text>
+<path d="M568 328L585 328" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M584.8 324.4L592 328L584.8 331.6Z" fill="#aebcc4"/>
+<rect x="592" y="312" width="230" height="32" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="707" y="332.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Recipient = "Ada Lovelace"</text>
+<path d="M32 373H58Q58 373 58 373V379Q58 379 58 379H32Z" fill="#3987e5"/>
+<text x="66" y="380" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">the write token</text>
+<path d="M172 376L191 376" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M190.8 372.4L198 376L190.8 379.6Z" fill="#aebcc4"/>
+<text x="206" y="380" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">a commit copied</text>
+<path d="M318 376L337 376" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M336.8 372.4L344 376L336.8 379.6Z" fill="#3987e5"/>
+<text x="352" y="380" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">the token taken by a commit</text>
+<text x="928" y="380" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">TokenGeneration &gt;= generation + 2</text>
+</svg>

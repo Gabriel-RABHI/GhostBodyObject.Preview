@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="300" viewBox="0 0 960 300" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>Immediate cuts the words at each write, Commit once</title>
+<desc>The same instructions in two rows: six writes of the description, the search of ethiopia, then the commit. With TextIndexing.Immediate, the default, each of the six writes cuts the words: 6 cuts. With TextIndexing.Commit, no write cuts them; the first search cuts them once, and sees the last text: 1 cut. Without a search, the cut falls at the commit. Both modes give the same results.</desc>
+<rect width="960" height="300" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Immediate cuts the words at each write, Commit once</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The six writes of the description of the Tasting Box, then a search and the commit</text>
+<line x1="32" y1="94" x2="928" y2="94" stroke="#4a5a62" stroke-width="1"/><circle cx="240" cy="94" r="3.5" fill="#aebcc4"/><circle cx="298" cy="94" r="3.5" fill="#aebcc4"/><circle cx="356" cy="94" r="3.5" fill="#aebcc4"/><circle cx="414" cy="94" r="3.5" fill="#aebcc4"/><circle cx="472" cy="94" r="3.5" fill="#aebcc4"/><circle cx="530" cy="94" r="3.5" fill="#aebcc4"/><circle cx="650" cy="94" r="3.5" fill="#aebcc4"/><circle cx="772" cy="94" r="3.5" fill="#aebcc4"/>
+<text x="240" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Day 1</text>
+<text x="298" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Day 2</text>
+<text x="356" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Day 3</text>
+<text x="414" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Day 4</text>
+<text x="472" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Day 5</text>
+<text x="530" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Day 6</text>
+<text x="385" y="136" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">product.Description = ...</text>
+<text x="650" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Search("ethiopia")</text>
+<text x="650" y="136" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">the first search</text>
+<text x="772" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<text x="888" y="118" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Cuts</text>
+<text x="32" y="168" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">TextIndexing.Immediate</text>
+<text x="32" y="185" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">the default, for a short text</text>
+<line x1="212" y1="170" x2="217" y2="170" stroke="#4a5a62" stroke-width="1"/>
+<line x1="263" y1="170" x2="275" y2="170" stroke="#4a5a62" stroke-width="1"/>
+<line x1="321" y1="170" x2="333" y2="170" stroke="#4a5a62" stroke-width="1"/>
+<line x1="379" y1="170" x2="391" y2="170" stroke="#4a5a62" stroke-width="1"/>
+<line x1="437" y1="170" x2="449" y2="170" stroke="#4a5a62" stroke-width="1"/>
+<line x1="495" y1="170" x2="507" y2="170" stroke="#4a5a62" stroke-width="1"/>
+<line x1="553" y1="170" x2="800" y2="170" stroke="#4a5a62" stroke-width="1"/>
+<rect x="217" y="156" width="46" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="240" y="174.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">cut</text>
+<rect x="275" y="156" width="46" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="298" y="174.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">cut</text>
+<rect x="333" y="156" width="46" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="356" y="174.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">cut</text>
+<rect x="391" y="156" width="46" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="414" y="174.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">cut</text>
+<rect x="449" y="156" width="46" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="472" y="174.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">cut</text>
+<rect x="507" y="156" width="46" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="530" y="174.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">cut</text>
+<circle cx="650" cy="170" r="3.5" fill="#aebcc4"/>
+<circle cx="772" cy="170" r="3.5" fill="#aebcc4"/>
+<text x="888" y="176" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">6</text>
+<text x="32" y="232" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">TextIndexing.Commit</text>
+<text x="32" y="249" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">for a long text, written in steps</text>
+<line x1="212" y1="234" x2="627" y2="234" stroke="#4a5a62" stroke-width="1"/>
+<line x1="673" y1="234" x2="800" y2="234" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="240" cy="234" r="3.5" fill="#aebcc4"/>
+<circle cx="298" cy="234" r="3.5" fill="#aebcc4"/>
+<circle cx="356" cy="234" r="3.5" fill="#aebcc4"/>
+<circle cx="414" cy="234" r="3.5" fill="#aebcc4"/>
+<circle cx="472" cy="234" r="3.5" fill="#aebcc4"/>
+<circle cx="530" cy="234" r="3.5" fill="#aebcc4"/>
+<rect x="627" y="220" width="46" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="650" y="238.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">cut</text>
+<circle cx="772" cy="234" r="3.5" fill="#aebcc4"/>
+<text x="888" y="240" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text>
+<text x="32" y="282" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Both modes give the same results; only the moment of the cut changes. Without a search, the cut falls at the commit</text>
+</svg>

@@ -21,7 +21,7 @@ A coffee shop. Its products, found by the words of their names and of their desc
 
 Three models, each in a namespace of its own with its own Repository, as in the tutorials before: `Products` for Lessons 1 and 2, `Catalog` for Lessons 3 and 4, `Shop` for Lessons 5 to 12. In the `Shop`, each index is declared in the lesson that shows it: an index is an interface of the model, wherever it is.
 
-**The values of the models come first**, each a value object ([Tutorial One, Lesson 18](One-TheBasics.md#lesson-18-give-each-value-its-type)). Those the three models share are declared once, in the namespace of the tutorial; each model declares at its head the values that it alone has. **An index finds a value object by the value inside it**, with every option of that value: a `Money` rounded by `Decimals`, a `Date` by its parts, an `Email` whatever its case, a `Description` by its words.
+**The values of the models come first**, each a value object ([Tutorial One, Lesson 19](One-TheBasics.md#lesson-19-give-each-value-its-type)). Those the three models share are declared once, in the namespace of the tutorial; each model declares at its head the values that it alone has. **An index finds a value object by the value inside it**, with every option of that value: a `Money` rounded by `Decimals`, a `Date` by its parts, an `Email` whatever its case, a `Description` by its words.
 
 ```csharp
 namespace TutorialFive
@@ -43,7 +43,7 @@ Every declaration of the tutorial, and the lesson that shows it:
 
 | Declaration in the model | What GBO guarantees | Lessons |
 | ------------------------ | ------------------- | ------- |
-| `[TextIndex(n)]` on `MProductTextIndex` | A text index, of a number stable in its Repository: the class `ProductTextIndex`, its searches and its words | 1, 3 |
+| `[TextIndex(n)]` on `MProductTextIndex` | A text index, of a stable number, unique among the Repositories of its Store: the class `ProductTextIndex`, its searches and its words | 1, 3 |
 | `[TextIndexed(nameof(MProductTextIndex))]` on a property | The words of the property in the index, up to date at the next instruction | 1, 3 |
 | `TextIndexing.Commit` | The words of a long text cut once, at the first search or at the commit | 4 |
 | `KeepAccents = true`, `Separators = ","` on `TextIndex` | The rules of an index: the accents kept, the words cut at the separators | 4 |
@@ -61,7 +61,9 @@ Every declaration of the tutorial, and the lesson that shows it:
 
 A query by LINQ reads every entity, and every character of their texts: `Description.Contains("coffee")` on a million products reads a million descriptions, and knows neither the words, nor the case, nor the accents. A **text index** knows the words of the properties that it indexes: a search reads the products that have them, whatever the count of the others.
 
-The index is an interface with `[TextIndex(n)]`, its number in the Repository, stable; its name starts with `M`, as a model: `MProductTextIndex` gives `ProductTextIndex`, the class of its searches. Each property of a text names it by `[TextIndexed]`:
+![The same four products: a query reads all of them to find two, a text index goes from the word to those two](diagrams/five-query-or-index.svg)
+
+The index is an interface with `[TextIndex(n)]`, its number, stable, and unique among the Repositories of its Store; its name starts with `M`, as a model: `MProductTextIndex` gives `ProductTextIndex`, the class of its searches. Each property of a text names it by `[TextIndexed]`:
 
 ```csharp
 // The description of a product: a value of this model alone, its words in the text index.
@@ -87,7 +89,7 @@ internal interface MProduct
     VMoney Price { get; set; }
 }
 
-[GhostRepository, IncludeEntityModel(nameof(MProduct))]
+[GhostRepository(1), IncludeEntityModel(nameof(MProduct))]
 internal interface MProductRepository
 {
 }
@@ -122,7 +124,7 @@ public void FindTheProductsOfAWord()
     using var shop = NewShop(store);
     using var transaction = shop.OpenTransaction(StoreAccessMode.ReadOnly);
 
-    // The Views of the products that have the word: in the name of the mug, in the description of the machine.
+    // The Views of the products that have the word: in the name and the description of the mug, in the description of the machine.
     Assert.Equal(["Coffee Mug", "Espresso Machine"], Names(ProductTextIndex.Search("coffee")));
     Assert.Equal(2, ProductTextIndex.Count("coffee"));
 
@@ -183,7 +185,7 @@ public void ForgetTheProductsRemoved()
 
 ### Lesson 2: The language of a query
 
-A query is a list of words. A word alone is **required**; `+word` is an **alternative**, which adds the entities that have it; `-word` **excludes** the entities that have it; a query of exclusions only starts from every entity. `Name:word` looks in one property. The order of the words never changes the result.
+A query is a list of words. A word alone is **required**; `+word` is an **alternative**, which adds the entities that have it; `-word` **excludes** the entities that have it; a query of exclusions only starts from every entity. `name:word` looks in one property. The order of the words never changes the result.
 
 The shop of the lesson:
 
@@ -205,6 +207,8 @@ private static List<string> Names(TextSearchResult<ProductView, ProductRepositor
     => found.Select(static product => product.Name).ToList();
 ```
 
+![Five products and their words: what the queries tea +cups, coffee -tea and -mug -pot find](diagrams/five-query-language.svg)
+
 ```csharp
 [Fact]
 public void CombineTheWords()
@@ -220,8 +224,8 @@ public void CombineTheWords()
     // Exclusions alone: every product, but those.
     Assert.Equal(["Espresso Machine", "Espresso Cups"], Names(ProductTextIndex.Search("-mug -pot")));
 
-    // The word in one property: "mug" in the name only, not in a description.
-    Assert.Equal(["Coffee Mug", "Tea Mug"], Names(ProductTextIndex.Search("name:mug")));
+    // The word in one property: "coffee" in the name only, not in a description.
+    Assert.Equal(["Coffee Mug"], Names(ProductTextIndex.Search("name:coffee")));
 
     // The order of the words never changes the result.
     Assert.Equal(Names(ProductTextIndex.Search("coffee -tea")), Names(ProductTextIndex.Search("-tea coffee")));
@@ -259,7 +263,7 @@ public void FindTheWordsThatLookAlike()
 | `tea +cups` | Those of `tea`, and those of `cups` |
 | `coffee -tea` | Those of `coffee` that do not have `tea` |
 | `-mug -pot` | Every entity but those of `mug` or of `pot` |
-| `name:mug` | `mug` in the property `Name` only |
+| `name:coffee` | `coffee` in the property `Name` only |
 | `espr*`, `t?a` | Any letters, one letter |
 | `expresso`, with `TextSearch.Fuzzy` | The words within one or two letters: `espresso` |
 
@@ -280,7 +284,7 @@ internal interface MCatalogTextIndex
 {
 }
 
-// The rules of an index (Lesson 4): the accents kept, and a term cut at the commas, a tag of several words kept whole.
+// The rules of an index (Lesson 4): the accents kept, and a term cut at the commas and the spaces only, so that fair-trade stays one word.
 [TextIndex(2, KeepAccents = true, Separators = ",")]
 internal interface MTagTextIndex
 {
@@ -313,7 +317,7 @@ internal interface MBrand
     VStory Story { get; set; }
 }
 
-[GhostRepository, IncludeEntityModel(nameof(MProduct)), IncludeEntityModel(nameof(MBrand))]
+[GhostRepository(2), IncludeEntityModel(nameof(MProduct)), IncludeEntityModel(nameof(MBrand))]
 internal interface MCatalogRepository
 {
 }
@@ -425,6 +429,8 @@ public void KeepTheRulesOfAnIndex()
 ```
 
 A property `TextIndexing.Commit` cuts its words once, at the first search of its index in the transaction, or at its commit: a long description written in many steps costs one cut, and the search of the transaction still sees its last text. By default, `TextIndexing.Immediate`, the words of a property are cut by its Setter.
+
+![The six writes of a description: Immediate cuts the words at each one, Commit once, at the first search](diagrams/five-cut-moment.svg)
 
 ```csharp
 [Fact]
@@ -555,7 +561,7 @@ internal interface MOrder
     VNote Note { get; set; }
 }
 
-[GhostRepository, IncludeEntityModel(nameof(MCustomer)), IncludeEntityModel(nameof(MOrder))]
+[GhostRepository(3), IncludeEntityModel(nameof(MCustomer)), IncludeEntityModel(nameof(MOrder))]
 internal interface MShopRepository
 {
 }
@@ -632,6 +638,8 @@ On a date, `OrderPlacedIndex` finds a period:
 | `Every` | Every entity |
 
 A search gives its entities **in the order of their values**: the orders by their dates. `Count()` counts them; the operators of GBO, `Select`, `Sum`, `Take`, work on them as on any collection.
+
+![The ten orders in the order of their dates, and the stretch that each condition takes](diagrams/five-conditions.svg)
 
 ```csharp
 [Fact]
@@ -712,6 +720,8 @@ private static ShopRepository NewShop(TransactionalMemoryStore store)
 private static List<OrderNumber> Numbers(ValueIndexResult<OrderView, Order, ShopRepositoryTag> found) => found.Select(static order => order.Number).ToList();
 ```
 
+![The 24 orders by status then by day: each search of a prefix is one stretch, a day of any status sits in four places](diagrams/five-composite.svg)
+
 ```csharp
 [Fact]
 public void FixTheComponentsInTheirOrder()
@@ -785,6 +795,8 @@ internal interface MCustomerBirthdayIndex
 
 `OrderTotalIndex.From(19.99m)`, on an index by the euro, keeps 19.99 and leaves 19.50: both are in the euro 19, which the search compares to the bound. A bound at the start of its euro, `Between(10.50m, 20m)` for its end, takes or leaves the euro whole, without comparing anything.
 
+![Nine totals in their euros: a euro split by a bound is compared one by one, the others are taken or left whole](diagrams/five-rounded.svg)
+
 ```csharp
 [Fact]
 public void KeepTheResultExactWithARoundedIndex()
@@ -856,7 +868,7 @@ public void FindByThePartsOfADate()
 
 ### Lesson 8: Flags and absent values
 
-The options of an order are a `[Flags]` enum, several at once; its day of shipping is an `Option<DateOnly>`, absent until it ships.
+The options of an order are a `[Flags]` enum, several at once; its day of shipping is an `Option<VDate>`, absent until it ships.
 
 ```csharp
 [ValueIndex(nameof(MOrder), 7), ValueIndexComponent(1, nameof(MOrder.Options))]
@@ -880,6 +892,8 @@ The index of a `[Flags]` enum finds an exact combination, and each flag:
 | `All(Gift \| Express)` | That have both |
 | `None(Fragile)` | That have none of them |
 
+![Five orders and their flags, and what Is, Has, One, All and None find](diagrams/five-flags.svg)
+
 `One`, `All` and `None` give a set of orders, in no particular order, as the combinations of Lesson 10.
 
 The numbers of the orders found, by a search and by a set:
@@ -887,7 +901,7 @@ The numbers of the orders found, by a search and by a set:
 ```csharp
 private static List<OrderNumber> Numbers(ValueIndexResult<OrderView, Order, ShopRepositoryTag> found) => found.Select(static order => order.Number).ToList();
 
-private static List<OrderNumber> Numbers(IndexSetResult<OrderView, Order, ShopRepositoryTag> found) => found.Select(static order => order.Number).ToList();
+private static List<OrderNumber> Numbers(IndexSetResult<OrderView, Order, ShopRepositoryTag> found) => found.Select(static order => order.Number).OrderBy(static n => n).ToList();
 ```
 
 ```csharp
@@ -986,12 +1000,12 @@ public void RefuseAValueTaken()
     {
         Assert.Equal("Ada", CustomerEmailIndex.Is("ADA@Example.com").Single().Name);
 
-        // The email of Ada, whatever its case, refused to Bob: he keeps his own.
+        // The email of Ada, whatever its case, refused to Bob, whose email stays.
         var bob = CustomerEmailIndex.Is("bob@example.com").Bodies().Single();
         Assert.Throws<GhostUniquenessException>(() => bob.Email = "Ada@Example.com");
         Assert.Equal("bob@example.com", bob.Email);
 
-        // Ada changes her email: the old one is free, and Bob takes it.
+        // Ada takes another email: the old one is free, and Bob takes it.
         CustomerEmailIndex.Is("ada@example.com").Bodies().Single().Email = "ada@lovelace.org";
         bob.Email = "ada@example.com";
         transaction.Commit();
@@ -1027,6 +1041,8 @@ public void NeverRefuseAnAbsentValue()
 ```
 
 Two concurrent transactions may give the same value, each alone in its own: neither sees the other. The first commit wins; the second is refused by a `TransactionConflictException` of the kind `Uniqueness`, and nothing of it is written. Its retry sees the value taken, and its Setter refuses it at once, as for any conflict (Tutorial One, Lesson 16).
+
+![Two transactions give the same email: the second commit is refused, and the Setter refuses its retry](diagrams/five-unique-race.svg)
 
 ```csharp
 [Fact]
@@ -1126,6 +1142,8 @@ public void CombineTwoIndexes()
 ```
 
 A text search combines as well: the orders of a note that says "door", paid, and not to call first. A combination combines again.
+
+![Three searches and their orders, and a combination that combines again: And, then AndNot](diagrams/five-combine.svg)
 
 ```csharp
 [Fact]
@@ -1232,6 +1250,8 @@ private static ShopRepository NewShop(TransactionalMemoryStore store)
 }
 ```
 
+![Order 5 joins ada.Orders at the next instruction, without any Add: each order designates its customer](diagrams/five-own-collection.svg)
+
 ```csharp
 [Fact]
 public void ReadTheOrdersOfACustomer()
@@ -1246,7 +1266,7 @@ public void ReadTheOrdersOfACustomer()
     Assert.Equal([3, 4], ada.OrdersSince(Monday.AddDays(1)).Select(static order => order.Number).ToList());
     Assert.Equal(4, ada.LastOrder.Get().Number);
 
-    // A new order of Ada: in her orders at the next instruction, without any Add.
+    // A new order of Ada: in ada.Orders at the next instruction, without any Add.
     new Order { Number = 5, Customer = ada, Placed = Monday.AddDays(3) };
     Assert.Equal(4, ada.Orders.Count());
     Assert.Equal(5, ada.LastOrder.Get().Number);
@@ -1299,6 +1319,8 @@ public void NameASearchOfTheShop()
 ### Lesson 12: The indexes and the transactions
 
 An index is a part of the data, as the entities. It is up to date at the next instruction in the transaction that changes them (Lessons 1 and 5); its changes are rolled back with the transaction; the other transactions see them at its commit only.
+
+![A rollback and a commit: the count of the index in the transaction, and for a reader before and after its end](diagrams/five-transactions.svg)
 
 ```csharp
 [Fact]
@@ -1422,6 +1444,8 @@ Every question has its tool. The path, from the most common to the rarest:
 **The orders of a customer, the late orders:** a member of your partial declaration over an index (Lesson 11). **A set that the code decides:** a collection of the model (Tutorial Two).
 
 ### The whole path
+
+![The questions from the need to the index: the tool first, then what each yes adds to it](diagrams/five-choose-an-index.svg)
 
 | The question | When the answer is yes | The declaration | Lessons |
 | ------------ | ---------------------- | --------------- | ------- |

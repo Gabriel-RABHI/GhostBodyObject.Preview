@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="414" viewBox="0 0 960 414" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>Random reads overlap</title>
+<desc>With one read at a time, 6.1 M/s, as a linked list at 6.1 M/s. The throughput rises with the reads allowed at once, up to 32.1 M/s without limit.</desc>
+<rect width="960" height="414" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Random reads overlap</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">10,000,000 objects of .NET read at random: the same objects, the same order, the reads that may run at once</text>
+<line x1="282" y1="96" x2="282" y2="366" stroke="#4a5a62" stroke-width="1"/>
+<text x="266" y="115" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">Linked list</text>
+<path d="M282 104H372.6Q376.6 104 376.6 108V118Q376.6 122 372.6 122H282Z" fill="#66757d"/>
+<text x="384.6" y="118" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">6.1 M/s</text>
+<text x="266" y="145" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">1 read at a time</text>
+<path d="M282 134H372.6Q376.6 134 376.6 138V148Q376.6 152 372.6 152H282Z" fill="#66757d"/>
+<text x="384.6" y="148" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">6.1 M/s</text>
+<text x="266" y="175" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">2 reads at a time</text>
+<path d="M282 164H456.4Q460.4 164 460.4 168V178Q460.4 182 456.4 182H282Z" fill="#66757d"/>
+<text x="468.4" y="178" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">11.5 M/s</text>
+<text x="266" y="205" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">4 reads at a time</text>
+<path d="M282 194H544.8Q548.8 194 548.8 198V208Q548.8 212 544.8 212H282Z" fill="#66757d"/>
+<text x="556.8" y="208" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">17.2 M/s</text>
+<text x="266" y="235" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">8 reads at a time</text>
+<path d="M282 224H610Q614 224 614 228V238Q614 242 610 242H282Z" fill="#66757d"/>
+<text x="622" y="238" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">21.4 M/s</text>
+<text x="266" y="265" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">16 reads at a time</text>
+<path d="M282 254H681.4Q685.4 254 685.4 258V268Q685.4 272 681.4 272H282Z" fill="#66757d"/>
+<text x="693.4" y="268" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">26.0 M/s</text>
+<text x="266" y="295" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">32 reads at a time</text>
+<path d="M282 284H743.4Q747.4 284 747.4 288V298Q747.4 302 743.4 302H282Z" fill="#66757d"/>
+<text x="755.4" y="298" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">30.0 M/s</text>
+<text x="266" y="325" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">64 reads at a time</text>
+<path d="M282 314H745Q749 314 749 318V328Q749 332 745 332H282Z" fill="#66757d"/>
+<text x="757" y="328" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">30.1 M/s</text>
+<text x="266" y="355" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">No limit</text>
+<path d="M282 344H776Q780 344 780 348V358Q780 362 776 362H282Z" fill="#66757d"/>
+<text x="788" y="358" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">32.1 M/s</text>
+<text x="32" y="396" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Intel i9-9900K, Windows 10, .NET 10, workstation GC · 10,000,000 items of 10 strings and a date · 2026-11-01</text>
+</svg>

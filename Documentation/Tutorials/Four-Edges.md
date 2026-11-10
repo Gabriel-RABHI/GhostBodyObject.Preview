@@ -21,7 +21,7 @@ A site of movie reviews: critics, movies, the ratings that critics give and the 
 
 Four models, each in a namespace of its own with its own Repository, as in Tutorials Two and Three: `Reviews` for Lessons 1 to 4, `Network` for Lessons 5 and 6, `Social` for Lessons 7 to 9, `Choices` for Lesson 10.
 
-**The values of the models come first**, each a value object ([Tutorial One, Lesson 18](One-TheBasics.md#lesson-18-give-each-value-its-type)). Those the four models share are declared once, in the namespace of the tutorial; each model declares at its head the values that it alone has. The values of an edge are given to its birth by their name, as any value: `critic.NewRating(movie, stars: 5)`.
+**The values of the models come first**, each a value object ([Tutorial One, Lesson 19](One-TheBasics.md#lesson-19-give-each-value-its-type)). Those the four models share are declared once, in the namespace of the tutorial; each model declares at its head the values that it alone has. The values of an edge are given to its birth by their name, as any value: `critic.NewRating(movie, stars: 5)`.
 
 ```csharp
 namespace TutorialFour
@@ -51,7 +51,7 @@ Every declaration of the tutorial, and the lesson that shows it:
 | `[Removable]` on an edge | The code removes it: `Remove()`, `Remove(other)`; without it, it leaves with an end only | 3 |
 | `[Edge(nameof(MCity), nameof(MCity))]` | A graph of one type: the edges that leave an entity, and those that arrive | 5, 6 |
 | `[Edge(..., Symmetric = true)]` | No direction: one edge per pair, the same from both ends | 7, 9 |
-| `[Strong] MRole Role` in an edge | A required link, given to its birth, compared by `GetOrNew` | 8 |
+| `[Strong] MRole Role` in an edge | A required link, given to its birth, compared by `GetOrNew` and `TryGetOrNew` | 8 |
 | `[Strong] EMembership`, `[Weak] Option<EFriendship>` | A reference to an edge: a strong one retains it and its ends; a weak one forgets it | 8 |
 
 ## Part 1: Edges
@@ -108,7 +108,7 @@ internal interface EScreening
     VInstant At { get; set; }
 }
 
-[GhostRepository, IncludeEntityModel(nameof(MCritic)), IncludeEntityModel(nameof(MMovie)), IncludeEntityModel(nameof(ERating)), IncludeEntityModel(nameof(EScreening))]
+[GhostRepository(1), IncludeEntityModel(nameof(MCritic)), IncludeEntityModel(nameof(MMovie)), IncludeEntityModel(nameof(ERating)), IncludeEntityModel(nameof(EScreening))]
 internal interface MReviewRepository
 {
 }
@@ -147,7 +147,9 @@ public void RateAMovie()
 }
 ```
 
-Each end reads its ratings: the critic those she gave, `ada.RatingEdges`, whose other ends are its **`Targets`**; the movie those it received, `dune.RatingEdges`, whose other ends are its **`Sources`**. The rating of a pair is found at once, without reading the other ratings: **`To(dune)`** from the critic, **`From(ada)`** from the movie, an `Option`.
+Each end reads its ratings: the critic those it gave, `ada.RatingEdges`, whose other ends are its **`Targets`**; the movie those it received, `dune.RatingEdges`, whose other ends are its **`Sources`**. The rating of a pair is found at once, without reading the other ratings: **`To(dune)`** from the critic, **`From(ada)`** from the movie, an `Option`.
+
+![Two critics, two movies and three ratings: a critic reads its movies, its Targets; a movie reads its critics, its Sources](diagrams/four-both-ends.svg)
 
 ```csharp
 [Fact]
@@ -162,7 +164,7 @@ public void ReadTheRatingsFromBothEnds()
     ada.NewRating(alien, 3);
     bob.NewRating(dune, 4);
 
-    // From the critic: the movies she rated, and her rating of one of them.
+    // From the critic: the movies it rated, and its rating of one of them.
     Assert.Equal(["Alien", "Dune"], ada.RatingEdges.Targets.Select(static m => m.Title).Order().ToList());
     Assert.Equal(3, ada.RatingEdges.To(alien).Get().Stars);
 
@@ -190,7 +192,7 @@ public void ChangeTheValuesOfAnEdge()
     var dune = new Movie { Title = "Dune" };
     var rating = ada.NewRating(dune, 3);
 
-    // The critic sees it again, and changes her mind.
+    // The critic sees it again, and changes its mind.
     rating.Stars = 5;
     rating.At = new DateTime(2026, 10, 15);
     Assert.Equal(5, dune.RatingEdges.From(ada).Get().Stars);
@@ -205,6 +207,8 @@ The generator checks an edge: its interface starts with `E`, its ends are entity
 ### Lesson 2: One edge per pair, or several
 
 A critic rates a movie once: an edge is **one per pair** of ends, unless its type says otherwise. A second rating of the same movie by the same critic is refused, before anything changes, and the transaction goes on. **`GetOrNew`** gives the rating of the pair, or a new one: one instruction rates a movie, whether the critic rated it already or not.
+
+![Four instructions on a pair: a second rating refused, GetOrNew finding the rating of the pair, and a new one for another pair](diagrams/four-one-per-pair.svg)
 
 ```csharp
 [Fact]
@@ -233,7 +237,7 @@ public void RateAMovieOnce()
 private static void Rate(Critic critic, Movie movie, Stars stars) => critic.RatingEdges.GetOrNew(movie).Stars = stars;
 ```
 
-A critic may see a movie several times: **`[Edge(..., Multiple = true)]`** allows several edges per pair. The screenings of a pair are then a sequence, `ada.ScreeningEdges.To(dune)`, and the movies she saw are each listed once in her `Targets`.
+A critic may see a movie several times: **`[Edge(..., Multiple = true)]`** allows several edges per pair. The screenings of a pair are then a sequence, `ada.ScreeningEdges.To(dune)`, and the movies it saw are each listed once in its `Targets`.
 
 ```csharp
 [Fact]
@@ -258,9 +262,11 @@ public void SeeAMovieSeveralTimes()
 
 ### Lesson 3: An edge lives with its ends
 
-An edge never survives its ends: removing a movie removes its ratings and its screenings, at that instruction; removing a critic, hers. The other end stays, with its other edges. The reverse never happens: **an edge never retains its ends**, and its removal leaves them as they are.
+An edge never survives its ends: removing a movie removes its ratings and its screenings, at that instruction; removing a critic, its own. The other end stays, with its other edges. The reverse never happens: **an edge never retains its ends**, and its removal leaves them as they are.
 
 The code removes an edge when its type is **`[Removable]`**: `rating.Remove()`, or by the pair, `ada.RatingEdges.Remove(dune)`.
+
+![Two removals: an edge removed leaves its ends, an end removed takes its edges](diagrams/four-edge-and-ends.svg)
 
 ```csharp
 [Fact]
@@ -392,6 +398,8 @@ public void RankTheMovies()
 
 The Bodies are for the few edges to write: a search by the Views finds them, `ToBody()` gives their Body. A birth takes its other end by its View as well: `cid.NewRating(alienView, 4)`.
 
+![The ratings of a movie searched by the Views, the one found crossing to its Body, and a View given to a birth](diagrams/four-views-and-bodies.svg)
+
 ```csharp
 [Fact]
 public void WriteTheFewByTheirBody()
@@ -458,7 +466,7 @@ internal interface ERoad
     RoadKind Kind { get; set; }
 }
 
-[GhostRepository, IncludeEntityModel(nameof(MCity)), IncludeEntityModel(nameof(ERoad))]
+[GhostRepository(2), IncludeEntityModel(nameof(MCity)), IncludeEntityModel(nameof(ERoad))]
 internal interface MRoadMapRepository
 {
 }
@@ -509,6 +517,8 @@ public void GoBothWays()
 ```
 
 Two cities may be linked by several roads, `Multiple = true`: `paris.RoadEdges.To(lyon)` is the sequence of the roads from Paris to Lyon, and the operators choose among them.
+
+![Paris and Lyon in three maps: one road, a way back that is another road, and two roads from one city to the other](diagrams/four-one-way-roads.svg)
 
 ```csharp
 [Fact]
@@ -562,6 +572,8 @@ private static RoadMapRepository NewMap(TransactionalMemoryStore store)
 ```
 
 The cities within two roads of Paris: a walk in breadth, a road at a time. It reads the Views of the cities, and remembers the cities it met by their identity, `CityRef`, a value that a `HashSet` holds.
+
+![The map of the lesson from Paris, one road away, then two, each city met once](diagrams/four-breadth-walk.svg)
 
 ```csharp
 [Fact]
@@ -660,6 +672,8 @@ private static Option<Route> ShortestRoute(CityView from, CityView to, bool avoi
 
 A rule of the walk is a condition in your code: a route without tolls skips the roads with one.
 
+![The same map twice: the shortest route through the tolls, 780 km, and the route without them, 890 km](diagrams/four-shortest-route.svg)
+
 ```csharp
 [Fact]
 public void AvoidTheTolls()
@@ -740,7 +754,7 @@ internal interface MNotice
     Option<EFriendship> Friendship { get; set; }
 }
 
-[GhostRepository, IncludeEntityModel(nameof(MPerson)), IncludeEntityModel(nameof(EFriendship)), IncludeEntityModel(nameof(MGroup)), IncludeEntityModel(nameof(MRole)), IncludeEntityModel(nameof(EMembership)), IncludeEntityModel(nameof(MCertificate)), IncludeEntityModel(nameof(MNotice))]
+[GhostRepository(3), IncludeEntityModel(nameof(MPerson)), IncludeEntityModel(nameof(EFriendship)), IncludeEntityModel(nameof(MGroup)), IncludeEntityModel(nameof(MRole)), IncludeEntityModel(nameof(EMembership)), IncludeEntityModel(nameof(MCertificate)), IncludeEntityModel(nameof(MNotice))]
 internal interface MSocialRepository
 {
 }
@@ -775,6 +789,8 @@ private static Person NewPerson(Name name) => new(PersonRef.New()) { Name = name
 
 Two steps give the friends of friends; your code ranks the people a person may know by the friends they have in common:
 
+![Two steps from Ada by the friendships, to Dan and Eve, ranked by the friends they share with Ada](diagrams/four-people-to-know.svg)
+
 ```csharp
 [Fact]
 public void SuggestThePeopleToKnow()
@@ -799,7 +815,7 @@ public void SuggestThePeopleToKnow()
     }
 }
 
-// The friends of the friends of a person, but her and her friends, ranked by the friends they share with her: two steps, from
+// The friends of the friends of a person, but the person and its friends, ranked by the friends they share with it: two steps, from
 // the View of a person to the Views of the others.
 private static List<string> PeopleToKnow(PersonView person)
 {
@@ -824,7 +840,9 @@ private static List<string> PeopleToKnow(PersonView person)
 
 ### Lesson 8: The links of an edge
 
-An edge is an entity: it has **the links of any entity** (Tutorial Two). A required link, a `T`, is given to its birth, after its other end: `ada.NewMembership(club, member)`; a strong one retains its target, the role. `TryGetOrNew` compares it: Ada joining the club as an admin, where the club has her as a member, is a case of the business, which the code handles at once.
+An edge is an entity: it has **the links of any entity** (Tutorial Two). A required link, a `T`, is given to its birth, after its other end: `ada.NewMembership(club, member)`; a strong one retains its target, the role. `GetOrNew` and `TryGetOrNew` compare it: Ada joining the club as an admin, where the club has Ada as a member, is a case of the business, which the code handles at once.
+
+![A membership and its role at each instruction: the role retained, its removal refused, another role given, and the first one free](diagrams/four-required-link.svg)
 
 ```csharp
 [Fact]
@@ -841,7 +859,7 @@ public void GiveAnEdgeARequiredLink()
     var membership = ada.NewMembership(club, member, since: new DateTime(2026, 1, 1));
     Assert.Throws<InvalidOperationException>(member.Remove);
 
-    // Ada as an admin, where she is a member: TryGetOrNew gives the membership, and false.
+    // Ada as an admin, a member already: TryGetOrNew gives the membership, and false.
     if (!ada.MembershipEdges.TryGetOrNew(club, admin, out var found))
         found.Role = admin;
     Assert.Same(membership, found);
@@ -854,6 +872,8 @@ public void GiveAnEdgeARequiredLink()
 ```
 
 Other entities link to an edge as to any entity. A **strong reference to an edge retains it, and its two ends through it**: a certificate of membership keeps the membership, the person and the group, until it is revoked.
+
+![A certificate retains a membership and its two ends: three removals refused, until the certificate is revoked](diagrams/four-edge-retained.svg)
 
 ```csharp
 [Fact]
@@ -943,6 +963,8 @@ public async Task ChangeAnEdgeAndItsEndsConcurrently()
 ```
 
 Two transactions that make the same pair friends at the same time **conflict** at the second commit, which retries: a pair never ends up with two friendships. Written with `GetOrNew`, the retry runs the same code, and finds the friendship that the other transaction gave.
+
+![Two concurrent transactions: an edge and its end both commit; the same pair conflicts, and the retry finds the friendship](diagrams/four-concurrency.svg)
 
 ```csharp
 [Fact]
@@ -1061,7 +1083,7 @@ internal interface MTransfer
     MAccount To { get; set; }
 }
 
-[GhostRepository, IncludeEntityModel(nameof(MUser)), IncludeEntityModel(nameof(MPost)), IncludeEntityModel(nameof(EReaction)), IncludeEntityModel(nameof(MAccount)), IncludeEntityModel(nameof(MTransfer))]
+[GhostRepository(4), IncludeEntityModel(nameof(MUser)), IncludeEntityModel(nameof(MPost)), IncludeEntityModel(nameof(EReaction)), IncludeEntityModel(nameof(MAccount)), IncludeEntityModel(nameof(MTransfer))]
 internal interface MForumRepository
 {
 }
@@ -1099,6 +1121,8 @@ public void ChooseTheLinkOfEachRelation()
 ```
 
 What the removal of an end does follows from the choice: the like leaves the collection, the reaction leaves with its post, the transfer refuses the removal of its account.
+
+![Three relations when an end goes: the like leaves the collection, the reaction leaves with its post, the transfer refuses the removal](diagrams/four-edge-or-reference.svg)
 
 ```csharp
 [Fact]
@@ -1145,7 +1169,7 @@ The lessons went from an edge to what it does. This chapter goes the other way: 
 
 **A rating, a membership, a road.** Without one of its ends, it means nothing: an edge, removed with either.
 
-**A transfer between two accounts, an order, a contract, a booking.** A fact of the business that outlives an end, or that others designate: a Root with strong references, which retain its ends (Lesson 10).
+**A transfer between two accounts, an order, a contract, a booking.** A fact of the business that must not vanish with an end, or that others designate: a Root with strong references, which retain its ends (Lesson 10).
 
 ### 4. One per pair, several, or no direction?
 
@@ -1160,6 +1184,8 @@ The lessons went from an edge to what it does. This chapter goes the other way: 
 **The friends of friends, the cities within two roads, the shortest route, the dependencies of a task.** The edges of an end give its neighbours; your code walks them, by the Views, and remembers what it met by the identities of the entities (Lessons 6 and 7).
 
 ### The whole path
+
+![The questions in their order: from a relation to an edge, then to its declaration](diagrams/four-choose-a-link.svg)
 
 | The question | When the answer is yes | The declaration | Lessons |
 | ------------ | ---------------------- | --------------- | ------- |

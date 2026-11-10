@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="268" viewBox="0 0 960 268" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A commit settles a merged entity in this order</title>
+<desc>Five steps in their order. The links: changed by the head, a conflict. The Merger: called when a value is in conflict. The other values: the head, unless the value differs from the epoch. Then Delta, Max and Min, merged from what the Merger left, so that it reads Posted as its transaction wrote it. Then the bounds: a merged value out of them is a conflict of the kind Bound.</desc>
+<rect width="960" height="268" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A commit settles a merged entity in this order</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Before it writes anything: a refusal at any step leaves nothing written</text>
+<rect x="32" y="104" width="166" height="112" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="115" y="140" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The links</text>
+<text x="115" y="166" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">changed by the head:</text>
+<text x="115" y="184" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">a conflict</text>
+<path d="M198 160L205 160" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M204.8 156.4L212 160L204.8 163.6Z" fill="#aebcc4"/>
+<rect x="212" y="104" width="166" height="112" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="295" y="140" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The Merger</text>
+<text x="295" y="166" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">a value in conflict:</text>
+<text x="295" y="184" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Merge(epoch, head)</text>
+<path d="M378 160L385 160" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M384.8 156.4L392 160L384.8 163.6Z" fill="#aebcc4"/>
+<rect x="392" y="104" width="166" height="112" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="475" y="140" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The other values</text>
+<text x="475" y="166" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">the head, unless the</text>
+<text x="475" y="184" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">value differs from the epoch</text>
+<path d="M558 160L565 160" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M564.8 156.4L572 160L564.8 163.6Z" fill="#aebcc4"/>
+<rect x="572" y="104" width="166" height="112" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="655" y="140" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">[Delta], [Max], [Min]</text>
+<text x="655" y="166" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">merged from what</text>
+<text x="655" y="184" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">the Merger left</text>
+<path d="M738 160L745 160" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M744.8 156.4L752 160L744.8 163.6Z" fill="#aebcc4"/>
+<rect x="752" y="104" width="166" height="112" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="835" y="140" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The bounds</text>
+<text x="835" y="166" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">a merged value out</text>
+<text x="835" y="184" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">of them: Bound</text>
+<text x="32" y="250" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">The Merger runs first of the values: Posted is a [Max], and the Merger reads it as its transaction wrote it.</text>
+</svg>

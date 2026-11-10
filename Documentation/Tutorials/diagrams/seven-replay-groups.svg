@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="356" viewBox="0 0 960 356" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A Replay transaction may hold many transactions of the Log</title>
+<desc>The Log holds the four transactions of the commands. With group 1, each is replayed in a Replay transaction of its own, four Replay commits, each Commit(through) naming its transaction. With group 100, one Replay transaction holds all four, one commit, through the last transaction of the Log. Both leave the same model, no longer behind its Log.</desc>
+<rect width="960" height="356" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A Replay transaction may hold many transactions of the Log</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The same Log replayed by transactions, then by groups of 100: each commit says where the model is</text>
+<text x="32" y="134" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The Log</text>
+<text x="32" y="152" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">four transactions</text>
+<rect x="176" y="100" width="142" height="62" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="247" y="126.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">PX-10001</text><text x="247" y="143.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">registered</text>
+<rect x="330" y="100" width="142" height="62" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="401" y="126.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">PX-10002</text><text x="401" y="143.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">registered</text>
+<rect x="484" y="100" width="142" height="62" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="555" y="126.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">PX-10001, PX-10002</text><text x="555" y="143.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">scanned at Lyon</text>
+<rect x="638" y="100" width="142" height="62" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="709" y="126.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">PX-10001 at Paris</text><text x="709" y="143.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">PX-10002 delivered</text>
+<text x="860" y="122" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">Replay</text>
+<text x="860" y="138" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">commits</text>
+<text x="32" y="204" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">One by one</text>
+<text x="32" y="223" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">group: 1</text>
+<line x1="247" y1="162" x2="247" y2="178" stroke="#4a5a62" stroke-width="1"/>
+<rect x="176" y="178" width="142" height="58" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="247" y="202.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Replay transaction</text><text x="247" y="219.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit(through)</text>
+<line x1="401" y1="162" x2="401" y2="178" stroke="#4a5a62" stroke-width="1"/>
+<rect x="330" y="178" width="142" height="58" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="401" y="202.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Replay transaction</text><text x="401" y="219.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit(through)</text>
+<line x1="555" y1="162" x2="555" y2="178" stroke="#4a5a62" stroke-width="1"/>
+<rect x="484" y="178" width="142" height="58" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="555" y="202.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Replay transaction</text><text x="555" y="219.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit(through)</text>
+<line x1="709" y1="162" x2="709" y2="178" stroke="#4a5a62" stroke-width="1"/>
+<rect x="638" y="178" width="142" height="58" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="709" y="202.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Replay transaction</text><text x="709" y="219.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit(through)</text>
+<text x="860" y="213" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">4</text>
+<line x1="32" y1="249" x2="928" y2="249" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="288" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">All together</text>
+<text x="32" y="307" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">group: 100</text>
+<rect x="176" y="262" width="604" height="58" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="478" y="278" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Replay transaction</text><text x="478" y="295" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit(through)</text><text x="478" y="312" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">through the last transaction of the Log</text>
+<text x="860" y="297" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text>
+<text x="32" y="338" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Both leave the same model, and IsBehindLog false</text>
+</svg>

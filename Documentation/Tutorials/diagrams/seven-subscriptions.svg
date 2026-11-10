@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="426" viewBox="0 0 960 426" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A subscription walks the Log, each Record to the handler of its type</title>
+<desc>The Log holds four Records in three commits: ParcelRegistered and ParcelScanned at Lyon in the first, ParcelScanned at Paris in the second, ParcelDelivered in the third. A subscription with a handler for each type receives all four, in the order of the Log. A subscription with a handler for ParcelScannedView alone receives Lyon and Paris, and skips the two others. A subscription whose handler answers Cancel skips the first Record, receives Lyon, and stops there: the Records after it are not delivered, and Completion is IsCompletedSuccessfully.</desc>
+<rect width="960" height="426" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A subscription walks the Log, each Record to the handler of its type</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The journey of a parcel, in three commits, and the three subscriptions of the lesson</text>
+<text x="32" y="138" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The Log</text>
+<text x="32" y="157" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Journey(log)</text>
+<rect x="252" y="100" width="308" height="82" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="264" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">First commit</text>
+<rect x="584" y="100" width="160" height="82" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="596" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Second commit</text>
+<rect x="768" y="100" width="160" height="82" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="780" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Third commit</text>
+<rect x="262" y="128" width="140" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="332" y="147" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">ParcelRegistered</text><text x="332" y="163" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">PX-2001, Ada</text>
+<rect x="410" y="128" width="140" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="480" y="147" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">ParcelScanned</text><text x="480" y="163" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">PX-2001, Lyon</text>
+<rect x="594" y="128" width="140" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="664" y="147" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">ParcelScanned</text><text x="664" y="163" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">PX-2001, Paris</text>
+<rect x="778" y="128" width="140" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="848" y="147" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">ParcelDelivered</text><text x="848" y="163" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">PX-2001</text>
+<text x="32" y="226" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A handler for each type</text>
+<text x="32" y="245" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">three Handle&lt;TView&gt;</text>
+<line x1="252" y1="232" x2="928" y2="232" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="332" cy="232" r="4.5" fill="#3987e5"/>
+<circle cx="480" cy="232" r="4.5" fill="#3987e5"/>
+<circle cx="664" cy="232" r="4.5" fill="#3987e5"/>
+<circle cx="848" cy="232" r="4.5" fill="#3987e5"/>
+<text x="332" y="220" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">registered for Ada</text>
+<text x="480" y="220" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">scanned at Lyon</text>
+<text x="664" y="220" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">scanned at Paris</text>
+<text x="848" y="220" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">delivered</text>
+<line x1="32" y1="272" x2="928" y2="272" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="302" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A handler for one type</text>
+<text x="32" y="321" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Handle&lt;ParcelScannedView&gt;</text>
+<line x1="252" y1="308" x2="928" y2="308" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="332" cy="308" r="4.5" fill="#1a252b"/>
+<circle cx="332" cy="308" r="4.5" fill="none" stroke="#7f9199" stroke-width="1"/>
+<circle cx="480" cy="308" r="4.5" fill="#3987e5"/>
+<circle cx="664" cy="308" r="4.5" fill="#3987e5"/>
+<circle cx="848" cy="308" r="4.5" fill="#1a252b"/>
+<circle cx="848" cy="308" r="4.5" fill="none" stroke="#7f9199" stroke-width="1"/>
+<text x="332" y="328" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">skipped</text>
+<text x="480" y="296" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Lyon</text>
+<text x="664" y="296" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Paris</text>
+<text x="848" y="328" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">skipped</text>
+<line x1="32" y1="348" x2="928" y2="348" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="378" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A handler that answers Cancel</text>
+<text x="32" y="397" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">LogStoreSubscription.Cancel</text>
+<line x1="252" y1="384" x2="480" y2="384" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="332" cy="384" r="4.5" fill="#1a252b"/>
+<circle cx="332" cy="384" r="4.5" fill="none" stroke="#7f9199" stroke-width="1"/>
+<circle cx="480" cy="384" r="4.5" fill="#3987e5"/>
+<text x="332" y="404" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">skipped</text>
+<text x="480" y="372" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Lyon</text>
+<line x1="488" y1="377" x2="488" y2="391" stroke="#aebcc4" stroke-width="2"/>
+<text x="594" y="380" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start">Cancel: the Records after it are not delivered</text>
+<text x="594" y="399" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Completion.IsCompletedSuccessfully</text>
+</svg>

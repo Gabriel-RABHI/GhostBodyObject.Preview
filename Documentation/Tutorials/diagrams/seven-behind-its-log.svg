@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>At each opening the model is behind its Log, until a replay</title>
+<desc>Five steps. The first opening: four commits leave two parcels, PX-10001 InTransit Paris 2 and PX-10002 Delivered Lyon 1, and six Records in the Log. The second opening: the model is empty and behind its Log, IsBehindLog, and the Log holds its six Records. A transaction of the commands is refused meanwhile. Replay.Run brings the model to the same two parcels: it is ready. Parcels.Register goes on, in the model and in the Log: three parcels, seven Records.</desc>
+<rect width="960" height="380" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">At each opening the model is behind its Log, until a replay</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">A model in memory, its Log on disk: what each one holds at each step</text>
+<line x1="32" y1="94" x2="928" y2="94" stroke="#4a5a62" stroke-width="1"/><circle cx="116" cy="94" r="3.5" fill="#aebcc4"/><circle cx="298" cy="94" r="3.5" fill="#aebcc4"/><circle cx="480" cy="94" r="3.5" fill="#aebcc4"/><circle cx="662" cy="94" r="3.5" fill="#aebcc4"/><circle cx="844" cy="94" r="3.5" fill="#aebcc4"/>
+<text x="32" y="160" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">The parcels, in memory</text>
+<text x="32" y="270" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">The Log, on disk: its transactions and their Records</text>
+<text x="116" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">the first opening</text>
+<text x="116" y="134" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">four commits</text>
+<rect x="32" y="170" width="168" height="64" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="116" y="197.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">PX-10001 InTransit Paris 2</text><text x="116" y="214.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">PX-10002 Delivered Lyon 1</text>
+<rect x="64" y="280" width="18" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="69" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="86" y="280" width="18" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="91" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="108" y="280" width="28" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="113" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="123" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="140" y="280" width="28" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="145" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="155" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<text x="116" y="334" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">6</text>
+<text x="116" y="351" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">Records</text>
+<text x="298" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">the second opening</text>
+<text x="298" y="134" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">new InMemoryChain</text>
+<rect x="214" y="170" width="168" height="64" rx="8" fill="#46391f" stroke="#e4a93c" stroke-width="1.5"/><text x="298" y="197.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Empty</text><text x="298" y="214.5" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">IsBehindLog</text>
+<rect x="246" y="280" width="18" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="251" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="268" y="280" width="18" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="273" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="290" y="280" width="28" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="295" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="305" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="322" y="280" width="28" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="327" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="337" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<text x="298" y="334" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">6</text>
+<text x="298" y="351" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">Records</text>
+<text x="480" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">OpenTransaction</text>
+<text x="480" y="134" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">(ReadWrite)</text>
+<rect x="396" y="170" width="168" height="64" rx="8" fill="#46391f" stroke="#e4a93c" stroke-width="1.5"/><text x="480" y="197.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Empty</text><text x="480" y="214.5" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">IsBehindLog</text>
+<text x="480" y="254" font-size="12" font-weight="600" fill="#f07a78" text-anchor="middle">refused</text>
+<rect x="428" y="280" width="18" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="433" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="450" y="280" width="18" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="455" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="472" y="280" width="28" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="477" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="487" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="504" y="280" width="28" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="509" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="519" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<text x="480" y="334" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">6</text>
+<text x="480" y="351" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">Records</text>
+<text x="662" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Replay.Run(...)</text>
+<text x="662" y="134" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace"></text>
+<rect x="578" y="170" width="168" height="64" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="662" y="197.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">PX-10001 InTransit Paris 2</text><text x="662" y="214.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">PX-10002 Delivered Lyon 1</text>
+<text x="662" y="254" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">ready</text>
+<rect x="610" y="280" width="18" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="615" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="632" y="280" width="18" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="637" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="654" y="280" width="28" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="659" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="669" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="686" y="280" width="28" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="691" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="701" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<text x="662" y="334" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">6</text>
+<text x="662" y="351" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">Records</text>
+<text x="844" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Parcels.Register(</text>
+<text x="844" y="134" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">"PX-10003", "Cy")</text>
+<rect x="760" y="170" width="168" height="64" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="844" y="189" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">PX-10001 InTransit Paris 2</text><text x="844" y="206" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">PX-10002 Delivered Lyon 1</text><text x="844" y="223" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">PX-10003 Registered  0</text>
+<rect x="781" y="280" width="18" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="786" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="803" y="280" width="18" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="808" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="825" y="280" width="28" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="830" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="840" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="857" y="280" width="28" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="862" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="872" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<rect x="889" y="280" width="18" height="26" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="894" y="287" width="7" height="12" rx="2" fill="#aebcc4"/>
+<text x="844" y="334" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">7</text>
+<text x="844" y="351" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">Records</text>
+</svg>

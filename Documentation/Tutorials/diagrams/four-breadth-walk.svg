@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="408" viewBox="0 0 960 408" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A walk in breadth: each frontier gives the next one</title>
+<desc>The map of the lesson, from Paris. One road away, Paris reaches Lyon, Dijon and Lille. Two roads away, Lyon reaches Marseille and Grenoble; Dijon reaches only Lyon, met already, which the walk does not take again. Reachable(paris, roads: 1) gives Dijon, Lille and Lyon. Reachable(paris, roads: 2) gives Dijon, Grenoble, Lille, Lyon and Marseille. Nice, a third road away, is not reached. The roads from Paris to Lyon, from Lyon to Marseille and from Marseille to Nice have a toll.</desc>
+<rect width="960" height="408" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A walk in breadth: each frontier gives the next one</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The cities within two roads of Paris, each met once</text>
+<text x="84" y="104" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The start</text>
+<text x="84" y="120" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">paris</text>
+<text x="348" y="104" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">One road</text>
+<text x="348" y="120" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">roads: 1</text>
+<text x="612" y="104" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Two roads</text>
+<text x="612" y="120" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">roads: 2</text>
+<text x="876" y="104" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Not reached</text>
+<path d="M84 232L84 164Q84 156 92 156L159 156" fill="none" stroke="#3987e5" stroke-width="2"/>
+<path d="M221 156L289 156" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M288.8 152.4L296 156L288.8 159.6Z" fill="#3987e5"/>
+<rect x="159" y="144" width="62" height="24" rx="8" fill="#46391f" stroke="#e4a93c" stroke-width="1.5"/><text x="190" y="160.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">465 km</text>
+<path d="M136 252L185 252" fill="none" stroke="#3987e5" stroke-width="2"/>
+<path d="M247 252L289 252" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M288.8 248.4L296 252L288.8 255.6Z" fill="#3987e5"/>
+<rect x="185" y="240" width="62" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="216" y="256.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">315 km</text>
+<path d="M84 272L84 340Q84 348 92 348L159 348" fill="none" stroke="#3987e5" stroke-width="2"/>
+<path d="M221 348L289 348" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M288.8 344.4L296 348L288.8 351.6Z" fill="#3987e5"/>
+<rect x="159" y="336" width="62" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="190" y="352.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">225 km</text>
+<path d="M348 232L348 216" fill="none" stroke="#aebcc4" stroke-width="1.6"/>
+<path d="M348 192L348 183" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M344.4 183.2L348 176L351.6 183.2Z" fill="#aebcc4"/>
+<rect x="317" y="192" width="62" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="348" y="208.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">195 km</text>
+<text x="307" y="208" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">Lyon, met already</text>
+<path d="M400 146L455 146" fill="none" stroke="#3987e5" stroke-width="2"/>
+<path d="M517 146L553 146" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M552.8 142.4L560 146L552.8 149.6Z" fill="#3987e5"/>
+<rect x="455" y="134" width="62" height="24" rx="8" fill="#46391f" stroke="#e4a93c" stroke-width="1.5"/><text x="486" y="150.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">315 km</text>
+<path d="M400 166L434 166Q442 166 442 174L442 244Q442 252 450 252L469 252" fill="none" stroke="#3987e5" stroke-width="2"/>
+<path d="M531 252L553 252" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M552.8 248.4L560 252L552.8 255.6Z" fill="#3987e5"/>
+<rect x="469" y="240" width="62" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="500" y="256.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">110 km</text>
+<path d="M612 232L612 216" fill="none" stroke="#aebcc4" stroke-width="1.6"/>
+<path d="M612 192L612 183" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M608.4 183.2L612 176L615.6 183.2Z" fill="#aebcc4"/>
+<rect x="581" y="192" width="62" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="612" y="208.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">270 km</text>
+<path d="M664 156L713 156" fill="none" stroke="#aebcc4" stroke-width="1.6"/>
+<path d="M775 156L817 156" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M816.8 152.4L824 156L816.8 159.6Z" fill="#aebcc4"/>
+<rect x="713" y="144" width="62" height="24" rx="8" fill="#46391f" stroke="#e4a93c" stroke-width="1.5"/><text x="744" y="160.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">200 km</text>
+<rect x="32" y="232" width="104" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="84" y="256.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Paris</text>
+<rect x="296" y="136" width="104" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="348" y="160.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Lyon</text>
+<rect x="296" y="232" width="104" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="348" y="256.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Dijon</text>
+<rect x="296" y="328" width="104" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="348" y="352.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Lille</text>
+<rect x="560" y="136" width="104" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="612" y="160.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Marseille</text>
+<rect x="560" y="232" width="104" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="612" y="256.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Grenoble</text>
+<rect x="824" y="136" width="104" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="876" y="160.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Nice</text>
+<text x="440" y="342" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Reachable(paris, roads: 1)</text>
+<text x="928" y="342" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="end">Dijon, Lille, Lyon</text>
+<text x="440" y="364" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Reachable(paris, roads: 2)</text>
+<text x="928" y="364" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="end">Dijon, Grenoble, Lille, Lyon, Marseille</text>
+<rect x="32" y="381" width="18" height="10" rx="3" fill="#46391f" stroke="#e4a93c" stroke-width="1.5"/>
+<text x="58" y="390" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">a road with a toll</text>
+</svg>

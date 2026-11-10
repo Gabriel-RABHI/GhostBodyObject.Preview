@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="322" viewBox="0 0 960 322" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A lease holds a seat between two transactions</title>
+<desc>A first transaction calls TryLock on seat 1, and its commit takes the lease. The payment runs outside any transaction, charged once by the key lease.Id. A transaction of the lease writes the buyer, calls Release, and its commit frees the seat. While the lease is active, another till that writes the seat is refused at its instruction, its transaction intact: it writes seat 2 and commits.</desc>
+<rect width="960" height="322" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A lease holds a seat between two transactions</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">A payment takes seconds, outside any transaction: nothing else stops, and only this seat is refused</text>
+<text x="146" y="138" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">the holder</text>
+<line x1="158" y1="134" x2="300" y2="134" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="158" cy="134" r="4" fill="#aebcc4"/>
+<text x="158" y="124" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">opens</text>
+<circle cx="228" cy="134" r="4" fill="#aebcc4"/>
+<text x="228" y="124" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">TryLock</text>
+<path d="M294 134L298.5 138.5L306 129.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="300" y="122" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<path d="M312 128H594Q598 128 598 132V136Q598 140 594 140H312Z" fill="#3987e5"/>
+<text x="455" y="120" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">the payment, outside any transaction</text>
+<text x="455" y="158" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">charged once, by lease.Id</text>
+<line x1="610" y1="134" x2="830" y2="134" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="610" cy="134" r="4" fill="#aebcc4"/>
+<text x="610" y="124" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">opens</text>
+<circle cx="722" cy="134" r="4" fill="#aebcc4"/>
+<text x="722" y="124" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Buyer, Release()</text>
+<path d="M824 134L828.5 138.5L836 129.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="830" y="122" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<text x="388" y="252" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">another till</text>
+<line x1="400" y1="248" x2="664" y2="248" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="400" cy="248" r="4" fill="#aebcc4"/>
+<text x="400" y="238" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">opens</text>
+<path d="M494 242L506 254M506 242L494 254" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="500" y="236" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Seat(1).Buyer =</text>
+<text x="500" y="268" font-size="12" font-weight="600" fill="#f07a78" text-anchor="middle">GhostLockedException</text>
+<circle cx="606" cy="248" r="4" fill="#aebcc4"/>
+<text x="606" y="238" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace"></text>
+<text x="606" y="267" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Seat(2)</text>
+<path d="M658 248L662.5 252.5L670 243.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="664" y="236" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<text x="682" y="252" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">the rest of its transaction commits</text>
+<text x="32" y="306" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">A lease not released ends with its duration, and the commit of its holder then fails: LeaseLost, nothing written.</text>
+</svg>

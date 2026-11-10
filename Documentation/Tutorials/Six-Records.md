@@ -24,7 +24,7 @@ A hotel. Its guests and their addresses first; then their stays, what each one w
 
 Five models, each in a namespace of its own with its own Repository, as in the tutorials before: `Guests` for Lessons 1 to 5, `Stays` for Lessons 6 to 11, `Reviews` for Lesson 12, `Bills` for Lessons 13 and 14, `Bookings` for Lesson 15.
 
-**The values of the models come first**, each a value object ([Tutorial One, Lesson 18](One-TheBasics.md#lesson-18-give-each-value-its-type)), a value of a Record as of an entity. Those the models share are declared once, in the namespace of the tutorial; each model declares at its head the values that it alone has:
+**The values of the models come first**, each a value object ([Tutorial One, Lesson 19](One-TheBasics.md#lesson-19-give-each-value-its-type)), a value of a Record as of an entity. Those the models share are declared once, in the namespace of the tutorial; each model declares at its head the values that it alone has:
 
 ```csharp
 namespace TutorialSix
@@ -63,7 +63,7 @@ Every declaration of the tutorial, and the lesson that shows it:
 | `RecordBag<RCheckedIn, RRoomChanged, RCheckedOut> History` | A list of these types, up to eight, and no other | 9 |
 | `RecordBag Requests` | A list of any Record, for several services | 10 |
 | `RecordBag<RComment> Replies` in `RComment` | Records of their own type, to any depth | 12 |
-| `[IncludeRecordModel]` on a `[GhostLog]` | One Record type, a fact in a Log and a value in a bag | 15 |
+| `[IncludeRecordModel]` on a `[GhostLog]`, and on a `[GhostRepository]` | A Record type of one model: a fact in a Log, a value in a bag | 15 |
 
 ## Part 1: A Record is a value
 
@@ -200,6 +200,8 @@ public void ReuseARecordInSeveralEntities()
 
 This is the question of this tutorial. An entity is **someone**: it exists on its own, it is found, it is linked, and two entities of the same values stay two. A Record is **something**: a value, like a number, that exists only in what holds it. Two Records of the same values are the same value, and giving a Record to a second entity gives it a copy.
 
+![An entity shared by a link, seen by two guests, and a Record copied, each guest keeping its own value](diagrams/six-link-or-copy.svg)
+
 A hotel that two guests like is one hotel. A link designates it, and when it changes its name, both guests see the new one:
 
 ```csharp
@@ -232,7 +234,7 @@ public void CopyARecordByAnAssignment()
     var ada = new Guest { Name = "Ada", Home = new Address { Street = "12 rue de Rivoli", City = "Paris" } };
     var bob = new Guest { Name = "Bob", Home = ada.Home };
 
-    // Ada moves: Bob keeps the value that he received.
+    // Ada moves: Bob keeps the value received.
     ada.Home = new Address { Street = "3 quai Saint-Antoine", City = "Lyon" };
     Assert.True(ada.Home.City == "Lyon" && bob.Home.City == "Paris");
 }
@@ -339,6 +341,8 @@ public void ReadWithoutAnAllocation()
 
 The View of a Record is a **value**, unlike the View of an entity, which reads its entity as it is now in its transaction. It keeps what it read: a later change of the guest changes the guest, not the value read before:
 
+![Two Views before and after a change of the guest: the View of the entity reads the new city, the View of the Record keeps the old one](diagrams/six-view-keeps.svg)
+
 ```csharp
 [Fact]
 public void KeepTheValueThatAViewRead()
@@ -407,6 +411,8 @@ public void ReplaceARecordWhole()
 ```
 
 To change one field, take a copy, `ToBody()`, change the copy, and assign it. Nothing changes in the guest before the assignment:
+
+![The Home of a guest and its copy at each instruction: copied out, changed apart, copied back](diagrams/six-change-by-copy.svg)
 
 ```csharp
 [Fact]
@@ -545,6 +551,8 @@ public void ReadARecordInARecord()
 ```
 
 It is changed level by level: each level is copied out, then assigned back to the level above:
+
+![The city of a contact in the guest and in two copies at each instruction: copied level by level, then assigned back](diagrams/six-nested-change.svg)
 
 ```csharp
 [Fact]
@@ -834,7 +842,9 @@ Finding reads the bag from its start. A bag is a short list that an entity carri
 
 ### Lesson 8: Change a bag
 
-Six writes, each one a change of the entity that holds the bag. `RemoveAt` a position, `Remove` the first Record equal to a value, `RemoveAll` of a value or of a type, `Clear`. A removal moves the Records after it down by one place:
+Six writes, each one a change of the entity that holds the bag. `Add` at the end, `RemoveAt` a position, `Remove` the first Record equal to a value, `RemoveAll` of a value or of a type, `ReplaceAt` a position, `Clear`. A removal moves the Records after it down by one place:
+
+![The Records of a bag at each write: a removal leaves a place, and the Records after it move down](diagrams/six-bag-writes.svg)
 
 ```csharp
 [Fact]
@@ -1004,6 +1014,8 @@ public void ReadEachTypeOfABag()
 
 One walk, `Enumerate(h1, h2, h3)`, gives each Record to the handler of its type, in their order. The handlers are `static` lambdas, which capture nothing: up to four values are passed before them, as in every query of GBO:
 
+![One walk over four Records: with a handler per type each one reaches its handler in order, with one handler the others are skipped](diagrams/six-walk-handlers.svg)
+
 ```csharp
 [Fact]
 public void WalkABagByAHandlerPerType()
@@ -1042,7 +1054,7 @@ public void SkipTheTypesWithoutAHandler()
 
 ### Lesson 10: A bag of any Record, the messenger
 
-`RecordBag`, without types, holds any Record: a messenger for several services. The stay leaves its requests in one place. Housekeeping reads the rooms to clean, the kitchen the breakfasts, and each one leaves the others:
+`RecordBag`, without types, holds any Record of its model: a messenger for several services. The stay leaves its requests in one place. Housekeeping reads the rooms to clean, the kitchen the breakfasts, and each one leaves the others:
 
 ```csharp
 /// <summary>The messages to the services of the hotel: a bag of any Record carries them (Lesson 10).</summary>
@@ -1082,8 +1094,8 @@ No property of the model names them: the Repository includes them by their names
 
 ```csharp
 // The messages are named by no property of the model: the Repository includes them by their names.
-[GhostRepository, IncludeEntityModel(nameof(MStay)), IncludeEntityModel(nameof(RCleanRoom)), IncludeEntityModel(nameof(RBreakfast)),
-    IncludeEntityModel(nameof(RWakeUp)), IncludeEntityModel(nameof(RDayPlan))]
+[GhostRepository(2), IncludeEntityModel(nameof(MStay)), IncludeRecordModel(nameof(RCleanRoom)), IncludeRecordModel(nameof(RBreakfast)),
+    IncludeRecordModel(nameof(RWakeUp)), IncludeRecordModel(nameof(RDayPlan)), IncludeRecordModel(nameof(RCharge)), IncludeRecordModel(nameof(RCheckedIn)), IncludeRecordModel(nameof(RCheckedOut)), IncludeRecordModel(nameof(RRoomChanged))]
 internal interface MStayRepository
 {
 }
@@ -1274,6 +1286,8 @@ public void KeepTheValueThatAViewOfABagRead()
 
 Its `ToBody()` gives a free copy, to change and to assign, to the same stay or to another one:
 
+![Three bags at each instruction: a copy of a bag changes apart, is copied into a second stay, and keeps no tie with the first](diagrams/six-bag-copies.svg)
+
 ```csharp
 [Fact]
 public void CopyABag()
@@ -1395,6 +1409,8 @@ internal interface MReview
 ```
 
 The review is read as a whole, in place, by a method that follows the replies:
+
+![A review holding a comment, its reply and the reply to it, one inside the other, built from the inside](diagrams/six-replies.svg)
 
 ```csharp
 // The comments of a bag, and the replies to them, at any depth.
@@ -1554,7 +1570,9 @@ internal interface MBill
 
 The lines of a bill are changed one by one, by several people, found, disputed. Each of these needs what only an entity has. The charges of Lesson 6 have the same fields, and they are values: each one is added, then read with its stay. What separates the two is not their shape, but what happens to them.
 
-**Its host is its unit of conflict.** A Record has no version of its own. Two transactions that change two different Records of one bag change the same entity, and the second one conflicts:
+**Its host is its unit of conflict.** A Record has no version of its own. Two transactions that change two different Records of one bag change the same entity, and the second commit conflicts:
+
+![Two transactions on two lines of a bill: as Records the later commit conflicts, as parts both commit](diagrams/six-conflict-host.svg)
 
 ```csharp
 [Fact]
@@ -1701,6 +1719,8 @@ Measured on the two bills of Lesson 13, a thousand of each, one thread, a Store 
 | 100 | 193 M/s / 42 M/s | 136,000/s / 399,000/s | 17.4 KB / 3.5 KB |
 | 1,000 | 196 M/s / 43 M/s | 15,800/s / 105,900/s | 150 KB / 3.3 KB |
 
+![Records against parts at 10, 100 and 1,000 lines: reading a line, changing one, and what a change allocates](diagrams/six-read-change.svg)
+
 Read the two columns together:
 
 - **Reading:** Records are 4 to 5 times faster, at any size.
@@ -1811,10 +1831,10 @@ public async Task CreateAMessageWithoutAStore()
 
 This is why a Log needs it. A Log keeps what happened, in order. A fact is a value: it has no identity, and it never changes. An event, a command, a Mutation: every entry of a Log is a Record, and a `[GhostLog]` holds nothing else.
 
-One Record type may be a fact in a Log and a value in a bag. Its home is the Log, which includes it; a room holds copies of it:
+A Record type belongs to one model. The fact belongs to the Log, which includes it. A Repository that keeps something of a fact declares a Record of its own, by `[IncludeRecordModel]`, and writes it from the fact: neither model depends on the other, and each regenerates alone.
 
 ```csharp
-/// <summary>A room was booked: a fact, that a Log keeps, and a value, that a room may hold.</summary>
+/// <summary>A room was booked: a fact, that a Log keeps.</summary>
 [Record(2, 1, 3)]
 internal interface RRoomBooked
 {
@@ -1831,26 +1851,43 @@ internal interface RRoomBooked
 
 ```csharp
 // A Log holds Records, and nothing else: Tutorial Seven shows it in detail.
-[GhostLog, IncludeRecordModel(nameof(RRoomBooked))]
+[GhostLog(6), IncludeRecordModel(nameof(RRoomBooked))]
 internal interface MBookingLog
 {
 }
 ```
 
 ```csharp
+/// <summary>A stay of a room: a value of the Repository, which the room writes from the fact of the Log.</summary>
+[Record(3, 1, 2)]
+internal interface RStay
+{
+    [Property(1)]
+    VName Guest { get; set; }
+
+    [Property(2)]
+    VInstant From { get; set; }
+}
+
 [Entity(1, 1, 2), Root, Enumerable]
 internal interface MRoom
 {
     [Property(1)]
     VRoomNumber Number { get; set; }
 
-    /// <summary>The same Record type: its home is the Log, and the room holds copies of it.</summary>
     [Property(2)]
-    RecordBag<RRoomBooked> Bookings { get; set; }
+    RecordBag<RStay> Bookings { get; set; }
+}
+
+[GhostRepository(5), IncludeEntityModel(nameof(MRoom)), IncludeRecordModel(nameof(RStay))]
+internal interface MRoomRepository
+{
 }
 ```
 
-The same value, as a fact, then as a copy in the room it is about:
+The fact in the Log, then the value that the room writes from it:
+
+![A fact added to a Log, delivered as a value, and a Stay written from it in the bag of a room](diagrams/six-log-to-bag.svg)
 
 ```csharp
 [Fact]
@@ -1880,14 +1917,14 @@ public void KeepARecordInALogAndInABag()
 
     using (var transaction = rooms.OpenTransaction(StoreAccessMode.ReadWrite))
     {
-        new Room { Number = 12 }.Bookings.Add(delivered.Single());
+        new Room { Number = 12 }.Bookings.Add(new Stay { Guest = delivered.Single().Guest, From = delivered.Single().On });
         transaction.Commit();
     }
 
     using (rooms.OpenTransaction(StoreAccessMode.ReadOnly))
     {
-        Assert.True(RoomViewCollection.Single().Bookings.TryGetAt(0, out RoomBookedView kept));
-        Assert.True(kept.Guest == "Ada" && kept.Room == 12);
+        Assert.True(RoomViewCollection.Single().Bookings.TryGetAt(0, out StayView kept));
+        Assert.True(kept.Guest == "Ada" && kept.From == Monday);
     }
 }
 ```
@@ -1898,7 +1935,7 @@ A bag never replaces a Log. A bag holds what its entity needs to read with it; t
 
 | The need | The answer | Lessons |
 | -------- | ---------- | ------- |
-| A value of a few bytes, without text: a price, a code | A value object, not a Record | [Tutorial One, 18](One-TheBasics.md#lesson-18-give-each-value-its-type) |
+| A value of a few bytes, without text: a price, a code | A value object, not a Record | [Tutorial One, 19](One-TheBasics.md#lesson-19-give-each-value-its-type) |
 | Several values that go together, read and replaced whole, reused in several places: an address | A Record property, few per entity | 1 to 5 |
 | A list of such values, owned by the entity, short, read whole: a history, charges | A bag of its types | 6 to 9 |
 | Messages of several types for several services | A bag of any Record, `RecordBag` | 10 |

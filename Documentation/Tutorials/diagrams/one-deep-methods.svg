@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="436" viewBox="0 0 960 436" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>Three levels down, a method finds the transaction by itself</title>
+<desc>A tree of calls next to the transaction of the context. The test opens the transaction and calls CloseTheYear(2026), which calls DiscountTheBooksBefore(1960, 10), which queries and changes, and ReprintTheBooksBefore(1950, 2026), which queries and calls Reprint(book, 2026), which creates. Each of them reaches the transaction by itself. Dune stays at 9.90; Foundation goes from 8.50 to 7.65; 1984 from 6.90 to 6.21; a reprint of 1984, of 2026, is created at 6.21. The test commits.</desc>
+<rect width="960" height="436" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Three levels down, a method finds the transaction by itself</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">No method receives it; the code that opened it keeps the decision to commit</text>
+<line x1="48" y1="140" x2="48" y2="354" stroke="#4a5a62" stroke-width="1.2"/>
+<path d="M48 140L48 164Q48 172 56 172L64 172" fill="none" stroke="#4a5a62" stroke-width="1.2"/>
+<path d="M80 190L80 214Q80 222 88 222L96 222" fill="none" stroke="#4a5a62" stroke-width="1.2"/>
+<path d="M80 190L80 264Q80 272 88 272L96 272" fill="none" stroke="#4a5a62" stroke-width="1.2"/>
+<path d="M112 290L112 314Q112 322 120 322L128 322" fill="none" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="32" y="104" width="262" height="36" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="163" y="126.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">library.OpenTransaction(...)</text>
+<rect x="64" y="154" width="262" height="36" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="195" y="176.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">CloseTheYear(2026)</text>
+<rect x="96" y="204" width="262" height="36" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="227" y="226.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">DiscountTheBooksBefore(1960, 10)</text>
+<rect x="96" y="254" width="262" height="36" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="227" y="276.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ReprintTheBooksBefore(1950, 2026)</text>
+<rect x="128" y="304" width="262" height="36" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="259" y="326.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Reprint(book, 2026)</text>
+<rect x="32" y="354" width="262" height="36" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="163" y="376.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">transaction.Commit()</text>
+<path d="M294 122L633 122" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M632.8 118.4L640 122L632.8 125.6Z" fill="#3987e5"/>
+<text x="628" y="114" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="end">opens it</text>
+<path d="M358 222L633 222" fill="none" stroke="#3987e5" stroke-width="1.6"/><path d="M632.8 218.4L640 222L632.8 225.6Z" fill="#3987e5"/>
+<text x="628" y="214" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="end">queries and changes</text>
+<path d="M358 272L633 272" fill="none" stroke="#3987e5" stroke-width="1.6"/><path d="M632.8 268.4L640 272L632.8 275.6Z" fill="#3987e5"/>
+<text x="628" y="264" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="end">queries</text>
+<path d="M390 322L633 322" fill="none" stroke="#3987e5" stroke-width="1.6"/><path d="M632.8 318.4L640 322L632.8 325.6Z" fill="#3987e5"/>
+<text x="628" y="314" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="end">creates</text>
+<path d="M294 372L633 372" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M632.8 368.4L640 372L632.8 375.6Z" fill="#3987e5"/>
+<text x="628" y="364" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="end">commits it</text>
+<rect x="640" y="98" width="288" height="298" rx="10" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="652" y="118" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The transaction of the context</text>
+<rect x="652" y="152" width="264" height="40" rx="8" fill="#1a252b" stroke="#4a5a62" stroke-width="1"/>
+<text x="664" y="176" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Dune</text>
+<text x="904" y="176" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">9.90</text>
+<rect x="652" y="202" width="264" height="40" rx="8" fill="#1a252b" stroke="#4a5a62" stroke-width="1"/>
+<text x="664" y="226" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Foundation</text>
+<text x="904" y="226" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">8.50 → 7.65</text>
+<rect x="652" y="252" width="264" height="40" rx="8" fill="#1a252b" stroke="#4a5a62" stroke-width="1"/>
+<text x="664" y="276" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">1984</text>
+<text x="904" y="276" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">6.90 → 6.21</text>
+<rect x="652" y="302" width="264" height="40" rx="8" fill="#1a252b" stroke="#3987e5" stroke-width="1.5"/>
+<text x="664" y="326" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">1984, of 2026</text>
+<text x="904" y="326" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">6.21</text>
+<text x="32" y="418" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Their changes are visible at once: two books discounted, one reprinted, four books after the commit</text>
+</svg>

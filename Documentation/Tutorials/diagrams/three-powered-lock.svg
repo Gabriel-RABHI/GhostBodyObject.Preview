@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="384" viewBox="0 0 960 384" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A system joins each lock and its capabilities, and keeps out the others</title>
+<desc>Four locks. The Front door has a battery at level 15 and a location on floor 0: it is in the system. The Office door has a battery at level 70 and no location, an optional capability: it is in the system. The Lab door has a battery at level 5 and a maintenance, Jammed bolt, an excluded capability: it is out. The Server room door is wired: without the required battery, it is out.</desc>
+<rect width="960" height="384" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A system joins each lock and its capabilities, and keeps out the others</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">SPoweredLock: the locks with a Battery, maybe a Location, never under Maintenance</text>
+<text x="296" y="118" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Battery</text>
+<text x="296" y="134" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">required</text>
+<text x="452" y="118" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Location</text>
+<text x="452" y="134" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">optional</text>
+<text x="608" y="118" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Maintenance</text>
+<text x="608" y="134" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">excluded</text>
+<text x="714" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">PoweredLockSystemCollection</text>
+<line x1="32" y1="150" x2="928" y2="150" stroke="#4a5a62" stroke-width="1"/>
+<text x="32" y="180" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Front door</text>
+<rect x="242" y="161" width="108" height="30" rx="6" fill="#1f3a55"/>
+<text x="296" y="180" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Level 15</text>
+<rect x="398" y="161" width="108" height="30" rx="6" fill="#1f3a55"/>
+<text x="452" y="180" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Floor 0</text>
+<circle cx="608" cy="176" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<path d="M714 176L718.5 180.5L726 171.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="32" y1="198" x2="928" y2="198" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="224" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Office door</text>
+<rect x="242" y="205" width="108" height="30" rx="6" fill="#1f3a55"/>
+<text x="296" y="224" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Level 70</text>
+<circle cx="452" cy="220" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="608" cy="220" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<path d="M714 220L718.5 224.5L726 215.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="32" y1="242" x2="928" y2="242" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="268" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Lab door</text>
+<rect x="242" y="249" width="108" height="30" rx="6" fill="#1f3a55"/>
+<text x="296" y="268" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Level 5</text>
+<circle cx="452" cy="264" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="554" y="249" width="108" height="30" rx="6" fill="#47292d"/>
+<text x="608" y="268" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Jammed bolt</text>
+<line x1="715" y1="264" x2="725" y2="264" stroke="#7f9199" stroke-width="2"/>
+<text x="740" y="268" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">under maintenance</text>
+<line x1="32" y1="286" x2="928" y2="286" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="312" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Server room door</text>
+<circle cx="296" cy="308" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="452" cy="308" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="608" cy="308" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<line x1="715" y1="308" x2="725" y2="308" stroke="#7f9199" stroke-width="2"/>
+<text x="740" y="312" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">wired</text>
+<text x="32" y="366" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">A ring: the lock has none. The members of a system are Views: it reads many entities, and creates no Body</text>
+</svg>

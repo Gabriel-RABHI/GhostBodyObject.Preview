@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="276" viewBox="0 0 960 276" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>What a full GC has to visit</title>
+<desc>.NET: 110,000,000 objects. GBO Records: 10,000,000 Bodies and about 34,000 pages. GBO entities after their commit: 146 Segments, 74 once compacted, and no object per entity.</desc>
+<rect width="960" height="276" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">What a full GC has to visit</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Objects on the managed heap, for 10,000,000 items, on the same scale</text>
+<line x1="282" y1="96" x2="282" y2="228" stroke="#4a5a62" stroke-width="1"/>
+<text x="266" y="115" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">.NET</text>
+<text x="266" y="130" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">each record and its 10 strings</text>
+<path d="M282 104H776Q780 104 780 108V118Q780 122 776 122H282Z" fill="#66757d"/>
+<text x="788" y="118" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">110,000,000 objects</text>
+<text x="266" y="159" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">GBO Records</text>
+<text x="266" y="174" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">each Body, and the pages of bytes</text>
+<path d="M282 148H323.4Q327.4 148 327.4 152V162Q327.4 166 323.4 166H282Z" fill="#3987e5"/>
+<text x="335.4" y="162" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">10,000,000 Bodies + about 34,000 pages</text>
+<text x="266" y="203" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">GBO entities</text>
+<text x="266" y="218" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">committed: Segments of bytes, no Body</text>
+<path d="M282 192H283.5Q285 192 285 193.5V208.5Q285 210 283.5 210H282Z" fill="#3987e5"/>
+<text x="293" y="206" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">146 Segments, 74 once compacted</text>
+<text x="32" y="258" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Intel i9-9900K, Windows 10, .NET 10, workstation GC · 10,000,000 items of 10 strings and a date · 2026-11-01</text>
+</svg>

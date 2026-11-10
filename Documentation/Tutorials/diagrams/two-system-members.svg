@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="348" viewBox="0 0 960 348" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A system holds the entities that have its components</title>
+<desc>Two tables of four artists and their components. At first Bowie has a tour and is verified, Eno has a tour, Reed has a tour and is retired, Iggy has nothing: the system holds Bowie and Eno. After iggy.Tour.New() and eno.Retired.New(), it holds Bowie and Iggy, at the next instruction.</desc>
+<rect width="960" height="348" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A system holds the entities that have its components</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">SOnTour: the artists with a Tour, maybe Verified, never Retired</text>
+<text x="32" y="104" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">committed</text>
+<text x="164" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Tour</text>
+<text x="164" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">required</text>
+<text x="242" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Verified</text>
+<text x="242" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">optional</text>
+<text x="320" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Retired</text>
+<text x="320" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">excluded</text>
+<text x="414" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">On tour</text>
+<line x1="32" y1="152" x2="464" y2="152" stroke="#4a5a62" stroke-width="1"/>
+<text x="32" y="178" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Bowie</text>
+<circle cx="164" cy="174" r="6" fill="#3987e5"/>
+<circle cx="242" cy="174" r="6" fill="#3987e5"/>
+<circle cx="320" cy="174" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<path d="M408 174L412.5 178.5L420 169.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="32" y1="194" x2="464" y2="194" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="218" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Eno</text>
+<circle cx="164" cy="214" r="6" fill="#3987e5"/>
+<circle cx="242" cy="214" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="320" cy="214" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<path d="M408 214L412.5 218.5L420 209.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="32" y1="234" x2="464" y2="234" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="258" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Reed</text>
+<circle cx="164" cy="254" r="6" fill="#3987e5"/>
+<circle cx="242" cy="254" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="320" cy="254" r="6" fill="#f07a78"/>
+<line x1="409" y1="254" x2="419" y2="254" stroke="#7f9199" stroke-width="2"/>
+<line x1="32" y1="274" x2="464" y2="274" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="298" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Iggy</text>
+<circle cx="164" cy="294" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="242" cy="294" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="320" cy="294" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<line x1="409" y1="294" x2="419" y2="294" stroke="#7f9199" stroke-width="2"/>
+<text x="496" y="104" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">iggy.Tour.New(); eno.Retired.New();</text>
+<text x="628" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Tour</text>
+<text x="628" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">required</text>
+<text x="706" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Verified</text>
+<text x="706" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">optional</text>
+<text x="784" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Retired</text>
+<text x="784" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">excluded</text>
+<text x="878" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">On tour</text>
+<line x1="496" y1="152" x2="928" y2="152" stroke="#4a5a62" stroke-width="1"/>
+<text x="496" y="178" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Bowie</text>
+<circle cx="628" cy="174" r="6" fill="#3987e5"/>
+<circle cx="706" cy="174" r="6" fill="#3987e5"/>
+<circle cx="784" cy="174" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<path d="M872 174L876.5 178.5L884 169.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="496" y1="194" x2="928" y2="194" stroke="#2b3a42" stroke-width="1"/>
+<text x="496" y="218" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Eno</text>
+<circle cx="628" cy="214" r="6" fill="#3987e5"/>
+<circle cx="706" cy="214" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<rect x="758" y="199" width="52" height="30" rx="6" fill="#1f3a55"/>
+<circle cx="784" cy="214" r="6" fill="#f07a78"/>
+<line x1="873" y1="214" x2="883" y2="214" stroke="#7f9199" stroke-width="2"/>
+<line x1="496" y1="234" x2="928" y2="234" stroke="#2b3a42" stroke-width="1"/>
+<text x="496" y="258" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Reed</text>
+<circle cx="628" cy="254" r="6" fill="#3987e5"/>
+<circle cx="706" cy="254" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="784" cy="254" r="6" fill="#f07a78"/>
+<line x1="873" y1="254" x2="883" y2="254" stroke="#7f9199" stroke-width="2"/>
+<line x1="496" y1="274" x2="928" y2="274" stroke="#2b3a42" stroke-width="1"/>
+<text x="496" y="298" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Iggy</text>
+<rect x="602" y="279" width="52" height="30" rx="6" fill="#1f3a55"/>
+<circle cx="628" cy="294" r="6" fill="#3987e5"/>
+<circle cx="706" cy="294" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="784" cy="294" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<path d="M872 294L876.5 298.5L884 289.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="32" y="330" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">A filled dot: the artist has the component. A component that the transaction attaches or removes is seen at the next instruction</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="372" viewBox="0 0 960 372" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>What a commit does</title>
+<desc>On the left, the transaction holds Bodies and their Ghosts, private to it. A commit checks for conflicts, copies each Ghost to the end of the Store, updates the indexes, then publishes it all at once. On the right, the Store holds the Ghosts alone. The Bodies are then left to the GC.</desc>
+<rect width="960" height="372" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">What a commit does</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">It turns the private work of a transaction into shared data, all of it or nothing.</text>
+<rect x="32" y="96" width="262" height="222" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="46" y="118" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The transaction</text>
+<text x="280" y="118" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">private</text>
+<rect x="48" y="136" width="84" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="90" y="160.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Body</text>
+<rect x="176" y="136" width="104" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="228" y="160.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ghost</text>
+<path d="M132 156L169 156" fill="none" stroke="#aebcc4" stroke-width="1.4"/><path d="M168.8 152.4L176 156L168.8 159.6Z" fill="#aebcc4"/>
+<rect x="48" y="192" width="84" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="90" y="216.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Body</text>
+<rect x="176" y="192" width="104" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="228" y="216.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ghost</text>
+<path d="M132 212L169 212" fill="none" stroke="#aebcc4" stroke-width="1.4"/><path d="M168.8 208.4L176 212L168.8 215.6Z" fill="#aebcc4"/>
+<rect x="48" y="248" width="84" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="90" y="272.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Body</text>
+<rect x="176" y="248" width="104" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="228" y="272.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ghost</text>
+<path d="M132 268L169 268" fill="none" stroke="#aebcc4" stroke-width="1.4"/><path d="M168.8 264.4L176 268L168.8 271.6Z" fill="#aebcc4"/>
+<rect x="326" y="96" width="308" height="48" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="342" y="116" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">1. Check</text>
+<text x="342" y="133" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">no conflict with the other transactions</text>
+<rect x="326" y="154" width="308" height="48" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="342" y="174" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">2. Write</text>
+<text x="342" y="191" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">each Ghost copied to the end of the Store</text>
+<rect x="326" y="212" width="308" height="48" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="342" y="232" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">3. Index</text>
+<text x="342" y="249" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">the indexes take the changes</text>
+<rect x="326" y="270" width="308" height="48" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="342" y="290" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">4. Publish</text>
+<text x="342" y="307" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">visible at once to the next transactions</text>
+<rect x="666" y="96" width="262" height="222" rx="10" fill="none" stroke="#3987e5" stroke-width="1.5"/>
+<text x="680" y="118" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The Store</text>
+<text x="914" y="118" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">shared</text>
+<rect x="680" y="136" width="74" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="717" y="160.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Ghost</text>
+<rect x="762" y="136" width="74" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="799" y="160.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Ghost</text>
+<rect x="844" y="136" width="74" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="881" y="160.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Ghost</text>
+<rect x="680" y="192" width="74" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="717" y="216.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Ghost</text>
+<rect x="762" y="192" width="74" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="799" y="216.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Ghost</text>
+<rect x="844" y="192" width="74" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="881" y="216.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Ghost</text>
+<rect x="680" y="248" width="74" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="717" y="272.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Ghost</text>
+<rect x="762" y="248" width="74" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="799" y="272.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Ghost</text>
+<rect x="844" y="248" width="74" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="881" y="272.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Ghost</text>
+<path d="M294 207L319 207" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M318.8 203.4L326 207L318.8 210.6Z" fill="#aebcc4"/>
+<path d="M634 207L659 207" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M658.8 203.4L666 207L658.8 210.6Z" fill="#aebcc4"/>
+<text x="32" y="350" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Then the Bodies and the memory of the transaction go to the GC. Only the bytes of the Store remain: not one object per entity.</text>
+</svg>

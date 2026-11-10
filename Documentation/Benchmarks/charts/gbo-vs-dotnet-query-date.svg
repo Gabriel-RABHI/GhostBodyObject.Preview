@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="304" viewBox="0 0 960 304" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A query on a date</title>
+<desc>As created: GBO 39.1 M/s, .NET 92.9 M/s. Dispersed: GBO 21.2 M/s, .NET 32.3 M/s. GBO aligned by the compactor 61.6 M/s, .NET still dispersed 32.3 M/s.</desc>
+<rect width="960" height="304" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A query on a date</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Items read per second · one thread · the same scale for every row</text>
+<rect x="800" y="58" width="12" height="12" rx="3" fill="#3987e5"/>
+<text x="818" y="68" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">GBO</text>
+<rect x="858" y="58" width="12" height="12" rx="3" fill="#66757d"/>
+<text x="876" y="68" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">.NET</text>
+<line x1="282" y1="100" x2="282" y2="252" stroke="#4a5a62" stroke-width="1"/>
+<text x="266" y="123" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">As created</text>
+<text x="266" y="139" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">objects in the order of the List</text>
+<path d="M282 110H487.6Q491.6 110 491.6 114V120Q491.6 124 487.6 124H282Z" fill="#3987e5"/>
+<text x="499.6" y="121.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">39.1 M/s</text>
+<path d="M282 128H776Q780 128 780 132V138Q780 142 776 142H282Z" fill="#66757d"/>
+<text x="788" y="139.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">92.9 M/s</text>
+<text x="928" y="133" font-size="14" font-weight="600" fill="#aebcc4" text-anchor="end">.NET ×2.4</text>
+<text x="266" y="175" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">Dispersed</text>
+<text x="266" y="191" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">the same swaps on both sides</text>
+<path d="M282 162H391.6Q395.6 162 395.6 166V172Q395.6 176 391.6 176H282Z" fill="#3987e5"/>
+<text x="403.6" y="173.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">21.2 M/s</text>
+<path d="M282 180H451.1Q455.1 180 455.1 184V190Q455.1 194 451.1 194H282Z" fill="#66757d"/>
+<text x="463.1" y="191.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">32.3 M/s</text>
+<text x="928" y="185" font-size="14" font-weight="600" fill="#aebcc4" text-anchor="end">.NET ×1.5</text>
+<text x="266" y="227" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="end">GBO aligned</text>
+<text x="266" y="243" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">by the compactor; .NET stays dispersed</text>
+<path d="M282 214H608.2Q612.2 214 612.2 218V224Q612.2 228 608.2 228H282Z" fill="#3987e5"/>
+<text x="620.2" y="225.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">61.6 M/s</text>
+<path d="M282 232H451.1Q455.1 232 455.1 236V242Q455.1 246 451.1 246H282Z" fill="#66757d"/>
+<text x="463.1" y="243.5" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">32.3 M/s</text>
+<text x="928" y="237" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="end">×1.9</text>
+<text x="32" y="286" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Intel i9-9900K, Windows 10, .NET 10, workstation GC · 10,000,000 items of 10 strings and a date · 2026-11-01</text>
+</svg>

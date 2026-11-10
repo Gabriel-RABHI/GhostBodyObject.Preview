@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="348" viewBox="0 0 960 348" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>Two steps give the friends of friends, and your code ranks them</title>
+<desc>Ada is the friend of Bob and of Cid. The friends of Bob are Ada and Dan; those of Cid are Ada, Dan and Eve. Leaving out Ada and the friends of Ada, two people are left: Dan, who shares 2 friends with Ada, Bob and Cid, and Eve, who shares 1, Cid. PeopleToKnow(ada) gives Dan, then Eve.</desc>
+<rect width="960" height="348" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Two steps give the friends of friends, and your code ranks them</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">A friendship has no direction: the walk reads the Others of each person</text>
+<text x="307" y="116" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ada.FriendshipEdges.Others</text>
+<text x="535" y="116" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">friend.FriendshipEdges.Others</text>
+<text x="668" y="116" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start">Friends shared with Ada</text>
+<path d="M142 204L189.5 204Q197 204 197 196.5L197 189" fill="none" stroke="#3987e5" stroke-width="1.6"/>
+<path d="M197 179L197 171.5Q197 164 204.5 164L252 164" fill="none" stroke="#3987e5" stroke-width="1.6"/>
+<rect x="189" y="179" width="16" height="10" rx="3" fill="#1f3a55" stroke="#3987e5" stroke-width="1"/>
+<path d="M142 224L189.5 224Q197 224 197 231.5L197 239" fill="none" stroke="#3987e5" stroke-width="1.6"/>
+<path d="M197 249L197 256.5Q197 264 204.5 264L252 264" fill="none" stroke="#3987e5" stroke-width="1.6"/>
+<rect x="189" y="239" width="16" height="10" rx="3" fill="#1f3a55" stroke="#3987e5" stroke-width="1"/>
+<path d="M362 154L409 154" fill="none" stroke="#3987e5" stroke-width="1.6"/>
+<path d="M425 154L472 154" fill="none" stroke="#3987e5" stroke-width="1.6"/>
+<rect x="409" y="149" width="16" height="10" rx="3" fill="#1f3a55" stroke="#3987e5" stroke-width="1"/>
+<path d="M362 254L409 254Q417 254 417 246L417 219" fill="none" stroke="#3987e5" stroke-width="1.6"/>
+<path d="M417 209L417 182Q417 174 425 174L472 174" fill="none" stroke="#3987e5" stroke-width="1.6"/>
+<rect x="409" y="209" width="16" height="10" rx="3" fill="#1f3a55" stroke="#3987e5" stroke-width="1"/>
+<path d="M362 274L409 274" fill="none" stroke="#3987e5" stroke-width="1.6"/>
+<path d="M425 274L472 274" fill="none" stroke="#3987e5" stroke-width="1.6"/>
+<rect x="409" y="269" width="16" height="10" rx="3" fill="#1f3a55" stroke="#3987e5" stroke-width="1"/>
+<rect x="32" y="192" width="110" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="87" y="218.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="252" y="142" width="110" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="307" y="168.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Bob</text>
+<rect x="252" y="242" width="110" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="307" y="268.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Cid</text>
+<rect x="472" y="142" width="110" height="44" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="527" y="168.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Dan</text>
+<rect x="472" y="242" width="110" height="44" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="527" y="268.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Eve</text>
+<path d="M668 155H864Q868 155 868 159V165Q868 169 864 169H668Z" fill="#3987e5"/>
+<text x="880" y="167" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">2</text>
+<text x="668" y="189" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">Bob, Cid</text>
+<path d="M668 255H764Q768 255 768 259V265Q768 269 764 269H668Z" fill="#3987e5"/>
+<text x="780" y="267" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">1</text>
+<text x="668" y="289" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">Cid</text>
+<text x="668" y="330" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">PeopleToKnow(ada)</text>
+<text x="928" y="330" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="end">Dan, Eve</text>
+<text x="32" y="330" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Ada and the friends of Ada are left out; the most friends shared come first</text>
+</svg>

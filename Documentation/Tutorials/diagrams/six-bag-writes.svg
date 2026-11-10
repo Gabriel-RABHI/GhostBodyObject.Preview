@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="412" viewBox="0 0 960 412" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A removal moves the Records after it down</title>
+<desc>A bag of six Records, CleanRoom 12, 14, 12, 16, 12 and a Breakfast, at positions 0 to 5. RemoveAt(1) removes CleanRoom 14, and the four Records after it move down by one place. Remove of CleanRoom 16 removes the first equal value and returns true. Remove of CleanRoom 99 finds none and returns false: nothing moves. RemoveAll of CleanRoom 12 removes the three equal values, returns 3, and the Breakfast comes to position 0. Add puts CleanRoom 14 at the end. RemoveAll&lt;BreakfastView&gt;() removes the Breakfast, returns 1, and CleanRoom 14 moves down. Clear() empties the bag.</desc>
+<rect width="960" height="412" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A removal moves the Records after it down</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The positions of a bag, instruction by instruction: dashed, what it removes; blue, what it moves down or adds</text>
+<text x="32" y="112" font-size="12" font-weight="400" fill="#7f9199" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">stay.Requests</text>
+<text x="353" y="112" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">0</text>
+<text x="436" y="112" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">1</text>
+<text x="519" y="112" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">2</text>
+<text x="602" y="112" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">3</text>
+<text x="685" y="112" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">4</text>
+<text x="768" y="112" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">5</text>
+<text x="870" y="112" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">returns</text>
+<text x="32" y="144" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">RemoveAt(1)</text>
+<rect x="314" y="126" width="78" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="353" y="144.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">CleanRoom 12</text>
+<rect x="397" y="126" width="78" height="28" rx="4" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="436" y="144.3" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">CleanRoom 14</text>
+<rect x="480" y="126" width="78" height="28" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="519" y="144.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">CleanRoom 12</text>
+<rect x="563" y="126" width="78" height="28" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="602" y="144.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">CleanRoom 16</text>
+<rect x="646" y="126" width="78" height="28" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="685" y="144.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">CleanRoom 12</text>
+<rect x="729" y="126" width="78" height="28" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="768" y="144.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">Breakfast</text>
+<line x1="32" y1="159" x2="928" y2="159" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="182" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Remove(new CleanRoom { Room = 16 })</text>
+<rect x="314" y="164" width="78" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="353" y="182.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">CleanRoom 12</text>
+<rect x="397" y="164" width="78" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="436" y="182.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">CleanRoom 12</text>
+<rect x="480" y="164" width="78" height="28" rx="4" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="519" y="182.3" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">CleanRoom 16</text>
+<rect x="563" y="164" width="78" height="28" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="602" y="182.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">CleanRoom 12</text>
+<rect x="646" y="164" width="78" height="28" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="685" y="182.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">Breakfast</text>
+<text x="870" y="182" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">true</text>
+<line x1="32" y1="197" x2="928" y2="197" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="220" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Remove(new CleanRoom { Room = 99 })</text>
+<rect x="314" y="202" width="78" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="353" y="220.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">CleanRoom 12</text>
+<rect x="397" y="202" width="78" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="436" y="220.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">CleanRoom 12</text>
+<rect x="480" y="202" width="78" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="519" y="220.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">CleanRoom 12</text>
+<rect x="563" y="202" width="78" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="602" y="220.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">Breakfast</text>
+<text x="870" y="220" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">false</text>
+<line x1="32" y1="235" x2="928" y2="235" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="258" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">RemoveAll(new CleanRoom { Room = 12 })</text>
+<rect x="314" y="240" width="78" height="28" rx="4" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="353" y="258.3" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">CleanRoom 12</text>
+<rect x="397" y="240" width="78" height="28" rx="4" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="436" y="258.3" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">CleanRoom 12</text>
+<rect x="480" y="240" width="78" height="28" rx="4" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="519" y="258.3" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">CleanRoom 12</text>
+<rect x="563" y="240" width="78" height="28" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="602" y="258.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">Breakfast</text>
+<text x="870" y="258" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">3</text>
+<line x1="32" y1="273" x2="928" y2="273" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="296" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Add(new CleanRoom { Room = 14 })</text>
+<rect x="314" y="278" width="78" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="353" y="296.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">Breakfast</text>
+<rect x="397" y="278" width="78" height="28" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="436" y="296.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">CleanRoom 14</text>
+<line x1="32" y1="311" x2="928" y2="311" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="334" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">RemoveAll&lt;BreakfastView&gt;()</text>
+<rect x="314" y="316" width="78" height="28" rx="4" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="353" y="334.3" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Breakfast</text>
+<rect x="397" y="316" width="78" height="28" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="436" y="334.3" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">CleanRoom 14</text>
+<text x="870" y="334" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">1</text>
+<line x1="32" y1="349" x2="928" y2="349" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="372" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Clear()</text>
+<rect x="314" y="354" width="78" height="28" rx="4" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="353" y="372.3" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">CleanRoom 14</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="424" viewBox="0 0 960 424" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>Each level is copied out, then assigned back to the level above</title>
+<desc>Six instructions, three columns. The guest Ada holds a contact, which holds an address in London. ada.Emergency.ToBody() copies the contact out. emergency.Address.ToBody() copies its address out. address.City becomes Cambridge in the last copy alone. emergency.Address = address assigns it to the copy of the contact. ada.Emergency = emergency assigns that to the guest, which now reads Cambridge.</desc>
+<rect width="960" height="424" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Each level is copied out, then assigned back to the level above</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The city of the emergency contact of Ada, at each instruction</text>
+<text x="464" y="110" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ada.Emergency.Address.City</text>
+<text x="464" y="126" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">in the guest</text>
+<text x="664" y="110" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">emergency.Address.City</text>
+<text x="664" y="126" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">your copy</text>
+<text x="864" y="110" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">address.City</text>
+<text x="864" y="126" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">your copy</text>
+<text x="32" y="159" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">var ada = new Guest { ... }</text>
+<rect x="400" y="140" width="128" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="464" y="159.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">London</text>
+<line x1="32" y1="177" x2="928" y2="177" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="203" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">var emergency = ada.Emergency.ToBody()</text>
+<rect x="400" y="184" width="128" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="464" y="203.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">London</text>
+<rect x="600" y="184" width="128" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="664" y="203.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">London</text>
+<path d="M528 199L593 199" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M592.8 195.4L600 199L592.8 202.6Z" fill="#aebcc4"/>
+<text x="564" y="193" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">copied</text>
+<line x1="32" y1="221" x2="928" y2="221" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="247" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">var address = emergency.Address.ToBody()</text>
+<rect x="400" y="228" width="128" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="464" y="247.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">London</text>
+<rect x="600" y="228" width="128" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="664" y="247.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">London</text>
+<rect x="800" y="228" width="128" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="864" y="247.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">London</text>
+<path d="M728 243L793 243" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M792.8 239.4L800 243L792.8 246.6Z" fill="#aebcc4"/>
+<text x="764" y="237" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">copied</text>
+<line x1="32" y1="265" x2="928" y2="265" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="291" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">address.City = "Cambridge"</text>
+<rect x="400" y="272" width="128" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="464" y="291.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">London</text>
+<rect x="600" y="272" width="128" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="664" y="291.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">London</text>
+<rect x="800" y="272" width="128" height="30" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="864" y="291.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Cambridge</text>
+<line x1="32" y1="309" x2="928" y2="309" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="335" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">emergency.Address = address</text>
+<rect x="400" y="316" width="128" height="30" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="464" y="335.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">London</text>
+<rect x="600" y="316" width="128" height="30" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="664" y="335.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Cambridge</text>
+<rect x="800" y="316" width="128" height="30" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="864" y="335.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Cambridge</text>
+<path d="M800 331L735 331" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M735.2 334.6L728 331L735.2 327.4Z" fill="#3987e5"/>
+<text x="764" y="325" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">assigned</text>
+<line x1="32" y1="353" x2="928" y2="353" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="379" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ada.Emergency = emergency</text>
+<rect x="400" y="360" width="128" height="30" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="464" y="379.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Cambridge</text>
+<rect x="600" y="360" width="128" height="30" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="664" y="379.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Cambridge</text>
+<rect x="800" y="360" width="128" height="30" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="864" y="379.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Cambridge</text>
+<path d="M600 375L535 375" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M535.2 378.6L528 375L535.2 371.4Z" fill="#3987e5"/>
+<text x="564" y="369" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">assigned</text>
+</svg>

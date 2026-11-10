@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="396" viewBox="0 0 960 396" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>An aggregate: an Owner and the parts it holds</title>
+<desc>The artist David Bowie, a Root, holds the album Low, a part. The album holds its release, exactly one; its booklet, one or none; and its tracks, any number. Each part reads its Owner by [OwnedFrom].</desc>
+<rect width="960" height="396" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">An aggregate: an Owner and the parts it holds</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Created, changed, removed and committed together</text>
+<rect x="32" y="100" width="896" height="254" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="44" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">David Bowie</text><text x="916" y="120" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">Artist, the Root: new Artist { ... }</text>
+<rect x="48" y="134" width="864" height="208" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="60" y="154" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Low</text><text x="900" y="154" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">Album, a part of the artist: bowie.Albums.New()</text>
+<rect x="64" y="166" width="150" height="46" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="139" y="186" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Release</text><text x="139" y="202" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">RCA, PL 12030</text>
+<rect x="64" y="224" width="150" height="46" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="139" y="244" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Booklet</text><text x="139" y="260" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">12 pages</text>
+<rect x="64" y="282" width="150" height="46" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="139" y="302" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Speed of Life</text><text x="139" y="318" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">166 s</text>
+<rect x="222" y="282" width="150" height="46" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="297" y="302" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Sound and Vision</text><text x="297" y="318" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">183 s</text>
+<line x1="214" y1="189" x2="384" y2="189" stroke="#2b3a42" stroke-width="1"/>
+<line x1="214" y1="247" x2="384" y2="247" stroke="#2b3a42" stroke-width="1"/>
+<line x1="372" y1="305" x2="384" y2="305" stroke="#2b3a42" stroke-width="1"/>
+<text x="396" y="185" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">MRelease Release { get; }</text>
+<text x="396" y="203" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">Exactly one part: born with its album</text>
+<text x="396" y="243" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Option&lt;MBooklet&gt; Booklet { get; }</text>
+<text x="396" y="261" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">One part, or none: a slot, filled by low.Booklet.New()</text>
+<text x="396" y="301" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">IEntityCollection&lt;MTrack&gt; Tracks { get; }</text>
+<text x="396" y="319" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">Any number of parts: each born by low.Tracks.New()</text>
+<text x="32" y="378" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Each part reads its Owner by [OwnedFrom]: speed.Album, speed.Album.Artist</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="422" viewBox="0 0 960 422" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>One Store, two transactions; a chain, only one</title>
+<desc>Two panels. Two Repositories on one Store: parcelTransaction writes the parcel PX-0102 and boardTransaction writes the board of Lyon; parcelTransaction commits and boardTransaction rolls back; the Store holds the parcel and no board. Two Stores in a chain: one transaction writes the parcel PX-2001 and its page; it rolls back, and neither Store holds anything.</desc>
+<rect width="960" height="422" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">One Store, two transactions; a chain, only one</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Two models written together, and a rollback: what each one keeps</text>
+<text x="32" y="108" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Two Repositories on one Store</text>
+<text x="32" y="127" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">new CarrierRepository(store), new TrackingRepository(store)</text>
+<line x1="32" y1="140" x2="462" y2="140" stroke="#2b3a42" stroke-width="1"/>
+<rect x="32" y="152" width="205" height="76" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="44" y="172" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start"></text>
+<text x="44" y="172" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">parcelTransaction</text>
+<rect x="257" y="152" width="205" height="76" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="269" y="172" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start"></text>
+<text x="269" y="172" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">boardTransaction</text>
+<rect x="44" y="182" width="181" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="134.5" y="203.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Parcel PX-0102</text>
+<rect x="269" y="182" width="181" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="359.5" y="203.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">DepotBoard Lyon</text>
+<path d="M134.5 228L134.5 275" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M138.1 274.8L134.5 282L130.9 274.8Z" fill="#3987e5"/>
+<text x="146.5" y="258" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<path d="M359.5 228L359.5 275" fill="none" stroke="#4a5a62" stroke-width="1.6"/><path d="M363.1 274.8L359.5 282L355.9 274.8Z" fill="#4a5a62"/>
+<path d="M355.5 249L363.5 257M363.5 249L355.5 257" fill="none" stroke="#7f9199" stroke-width="2" stroke-linecap="round"/>
+<text x="371.5" y="258" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Rollback()</text>
+<rect x="32" y="282" width="430" height="76" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="44" y="302" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start"></text>
+<text x="44" y="302" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">store</text>
+<rect x="44" y="312" width="181" height="34" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="134.5" y="333.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Parcel PX-0102</text>
+<rect x="269" y="312" width="181" height="34" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="359.5" y="333.3" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">DepotBoard Lyon</text>
+<text x="247" y="384" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The parcel is committed, its board is not</text>
+<text x="247" y="404" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">1 parcel, 0 boards</text>
+<text x="498" y="108" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Two Stores in a chain</text>
+<text x="498" y="127" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">parcels.AddChildStore(tracking), carrier.Chain(site)</text>
+<line x1="498" y1="140" x2="928" y2="140" stroke="#2b3a42" stroke-width="1"/>
+<rect x="498" y="152" width="430" height="76" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="510" y="172" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start"></text>
+<text x="510" y="172" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">transaction</text>
+<rect x="510" y="182" width="181" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="600.5" y="203.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Parcel PX-2001</text>
+<rect x="735" y="182" width="181" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="825.5" y="203.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">TrackingPage PX-2001</text>
+<path d="M600.5 228L600.5 275" fill="none" stroke="#4a5a62" stroke-width="1.6"/><path d="M604.1 274.8L600.5 282L596.9 274.8Z" fill="#4a5a62"/>
+<path d="M596.5 249L604.5 257M604.5 249L596.5 257" fill="none" stroke="#7f9199" stroke-width="2" stroke-linecap="round"/>
+<path d="M825.5 228L825.5 275" fill="none" stroke="#4a5a62" stroke-width="1.6"/><path d="M829.1 274.8L825.5 282L821.9 274.8Z" fill="#4a5a62"/>
+<path d="M821.5 249L829.5 257M829.5 249L821.5 257" fill="none" stroke="#7f9199" stroke-width="2" stroke-linecap="round"/>
+<text x="713" y="258" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Rollback()</text>
+<rect x="498" y="282" width="205" height="76" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="510" y="302" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start"></text>
+<text x="510" y="302" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">parcels</text>
+<rect x="723" y="282" width="205" height="76" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="735" y="302" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start"></text>
+<text x="735" y="302" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">tracking</text>
+<rect x="510" y="312" width="181" height="34" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="600.5" y="333.3" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">Parcel PX-2001</text>
+<rect x="735" y="312" width="181" height="34" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="825.5" y="333.3" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">TrackingPage PX-2001</text>
+<text x="713" y="384" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Nothing in any Store</text>
+<text x="713" y="404" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">(0, 0)</text>
+</svg>

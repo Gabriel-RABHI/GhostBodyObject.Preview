@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="428" viewBox="0 0 960 428" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>You declare interfaces, the generator writes the types</title>
+<desc>Three interfaces and what the generator writes from each. VTitle, a value object, gives Title, that a book reads and writes in place, and ReadOnlyTitle, that a BookView reads. MBook gives the class Book, a Body, the object you change; the struct BookView, a read-only view of a book; BookCollection, which enumerates the books; and BookViewCollection, which enumerates their Views. MLibraryRepository gives LibraryRepository, which opens the transactions, and its transaction, LibraryRepositoryTransaction.</desc>
+<rect width="960" height="428" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">You declare interfaces, the generator writes the types</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">What you write on the left; what your code uses on the right</text>
+<text x="32" y="104" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">You declare</text>
+<text x="440" y="104" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The generator writes</text>
+<rect x="32" y="118" width="350" height="64" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="207" y="145.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">[ValueObject&lt;GhostString&gt;]</text><text x="207" y="162.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">interface VTitle</text>
+<path d="M382 150L433 150" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M432.8 146.4L440 150L432.8 153.6Z" fill="#aebcc4"/>
+<rect x="440" y="118" width="488" height="64" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="454" y="141.5" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Title</text>
+<text x="666" y="141.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">what a book reads and writes in place</text>
+<text x="454" y="166.5" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ReadOnlyTitle</text>
+<text x="666" y="166.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">what a BookView reads</text>
+<rect x="32" y="196" width="350" height="114" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="207" y="248.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">[Entity(1, 1, 10), Root, Removable, Enumerable]</text><text x="207" y="265.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">interface MBook</text>
+<path d="M382 253L433 253" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M432.8 249.4L440 253L432.8 256.6Z" fill="#aebcc4"/>
+<rect x="440" y="196" width="488" height="114" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="454" y="219.5" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Book</text>
+<text x="666" y="219.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">a class, a Body: the object you change</text>
+<text x="454" y="244.5" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">BookView</text>
+<text x="666" y="244.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">a struct: a read-only view of a book</text>
+<text x="454" y="269.5" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">BookCollection</text>
+<text x="666" y="269.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">enumerates the books</text>
+<text x="454" y="294.5" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">BookViewCollection</text>
+<text x="666" y="294.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">enumerates their Views</text>
+<rect x="32" y="324" width="350" height="64" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="207" y="343" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">[GhostRepository(1),</text><text x="207" y="360" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">IncludeEntityModel(nameof(MBook))]</text><text x="207" y="377" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">interface MLibraryRepository</text>
+<path d="M382 356L433 356" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M432.8 352.4L440 356L432.8 359.6Z" fill="#aebcc4"/>
+<rect x="440" y="324" width="488" height="64" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="454" y="347.5" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">LibraryRepository</text>
+<text x="666" y="347.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">opens the transactions</text>
+<text x="454" y="372.5" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">LibraryRepositoryTransaction</text>
+<text x="666" y="372.5" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">its transaction</text>
+<text x="32" y="410" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">An interface gives a type without its first letter: MBook gives Book, VTitle gives Title</text>
+</svg>

@@ -1,3 +1,14 @@
 <Solution>
-  <Project Path="GhostBodyObject.Preview/GhostBodyObject.Preview.csproj" />
+  <Folder Name="/Tutorials/">
+    <Project Path="GhostBodyObject.TutorialEight/GhostBodyObject.TutorialEight.csproj" />
+    <Project Path="GhostBodyObject.TutorialFive/GhostBodyObject.TutorialFive.csproj" />
+    <Project Path="GhostBodyObject.TutorialFour/GhostBodyObject.TutorialFour.csproj" />
+    <Project Path="GhostBodyObject.TutorialNine/GhostBodyObject.TutorialNine.csproj" />
+    <Project Path="GhostBodyObject.TutorialOne/GhostBodyObject.TutorialOne.csproj" />
+    <Project Path="GhostBodyObject.TutorialSeven/GhostBodyObject.TutorialSeven.csproj" />
+    <Project Path="GhostBodyObject.TutorialSix/GhostBodyObject.TutorialSix.csproj" />
+    <Project Path="GhostBodyObject.TutorialTen/GhostBodyObject.TutorialTen.csproj" />
+    <Project Path="GhostBodyObject.TutorialThree/GhostBodyObject.TutorialThree.csproj" />
+    <Project Path="GhostBodyObject.TutorialTwo/GhostBodyObject.TutorialTwo.csproj" />
+  </Folder>
 </Solution>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="372" viewBox="0 0 960 372" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>An index changes with its transaction</title>
+<desc>Two scenarios. A rollback: a transaction creates a paid order, and counts 1; after its rollback, a new transaction counts 0. A commit: a writer creates a paid order and waits; a reader, on its own thread, counts 0 meanwhile, as the order is not committed; the writer commits, and a transaction opened then counts 1.</desc>
+<rect width="960" height="372" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">An index changes with its transaction</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">OrderStatusDayIndex.Is(Paid).Count(), read before and after the end of the writer</text>
+<text x="32" y="130" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A rollback</text>
+<text x="32" y="150" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">Its changes are rolled</text>
+<text x="32" y="166" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">back with the transaction</text>
+<line x1="684" y1="140" x2="684" y2="218" stroke="#2b3a42" stroke-width="1"/>
+<text x="310" y="134" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">writer</text>
+<line x1="322" y1="130" x2="684" y2="130" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="384" cy="130" r="4" fill="#aebcc4"/>
+<text x="384" y="119" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">new Order</text>
+<circle cx="530" cy="130" r="4" fill="#aebcc4"/>
+<text x="530" y="119" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Count()</text>
+<text x="530" y="155" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text>
+<text x="544" y="154" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">in the transaction</text>
+<text x="684" y="119" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Rollback()</text>
+<circle cx="684" cy="130" r="4" fill="#aebcc4"/>
+<text x="310" y="192" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">reader</text>
+<line x1="740" y1="188" x2="860" y2="188" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="800" cy="188" r="4" fill="#aebcc4"/>
+<text x="800" y="177" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Count()</text>
+<text x="800" y="213" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">0</text>
+<text x="814" y="212" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">a new transaction</text>
+<line x1="32" y1="226" x2="928" y2="226" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="266" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A commit</text>
+<text x="32" y="286" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">The others see a change</text>
+<text x="32" y="302" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">at its commit only</text>
+<line x1="684" y1="276" x2="684" y2="354" stroke="#2b3a42" stroke-width="1"/>
+<text x="310" y="270" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">writer</text>
+<line x1="322" y1="266" x2="684" y2="266" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="384" cy="266" r="4" fill="#aebcc4"/>
+<text x="384" y="255" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">new Order</text>
+<text x="684" y="255" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<path d="M678 266L682.5 270.5L690 261.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="310" y="328" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">reader</text>
+<line x1="470" y1="324" x2="590" y2="324" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="530" cy="324" r="4" fill="#aebcc4"/>
+<text x="530" y="313" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Count()</text>
+<text x="530" y="349" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">0</text>
+<text x="544" y="348" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">not committed yet</text>
+<line x1="740" y1="324" x2="860" y2="324" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="800" cy="324" r="4" fill="#aebcc4"/>
+<text x="800" y="313" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Count()</text>
+<text x="800" y="349" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text>
+<text x="814" y="348" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">a new transaction</text>
+</svg>

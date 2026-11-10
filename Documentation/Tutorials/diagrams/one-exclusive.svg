@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="442" viewBox="0 0 960 442" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>An exclusive transaction holds the right to write from its opening</title>
+<desc>Two scenarios. An exclusive transaction opens, takes the right to write, and sets the price of Dune to 12.50. Another transaction sets it to 11.00: its commit waits for the exclusive one to close, then finds the book changed since it opened, and conflicts. In the second scenario, an exclusive transaction holds the right to write. A second exclusive transaction waits for it when it opens, 100 milliseconds at most by a CancellationToken, and throws an OperationCanceledException. A transaction that reads then opens at once, and counts 0.</desc>
+<rect width="960" height="442" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">An exclusive transaction holds the right to write from its opening</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The other commits and the other exclusive transactions wait; the transactions that read do not</text>
+<text x="32" y="136" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A commit waits</text>
+<text x="32" y="156" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">It waits for the exclusive one to</text>
+<text x="32" y="172" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">close, then finds the book</text>
+<text x="32" y="188" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">changed since it opened</text>
+<text x="250" y="142" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">exclusive</text>
+<line x1="262" y1="138" x2="754" y2="138" stroke="#4a5a62" stroke-width="1"/>
+<path d="M262 132H750Q754 132 754 136V140Q754 144 750 144H262Z" fill="#3987e5"/>
+<text x="262" y="162" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">holds the right to write</text>
+<circle cx="262" cy="138" r="4" fill="#aebcc4"/>
+<text x="262" y="128" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">opens</text>
+<circle cx="372" cy="138" r="4" fill="#aebcc4"/>
+<text x="372" y="128" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Price = 12.50</text>
+<path d="M758 138L762.5 142.5L770 133.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="754" y="126" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<text x="422" y="208" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">other</text>
+<line x1="434" y1="204" x2="610" y2="204" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="434" cy="204" r="4" fill="#aebcc4"/>
+<text x="434" y="194" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">opens</text>
+<circle cx="520" cy="204" r="4" fill="#aebcc4"/>
+<text x="520" y="194" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Price = 11.00</text>
+<circle cx="610" cy="204" r="4" fill="#aebcc4"/>
+<text x="610" y="194" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<path d="M610 198H750Q754 198 754 202V206Q754 210 750 210H610Z" fill="#e4a93c"/>
+<text x="682" y="228" font-size="12" font-weight="400" fill="#e4a93c" text-anchor="middle">waits</text>
+<path d="M768 198L780 210M780 198L768 210" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="788" y="208" font-size="12" font-weight="600" fill="#f07a78" text-anchor="start">conflict</text>
+<text x="788" y="224" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">writes nothing</text>
+<line x1="32" y1="248" x2="928" y2="248" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="292" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">An opening waits</text>
+<text x="32" y="312" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">A CancellationToken bounds the</text>
+<text x="32" y="328" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">wait of an exclusive transaction</text>
+<text x="32" y="344" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">for the right to write</text>
+<text x="250" y="298" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">first exclusive</text>
+<line x1="262" y1="294" x2="880" y2="294" stroke="#4a5a62" stroke-width="1"/>
+<path d="M262 288H876Q880 288 880 292V296Q880 300 876 300H262Z" fill="#3987e5"/>
+<text x="262" y="318" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">holds the right to write</text>
+<circle cx="262" cy="294" r="4" fill="#aebcc4"/>
+<text x="262" y="284" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">opens</text>
+<text x="880" y="284" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">closes</text>
+<text x="342" y="360" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">second exclusive</text>
+<path d="M354 350H496Q500 350 500 354V358Q500 362 496 362H354Z" fill="#e4a93c"/>
+<text x="427" y="380" font-size="12" font-weight="400" fill="#e4a93c" text-anchor="middle">100 milliseconds at most</text>
+<circle cx="354" cy="356" r="4" fill="#aebcc4"/>
+<text x="354" y="346" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">opens</text>
+<path d="M510 350L522 362M522 350L510 362" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="532" y="360" font-size="12" font-weight="400" fill="#f07a78" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">OperationCanceledException</text>
+<text x="554" y="416" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">reader</text>
+<line x1="566" y1="412" x2="648" y2="412" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="566" cy="412" r="4" fill="#aebcc4"/>
+<text x="566" y="402" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">opens</text>
+<circle cx="648" cy="412" r="4" fill="#aebcc4"/>
+<text x="648" y="402" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Count() == 0</text>
+<text x="704" y="416" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">A transaction that reads never waits</text>
+</svg>

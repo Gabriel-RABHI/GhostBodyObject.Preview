@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="392" viewBox="0 0 960 392" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A lambda captures nothing: a value from outside is its state</title>
+<desc>Two versions of one count of the books before 1950. The first reads the local value before in the lambda: it captures it, makes .NET allocate an object at each call, and GBO refuses it at compile time with the error GBO013. The second passes before to Count, ahead of a static lambda: the lambda receives each book, then the state as its parameter year. It compiles, and counts 2 books. Up to 4 values of state can be passed, in their order.</desc>
+<rect width="960" height="392" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A lambda captures nothing: a value from outside is its state</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The state is passed before the lambda, and reaches it as a parameter, after the book</text>
+<text x="32" y="106" font-size="13" font-weight="600" fill="#f07a78" text-anchor="start">A capture</text>
+<text x="32" y="132" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Year before = 1950;</text>
+<path d="M176.8 128L357.6 128Q365.6 128 365.6 136L365.6 149" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M369.2 148.8L365.6 156L362 148.8Z" fill="#f07a78"/>
+<text x="271.2" y="120" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">captured</text>
+<rect x="32" y="156" width="116.8" height="28" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="90.4" y="174.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">BookCollection</text>
+<text x="242.4" y="174" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">.Count(book =&gt; book.Year &lt;</text>
+<rect x="336" y="156" width="59.2" height="28" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="365.6" y="174.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">before</text>
+<text x="402.4" y="174" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">);</text>
+<text x="640" y="164" font-size="13" font-weight="600" fill="#f07a78" text-anchor="start">Error GBO013</text>
+<text x="640" y="182" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">An object allocated at each call</text>
+<line x1="32" y1="206" x2="928" y2="206" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="230" font-size="13" font-weight="600" fill="#3987e5" text-anchor="start">The state</text>
+<text x="32" y="256" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Year before = 1950;</text>
+<path d="M176.8 252L210.8 252Q218.8 252 218.8 260L218.8 277" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M222.4 276.8L218.8 284L215.2 276.8Z" fill="#3987e5"/>
+<path d="M238.8 284L238.8 277Q238.8 270 245.8 270L408.5 270Q412 270 412 273.5L412 277" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M415.6 276.8L412 284L408.4 276.8Z" fill="#3987e5"/>
+<text x="246.8" y="262" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">reaches it after the book</text>
+<rect x="32" y="284" width="116.8" height="28" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="90.4" y="302.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">BookCollection</text>
+<text x="174" y="302" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">.Count(</text>
+<rect x="199.2" y="284" width="59.2" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="228.8" y="302.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">before</text>
+<text x="294.4" y="302" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">, static (</text>
+<rect x="330.4" y="284" width="44.8" height="28" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="352.8" y="302.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">book</text>
+<text x="382.4" y="302" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">, </text>
+<rect x="389.6" y="284" width="44.8" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="412" y="302.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">year</text>
+<text x="517.2" y="302" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">) =&gt; book.Year &lt; year);</text>
+<path d="M90.4 312L90.4 324Q90.4 332 98.4 332L346.3 332Q352.8 332 352.8 325.5L352.8 319" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M349.2 319.2L352.8 312L356.4 319.2Z" fill="#aebcc4"/>
+<text x="221.6" y="348" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">each book</text>
+<text x="646" y="304" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">2</text>
+<text x="662" y="302" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">books before 1950</text>
+<text x="32" y="374" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Up to 4 values of state, in their order: BookCollection.Count(1950, 1970, static (book, from, to) =&gt; ...)</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="324" viewBox="0 0 960 324" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A conflict in one Store fails the commit of the whole chain</title>
+<desc>Two writers. The first one scans the parcel PX-2003 at Lyon, then the second one scans the parcel PX-2004 at Lyon. The parcels are two entities of the Store of the parcels; the board of Lyon, in the Store of the tracking, is changed by both. The second writer commits first. The commit of the first one conflicts and writes nothing in any Store: PX-2003 stays without a depot, PX-2004 is at Lyon, and the board counts 1 parcel.</desc>
+<rect width="960" height="324" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A conflict in one Store fails the commit of the whole chain</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Two transactions scan two parcels at Lyon: their parcels differ, and both change the same board</text>
+<rect x="32" y="134" width="176" height="64" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="120" y="161.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The first writer</text><text x="120" y="178.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Arrive(first, "Lyon")</text>
+<rect x="32" y="226" width="176" height="64" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="120" y="253.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The second writer</text><text x="120" y="270.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Arrive(second, "Lyon")</text>
+<rect x="242" y="100" width="214" height="206" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="254" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start"></text>
+<text x="254" y="120" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">parcels</text>
+<rect x="256" y="134" width="186" height="64" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="349" y="163" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">PX-2003</text><text x="349" y="179" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">unchanged, no depot</text>
+<rect x="256" y="226" width="186" height="64" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="349" y="255" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">PX-2004</text><text x="349" y="271" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">at Lyon</text>
+<rect x="502" y="100" width="212" height="206" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="514" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start"></text>
+<text x="514" y="120" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">tracking</text>
+<rect x="516" y="134" width="184" height="156" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="608" y="209" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The board of Lyon</text><text x="608" y="225" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">1 parcel</text>
+<path d="M208 166L249 166" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M248.8 162.4L256 166L248.8 169.6Z" fill="#aebcc4"/>
+<path d="M208 258L249 258" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M248.8 254.4L256 258L248.8 261.6Z" fill="#aebcc4"/>
+<path d="M442 166L509 166" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M508.8 162.4L516 166L508.8 169.6Z" fill="#f07a78"/>
+<path d="M442 258L509 258" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M508.8 254.4L516 258L508.8 261.6Z" fill="#f07a78"/>
+<path d="M700 166L748 166" fill="none" stroke="#4a5a62" stroke-width="1.6"/>
+<path d="M700 258L748 258" fill="none" stroke="#4a5a62" stroke-width="1.6"/>
+<path d="M754 160L766 172M766 160L754 172" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="776" y="152" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<text x="776" y="170" font-size="12" font-weight="600" fill="#f07a78" text-anchor="start">conflict</text>
+<text x="776" y="186" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">writes nothing, in any Store</text>
+<path d="M754 258L758.5 262.5L766 253.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="776" y="244" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<text x="776" y="262" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">committed first</text>
+<text x="776" y="278" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">both Stores written</text>
+<path d="M760 246L760 178" fill="none" stroke="#f07a78" stroke-width="1.4" stroke-dasharray="5 4"/><path d="M756.4 185.2L760 178L763.6 185.2" fill="none" stroke="#f07a78" stroke-width="1.4" stroke-linejoin="round"/>
+</svg>
