@@ -307,7 +307,7 @@ GBO is faster than almost all general-purpose database engines, and gives a more
 
 ![Insert orders: GBO against EF Core + PostgreSQL, orders per second](Documentation/Benchmarks/charts/gbo-vs-ef-insert.svg)
 
-**Inserts: 24 to 53 times faster.** EF Core sends one `INSERT` per row, about 19,000 rows/s, whatever the size of the transaction.
+**Inserts: 24 to 53 times faster.** EF Core sends one `INSERT` per row, about 19,000 rows/s, whatever the size of the transaction. GBO reach 1M+ inserted object/s.
 
 ![Change orders: GBO against EF Core + PostgreSQL, orders per second](Documentation/Benchmarks/charts/gbo-vs-ef-change.svg)
 
