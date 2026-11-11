@@ -14,6 +14,12 @@ GBO makes AI code generation far more effective. It allows AI to build large dis
 The GBO data model extends the capabilities of native C# objects. It combines object aggregates, weak and strong references, entity-component systems (ECS), and edge-based graphs. It also supports various indexes, including text indexes. GBO provides strong safety guarantees (no more `NullReferenceException`) and deterministic memory management, along with a fine-grained code analysis extension that provides feedback on problems in the code. This combination is similar to the one that makes Rust so effective in AI-assisted software development. GBO applies it to the development of large, full-stack .NET business applications.
 
 The result is a much smaller codebase and a dramatic reduction in complexity, from the most basic applications to the largest modular, distributed ones. GBO introduces a new paradigm for infrastructure, object data modeling, and error and memory management. This paradigm is easy for human developers to work with and is designed for the next generation of **AI Dark Software Factories**. The complete GBO stack will use Blazor for both server-side and client-side rendering, with a rich, lightweight component library. The GBO stack will introduce a new, dedicated transactional server-side UI framework that uses streaming and scales far beyond what server-side Blazor can offer for web, mobile, and desktop applications.
+
+> [!WARNINGS]
+> This repository is a preview of the upcoming official GBO repository. Not all projects and samples are available yet.
+> 
+> GBO is the fifth generation of a technology that has been in development since 2009. The project began with work for a healthcare company, continued with the development of a social media system, and later became a research side project. Earlier versions of the technology power a distributed healthcare system with 450 instances across France. The system supports terabyte-scale data aggregation, monitoring, and automated updates.
+
 ### A minimal sample
 
 An agenda of appointments, kept on disk: the model in one file, the operations in another, then the same program on two nodes.
@@ -218,23 +224,33 @@ In .NET, a record holds references: each string is an object of its own on the m
 
 ![The GC and 10,000,000 Records: full collections and managed heap, GBO against .NET](Documentation/Benchmarks/charts/gbo-vs-dotnet-gc-records.svg)
 
-**Why is the GC so slow?** A full collection must prove what is alive: it follows every reference, and visits each object it reaches. A record of .NET is 11 objects, so 10,000,000 records are 110,000,000 visits: 4.10 s, during which every thread of the application waits.
+**Why is the GC so slow?**
 
-**Why is GBO faster?** It does not give the GC less data, it gives it fewer objects. A GBO Record is one Body, a C# object of 40 bytes, and its Ghost sits in pinned pages of 128 KB: arrays of bytes, in which the GC has no reference to follow. 10,000,000 GBO Bodies instead of 110,000,000 objects: 11 times fewer visits, 11.5 times less time. The cost of a collection follows the number of objects, not the volume of the data.
+A full collection must prove what is alive: it follows every reference, and visits each object it reaches. A record of .NET is 11 objects, so 10,000,000 records are 110,000,000 visits: 4.10 s, during which every thread of the application waits.
+
+**Why is GBO faster?**
+
+It does not give the GC less data, it gives it fewer objects. A GBO Record is one Body, a C# object of 40 bytes, and its Ghost sits in pinned pages of 128 KB: arrays of bytes, in which the GC has no reference to follow. 10,000,000 GBO Bodies instead of 110,000,000 objects: 11 times fewer visits, 11.5 times less time. The cost of a collection follows the number of objects, not the volume of the data.
 
 ![What a full GC has to visit: 110,000,000 objects for .NET, 10,000,000 Bodies for GBO Records, a few Segments for GBO entities](Documentation/Benchmarks/charts/gbo-vs-dotnet-gc-visits.svg)
 
-**Why is the release faster, but not free?** Nothing is alive any more, so nothing is followed, but the GC still walks through the heap to find what it can free: 0.74 s across 110,000,000 dead objects, 73 ms across 10,000,000 Bodies.
+**Why is the release faster, but not free?**
+
+Nothing is alive any more, so nothing is followed, but the GC still walks through the heap to find what it can free: 0.74 s across 110,000,000 dead objects, 73 ms across 10,000,000 Bodies.
 
 The collections that nobody asks for pay the same price. During the creation, .NET spends 3.6 s of its 10.3 s in GC pauses, GBO 0.5 s of its 11.6 s. .NET still creates a little faster (×1.1): here GBO writes its fields one loop at a time, and a Ghost moves to a larger block as it grows.
 
-**Why does GBO take 25 % less memory?** Both sides hold the same characters, in UTF-16, about 298 bytes per item. What differs is the price of a string. In .NET, 8 bytes for its reference, 22 for its object header, its length and its terminator, then padding to a multiple of 8: about 34 bytes, ten times over. In a Ghost, one entry of 8 bytes in its table, ten times over. With its Body, a Record takes 488 bytes against 654, the managed heap 4.5 GB against 6.1 GB, and the working set 6.4 GB against 8.1 GB.
+**Why does GBO take 25 % less memory?**
+
+Both sides hold the same characters, in UTF-16, about 298 bytes per item. What differs is the price of a string. In .NET, 8 bytes for its reference, 22 for its object header, its length and its terminator, then padding to a multiple of 8: about 34 bytes, ten times over. In a Ghost, one entry of 8 bytes in its table, ten times over. With its Body, a Record takes 488 bytes against 654, the managed heap 4.5 GB against 6.1 GB, and the working set 6.4 GB against 8.1 GB.
 
 ### Comparison 2: entities in a Store
 
 10,000,000 entities created in one transaction of a GBO Repository, committed to a Store in memory, collected, removed, and collected again. .NET keeps the same objects in a `List<T>`: the collection that costs its GC the least, without a dictionary and without any identity.
 
-**What is a commit, and what does it do?** In a transaction, everything you create or change is private: a Body and its Ghost, in the memory of the transaction. The commit turns this work into shared data, all of it or nothing. It checks that nothing committed since the snapshot of the transaction conflicts with its writes, copies each Ghost to the end of the Store, one writer at a time, updates the indexes, then publishes it all at once to the next transactions. On a Store on disk, the same bytes then reach the disk according to its durability. The Bodies and the memory of the transaction are left to the GC: the entity is now bytes in the Store.
+**What is a commit, and what does it do?**
+
+In a transaction, everything you create or change is private: a Body and its Ghost, in the memory of the transaction. The commit turns this work into shared data, all of it or nothing. It checks that nothing committed since the snapshot of the transaction conflicts with its writes, copies each Ghost to the end of the Store, one writer at a time, updates the indexes, then publishes it all at once to the next transactions. On a Store on disk, the same bytes then reach the disk according to its durability. The Bodies and the memory of the transaction are left to the GC: the entity is now bytes in the Store.
 
 ![What a commit does: the Bodies and Ghosts of a transaction, four steps, then the Ghosts alone in the Store](Documentation/Benchmarks/charts/gbo-vs-dotnet-commit.svg)
 
@@ -242,11 +258,15 @@ The collections that nobody asks for pay the same price. During the creation, .N
 
 ![The GC and 10,000,000 entities: full collections and managed heap, GBO against .NET](Documentation/Benchmarks/charts/gbo-vs-dotnet-gc-entities.svg)
 
-**Why is the GC even faster than with Records?** Once committed, an entity is no longer a C# object, not even a Body. A query creates none either: a View is a struct, on the stack. All that is left for the GC is the 146 Segments of the Store, arrays of bytes without references: 71 ms against 4.04 s, 57 times faster. These 71 ms are mostly the walk through the 10,000,000 Bodies that the transaction left behind.
+**Why is the GC even faster than with Records?**
 
-**Why is the last collection so fast?** Removing the entities is the work of their transactions, 8.9 s by transactions of 10,000, where a `List` clears in 6 ms: GBO does this work at the instruction, not at some later collection. The Segments emptied by the removals are released, and the GC finds a few arrays to free: 7 ms, against the 0.76 s that .NET spends walking through 110,000,000 dead objects.
+Once committed, an entity is no longer a C# object, not even a Body. A query creates none either: a View is a struct, on the stack. All that is left for the GC is the 146 Segments of the Store, arrays of bytes without references: 71 ms against 4.04 s, 57 times faster. These 71 ms are mostly the walk through the 10,000,000 Bodies that the transaction left behind.
 
-Once committed, the managed heap holds 4.1 GB against 6.1 GB, 32 % less. The working set does not follow yet, 10.5 GB against 8.1 GB: the memory of the transaction has not gone back to the system.
+**Why is the last collection so fast?**
+
+Removing the entities is the work of their transactions, 8.9 s by transactions of 10,000, where a `List` clears in 6 ms: GBO does this work at the instruction, not at some later collection. The Segments emptied by the removals are released, and the GC finds a few arrays to free: 7 ms, against the 0.76 s that .NET spends walking through 110,000,000 dead objects.
+
+**Once committed, the managed heap holds 4.1 GB against 6.1 GB, 32 % less.** The working set does not follow yet, 10.5 GB against 8.1 GB: the memory of the transaction has not gone back to the system.
 
 ### Comparison 3: a query and the layout
 
@@ -254,15 +274,21 @@ A query on five strings, then a query on the date, measured in the same way: by 
 
 ![A query on 5 strings: GBO against .NET, as created, dispersed, and GBO aligned](Documentation/Benchmarks/charts/gbo-vs-dotnet-query-strings.svg)
 
-**Why is .NET 2.5 times faster at first?** Here the strings follow their object, memory is read in order on both sides, and the difference is the code of a read. A `string` of .NET is one reference away, and its methods are among the most tuned code of the platform. A `GhostString` first has to find its characters: through the View, the table of the version of its Ghost, then the entry of the string, each step checked. This cost is in the processor, not in the memory, and it is the next one to lower. A program that would allocate all its first names in a row, then all its last names, would read 55 M/s in .NET; no running program keeps that order.
+**Why is .NET 2.5 times faster at first?**
 
-**Why does .NET then fall behind?** A program lives: it replaces its strings, and each new string lands elsewhere on the heap. The GC compacts the heap but keeps the order of the addresses, so it never brings a record and its strings back together. The benchmark gives both sides this life at once. In .NET, each field swaps its string with the same field of a record drawn at random, and the `List` is shuffled. In GBO, each entity swaps its ten strings with another one, in transactions of 1,000, and its new version goes to the end of the Store.
+Here the strings follow their object, memory is read in order on both sides, and the difference is the code of a read. A `string` of .NET is one reference away, and its methods are among the most tuned code of the platform. A `GhostString` first has to find its characters: through the View, the table of the version of its Ghost, then the entry of the string, each step checked. This cost is in the processor, not in the memory, and it is the next one to lower. A program that would allocate all its first names in a row, then all its last names, would read 55 M/s in .NET; no running program keeps that order.
+
+**Why does .NET then fall behind?**
+
+A program lives: it replaces its strings, and each new string lands elsewhere on the heap. The GC compacts the heap but keeps the order of the addresses, so it never brings a record and its strings back together. The benchmark gives both sides this life at once. In .NET, each field swaps its string with the same field of a record drawn at random, and the `List` is shuffled. In GBO, each entity swaps its ten strings with another one, in transactions of 1,000, and its new version goes to the end of the Store.
 
 ![After the swaps: in .NET the objects and their strings are scattered, in GBO the Ghosts are scattered with their strings in them](Documentation/Benchmarks/charts/gbo-vs-dotnet-dispersion.svg)
 
 .NET falls from 24.8 to 2.6 M/s, 9.5 times slower: each string is now a chain of two random reads, the object then the string, five times per record. GBO falls from 9.8 to 4.5 M/s, 2.2 times slower: an entity is one random read, and its strings came with it.
 
-**How does GBO get its order back?** By its compactor, which .NET has no equivalent of. It copies the current version of each entity to the head of the Store, in the order of the identifiers, about 64 KB at a time, then releases the Segments it emptied. The order of a collection becomes the order of the memory again. Here it moves 4.5 GB in 6.7 s, and the query comes back to 8.2 M/s, 3.1 times .NET, whose strings stay dispersed until the end of the process. Entities written once have nothing to gain: a commit already writes them in order, and the compactor then moves 0 byte.
+**How does GBO get its order back?**
+
+By its compactor, which .NET has no equivalent of. It copies the current version of each entity to the head of the Store, in the order of the identifiers, about 64 KB at a time, then releases the Segments it emptied. The order of a collection becomes the order of the memory again. Here it moves 4.5 GB in 6.7 s, and the query comes back to 8.2 M/s, 3.1 times .NET, whose strings stay dispersed until the end of the process. Entities written once have nothing to gain: a commit already writes them in order, and the compactor then moves 0 byte.
 
 ![The compactor puts the entities back in order: the Ghosts 3, 1, 4, 2 apart from each other, then copied side by side from 1 to 4](Documentation/Benchmarks/charts/gbo-vs-dotnet-compactor.svg)
 
@@ -289,6 +315,9 @@ A value does not slow an enumeration: at a fixed place in its Ghost, it is read 
 
 These choices follow from one fact: a data manager generally performs far more reads than changes, by a factor of 10, 100, 1,000 or more when the system aggregates a lot of data. Using Views, GhostString, GhostSpan and static lambdas, GBO perform aggregations (like a .Count operation) and filtering (like a .Where selection) without any memory allocations. It can turns a .Net application in a high performance data processing system.
 
+> [!WARNINGS]
+> This repository is a preview of the upcoming official GBO repository. Not all projects are available yet.
+
 These figures are those of the workstation GC. The code of the measures: [RecordStringsBenchmark](GhostBodyObject.Runtime.Common.Benchmarks/RecordStringsBenchmark.cs), run by its code, from `REC01` to `REC04`:
 
 ```bash
@@ -307,7 +336,7 @@ GBO is faster than almost all general-purpose database engines, and gives a more
 
 ![Insert orders: GBO against EF Core + PostgreSQL, orders per second](Documentation/Benchmarks/charts/gbo-vs-ef-insert.svg)
 
-**Inserts: 24 to 53 times faster.** EF Core sends one `INSERT` per row, about 19,000 rows/s, whatever the size of the transaction. GBO reach 1M+ inserted object/s.
+**Inserts: 24 to 53 times faster.** EF Core sends one `INSERT` per row, about 19,000 rows/s, whatever the size of the transaction.
 
 ![Change orders: GBO against EF Core + PostgreSQL, orders per second](Documentation/Benchmarks/charts/gbo-vs-ef-change.svg)
 
