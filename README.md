@@ -15,7 +15,7 @@ The GBO data model extends the capabilities of native C# objects. It combines ob
 
 The result is a much smaller codebase and a dramatic reduction in complexity, from the most basic applications to the largest modular, distributed ones. GBO introduces a new paradigm for infrastructure, object data modeling, and error and memory management. This paradigm is easy for human developers to work with and is designed for the next generation of **AI Dark Software Factories**. The complete GBO stack will use Blazor for both server-side and client-side rendering, with a rich, lightweight component library. The GBO stack will introduce a new, dedicated transactional server-side UI framework that uses streaming and scales far beyond what server-side Blazor can offer for web, mobile, and desktop applications.
 
-> [!WARNINGS]
+> [!WARNING]
 > This repository is a preview of the upcoming official GBO repository. Not all projects and samples are available yet.
 > 
 > GBO is the fifth generation of a technology that has been in development since 2009. The project began with work for a healthcare company, continued with the development of a social media system, and later became a research side project. Earlier versions of the technology power a distributed healthcare system with 450 instances across France. The system supports terabyte-scale data aggregation, monitoring, and automated updates.
