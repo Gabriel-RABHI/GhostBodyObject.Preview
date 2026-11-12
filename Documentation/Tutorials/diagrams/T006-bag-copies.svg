@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="406" viewBox="0 0 960 406" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>The copy of a bag is free: to change, and to assign to another stay</title>
+<desc>Five instructions, three bags. ada.Charges receives a charge, Room. ada.ToView().Charges.ToBody() gives copy, a free bag that holds Room. copy.Add adds Parking to the copy alone: ada.Charges still counts 1. The new stay of Bob receives the copy by Charges = copy, and holds Room and Parking. ada.Charges.Clear() empties the bag of Ada: the stay of Bob keeps its two charges.</desc>
+<rect width="960" height="406" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">The copy of a bag is free: to change, and to assign to another stay</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The Records of each bag, at each instruction</text>
+<text x="350" y="110" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ada.Charges</text>
+<text x="350" y="126" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">bound to the stay of Ada</text>
+<text x="558" y="110" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">copy</text>
+<text x="558" y="126" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">free: it belongs to nothing</text>
+<text x="766" y="110" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">bob.Charges</text>
+<text x="766" y="126" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">bound to the stay of Bob</text>
+<text x="32" y="164" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ada.Charges.Add(new Charge { ... })</text>
+<rect x="350" y="144" width="78" height="32" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="389" y="164.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Room</text>
+<line x1="32" y1="184" x2="928" y2="184" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="212" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">var copy = ada.ToView().Charges.ToBody()</text>
+<rect x="350" y="192" width="78" height="32" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="389" y="212.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Room</text>
+<rect x="558" y="192" width="78" height="32" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="597" y="212.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Room</text>
+<path d="M428 208L551 208" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M550.8 204.4L558 208L550.8 211.6Z" fill="#aebcc4"/>
+<text x="493" y="201" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">copied</text>
+<line x1="32" y1="232" x2="928" y2="232" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="260" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">copy.Add(new Charge { ... })</text>
+<rect x="350" y="240" width="78" height="32" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="389" y="260.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Room</text>
+<rect x="558" y="240" width="78" height="32" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="597" y="260.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Room</text>
+<rect x="642" y="240" width="78" height="32" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="681" y="260.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Parking</text>
+<line x1="32" y1="280" x2="928" y2="280" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="308" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">var bob = new Stay { ..., Charges = copy }</text>
+<rect x="350" y="288" width="78" height="32" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="389" y="308.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Room</text>
+<rect x="558" y="288" width="78" height="32" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="597" y="308.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Room</text>
+<rect x="642" y="288" width="78" height="32" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="681" y="308.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Parking</text>
+<rect x="766" y="288" width="78" height="32" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="805" y="308.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Room</text>
+<rect x="850" y="288" width="78" height="32" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="889" y="308.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Parking</text>
+<path d="M720 304L759 304" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M758.8 300.4L766 304L758.8 307.6Z" fill="#aebcc4"/>
+<text x="743" y="297" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">copied</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="356" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ada.Charges.Clear()</text>
+<rect x="350" y="336" width="78" height="32" rx="4" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="389" y="356.3" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">Room</text>
+<rect x="558" y="336" width="78" height="32" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="597" y="356.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Room</text>
+<rect x="642" y="336" width="78" height="32" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="681" y="356.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Parking</text>
+<rect x="766" y="336" width="78" height="32" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="805" y="356.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Room</text>
+<rect x="850" y="336" width="78" height="32" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="889" y="356.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">Parking</text>
+</svg>

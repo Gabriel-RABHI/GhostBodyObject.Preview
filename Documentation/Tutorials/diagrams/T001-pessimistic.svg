@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="408" viewBox="0 0 960 408" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>Each decision is right on what it read, and the rule breaks</title>
+<desc>Two transactions read Dune and Foundation available, and each one borrows its own book. At the Optimistic level both commit, because they wrote two different books, and the shelves are empty. At the Pessimistic level the later commit conflicts, of the kind Collection, because the books it read changed: Dune stays on the shelves, and its retry refuses to borrow it.</desc>
+<rect width="960" height="408" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Each decision is right on what it read, and the rule breaks</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The library keeps one book on its shelves. Each transaction reads two, and writes its own book</text>
+<text x="32" y="130" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Optimistic</text>
+<text x="32" y="150" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">Reads are not checked:</text>
+<text x="32" y="166" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">two books, no conflict</text>
+<text x="268" y="138" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">first</text>
+<line x1="280" y1="134" x2="590" y2="134" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="280" cy="134" r="4" fill="#aebcc4"/>
+<text x="280" y="124" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">opens</text>
+<circle cx="392" cy="134" r="4" fill="#aebcc4"/>
+<text x="392" y="124" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Borrow("Dune")</text>
+<path d="M584 134L588.5 138.5L596 129.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="590" y="122" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<text x="284" y="190" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">second</text>
+<line x1="296" y1="186" x2="510" y2="186" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="296" cy="186" r="4" fill="#aebcc4"/>
+<text x="296" y="176" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">opens</text>
+<circle cx="402" cy="186" r="4" fill="#aebcc4"/>
+<text x="402" y="176" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Borrow("Foundation")</text>
+<path d="M504 186L508.5 190.5L516 181.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="510" y="174" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<rect x="722" y="112" width="206" height="96" rx="10" fill="none" stroke="#f07a78" stroke-width="1.5"/><text x="734" y="132" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The shelves</text><text x="916" y="132" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="end">empty</text>
+<rect x="734" y="150" width="84" height="44" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="776" y="169" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text><text x="776" y="185" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">borrowed</text>
+<rect x="830" y="150" width="84" height="44" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="872" y="169" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Foundation</text><text x="872" y="185" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">borrowed</text>
+<line x1="32" y1="234" x2="928" y2="234" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="284" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Pessimistic</text>
+<text x="32" y="304" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">The books it read changed:</text>
+<text x="32" y="320" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">the later commit conflicts</text>
+<text x="268" y="292" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">first</text>
+<line x1="280" y1="288" x2="590" y2="288" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="280" cy="288" r="4" fill="#aebcc4"/>
+<text x="280" y="278" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">opens</text>
+<circle cx="392" cy="288" r="4" fill="#aebcc4"/>
+<text x="392" y="278" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Borrow("Dune")</text>
+<path d="M584 282L596 294M596 282L584 294" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="590" y="276" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<text x="604" y="292" font-size="12" font-weight="600" fill="#f07a78" text-anchor="start">conflict</text>
+<text x="604" y="308" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">writes nothing</text>
+<text x="284" y="344" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">second</text>
+<line x1="296" y1="340" x2="510" y2="340" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="296" cy="340" r="4" fill="#aebcc4"/>
+<text x="296" y="330" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">opens</text>
+<circle cx="402" cy="340" r="4" fill="#aebcc4"/>
+<text x="402" y="330" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Borrow("Foundation")</text>
+<path d="M504 340L508.5 344.5L516 335.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="510" y="328" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<rect x="722" y="266" width="206" height="96" rx="10" fill="none" stroke="#3987e5" stroke-width="1.5"/><text x="734" y="286" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The shelves</text><text x="916" y="286" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="end">one book</text>
+<rect x="734" y="304" width="84" height="44" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="776" y="323" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text><text x="776" y="339" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">available</text>
+<rect x="830" y="304" width="84" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="872" y="323" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Foundation</text><text x="872" y="339" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">borrowed</text>
+<text x="32" y="392" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Run again, the first transaction reads one book available, and refuses.</text>
+</svg>

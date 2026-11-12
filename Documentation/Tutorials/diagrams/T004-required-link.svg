@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="372" viewBox="0 0 960 372" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A membership retains its role, until it is given another</title>
+<desc>Five steps. ada.NewMembership(club, member) makes the membership of Ada in the chess club, which retains the role Member by a strong reference. member.Remove() is refused. TryGetOrNew(club, admin, out found) compares the role: it gives the membership, and false. found.Role = admin moves the strong reference to the role Admin. member.Remove() passes: the role Member is free.</desc>
+<rect width="960" height="372" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A membership retains its role, until it is given another</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Ada in the chess club: the role is a required link of the edge, given to its birth</text>
+<line x1="32" y1="94" x2="928" y2="94" stroke="#4a5a62" stroke-width="1"/><circle cx="116" cy="94" r="3.5" fill="#aebcc4"/><circle cx="298.5" cy="94" r="3.5" fill="#aebcc4"/><circle cx="481" cy="94" r="3.5" fill="#aebcc4"/><circle cx="663.5" cy="94" r="3.5" fill="#aebcc4"/><circle cx="846" cy="94" r="3.5" fill="#aebcc4"/>
+<text x="116" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ada.NewMembership(</text>
+<text x="116" y="134" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">club, member)</text>
+<rect x="32" y="150" width="74" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="69" y="170.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="112" y="150" width="88" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="156" y="170.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Chess club</text>
+<path d="M82 182L82 202" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<path d="M150 182L150 202" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<rect x="66" y="202" width="100" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="116" y="218.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Membership</text>
+<path d="M92 226L92 261" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M95.6 260.8L92 268L88.4 260.8Z" fill="#3987e5"/>
+<rect x="32" y="268" width="78" height="32" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="71" y="288.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Member</text>
+<rect x="122" y="268" width="78" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="161" y="288.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Admin</text>
+<text x="116" y="326" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">The role is retained</text>
+<text x="298.5" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">member.Remove()</text>
+<rect x="214.5" y="150" width="74" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="251.5" y="170.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="294.5" y="150" width="88" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="338.5" y="170.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Chess club</text>
+<path d="M264.5 182L264.5 202" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<path d="M332.5 182L332.5 202" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<rect x="248.5" y="202" width="100" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="298.5" y="218.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Membership</text>
+<path d="M274.5 226L274.5 261" fill="none" stroke="#f07a78" stroke-width="2"/><path d="M278.1 260.8L274.5 268L270.9 260.8Z" fill="#f07a78"/>
+<rect x="214.5" y="268" width="78" height="32" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="253.5" y="288.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Member</text>
+<rect x="304.5" y="268" width="78" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="343.5" y="288.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Admin</text>
+<text x="298.5" y="326" font-size="12" font-weight="600" fill="#f07a78" text-anchor="middle">Refused</text>
+<text x="481" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">TryGetOrNew(club,</text>
+<text x="481" y="134" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">admin, out found)</text>
+<rect x="397" y="150" width="74" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="434" y="170.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="477" y="150" width="88" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="521" y="170.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Chess club</text>
+<path d="M447 182L447 202" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<path d="M515 182L515 202" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<rect x="431" y="202" width="100" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="481" y="218.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Membership</text>
+<path d="M457 226L457 261" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M460.6 260.8L457 268L453.4 260.8Z" fill="#3987e5"/>
+<rect x="397" y="268" width="78" height="32" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="436" y="288.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Member</text>
+<rect x="487" y="268" width="78" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="526" y="288.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Admin</text>
+<text x="481" y="326" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">The membership, and false</text>
+<text x="663.5" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">found.Role = admin</text>
+<rect x="579.5" y="150" width="74" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="616.5" y="170.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="659.5" y="150" width="88" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="703.5" y="170.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Chess club</text>
+<path d="M629.5 182L629.5 202" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<path d="M697.5 182L697.5 202" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<rect x="613.5" y="202" width="100" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="663.5" y="218.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Membership</text>
+<path d="M687.5 226L687.5 261" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M691.1 260.8L687.5 268L683.9 260.8Z" fill="#3987e5"/>
+<rect x="579.5" y="268" width="78" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="618.5" y="288.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Member</text>
+<rect x="669.5" y="268" width="78" height="32" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="708.5" y="288.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Admin</text>
+<text x="663.5" y="326" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">The role changes</text>
+<text x="846" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">member.Remove()</text>
+<rect x="762" y="150" width="74" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="799" y="170.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="842" y="150" width="88" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="886" y="170.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Chess club</text>
+<path d="M812 182L812 202" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<path d="M880 182L880 202" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<rect x="796" y="202" width="100" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="846" y="218.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Membership</text>
+<path d="M870 226L870 261" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M873.6 260.8L870 268L866.4 260.8Z" fill="#3987e5"/>
+<rect x="762" y="268" width="78" height="32" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="801" y="288.7" font-size="13" font-weight="600" fill="#7f9199" text-anchor="middle">Member</text>
+<rect x="852" y="268" width="78" height="32" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="891" y="288.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Admin</text>
+<text x="846" y="326" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">Removed</text>
+<line x1="32" y1="350" x2="40" y2="350" stroke="#aebcc4" stroke-width="1.4"/>
+<rect x="40" y="345" width="18" height="10" rx="3" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<path d="M58 350L66 350" fill="none" stroke="#aebcc4" stroke-width="1.4"/>
+<text x="74" y="354" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">an edge</text>
+<path d="M136.6 350L155.6 350" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M155.4 346.4L162.6 350L155.4 353.6Z" fill="#aebcc4"/><text x="170.6" y="354" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">strong reference</text>
+</svg>

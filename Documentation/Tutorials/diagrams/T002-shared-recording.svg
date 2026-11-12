@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="368" viewBox="0 0 960 368" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A shared object lives as long as its strong references</title>
+<desc>Four steps. A track of the album Low is born with a new recording: 1 strong reference. A track of the compilation Best of designates the same recording: 2. The album Low is removed with its track: 1, and the recording lives. The compilation is removed: nothing retains the recording, removed by the same instruction.</desc>
+<rect width="960" height="368" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A shared object lives as long as its strong references</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">No Owner, no Remove(): the tracks that designate a recording keep it alive</text>
+<line x1="32" y1="94" x2="928" y2="94" stroke="#4a5a62" stroke-width="1"/><circle cx="135" cy="94" r="3.5" fill="#aebcc4"/><circle cx="365" cy="94" r="3.5" fill="#aebcc4"/><circle cx="595" cy="94" r="3.5" fill="#aebcc4"/><circle cx="825" cy="94" r="3.5" fill="#aebcc4"/>
+<text x="135" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">new Recording.Init()</text>
+<rect x="32" y="134" width="96" height="74" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="44" y="154" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Low</text>
+<rect x="44" y="166" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="80" y="185.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Track</text>
+<rect x="142" y="134" width="96" height="74" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="154" y="154" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Best of</text>
+<rect x="60" y="252" width="150" height="38" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="135" y="275.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Recording</text>
+<path d="M80 196L80 245" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M83.6 244.8L80 252L76.4 244.8Z" fill="#aebcc4"/>
+<text x="135" y="326" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text>
+<text x="135" y="344" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">strong reference</text>
+<text x="365" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">best.Tracks.New(recording)</text>
+<rect x="262" y="134" width="96" height="74" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="274" y="154" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Low</text>
+<rect x="274" y="166" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="310" y="185.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Track</text>
+<rect x="372" y="134" width="96" height="74" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="384" y="154" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Best of</text>
+<rect x="384" y="166" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="420" y="185.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Track</text>
+<rect x="290" y="252" width="150" height="38" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="365" y="275.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Recording</text>
+<path d="M310 196L310 245" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M313.6 244.8L310 252L306.4 244.8Z" fill="#aebcc4"/>
+<path d="M420 196L420 245" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M423.6 244.8L420 252L416.4 244.8Z" fill="#aebcc4"/>
+<text x="365" y="326" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">2</text>
+<text x="595" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">bowie.Albums.Remove(low)</text>
+<rect x="492" y="134" width="96" height="74" rx="10" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="504" y="154" font-size="13" font-weight="600" fill="#7f9199" text-anchor="start">Low</text>
+<rect x="504" y="166" width="72" height="30" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="540" y="185.3" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">Track</text>
+<rect x="602" y="134" width="96" height="74" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="614" y="154" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Best of</text>
+<rect x="614" y="166" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="650" y="185.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Track</text>
+<rect x="520" y="252" width="150" height="38" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="595" y="275.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Recording</text>
+<path d="M650 196L650 245" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M653.6 244.8L650 252L646.4 244.8Z" fill="#aebcc4"/>
+<text x="595" y="326" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text>
+<text x="825" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">bowie.Albums.Remove(best)</text>
+<rect x="722" y="134" width="96" height="74" rx="10" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="734" y="154" font-size="13" font-weight="600" fill="#7f9199" text-anchor="start">Low</text>
+<rect x="734" y="166" width="72" height="30" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="770" y="185.3" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">Track</text>
+<rect x="832" y="134" width="96" height="74" rx="10" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="844" y="154" font-size="13" font-weight="600" fill="#7f9199" text-anchor="start">Best of</text>
+<rect x="844" y="166" width="72" height="30" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="880" y="185.3" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">Track</text>
+<rect x="750" y="252" width="150" height="38" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="825" y="275.7" font-size="13" font-weight="600" fill="#7f9199" text-anchor="middle">Recording</text>
+<text x="825" y="326" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle"></text>
+<text x="825" y="321" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">removed</text>
+</svg>

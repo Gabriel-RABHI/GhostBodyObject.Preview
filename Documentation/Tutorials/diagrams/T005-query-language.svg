@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="396" viewBox="0 0 960 396" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A word requires, + adds, - takes off</title>
+<desc>Five products and five words. Coffee Mug has coffee and mug. Espresso Machine has coffee. Tea Pot has tea and pot. Tea Mug has coffee, tea and mug. Espresso Cups has cups. The query tea +cups finds Tea Pot, Tea Mug and Espresso Cups. The query coffee -tea finds Coffee Mug and Espresso Machine: Tea Mug has coffee, and tea excludes it. The query -mug -pot starts from every product and finds Espresso Machine and Espresso Cups.</desc>
+<rect width="960" height="396" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A word requires, + adds, - takes off</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The five products of the lesson, the words they have, and what three queries find</text>
+<line x1="32" y1="152" x2="188" y2="152" stroke="#4a5a62" stroke-width="1"/>
+<text x="318" y="106" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">tea +cups</text>
+<line x1="204" y1="152" x2="432" y2="152" stroke="#4a5a62" stroke-width="1"/>
+<text x="236" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">tea</text>
+<text x="236" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">required</text>
+<text x="308" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">+cups</text>
+<text x="308" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">adds</text>
+<text x="380" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Found</text>
+<circle cx="236" cy="174" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="308" cy="174" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<line x1="375" y1="174" x2="385" y2="174" stroke="#7f9199" stroke-width="2"/>
+<circle cx="236" cy="214" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="308" cy="214" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<line x1="375" y1="214" x2="385" y2="214" stroke="#7f9199" stroke-width="2"/>
+<circle cx="236" cy="254" r="6" fill="#3987e5"/>
+<circle cx="308" cy="254" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<path d="M374 254L378.5 258.5L386 249.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="236" cy="294" r="6" fill="#3987e5"/>
+<circle cx="308" cy="294" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<path d="M374 294L378.5 298.5L386 289.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="236" cy="334" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="308" cy="334" r="6" fill="#3987e5"/>
+<path d="M374 334L378.5 338.5L386 329.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="562" y="106" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">coffee -tea</text>
+<line x1="448" y1="152" x2="676" y2="152" stroke="#4a5a62" stroke-width="1"/>
+<text x="480" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">coffee</text>
+<text x="480" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">required</text>
+<text x="552" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">-tea</text>
+<text x="552" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">excludes</text>
+<text x="624" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Found</text>
+<circle cx="480" cy="174" r="6" fill="#3987e5"/>
+<circle cx="552" cy="174" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<path d="M618 174L622.5 178.5L630 169.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="480" cy="214" r="6" fill="#3987e5"/>
+<circle cx="552" cy="214" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<path d="M618 214L622.5 218.5L630 209.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="480" cy="254" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="552" cy="254" r="6" fill="#f07a78"/>
+<line x1="619" y1="254" x2="629" y2="254" stroke="#7f9199" stroke-width="2"/>
+<circle cx="480" cy="294" r="6" fill="#3987e5"/>
+<circle cx="552" cy="294" r="6" fill="#f07a78"/>
+<line x1="619" y1="294" x2="629" y2="294" stroke="#7f9199" stroke-width="2"/>
+<circle cx="480" cy="334" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="552" cy="334" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<line x1="619" y1="334" x2="629" y2="334" stroke="#7f9199" stroke-width="2"/>
+<text x="806" y="106" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">-mug -pot</text>
+<line x1="692" y1="152" x2="920" y2="152" stroke="#4a5a62" stroke-width="1"/>
+<text x="724" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">-mug</text>
+<text x="724" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">excludes</text>
+<text x="796" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">-pot</text>
+<text x="796" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">excludes</text>
+<text x="868" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Found</text>
+<circle cx="724" cy="174" r="6" fill="#f07a78"/>
+<circle cx="796" cy="174" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<line x1="863" y1="174" x2="873" y2="174" stroke="#7f9199" stroke-width="2"/>
+<circle cx="724" cy="214" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="796" cy="214" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<path d="M862 214L866.5 218.5L874 209.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="724" cy="254" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="796" cy="254" r="6" fill="#f07a78"/>
+<line x1="863" y1="254" x2="873" y2="254" stroke="#7f9199" stroke-width="2"/>
+<circle cx="724" cy="294" r="6" fill="#f07a78"/>
+<circle cx="796" cy="294" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<line x1="863" y1="294" x2="873" y2="294" stroke="#7f9199" stroke-width="2"/>
+<circle cx="724" cy="334" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="796" cy="334" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<path d="M862 334L866.5 338.5L874 329.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="32" y="178" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Coffee Mug</text>
+<line x1="32" y1="194" x2="928" y2="194" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="218" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Espresso Machine</text>
+<line x1="32" y1="234" x2="928" y2="234" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="258" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Tea Pot</text>
+<line x1="32" y1="274" x2="928" y2="274" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="298" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Tea Mug</text>
+<line x1="32" y1="314" x2="928" y2="314" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="338" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Espresso Cups</text>
+<text x="32" y="378" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">A filled dot: the product has the word, in its name or its description. Red: a word that excludes it</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="372" viewBox="0 0 960 372" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A search by the Views finds the few to write by their Body</title>
+<desc>On the left, by the Views, no Body is created: the View of Dune gives the Views of its three ratings, 5, 4 and 0 stars; Where keeps the one below 1 star, the rating of Cid. Its ToBody() crosses to the right, to its Body, whose Remove() removes it. Below, the View of Alien is given to the Body of Cid: cid.NewRating(alien, 4) makes a rating of 4 stars. After the commit, Dune has 2 ratings and Alien 8 stars.</desc>
+<rect width="960" height="372" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A search by the Views finds the few to write by their Body</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The moderation removes the ratings without a star; then Cid rates Alien, found by its View</text>
+<rect x="32" y="100" width="540" height="226" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="44" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">By the Views</text><text x="560" y="120" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">no Body is created</text>
+<rect x="644" y="100" width="284" height="226" rx="10" fill="none" stroke="#3987e5" stroke-width="1.5"/><text x="656" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">By a Body</text><text x="916" y="120" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="end">the few to write</text>
+<rect x="48" y="154" width="90" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="93" y="173" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text><text x="93" y="189" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">a View</text>
+<path d="M138 176L237 176" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M236.8 172.4L244 176L236.8 179.6Z" fill="#aebcc4"/>
+<text x="191" y="168" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">RatingEdges</text>
+<rect x="244" y="134" width="112" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="300" y="150.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada, 5 stars</text>
+<rect x="244" y="164" width="112" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="300" y="180.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Bob, 4 stars</text>
+<rect x="244" y="194" width="112" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="300" y="210.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Cid, 0 stars</text>
+<path d="M356 206L428 206Q436 206 436 198L436 180.5Q436 176 440.5 176L445 176" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M444.8 172.4L452 176L444.8 179.6Z" fill="#3987e5"/>
+<text x="398" y="198" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Where(...)</text>
+<text x="398" y="226" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Stars &lt; 1</text>
+<rect x="452" y="164" width="112" height="24" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="508" y="180.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Cid, 0 stars</text>
+<path d="M564 176L653 176" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M652.8 172.4L660 176L652.8 179.6Z" fill="#3987e5"/>
+<text x="612" y="168" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ToBody()</text>
+<rect x="660" y="154" width="96" height="44" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="708" y="173" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Cid, 0 stars</text><text x="708" y="189" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">a Body</text>
+<path d="M756 176L817 176" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M816.8 172.4L824 176L816.8 179.6Z" fill="#aebcc4"/>
+<text x="790" y="168" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Remove()</text>
+<rect x="824" y="154" width="88" height="44" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="868" y="173" font-size="13" font-weight="600" fill="#7f9199" text-anchor="middle">0 stars</text><text x="868" y="189" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">removed</text>
+<rect x="48" y="256" width="90" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="93" y="275" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Alien</text><text x="93" y="291" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">a View</text>
+<path d="M138 278L653 278" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M652.8 274.4L660 278L652.8 281.6Z" fill="#aebcc4"/>
+<text x="400" y="270" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">A birth takes its other end by its View</text>
+<rect x="660" y="256" width="96" height="44" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="708" y="275" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Cid</text><text x="708" y="291" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">a Body</text>
+<path d="M756 278L817 278" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M816.8 274.4L824 278L816.8 281.6Z" fill="#aebcc4"/>
+<rect x="824" y="256" width="88" height="44" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="868" y="275" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">4 stars</text><text x="868" y="291" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">new</text>
+<text x="660" y="244" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">cid.NewRating(alien, 4)</text>
+<text x="32" y="354" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">After the commit: Dune has 2 ratings, and Alien 8 stars</text>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>An artist can be removed once nothing designates it</title>
+<desc>Five steps. Two albums designate Bowie: 2 strong references. Low designates Brian Eno instead: 1. bowie.Remove() is refused, and the count stays 1. heroes.Remove() releases the last reference: 0. bowie.Remove() passes, and Bowie is removed.</desc>
+<rect width="960" height="360" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">An artist can be removed once nothing designates it</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The strong references to Bowie, counted at each instruction</text>
+<line x1="32" y1="94" x2="928" y2="94" stroke="#4a5a62" stroke-width="1"/><circle cx="116" cy="94" r="3.5" fill="#aebcc4"/><circle cx="298" cy="94" r="3.5" fill="#aebcc4"/><circle cx="480" cy="94" r="3.5" fill="#aebcc4"/><circle cx="662" cy="94" r="3.5" fill="#aebcc4"/><circle cx="844" cy="94" r="3.5" fill="#aebcc4"/>
+<text x="116" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">two albums</text>
+<rect x="36" y="136" width="76" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="74" y="157.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Low</text>
+<rect x="120" y="136" width="76" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="158" y="157.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Heroes</text>
+<rect x="120" y="218" width="76" height="34" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="158" y="239.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Bowie</text>
+<path d="M88 170L125.4 212.7" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M128 210.3L130 218L122.6 214.9Z" fill="#aebcc4"/>
+<path d="M158 170L158 211" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M161.6 210.8L158 218L154.4 210.8Z" fill="#aebcc4"/>
+<text x="158" y="292" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">2</text>
+<text x="158" y="310" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">strong references</text>
+<text x="298" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">low.Artist = eno</text>
+<rect x="218" y="136" width="76" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="256" y="157.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Low</text>
+<rect x="302" y="136" width="76" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="340" y="157.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Heroes</text>
+<rect x="218" y="218" width="76" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="256" y="239.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Eno</text>
+<rect x="302" y="218" width="76" height="34" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="340" y="239.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Bowie</text>
+<path d="M256 170L256 211" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M259.6 210.8L256 218L252.4 210.8Z" fill="#aebcc4"/>
+<path d="M340 170L340 211" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M343.6 210.8L340 218L336.4 210.8Z" fill="#aebcc4"/>
+<text x="340" y="292" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text>
+<text x="480" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">bowie.Remove()</text>
+<rect x="400" y="136" width="76" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="438" y="157.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Low</text>
+<rect x="484" y="136" width="76" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="522" y="157.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Heroes</text>
+<rect x="400" y="218" width="76" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="438" y="239.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Eno</text>
+<rect x="484" y="218" width="76" height="34" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="522" y="239.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Bowie</text>
+<path d="M438 170L438 211" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M441.6 210.8L438 218L434.4 210.8Z" fill="#aebcc4"/>
+<path d="M522 170L522 211" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M525.6 210.8L522 218L518.4 210.8Z" fill="#f07a78"/>
+<text x="522" y="292" font-size="18" font-weight="600" fill="#f07a78" text-anchor="middle">1</text>
+<text x="522" y="310" font-size="12" font-weight="600" fill="#f07a78" text-anchor="middle">refused</text>
+<text x="662" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">heroes.Remove()</text>
+<rect x="582" y="136" width="76" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="620" y="157.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Low</text>
+<rect x="666" y="136" width="76" height="34" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="704" y="157.7" font-size="13" font-weight="600" fill="#7f9199" text-anchor="middle">Heroes</text>
+<rect x="582" y="218" width="76" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="620" y="239.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Eno</text>
+<rect x="666" y="218" width="76" height="34" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="704" y="239.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Bowie</text>
+<path d="M620 170L620 211" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M623.6 210.8L620 218L616.4 210.8Z" fill="#aebcc4"/>
+<text x="704" y="292" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">0</text>
+<text x="844" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">bowie.Remove()</text>
+<rect x="764" y="136" width="76" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="802" y="157.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Low</text>
+<rect x="848" y="136" width="76" height="34" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="886" y="157.7" font-size="13" font-weight="600" fill="#7f9199" text-anchor="middle">Heroes</text>
+<rect x="764" y="218" width="76" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="802" y="239.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Eno</text>
+<rect x="848" y="218" width="76" height="34" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="886" y="239.7" font-size="13" font-weight="600" fill="#7f9199" text-anchor="middle">Bowie</text>
+<path d="M802 170L802 211" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M805.6 210.8L802 218L798.4 210.8Z" fill="#aebcc4"/>
+<text x="886" y="292" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle"></text>
+<text x="886" y="287" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">removed</text>
+<path d="M32 338L51 338" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M50.8 334.4L58 338L50.8 341.6Z" fill="#aebcc4"/><text x="66" y="342" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">strong reference</text>
+</svg>

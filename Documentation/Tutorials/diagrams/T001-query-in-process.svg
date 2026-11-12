@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="366" viewBox="0 0 960 366" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A query runs in your process: its lambda is plain C#</title>
+<desc>Two columns. In Entity Framework, a query is not run in your process: it is translated to SQL and run by the database. A method of your own, IsBargain, has no translation, and the query throws when it runs. In GBO, the query runs in your process, over the objects themselves: the lambda calls IsBargain, which reads book.Price &lt; 8m, and the count gives 3 books. The lambda may call any method, read any computed property, and even run another query.</desc>
+<rect width="960" height="366" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A query runs in your process: its lambda is plain C#</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The same method of yours in a query: translated in Entity Framework, called in GBO</text>
+<text x="32" y="108" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Entity Framework</text>
+<text x="32" y="127" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Where(book =&gt; IsBargain(book))</text>
+<line x1="32" y1="140" x2="466" y2="140" stroke="#2b3a42" stroke-width="1"/>
+<rect x="32" y="156" width="164" height="124" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="44" y="176" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Your process</text>
+<rect x="45" y="190" width="138" height="76" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="114" y="223.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The query</text><text x="114" y="240.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">IsBargain(book)</text>
+<rect x="306" y="156" width="160" height="124" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="318" y="176" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The database</text>
+<rect x="319" y="190" width="134" height="76" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="386" y="223.5" font-size="13" font-weight="600" fill="#7f9199" text-anchor="middle">SQL</text><text x="386" y="240.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">run by the database</text>
+<path d="M183 236L312 236" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M311.8 232.4L319 236L311.8 239.6Z" fill="#f07a78"/>
+<circle cx="251" cy="236" r="9" fill="#1a252b"/>
+<path d="M247 232L255 240M255 232L247 240" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="251" y="218" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">no translation</text>
+<text x="249" y="310" font-size="13" font-weight="600" fill="#f07a78" text-anchor="middle">The query throws when it runs</text>
+<text x="249" y="330" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">A method of yours has no translation to SQL</text>
+<text x="494" y="108" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">GBO</text>
+<text x="494" y="127" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">BookCollection.Count(static book =&gt; IsBargain(book))</text>
+<line x1="494" y1="140" x2="928" y2="140" stroke="#2b3a42" stroke-width="1"/>
+<rect x="494" y="156" width="434" height="124" rx="10" fill="none" stroke="#3987e5" stroke-width="1.5"/><text x="506" y="176" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Your process</text>
+<rect x="507" y="190" width="138" height="76" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="576" y="223.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The query</text><text x="576" y="240.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">IsBargain(book)</text>
+<rect x="781" y="190" width="134" height="76" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="848" y="223.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">IsBargain(book)</text><text x="848" y="240.5" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">book.Price &lt; 8m</text>
+<path d="M645 236L774 236" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M773.8 232.4L781 236L773.8 239.6Z" fill="#3987e5"/>
+<text x="713" y="226" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">called</text>
+<text x="711" y="310" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">3 books, over the objects themselves</text>
+<text x="711" y="330" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">Any method, any computed property, even another query</text>
+</svg>

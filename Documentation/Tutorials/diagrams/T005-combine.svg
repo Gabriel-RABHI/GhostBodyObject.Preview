@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="424" viewBox="0 0 960 424" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A text search and a value index combine, and the result combines again</title>
+<desc>Three searches over the orders 1 to 5. OrderStatusDayIndex.Is(Paid) gives 1, 2 and 4. OrderTextIndex.Search("door") gives 1, 4 and 5. OrderTextIndex.Search("call") gives 2 and 4. The paid orders .And(door) give 1 and 4, those of both. That result, .AndNot(Search("call")), gives 1: those of the first, not of the second. A combination is a set: its orders come in no particular order.</desc>
+<rect width="960" height="424" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A text search and a value index combine, and the result combines again</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The five orders of the lesson: the paid ones of a note that says door, but not those to call first</text>
+<rect x="32" y="106" width="244" height="78" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="48" y="130" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">OrderStatusDayIndex.Is(Paid)</text>
+<rect x="48" y="144" width="36" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="66" y="162.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">1</text>
+<rect x="92" y="144" width="36" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="110" y="162.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">2</text>
+<rect x="136" y="144" width="36" height="28" rx="8" fill="none" stroke="#2b3a42" stroke-width="1"/>
+<text x="154" y="162.3" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">3</text>
+<rect x="180" y="144" width="36" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="198" y="162.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">4</text>
+<rect x="224" y="144" width="36" height="28" rx="8" fill="none" stroke="#2b3a42" stroke-width="1"/>
+<text x="242" y="162.3" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">5</text>
+<rect x="32" y="206" width="244" height="78" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="48" y="230" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">OrderTextIndex.Search("door")</text>
+<rect x="48" y="244" width="36" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="66" y="262.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">1</text>
+<rect x="92" y="244" width="36" height="28" rx="8" fill="none" stroke="#2b3a42" stroke-width="1"/>
+<text x="110" y="262.3" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">2</text>
+<rect x="136" y="244" width="36" height="28" rx="8" fill="none" stroke="#2b3a42" stroke-width="1"/>
+<text x="154" y="262.3" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">3</text>
+<rect x="180" y="244" width="36" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="198" y="262.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">4</text>
+<rect x="224" y="244" width="36" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="242" y="262.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">5</text>
+<rect x="32" y="306" width="244" height="78" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="48" y="330" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">OrderTextIndex.Search("call")</text>
+<rect x="48" y="344" width="36" height="28" rx="8" fill="none" stroke="#2b3a42" stroke-width="1"/>
+<text x="66" y="362.3" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">1</text>
+<rect x="92" y="344" width="36" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="110" y="362.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">2</text>
+<rect x="136" y="344" width="36" height="28" rx="8" fill="none" stroke="#2b3a42" stroke-width="1"/>
+<text x="154" y="362.3" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">3</text>
+<rect x="180" y="344" width="36" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="198" y="362.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">4</text>
+<rect x="224" y="344" width="36" height="28" rx="8" fill="none" stroke="#2b3a42" stroke-width="1"/>
+<text x="242" y="362.3" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">5</text>
+<rect x="358" y="156" width="244" height="78" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="374" y="180" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">.And(door)</text>
+<rect x="374" y="194" width="36" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="392" y="212.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">1</text>
+<rect x="418" y="194" width="36" height="28" rx="8" fill="none" stroke="#2b3a42" stroke-width="1"/>
+<text x="436" y="212.3" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">2</text>
+<rect x="462" y="194" width="36" height="28" rx="8" fill="none" stroke="#2b3a42" stroke-width="1"/>
+<text x="480" y="212.3" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">3</text>
+<rect x="506" y="194" width="36" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="524" y="212.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">4</text>
+<rect x="550" y="194" width="36" height="28" rx="8" fill="none" stroke="#2b3a42" stroke-width="1"/>
+<text x="568" y="212.3" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">5</text>
+<text x="374" y="252" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">Of both</text>
+<rect x="684" y="231" width="244" height="78" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="700" y="255" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">.AndNot(Search("call"))</text>
+<rect x="700" y="269" width="36" height="28" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="718" y="287.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">1</text>
+<rect x="744" y="269" width="36" height="28" rx="8" fill="none" stroke="#2b3a42" stroke-width="1"/>
+<text x="762" y="287.3" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">2</text>
+<rect x="788" y="269" width="36" height="28" rx="8" fill="none" stroke="#2b3a42" stroke-width="1"/>
+<text x="806" y="287.3" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">3</text>
+<rect x="832" y="269" width="36" height="28" rx="8" fill="none" stroke="#2b3a42" stroke-width="1"/>
+<text x="850" y="287.3" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">4</text>
+<rect x="876" y="269" width="36" height="28" rx="8" fill="none" stroke="#2b3a42" stroke-width="1"/>
+<text x="894" y="287.3" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">5</text>
+<text x="700" y="327" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">Of the first, not of the second</text>
+<path d="M276 145L309 145Q317 145 317 153L317 179Q317 187 325 187L351 187" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M350.8 183.4L358 187L350.8 190.6Z" fill="#aebcc4"/>
+<path d="M276 245L309 245Q317 245 317 237L317 211Q317 203 325 203L351 203" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M350.8 199.4L358 203L350.8 206.6Z" fill="#aebcc4"/>
+<path d="M602 195L635 195Q643 195 643 203L643 254Q643 262 651 262L677 262" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M676.8 258.4L684 262L676.8 265.6Z" fill="#aebcc4"/>
+<path d="M276 345L635 345Q643 345 643 337L643 286Q643 278 651 278L677 278" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M676.8 274.4L684 278L676.8 281.6Z" fill="#aebcc4"/>
+<text x="32" y="406" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">A combination is a set: its orders come in no particular order</text>
+</svg>

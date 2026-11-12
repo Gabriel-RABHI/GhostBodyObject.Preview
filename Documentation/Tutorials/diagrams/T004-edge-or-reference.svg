@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="434" viewBox="0 0 960 434" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>Three relations, three answers when an end goes</title>
+<desc>Three columns. A like is a collection of weak references from the user Ada to a post: post.Remove() removes the post, and the like leaves the collection. A reaction is an edge between Ada and the post, of the kind Insightful: post.Remove() removes the post, and the reaction with it. A transfer of 120 is a Root with a strong reference to the account savings and one to the account current: savings.Remove() is refused, and nothing changes.</desc>
+<rect width="960" height="434" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Three relations, three answers when an end goes</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">One removal, and what the link chosen for the relation makes of it</text>
+<text x="32" y="108" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A like</text>
+<text x="32" y="127" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">[Weak] IEntityCollection&lt;MPost&gt; Likes</text>
+<line x1="32" y1="140" x2="310" y2="140" stroke="#2b3a42" stroke-width="1"/>
+<rect x="32" y="171" width="76" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="70" y="195.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="234" y="171" width="76" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="272" y="195.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Post</text>
+<path d="M108 191L234 191" fill="none" stroke="#aebcc4" stroke-width="1.4" stroke-dasharray="5 4"/><path d="M226.8 187.4L234 191L226.8 194.6" fill="none" stroke="#aebcc4" stroke-width="1.4" stroke-linejoin="round"/>
+<text x="171" y="183" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Likes</text>
+<text x="171" y="252" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">post.Remove()</text>
+<path d="M171 260L171 275" fill="none" stroke="#4a5a62" stroke-width="1.2"/><path d="M174.6 274.8L171 282L167.4 274.8Z" fill="#4a5a62"/>
+<rect x="32" y="309" width="76" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="70" y="333.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="234" y="309" width="76" height="40" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="272" y="333.7" font-size="13" font-weight="600" fill="#7f9199" text-anchor="middle">Post</text>
+<path d="M108 329L132 329" fill="none" stroke="#7f9199" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="140" y="333.5" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">none</text>
+<text x="171" y="392" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The like leaves the collection</text>
+<text x="171" y="412" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ada.Likes.Count(): 0</text>
+<text x="341" y="108" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A reaction</text>
+<text x="341" y="127" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">[Edge(nameof(MUser), nameof(MPost))]</text>
+<line x1="341" y1="140" x2="619" y2="140" stroke="#2b3a42" stroke-width="1"/>
+<rect x="341" y="171" width="76" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="379" y="195.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="543" y="171" width="76" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="581" y="195.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Post</text>
+<path d="M417 191L438 191" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<path d="M522 191L543 191" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<rect x="438" y="179" width="84" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="480" y="195.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Insightful</text>
+<text x="480" y="252" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">post.Remove()</text>
+<path d="M480 260L480 275" fill="none" stroke="#4a5a62" stroke-width="1.2"/><path d="M483.6 274.8L480 282L476.4 274.8Z" fill="#4a5a62"/>
+<rect x="341" y="309" width="76" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="379" y="333.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="543" y="309" width="76" height="40" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="581" y="333.7" font-size="13" font-weight="600" fill="#7f9199" text-anchor="middle">Post</text>
+<path d="M417 329L438 329" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="5 4"/>
+<path d="M522 329L543 329" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="5 4"/>
+<rect x="438" y="317" width="84" height="24" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="480" y="333.3" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">Insightful</text>
+<text x="480" y="392" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The reaction leaves with its post</text>
+<text x="480" y="412" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ReactionCollection.Count(): 0</text>
+<text x="650" y="108" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A transfer</text>
+<text x="650" y="127" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">[Strong] MAccount From, To</text>
+<line x1="650" y1="140" x2="928" y2="140" stroke="#2b3a42" stroke-width="1"/>
+<rect x="650" y="152" width="92" height="78" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="696" y="188" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Transfer</text><text x="696" y="204" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">120</text>
+<rect x="836" y="152" width="92" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="882" y="173.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">savings</text>
+<rect x="836" y="196" width="92" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="882" y="217.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">current</text>
+<path d="M742 169L829 169" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M828.8 165.4L836 169L828.8 172.6Z" fill="#aebcc4"/>
+<path d="M742 213L829 213" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M828.8 209.4L836 213L828.8 216.6Z" fill="#aebcc4"/>
+<text x="789" y="162" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">From</text>
+<text x="789" y="206" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">To</text>
+<text x="789" y="252" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">savings.Remove()</text>
+<path d="M789 260L789 275" fill="none" stroke="#4a5a62" stroke-width="1.2"/><path d="M792.6 274.8L789 282L785.4 274.8Z" fill="#4a5a62"/>
+<rect x="650" y="290" width="92" height="78" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="696" y="326" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Transfer</text><text x="696" y="342" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">120</text>
+<rect x="836" y="290" width="92" height="34" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="882" y="311.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">savings</text>
+<rect x="836" y="334" width="92" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="882" y="355.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">current</text>
+<path d="M742 307L829 307" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M828.8 303.4L836 307L828.8 310.6Z" fill="#f07a78"/>
+<path d="M742 351L829 351" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M828.8 347.4L836 351L828.8 354.6Z" fill="#aebcc4"/>
+<text x="789" y="300" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">From</text>
+<text x="789" y="344" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">To</text>
+<text x="789" y="392" font-size="13" font-weight="600" fill="#f07a78" text-anchor="middle">Refused: nothing changes</text>
+<text x="789" y="412" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">TransferCollection.Count(): 1</text>
+</svg>

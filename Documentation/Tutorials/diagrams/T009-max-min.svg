@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="372" viewBox="0 0 960 372" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>[Max] and [Min] read the three points too</title>
+<desc>When both sides changed the value: the last sale at epoch 09:00, head 09:20, new 09:10 gives 09:20; the lowest price at epoch 40, head 35, new 30 gives 30. When only the head changed it, a correction: the last sale at epoch 09:00, head 08:00, new unchanged at 09:00 gives 08:00; the lowest price at epoch 40, head 45, new unchanged at 40 gives 45. A plain maximum would have undone the correction.</desc>
+<rect width="960" height="372" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">[Max] and [Min] read the three points too</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">A transaction that changed the value keeps the best of two. One that did not takes the head</text>
+<text x="383" y="108" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">the epoch</text>
+<text x="537" y="108" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">the head</text>
+<text x="691" y="108" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">new</text>
+<text x="845" y="108" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">committed</text>
+<text x="32" y="138" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">[Max] LastSale</text>
+<text x="32" y="156" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">both changed it</text>
+<rect x="316" y="120" width="134" height="42" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="383" y="145.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">09:00</text>
+<rect x="470" y="120" width="134" height="42" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="537" y="145.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">09:20</text>
+<rect x="624" y="120" width="134" height="42" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="691" y="145.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">09:10</text>
+<rect x="778" y="120" width="134" height="42" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="845" y="145.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">09:20</text>
+<text x="32" y="194" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">[Min] LowestPrice</text>
+<text x="32" y="212" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">both changed it</text>
+<rect x="316" y="176" width="134" height="42" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="383" y="201.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">40</text>
+<rect x="470" y="176" width="134" height="42" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="537" y="201.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">35</text>
+<rect x="624" y="176" width="134" height="42" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="691" y="201.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">30</text>
+<rect x="778" y="176" width="134" height="42" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="845" y="201.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">30</text>
+<line x1="32" y1="225" x2="928" y2="225" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="250" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">[Max] LastSale</text>
+<text x="32" y="268" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">a correction, not by this transaction</text>
+<rect x="316" y="232" width="134" height="42" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="383" y="257.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">09:00</text>
+<rect x="470" y="232" width="134" height="42" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="537" y="257.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">08:00</text>
+<rect x="624" y="232" width="134" height="42" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="691" y="257.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">09:00</text>
+<rect x="778" y="232" width="134" height="42" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="845" y="257.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">08:00</text>
+<text x="32" y="306" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">[Min] LowestPrice</text>
+<text x="32" y="324" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">a correction, not by this transaction</text>
+<rect x="316" y="288" width="134" height="42" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="383" y="313.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">40</text>
+<rect x="470" y="288" width="134" height="42" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="537" y="313.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">45</text>
+<rect x="624" y="288" width="134" height="42" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="691" y="313.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">40</text>
+<rect x="778" y="288" width="134" height="42" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="845" y="313.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">45</text>
+<text x="32" y="356" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">The blue box is the side the value comes from. Without a concurrent change nothing merges, and the value written is committed.</text>
+</svg>

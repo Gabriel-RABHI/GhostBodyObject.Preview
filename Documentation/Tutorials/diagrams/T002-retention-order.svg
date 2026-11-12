@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="372" viewBox="0 0 960 372" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>Take the new retention before releasing the old one</title>
+<desc>Two rows. Retain, then release: final.Lyrics.Set(lyrics) brings the count to 2, demo.Lyrics.Clear() brings it back to 1, and the lyrics live, now held by final. Release, then retain: demo.Lyrics.Clear() brings the count to 0 and removes the lyrics; final.Lyrics.Set(lyrics) is then refused, as nothing is left to designate.</desc>
+<rect width="960" height="372" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Take the new retention before releasing the old one</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The same two instructions, and the strong references to the lyrics at each one</text>
+<text x="32" y="140" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Retain, then release</text>
+<text x="32" y="160" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">The lyrics pass from</text>
+<text x="32" y="176" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">one holder to the other</text>
+<text x="314" y="108" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">the start</text>
+<rect x="196" y="120" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="232" y="139.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">demo</text>
+<rect x="196" y="164" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="232" y="183.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">final</text>
+<rect x="312" y="142" width="72" height="30" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="348" y="161.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Lyrics</text>
+<path d="M268 135L282 135Q290 135 290 143L290 143.5Q290 151 297.5 151L305 151" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M304.8 147.4L312 151L304.8 154.6Z" fill="#aebcc4"/>
+<text x="410" y="163" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text>
+<text x="562" y="108" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">final.Lyrics.Set(lyrics)</text>
+<rect x="444" y="120" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="480" y="139.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">demo</text>
+<rect x="444" y="164" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="480" y="183.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">final</text>
+<rect x="560" y="142" width="72" height="30" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="596" y="161.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Lyrics</text>
+<path d="M516 135L530 135Q538 135 538 143L538 143.5Q538 151 545.5 151L553 151" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M552.8 147.4L560 151L552.8 154.6Z" fill="#aebcc4"/>
+<path d="M516 179L530 179Q538 179 538 171L538 170.5Q538 163 545.5 163L553 163" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M552.8 159.4L560 163L552.8 166.6Z" fill="#aebcc4"/>
+<text x="658" y="163" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">2</text>
+<text x="810" y="108" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">demo.Lyrics.Clear()</text>
+<rect x="692" y="120" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="728" y="139.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">demo</text>
+<rect x="692" y="164" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="728" y="183.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">final</text>
+<rect x="808" y="142" width="72" height="30" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="844" y="161.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Lyrics</text>
+<path d="M764 179L778 179Q786 179 786 171L786 170.5Q786 163 793.5 163L801 163" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M800.8 159.4L808 163L800.8 166.6Z" fill="#aebcc4"/>
+<text x="906" y="163" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text>
+<line x1="32" y1="216" x2="928" y2="216" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="272" font-size="13" font-weight="600" fill="#f07a78" text-anchor="start">Release, then retain</text>
+<text x="32" y="292" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">Removed at the release:</text>
+<text x="32" y="308" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">nothing left to designate</text>
+<text x="314" y="240" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">the start</text>
+<rect x="196" y="252" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="232" y="271.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">demo</text>
+<rect x="196" y="296" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="232" y="315.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">final</text>
+<rect x="312" y="274" width="72" height="30" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="348" y="293.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Lyrics</text>
+<path d="M268 267L282 267Q290 267 290 275L290 275.5Q290 283 297.5 283L305 283" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M304.8 279.4L312 283L304.8 286.6Z" fill="#aebcc4"/>
+<text x="410" y="295" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text>
+<text x="562" y="240" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">demo.Lyrics.Clear()</text>
+<rect x="444" y="252" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="480" y="271.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">demo</text>
+<rect x="444" y="296" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="480" y="315.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">final</text>
+<rect x="560" y="274" width="72" height="30" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="596" y="293.3" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">Lyrics</text>
+<text x="658" y="295" font-size="18" font-weight="600" fill="#7f9199" text-anchor="middle">0</text>
+<text x="810" y="240" font-size="12" font-weight="400" fill="#f07a78" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">final.Lyrics.Set(lyrics)</text>
+<rect x="692" y="252" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="728" y="271.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">demo</text>
+<rect x="692" y="296" width="72" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="728" y="315.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">final</text>
+<rect x="808" y="274" width="72" height="30" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="844" y="293.3" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">Lyrics</text>
+<path d="M764 311L801.4 297.4" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M800 294.1L808 295L802.5 300.8Z" fill="#f07a78"/>
+<circle cx="786" cy="303" r="9" fill="#1a252b"/>
+<path d="M782 299L790 307M790 299L782 307" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="906" y="295" font-size="18" font-weight="600" fill="#7f9199" text-anchor="middle">0</text>
+</svg>

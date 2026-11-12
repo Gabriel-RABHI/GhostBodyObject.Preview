@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="352" viewBox="0 0 960 352" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>The Log keeps the fact, the room writes a value of its own from it</title>
+<desc>Three steps. new RoomBooked with the guest Ada, room 12, on Monday, is added to BookingLog, whose model includes RRoomBooked: a fact. log.SubscribeFrom delivers a RoomBookedView, a value kept after its subscription. From it, the code writes a Stay, its Guest from the Guest of the fact, its From from On, into the Bookings of the room 12 of RoomRepository, whose model includes RStay. Neither model depends on the other.</desc>
+<rect width="960" height="352" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">The Log keeps the fact, the room writes a value of its own from it</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">A Record type belongs to one model: what goes from one to the other is a value</text>
+<line x1="32" y1="94" x2="928" y2="94" stroke="#4a5a62" stroke-width="1"/><circle cx="168" cy="94" r="3.5" fill="#aebcc4"/><circle cx="480" cy="94" r="3.5" fill="#aebcc4"/><circle cx="792" cy="94" r="3.5" fill="#aebcc4"/>
+<text x="168" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">new RoomBooked { ... }.Add()</text>
+<text x="480" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">log.SubscribeFrom(0, ...)</text>
+<text x="792" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Bookings.Add(new Stay { ... })</text>
+<rect x="32" y="134" width="272" height="190" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="44" y="154" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">BookingLog</text><text x="292" y="154" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">RoomBooked, a fact</text>
+<rect x="44" y="170" width="248" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="54" y="188.3" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Guest</text>
+<text x="282" y="188.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end">Ada</text>
+<rect x="44" y="204" width="248" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="54" y="222.3" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Room</text>
+<text x="282" y="222.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end">12</text>
+<rect x="44" y="238" width="248" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="54" y="256.3" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">On</text>
+<text x="282" y="256.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end">Monday</text>
+<text x="44" y="310" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">IncludeRecordModel(nameof(RRoomBooked))</text>
+<rect x="374" y="156" width="212" height="64" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="480" y="183.5" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">RoomBookedView</text><text x="480" y="200.5" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">a value, kept after its subscription</text>
+<path d="M304 188L367 188" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M366.8 184.4L374 188L366.8 191.6Z" fill="#3987e5"/>
+<path d="M586 188L649 188" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M648.8 184.4L656 188L648.8 191.6Z" fill="#3987e5"/>
+<text x="480" y="252" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Guest = delivered.Single().Guest</text>
+<text x="480" y="270" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">From = delivered.Single().On</text>
+<text x="480" y="310" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Neither model depends on the other</text>
+<rect x="656" y="134" width="272" height="190" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="668" y="154" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">RoomRepository</text><text x="916" y="154" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">a Stay, its own value</text>
+<rect x="668" y="166" width="248" height="112" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="680" y="186" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Room 12</text><text x="904" y="186" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">Bookings</text>
+<rect x="680" y="198" width="224" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="690" y="216.3" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Guest</text>
+<text x="894" y="216.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end">Ada</text>
+<rect x="680" y="232" width="224" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="690" y="250.3" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">From</text>
+<text x="894" y="250.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end">Monday</text>
+<text x="668" y="310" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">IncludeRecordModel(nameof(RStay))</text>
+</svg>

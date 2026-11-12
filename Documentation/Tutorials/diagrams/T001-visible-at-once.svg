@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="412" viewBox="0 0 960 412" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A query of a transaction sees every change at once</title>
+<desc>Two rows of three moments. In Entity Framework, a DbContext collects two new books; a query on a DbSet asks the database, and does not find them; SaveChanges() sends them to the database. In GBO, two new books are in the transaction; BookCollection.Count() reads the transaction, and gives 2; transaction.Commit() writes them in the Store and closes the transaction.</desc>
+<rect width="960" height="412" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A query of a transaction sees every change at once</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The same three moments: nothing to save first, because the query reads the memory you work in</text>
+<text x="32" y="138" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Entity Framework</text>
+<text x="32" y="158" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">A DbContext collects</text>
+<text x="32" y="174" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">your changes</text>
+<text x="200" y="100" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start">two new books</text>
+<path d="M252 108L252 125" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M255.6 124.8L252 132L248.4 124.8Z" fill="#aebcc4"/>
+<rect x="200" y="132" width="104" height="88" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="212" y="152" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">DbContext</text>
+<rect x="208" y="162" width="88" height="22" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="252" y="177.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text>
+<rect x="208" y="188" width="88" height="22" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="252" y="203.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Foundation</text>
+<rect x="324" y="132" width="104" height="88" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="336" y="152" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Database</text>
+<text x="376" y="190" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">no book</text>
+<text x="574" y="100" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start">a query on a DbSet</text>
+<path d="M626 108L626 125" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M629.6 124.8L626 132L622.4 124.8Z" fill="#f07a78"/>
+<rect x="450" y="132" width="104" height="88" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="462" y="152" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">DbContext</text>
+<rect x="458" y="162" width="88" height="22" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="502" y="177.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text>
+<rect x="458" y="188" width="88" height="22" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="502" y="203.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Foundation</text>
+<rect x="574" y="132" width="104" height="88" rx="10" fill="none" stroke="#f07a78" stroke-width="1.5"/><text x="586" y="152" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Database</text>
+<text x="626" y="182" font-size="12" font-weight="600" fill="#f07a78" text-anchor="middle">does not</text>
+<text x="626" y="198" font-size="12" font-weight="600" fill="#f07a78" text-anchor="middle">find them</text>
+<text x="700" y="100" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">SaveChanges()</text>
+<rect x="700" y="132" width="104" height="88" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="712" y="152" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">DbContext</text>
+<rect x="708" y="162" width="88" height="22" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="752" y="177.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text>
+<rect x="708" y="188" width="88" height="22" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="752" y="203.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Foundation</text>
+<path d="M804 176L817 176" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M816.8 172.4L824 176L816.8 179.6Z" fill="#3987e5"/>
+<rect x="824" y="132" width="104" height="88" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="836" y="152" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Database</text>
+<rect x="832" y="162" width="88" height="22" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="876" y="177.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text>
+<rect x="832" y="188" width="88" height="22" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="876" y="203.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Foundation</text>
+<line x1="32" y1="236" x2="928" y2="236" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="300" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">GBO</text>
+<text x="32" y="320" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">The transaction is the</text>
+<text x="32" y="336" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">memory you work in</text>
+<text x="200" y="262" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">new Book { ... } × 2</text>
+<path d="M252 270L252 287" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M255.6 286.8L252 294L248.4 286.8Z" fill="#aebcc4"/>
+<rect x="200" y="294" width="104" height="88" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="212" y="314" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Transaction</text>
+<rect x="208" y="324" width="88" height="22" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="252" y="339.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text>
+<rect x="208" y="350" width="88" height="22" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="252" y="365.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Foundation</text>
+<rect x="324" y="294" width="104" height="88" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="336" y="314" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Store</text>
+<text x="376" y="352" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">no book</text>
+<text x="450" y="262" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">BookCollection.Count() == 2</text>
+<path d="M502 270L502 287" fill="none" stroke="#3987e5" stroke-width="1.6"/><path d="M505.6 286.8L502 294L498.4 286.8Z" fill="#3987e5"/>
+<rect x="450" y="294" width="104" height="88" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="462" y="314" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Transaction</text>
+<rect x="458" y="324" width="88" height="22" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="502" y="339.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text>
+<rect x="458" y="350" width="88" height="22" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="502" y="365.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Foundation</text>
+<rect x="574" y="294" width="104" height="88" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="586" y="314" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Store</text>
+<text x="626" y="352" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">no book</text>
+<text x="700" y="262" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">transaction.Commit()</text>
+<rect x="700" y="294" width="104" height="88" rx="10" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="712" y="314" font-size="13" font-weight="600" fill="#7f9199" text-anchor="start">Transaction</text>
+<text x="752" y="352" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">closed</text>
+<path d="M804 338L817 338" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M816.8 334.4L824 338L816.8 341.6Z" fill="#3987e5"/>
+<rect x="824" y="294" width="104" height="88" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="836" y="314" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Store</text>
+<rect x="832" y="324" width="88" height="22" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="876" y="339.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text>
+<rect x="832" y="350" width="88" height="22" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="876" y="365.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Foundation</text>
+</svg>

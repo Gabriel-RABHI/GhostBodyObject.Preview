@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="382" viewBox="0 0 960 382" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>An OrNone operator gives none for an absence, never for more than one</title>
+<desc>A grid of four operators against no book, one book and two books. First gives a Book: it throws for no book, gives the book for one, the first one for two. FirstOrNone gives an Option&lt;Book&gt;: none for no book, the book for one, the first one for two. Single gives a Book: it throws for no book and for two, and gives the book for one. SingleOrNone gives an Option&lt;Book&gt;: none for no book, the book for one, and it throws for two: more than one is never none.</desc>
+<rect width="960" height="382" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">An OrNone operator gives none for an absence, never for more than one</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">What each operator gives, for the books that meet its condition</text>
+<text x="400" y="112" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">no book</text>
+<text x="400" y="130" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Title == "Hamlet"</text>
+<text x="614" y="112" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">one book</text>
+<text x="614" y="130" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Title == "Dune"</text>
+<text x="828" y="112" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">two books</text>
+<text x="828" y="130" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Author == "Isaac Asimov"</text>
+<text x="32" y="170" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">First</text>
+<text x="168" y="170" font-size="12" font-weight="400" fill="#7f9199" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Book</text>
+<rect x="300" y="150" width="200" height="32" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="400" y="170.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">throws</text>
+<rect x="514" y="150" width="200" height="32" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="614" y="170.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">the book</text>
+<rect x="728" y="150" width="200" height="32" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="828" y="170.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">the first</text>
+<text x="32" y="214" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">FirstOrNone</text>
+<text x="168" y="214" font-size="12" font-weight="400" fill="#7f9199" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Option&lt;Book&gt;</text>
+<rect x="300" y="194" width="200" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="400" y="214.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">none</text>
+<rect x="514" y="194" width="200" height="32" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="614" y="214.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">the book</text>
+<rect x="728" y="194" width="200" height="32" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="828" y="214.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">the first</text>
+<text x="32" y="272" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Single</text>
+<text x="168" y="272" font-size="12" font-weight="400" fill="#7f9199" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Book</text>
+<rect x="300" y="252" width="200" height="32" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="400" y="272.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">throws</text>
+<rect x="514" y="252" width="200" height="32" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="614" y="272.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">the book</text>
+<rect x="728" y="252" width="200" height="32" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="828" y="272.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">throws</text>
+<text x="32" y="316" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">SingleOrNone</text>
+<text x="168" y="316" font-size="12" font-weight="400" fill="#7f9199" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Option&lt;Book&gt;</text>
+<rect x="300" y="296" width="200" height="32" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="400" y="316.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">none</text>
+<rect x="514" y="296" width="200" height="32" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="614" y="316.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">the book</text>
+<rect x="728" y="296" width="200" height="32" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="828" y="316.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">throws</text>
+<line x1="32" y1="239" x2="928" y2="239" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="364" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">An Option: zero or one item, which you cannot read without handling its absence. So with Max: over no book it throws, MaxOrNone gives none</text>
+</svg>

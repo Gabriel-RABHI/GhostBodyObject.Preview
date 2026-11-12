@@ -1,14 +1,17 @@
 <Solution>
-  <Folder Name="/Tutorials/">
-    <Project Path="GhostBodyObject.TutorialEight/GhostBodyObject.TutorialEight.csproj" />
-    <Project Path="GhostBodyObject.TutorialFive/GhostBodyObject.TutorialFive.csproj" />
-    <Project Path="GhostBodyObject.TutorialFour/GhostBodyObject.TutorialFour.csproj" />
-    <Project Path="GhostBodyObject.TutorialNine/GhostBodyObject.TutorialNine.csproj" />
-    <Project Path="GhostBodyObject.TutorialOne/GhostBodyObject.TutorialOne.csproj" />
-    <Project Path="GhostBodyObject.TutorialSeven/GhostBodyObject.TutorialSeven.csproj" />
-    <Project Path="GhostBodyObject.TutorialSix/GhostBodyObject.TutorialSix.csproj" />
-    <Project Path="GhostBodyObject.TutorialTen/GhostBodyObject.TutorialTen.csproj" />
-    <Project Path="GhostBodyObject.TutorialThree/GhostBodyObject.TutorialThree.csproj" />
-    <Project Path="GhostBodyObject.TutorialTwo/GhostBodyObject.TutorialTwo.csproj" />
-  </Folder>
+  <Folder Name="/Tutorials/" />
+  <Project Path="GhostBodyObject.Tutorials.T001/GhostBodyObject.Tutorials.T001.csproj" />
+  <Project Path="GhostBodyObject.Tutorials.T002/GhostBodyObject.Tutorials.T002.csproj" />
+  <Project Path="GhostBodyObject.Tutorials.T003/GhostBodyObject.Tutorials.T003.csproj" />
+  <Project Path="GhostBodyObject.Tutorials.T004/GhostBodyObject.Tutorials.T004.csproj" />
+  <Project Path="GhostBodyObject.Tutorials.T005/GhostBodyObject.Tutorials.T005.csproj" />
+  <Project Path="GhostBodyObject.Tutorials.T006/GhostBodyObject.Tutorials.T006.csproj" />
+  <Project Path="GhostBodyObject.Tutorials.T007/GhostBodyObject.Tutorials.T007.csproj" />
+  <Project Path="GhostBodyObject.Tutorials.T008/GhostBodyObject.Tutorials.T008.csproj" />
+  <Project Path="GhostBodyObject.Tutorials.T009/GhostBodyObject.Tutorials.T009.csproj" />
+  <Project Path="GhostBodyObject.Tutorials.T010/GhostBodyObject.Tutorials.T010.csproj" />
+  <Project Path="GhostBodyObject.Tutorials.T011.Billing/GhostBodyObject.Tutorials.T011.Billing.csproj" />
+  <Project Path="GhostBodyObject.Tutorials.T011.Catalog/GhostBodyObject.Tutorials.T011.Catalog.csproj" />
+  <Project Path="GhostBodyObject.Tutorials.T011.Comments/GhostBodyObject.Tutorials.T011.Comments.csproj" />
+  <Project Path="GhostBodyObject.Tutorials.T011/GhostBodyObject.Tutorials.T011.csproj" />
 </Solution>

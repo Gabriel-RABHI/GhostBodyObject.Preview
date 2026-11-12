@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="366" viewBox="0 0 960 366" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>One rating per pair: the second is refused, GetOrNew finds the first</title>
+<desc>Four steps. ada.NewRating(dune, 4) makes a rating of 4 stars: 1 rating. ada.NewRating(dune, 2) is refused: the pair has its rating, nothing changes, and the count stays 1. Rate(ada, dune, 5) finds the rating of the pair and gives it 5 stars: still 1 rating. Rate(ada, alien, 3) finds no rating for this pair, and makes a new one of 3 stars: 2 ratings. Rate is critic.RatingEdges.GetOrNew(movie).Stars = stars.</desc>
+<rect width="960" height="366" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">One rating per pair: the second is refused, GetOrNew finds the first</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The ratings, counted at each instruction</text>
+<line x1="32" y1="94" x2="928" y2="94" stroke="#4a5a62" stroke-width="1"/><circle cx="135" cy="94" r="3.5" fill="#aebcc4"/><circle cx="365" cy="94" r="3.5" fill="#aebcc4"/><circle cx="595" cy="94" r="3.5" fill="#aebcc4"/><circle cx="825" cy="94" r="3.5" fill="#aebcc4"/>
+<text x="135" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ada.NewRating(dune, 4)</text>
+<rect x="32" y="134" width="206" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="135" y="155.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="32" y="234" width="96" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="80" y="255.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text>
+<path d="M80 168L80 189" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<path d="M80 213L80 234" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<rect x="47" y="189" width="66" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="80" y="205.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">4 stars</text>
+<text x="135" y="296" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text>
+<text x="135" y="316" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">rating</text>
+<text x="365" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ada.NewRating(dune, 2)</text>
+<rect x="262" y="134" width="206" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="365" y="155.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="262" y="234" width="96" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="310" y="255.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text>
+<path d="M310 168L310 189" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<path d="M310 213L310 234" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<rect x="277" y="189" width="66" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="310" y="205.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">4 stars</text>
+<path d="M420 168L420 189" fill="none" stroke="#f07a78" stroke-width="1.4"/>
+<path d="M420 213L420 243Q420 251 412 251L378 251" fill="none" stroke="#f07a78" stroke-width="1.4"/>
+<rect x="387" y="189" width="66" height="24" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="420" y="205.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">2 stars</text>
+<path d="M366 247L374 255M374 247L366 255" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="365" y="296" font-size="18" font-weight="600" fill="#f07a78" text-anchor="middle">1</text>
+<text x="365" y="316" font-size="12" font-weight="600" fill="#f07a78" text-anchor="middle">refused: nothing changes</text>
+<text x="595" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Rate(ada, dune, 5)</text>
+<rect x="492" y="134" width="206" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="595" y="155.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="492" y="234" width="96" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="540" y="255.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text>
+<path d="M540 168L540 189" fill="none" stroke="#3987e5" stroke-width="1.4"/>
+<path d="M540 213L540 234" fill="none" stroke="#3987e5" stroke-width="1.4"/>
+<rect x="507" y="189" width="66" height="24" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="540" y="205.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">5 stars</text>
+<text x="595" y="296" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text>
+<text x="595" y="316" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">the rating of the pair</text>
+<text x="825" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Rate(ada, alien, 3)</text>
+<rect x="722" y="134" width="206" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="825" y="155.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="722" y="234" width="96" height="34" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="770" y="255.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text>
+<rect x="832" y="234" width="96" height="34" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="880" y="255.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Alien</text>
+<path d="M770 168L770 189" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<path d="M770 213L770 234" fill="none" stroke="#4a5a62" stroke-width="1.4"/>
+<rect x="737" y="189" width="66" height="24" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="770" y="205.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">5 stars</text>
+<path d="M880 168L880 189" fill="none" stroke="#3987e5" stroke-width="1.4"/>
+<path d="M880 213L880 234" fill="none" stroke="#3987e5" stroke-width="1.4"/>
+<rect x="847" y="189" width="66" height="24" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="880" y="205.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">3 stars</text>
+<text x="825" y="296" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">2</text>
+<text x="825" y="316" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">a new one</text>
+<text x="32" y="348" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Rate, the same instruction for the first time and the next ones:</text>
+<text x="352" y="348" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">critic.RatingEdges.GetOrNew(movie).Stars = stars</text>
+</svg>

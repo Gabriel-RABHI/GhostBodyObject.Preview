@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="392" viewBox="0 0 960 392" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>Is wants exactly its flags; Has, One, All and None look at each flag</title>
+<desc>Five orders and their flags. Order 1 has no flag; order 2 has Gift; order 3 has Gift and Express; order 4 has Express and Fragile; order 5 has all three. Is(Gift | Express) finds order 3 only, of exactly these flags. Has(Gift) finds 2, 3 and 5. One(Gift | Express) finds 2, 3, 4 and 5. All(Gift | Express) finds 3 and 5. None(Fragile) finds 1, 2 and 3.</desc>
+<rect width="960" height="392" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Is wants exactly its flags; Has, One, All and None look at each flag</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">OrderOptionsIndex and the five orders of the lesson</text>
+<text x="222" y="104" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">Its flags</text>
+<text x="636" y="104" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">What each condition finds</text>
+<text x="156" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Gift</text>
+<text x="222" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Express</text>
+<text x="288" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Fragile</text>
+<text x="412" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Is</text>
+<text x="412" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Gift | Express</text>
+<text x="524" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Has</text>
+<text x="524" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Gift</text>
+<text x="636" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">One</text>
+<text x="636" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Gift | Express</text>
+<text x="748" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">All</text>
+<text x="748" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Gift | Express</text>
+<text x="860" y="128" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">None</text>
+<text x="860" y="143" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Fragile</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#4a5a62" stroke-width="1"/>
+<text x="32" y="178" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Order 1</text>
+<circle cx="156" cy="174" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="222" cy="174" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="288" cy="174" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<line x1="407" y1="174" x2="417" y2="174" stroke="#7f9199" stroke-width="2"/>
+<line x1="519" y1="174" x2="529" y2="174" stroke="#7f9199" stroke-width="2"/>
+<line x1="631" y1="174" x2="641" y2="174" stroke="#7f9199" stroke-width="2"/>
+<line x1="743" y1="174" x2="753" y2="174" stroke="#7f9199" stroke-width="2"/>
+<path d="M854 174L858.5 178.5L866 169.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="32" y1="194" x2="928" y2="194" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="218" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Order 2</text>
+<circle cx="156" cy="214" r="6" fill="#3987e5"/>
+<circle cx="222" cy="214" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="288" cy="214" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<line x1="407" y1="214" x2="417" y2="214" stroke="#7f9199" stroke-width="2"/>
+<path d="M518 214L522.5 218.5L530 209.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M630 214L634.5 218.5L642 209.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="743" y1="214" x2="753" y2="214" stroke="#7f9199" stroke-width="2"/>
+<path d="M854 214L858.5 218.5L866 209.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="32" y1="234" x2="928" y2="234" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="258" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Order 3</text>
+<circle cx="156" cy="254" r="6" fill="#3987e5"/>
+<circle cx="222" cy="254" r="6" fill="#3987e5"/>
+<circle cx="288" cy="254" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<path d="M406 254L410.5 258.5L418 249.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M518 254L522.5 258.5L530 249.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M630 254L634.5 258.5L642 249.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M742 254L746.5 258.5L754 249.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M854 254L858.5 258.5L866 249.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="32" y1="274" x2="928" y2="274" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="298" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Order 4</text>
+<circle cx="156" cy="294" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="222" cy="294" r="6" fill="#3987e5"/>
+<circle cx="288" cy="294" r="6" fill="#3987e5"/>
+<line x1="407" y1="294" x2="417" y2="294" stroke="#7f9199" stroke-width="2"/>
+<line x1="519" y1="294" x2="529" y2="294" stroke="#7f9199" stroke-width="2"/>
+<path d="M630 294L634.5 298.5L642 289.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="743" y1="294" x2="753" y2="294" stroke="#7f9199" stroke-width="2"/>
+<line x1="855" y1="294" x2="865" y2="294" stroke="#7f9199" stroke-width="2"/>
+<line x1="32" y1="314" x2="928" y2="314" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="338" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Order 5</text>
+<circle cx="156" cy="334" r="6" fill="#3987e5"/>
+<circle cx="222" cy="334" r="6" fill="#3987e5"/>
+<circle cx="288" cy="334" r="6" fill="#3987e5"/>
+<line x1="407" y1="334" x2="417" y2="334" stroke="#7f9199" stroke-width="2"/>
+<path d="M518 334L522.5 338.5L530 329.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M630 334L634.5 338.5L642 329.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M742 334L746.5 338.5L754 329.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="855" y1="334" x2="865" y2="334" stroke="#7f9199" stroke-width="2"/>
+<text x="32" y="374" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">A filled dot: the order has the flag</text>
+</svg>

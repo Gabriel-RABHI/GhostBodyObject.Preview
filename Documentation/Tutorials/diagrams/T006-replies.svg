@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="390" viewBox="0 0 960 390" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>Replies of replies stay in one entity</title>
+<desc>A review of the Ritz, one entity, holds in its bag Comments a comment of Ada, A wonderful view. That comment holds in its bag Replies a comment of Bob, Which room? It holds in its own bag Replies a comment of Ada, Number 12. The test builds them from the inside: first reply.Replies.Add, then comment.Replies.Add(reply), then the Add on the bag of the review, in a transaction. CountAll follows the replies, and reads the 3 comments in place.</desc>
+<rect width="960" height="390" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">Replies of replies stay in one entity</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Built from the inside: each Add copies a comment into the bag above it, the last one in a transaction</text>
+<rect x="32" y="100" width="896" height="248" rx="10" fill="none" stroke="#3987e5" stroke-width="1.5"/><text x="44" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A review of the Ritz</text><text x="916" y="120" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="end">one entity</text>
+<text x="48" y="144" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Comments</text>
+<rect x="48" y="152" width="864" height="184" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="60" y="178" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Ada</text>
+<text x="96" y="178" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">A wonderful view.</text>
+<text x="536" y="178" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">3</text>
+<text x="552" y="178" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">new Review { ... }.Comments.Add(comment)</text>
+<text x="64" y="204" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Replies</text>
+<rect x="64" y="212" width="832" height="112" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="76" y="238" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Bob</text>
+<text x="112" y="238" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Which room?</text>
+<text x="536" y="238" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">2</text>
+<text x="552" y="238" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">comment.Replies.Add(reply)</text>
+<text x="80" y="264" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Replies</text>
+<rect x="80" y="272" width="800" height="40" rx="4" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="92" y="298" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Ada</text>
+<text x="128" y="298" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Number 12.</text>
+<text x="536" y="298" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text>
+<text x="552" y="298" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">reply.Replies.Add(new Comment { ... })</text>
+<text x="32" y="372" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">CountAll follows the replies, in place, and reads the 3 comments</text>
+</svg>

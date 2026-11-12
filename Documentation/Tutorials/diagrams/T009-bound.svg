@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="292" viewBox="0 0 960 292" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A bound holds on the merged value, at the commit</title>
+<desc>Two seats remain, the epoch. Another till sells one and commits: the head is 1. This transaction sold two, and its new value is 0, which its Setter accepts. The merged value would be 1 plus 0 minus 2, minus 1, below the bound: the commit conflicts, of the kind Bound, nothing written. Its next attempt reads one seat, and the code of the sale refuses.</desc>
+<rect width="960" height="292" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A bound holds on the merged value, at the commit</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">[Delta(Min = 0)] Remaining: two seats. Each sale fits on what it read, and they do not fit together</text>
+<rect x="32" y="170" width="96" height="48" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="80" y="191" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">2</text><text x="80" y="207" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">the epoch</text>
+<path d="M128 188L375.2 121.8" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M374.2 118.4L382 120L376 125.3Z" fill="#aebcc4"/>
+<path d="M128 200L375 219.5" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M375.1 215.9L382 220L374.6 223Z" fill="#aebcc4"/>
+<text x="220" y="120" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">another till, -1</text>
+<text x="220" y="240" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">this transaction, -2</text>
+<rect x="382" y="96" width="96" height="48" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="430" y="117" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text><text x="430" y="133" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">the head</text>
+<rect x="382" y="196" width="96" height="48" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="430" y="217" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">0</text><text x="430" y="233" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">new</text>
+<path d="M478 120L761.2 186.4" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M761.8 182.9L768 188L760.2 189.8Z" fill="#aebcc4"/>
+<path d="M478 220L761 200.5" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M760.6 197L768 200L761.1 204Z" fill="#aebcc4"/>
+<rect x="768" y="170" width="160" height="48" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="848" y="191" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">-1</text><text x="848" y="207" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">below the bound</text>
+<text x="848" y="242" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">1 + (0 - 2)</text>
+<text x="928" y="274" font-size="12" font-weight="600" fill="#f07a78" text-anchor="end">Bound: writes nothing</text>
+<text x="32" y="274" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">The Setter accepted 0. Its next attempt reads the seat that remains, and the sale refuses.</text>
+</svg>

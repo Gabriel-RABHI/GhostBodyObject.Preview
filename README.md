@@ -11,7 +11,7 @@ GBO makes AI code generation far more effective. It allows AI to build large dis
 
 **Its API is ambient**, so managing these objects requires no load or save operations. You open a transaction, create or find objects across deep call paths, change them, and commit the transaction. This is called **orthogonal persistence**, a principle seen as the holy grail of durable data management. You can use these object collections to store a business application’s data, enable independent systems to communicate without a message broker, build a caching infrastructure, aggregate data in edge computing or IoT environments, or build complex distributed systems that combine all of these capabilities. GBO can be used alongside traditional DBMSs and message brokers, or it can simply replace them.
 
-The GBO data model extends the capabilities of native C# objects. It combines object aggregates, weak and strong references, entity-component systems (ECS), and edge-based graphs. It also supports various indexes, including text indexes. GBO provides strong safety guarantees (no more `NullReferenceException`) and deterministic memory management, along with a fine-grained code analysis extension that provides feedback on problems in the code. This combination is similar to the one that makes Rust so effective in AI-assisted software development. GBO applies it to the development of large, full-stack .NET business applications.
+The GBO data model extends the capabilities of native C# objects. It combines object aggregates, weak and strong references, entity-component systems (ECS), and edge-based graphs. It also supports various indexes, including text indexes. GBO provides strong safety guarantees (no more `NullReferenceException`) and deterministic memory management, along with a fine-grained code analysis extension that provides feedback on problems in the code. It lets you compose large data models from loosely coupled modules, with thousands of entity types organized into a clear hierarchy of module-specific assemblies. This combination of memory safety and static analysis is similar to the one that makes Rust so effective in AI-assisted software development. GBO applies it to the development of large, full-stack .NET business applications.
 
 The result is a much smaller codebase and a dramatic reduction in complexity, from the most basic applications to the largest modular, distributed ones. GBO introduces a new paradigm for infrastructure, object data modeling, and error and memory management. This paradigm is easy for human developers to work with and is designed for the next generation of **AI Dark Software Factories**. The complete GBO stack will use Blazor for both server-side and client-side rendering, with a rich, lightweight component library. The GBO stack will introduce a new, dedicated transactional server-side UI framework that uses streaming and scales far beyond what server-side Blazor can offer for web, mobile, and desktop applications.
 
@@ -60,7 +60,7 @@ internal interface MAgendaRepository
 }
 ```
 
-This model is deliberately minimal: a model can declare many entity types, with complex relations, constraints and indexes ([Tutorials Two to Five](Documentation/Tutorials/Two-Relationships.md)). A model that must evolve, read by both the old and the new versions of an application, gives its numbers, as [Tutorial One](Documentation/Tutorials/One-TheBasics.md) shows.
+This model is deliberately minimal: a model can declare many entity types, with complex relations, constraints and indexes ([Tutorials T002 to T005](Documentation/Tutorials/T002-Relationships.md)). A model that must evolve, read by both the old and the new versions of an application, gives its numbers, as [Tutorial T001](Documentation/Tutorials/T001-TheBasics.md) shows.
 
 #### 2. The operations: `Program.cs`
 
@@ -115,20 +115,21 @@ using var agenda = new AgendaRepository(store);
 Console.ReadLine();
 ```
 
-Each commit on one node is copied to the other, in the order of the commits: both nodes read and write the same appointments. Start the second node while the first one runs. Two nodes that both wrote while apart hold two different histories: when they meet, both stop rather than merge them ([Tutorial Eight](Documentation/Tutorials/Eight-ChainsAndDistribution.md)).
+Each commit on one node is copied to the other, in the order of the commits: both nodes read and write the same appointments. Start the second node while the first one runs. Two nodes that both wrote while apart hold two different histories: when they meet, both stop rather than merge them ([Tutorial T008](Documentation/Tutorials/T008-ChainsAndDistribution.md)).
 
-You can read the eight tutorials to discover what GBO can do:
+You can read the tutorials to discover what GBO can do:
 
-- [Tutorial One: The Basics](Documentation/Tutorials/One-TheBasics.md): an overview of GBO, its models, its transactions and its queries.
-- [Tutorial Two: Relationships](Documentation/Tutorials/Two-Relationships.md): links, constraints and deterministic garbage collection.
-- [Tutorial Three: Composition](Documentation/Tutorials/Three-Composition.md): the Entity Component System and object composition.
-- [Tutorial Four: Edges](Documentation/Tutorials/Four-Edges.md): edges and graph-oriented models.
-- [Tutorial Five: Indexes](Documentation/Tutorials/Five-Indexes.md): text indexes, value indexes, unique values and custom collections.
-- [Tutorial Six: Records](Documentation/Tutorials/Six-Records.md): values of several fields, bags of Records, and when not to use them.
-- [Tutorial Seven: The Log](Documentation/Tutorials/Seven-TheLog.md): facts in their order, subscriptions and replay.
-- [Tutorial Eight: Chains and Distribution](Documentation/Tutorials/Eight-ChainsAndDistribution.md): several Stores in one transaction, on several servers.
-- [Tutorial Nine: Transaction Conflicts](Documentation/Tutorials/Nine-Transaction-Conflicts.md): auto-merge and explicit merge, with `[Delta]`, `[Max]`, `[Min]` and the Mergers.
-- [Tutorial Ten: Claims, Points and Leases](Documentation/Tutorials/Ten-Claims-Points-And-Leases.md): a decision on what was read, a rule over the parts of an aggregate, and entities held during a work outside a transaction.
+- [Tutorial T001: The Basics](Documentation/Tutorials/T001-TheBasics.md): an overview of GBO, its models, its transactions and its queries.
+- [Tutorial T002: Relationships](Documentation/Tutorials/T002-Relationships.md): links, constraints and deterministic garbage collection.
+- [Tutorial T003: Composition](Documentation/Tutorials/T003-Composition.md): the Entity Component System and object composition.
+- [Tutorial T004: Edges](Documentation/Tutorials/T004-Edges.md): edges and graph-oriented models.
+- [Tutorial T005: Indexes](Documentation/Tutorials/T005-Indexes.md): text indexes, value indexes, unique values and custom collections.
+- [Tutorial T006: Records](Documentation/Tutorials/T006-Records.md): values of several fields, bags of Records, and when not to use them.
+- [Tutorial T007: The Log](Documentation/Tutorials/T007-TheLog.md): facts in their order, subscriptions and replay.
+- [Tutorial T008: Chains and Distribution](Documentation/Tutorials/T008-ChainsAndDistribution.md): several Stores in one transaction, on several servers.
+- [Tutorial T009: Transaction Conflicts](Documentation/Tutorials/T009-Transaction-Conflicts.md): auto-merge and explicit merge, with `[Delta]`, `[Max]`, `[Min]` and the Mergers.
+- [Tutorial T010: Claims, Points and Leases](Documentation/Tutorials/T010-Claims-Points-And-Leases.md): a decision on what was read, a rule over the parts of an aggregate, and entities held during a work outside a transaction.
+- [Tutorial T011: Composition](Documentation/Tutorials/T011-Composition.md): separately compiled modules, private components and handlers, one global link model, public Commands, atomic sub-Mutations and replay.
 
 ## Why GBO?
 
@@ -197,7 +198,7 @@ You can read the eight tutorials to discover what GBO can do:
   <tr>
     <td width="50%" valign="top">
 	    <h3 align="left">👉 Fast and faithful tests</h3>
-	    <p>In-memory Stores run the same engine as the persistent ones. No database to start, no mock, a test in milliseconds - the thirty tests of Tutorial Seven run in half a second.</p>
+	    <p>In-memory Stores run the same engine as the persistent ones. No database to start, no mock, a test in milliseconds - the thirty tests of Tutorial T007 run in half a second.</p>
 		    <p></p>
     </td>
     <td width="50%" valign="top">
@@ -407,7 +408,7 @@ The engines and their settings, the loads and the reopen, the latencies, the mem
 
 ## Spreadsheet
 
-GBO on one page: what the engine does, how each guarantee is obtained, and the industry principle it follows. The details are in the [specifications](Documentation/Specifications/SPEC-Registry.md) and the [tutorials](Documentation/Tutorials/One-TheBasics.md).
+GBO on one page: what the engine does, how each guarantee is obtained, and the industry principle it follows. The details are in the [specifications](Documentation/Specifications/SPEC-Registry.md) and the [tutorials](Documentation/Tutorials/T001-TheBasics.md).
 
 #### At a glance
 

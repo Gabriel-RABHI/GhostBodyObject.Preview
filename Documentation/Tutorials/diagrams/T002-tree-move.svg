@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="394" viewBox="0 0 960 394" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A folder moves anywhere, except into its own subtree</title>
+<desc>Two trees of the library of Ada. On the left, music.MoveTo(bebop.Folders) is refused: Bebop is a subfolder of Music, and the move would make a cycle. On the right, music.MoveTo(archive.Folders) moves Music, Jazz, Bebop and the playlist under Archive: the Owner of Music, a listener before, is now a folder.</desc>
+<rect width="960" height="394" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A folder moves anywhere, except into its own subtree</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">MoveTo changes the Owner of a whole subtree, or refuses before anything changes</text>
+<text x="32" y="108" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">music.MoveTo(bebop.Folders)</text>
+<text x="500" y="108" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">music.MoveTo(archive.Folders)</text>
+<path d="M48 160L48 175Q48 183 56 183L72 183" fill="none" stroke="#4a5a62" stroke-width="1.2"/>
+<path d="M88 198L88 213Q88 221 96 221L112 221" fill="none" stroke="#4a5a62" stroke-width="1.2"/>
+<path d="M128 236L128 251Q128 259 136 259L152 259" fill="none" stroke="#4a5a62" stroke-width="1.2"/>
+<path d="M168 274L168 289Q168 297 176 297L192 297" fill="none" stroke="#4a5a62" stroke-width="1.2"/>
+<path d="M48 160L48 327Q48 335 56 335L72 335" fill="none" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="32" y="130" width="118" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="91" y="149.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="72" y="168" width="118" height="30" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="131" y="187.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Music</text>
+<rect x="112" y="206" width="118" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="171" y="225.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Jazz</text>
+<rect x="152" y="244" width="118" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="211" y="263.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Bebop</text>
+<rect x="192" y="282" width="118" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="251" y="301.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Playlist</text>
+<rect x="72" y="320" width="118" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="131" y="339.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Archive</text>
+<path d="M516 160L516 175Q516 183 524 183L540 183" fill="none" stroke="#4a5a62" stroke-width="1.2"/>
+<path d="M556 198L556 213Q556 221 564 221L580 221" fill="none" stroke="#4a5a62" stroke-width="1.2"/>
+<path d="M596 236L596 251Q596 259 604 259L620 259" fill="none" stroke="#4a5a62" stroke-width="1.2"/>
+<path d="M636 274L636 289Q636 297 644 297L660 297" fill="none" stroke="#4a5a62" stroke-width="1.2"/>
+<path d="M676 312L676 327Q676 335 684 335L700 335" fill="none" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="500" y="130" width="118" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="559" y="149.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="540" y="168" width="118" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="599" y="187.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Archive</text>
+<rect x="580" y="206" width="118" height="30" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="639" y="225.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Music</text>
+<rect x="620" y="244" width="118" height="30" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="679" y="263.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Jazz</text>
+<rect x="660" y="282" width="118" height="30" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="719" y="301.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Bebop</text>
+<rect x="700" y="320" width="118" height="30" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="759" y="339.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Playlist</text>
+<path d="M190 183L364 183Q372 183 372 191L372 251Q372 259 364 259L277 259" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M277.2 262.6L270 259L277.2 255.4Z" fill="#f07a78"/>
+<text x="384" y="226" font-size="13" font-weight="600" fill="#f07a78" text-anchor="start">Refused: a cycle</text>
+<text x="384" y="244" font-size="12" font-weight="400" fill="#7f9199" text-anchor="start">nothing changes</text>
+<text x="708" y="225" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">music.Parent: Archive</text>
+<text x="748" y="263" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">music.Listener: none</text>
+</svg>

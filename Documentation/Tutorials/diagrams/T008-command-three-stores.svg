@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="410" viewBox="0 0 960 410" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>The commands write the three Stores, in one commit</title>
+<desc>Three commands in one transaction of the chain. Parcels.Register adds ParcelRegistered to the Log; its handler creates the parcel and its page, Registered. Parcels.Scan at Lyon adds ParcelScanned; the handler moves the parcel to Lyon, the page reads In transit at Lyon, its Steps 1, and the board of Lyon counts 1. Parcels.Scan at Paris adds ParcelScanned; the parcel is at Paris, the page reads In transit at Paris, its Steps 2, the board of Lyon counts 0 and the board of Paris 1. transaction.Commit() is one commit of the three Stores.</desc>
+<rect width="960" height="410" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">The commands write the three Stores, in one commit</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Each command adds its Record to the Log, and its handler changes both models; the commit writes the three</text>
+<text x="163" y="106" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The command</text>
+<text x="382" y="106" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The Log</text>
+<text x="382" y="123" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">journal</text>
+<text x="600" y="106" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The parcels</text>
+<text x="600" y="123" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">parcels</text>
+<text x="802" y="106" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The tracking</text>
+<text x="802" y="123" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">tracking</text>
+<rect x="32" y="136" width="262" height="54" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="163" y="167" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Parcels.Register("PX-3001", "Ada")</text>
+<path d="M294 163L305 163" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M304.8 159.4L312 163L304.8 166.6Z" fill="#aebcc4"/>
+<rect x="312" y="136" width="140" height="54" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="382" y="158.5" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ParcelRegistered</text><text x="382" y="175.5" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">PX-3001, Ada</text>
+<path d="M452 163L517 163" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M516.8 159.4L524 163L516.8 166.6Z" fill="#aebcc4"/>
+<text x="488" y="155" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Apply(e)</text>
+<rect x="524" y="136" width="404" height="54" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<line x1="676" y1="136" x2="676" y2="190" stroke="#4a5a62" stroke-width="1"/>
+<text x="600" y="159" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">new Parcel</text>
+<text x="600" y="175" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Status: Registered</text>
+<text x="802" y="159" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">new TrackingPage</text>
+<text x="802" y="175" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Status: Registered</text>
+<rect x="32" y="202" width="262" height="54" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="163" y="233" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Parcels.Scan(ada, "Lyon")</text>
+<path d="M294 229L305 229" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M304.8 225.4L312 229L304.8 232.6Z" fill="#aebcc4"/>
+<rect x="312" y="202" width="140" height="54" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="382" y="224.5" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ParcelScanned</text><text x="382" y="241.5" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Lyon</text>
+<path d="M452 229L517 229" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M516.8 225.4L524 229L516.8 232.6Z" fill="#aebcc4"/>
+<text x="488" y="221" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Apply(e)</text>
+<rect x="524" y="202" width="404" height="54" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<line x1="676" y1="202" x2="676" y2="256" stroke="#4a5a62" stroke-width="1"/>
+<text x="600" y="225" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">Status: InTransit</text>
+<text x="600" y="241" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Depot: Lyon</text>
+<text x="802" y="225" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">In transit at Lyon, Steps: 1</text>
+<text x="802" y="241" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Board Lyon: 1</text>
+<rect x="32" y="268" width="262" height="54" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="163" y="299" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Parcels.Scan(ada, "Paris")</text>
+<path d="M294 295L305 295" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M304.8 291.4L312 295L304.8 298.6Z" fill="#aebcc4"/>
+<rect x="312" y="268" width="140" height="54" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="382" y="290.5" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ParcelScanned</text><text x="382" y="307.5" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Paris</text>
+<path d="M452 295L517 295" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M516.8 291.4L524 295L516.8 298.6Z" fill="#aebcc4"/>
+<text x="488" y="287" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Apply(e)</text>
+<rect x="524" y="268" width="404" height="54" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<line x1="676" y1="268" x2="676" y2="322" stroke="#4a5a62" stroke-width="1"/>
+<text x="600" y="291" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">Status: InTransit</text>
+<text x="600" y="307" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Depot: Paris</text>
+<text x="802" y="291" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">In transit at Paris, Steps: 2</text>
+<text x="802" y="307" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Board Lyon: 0, board Paris: 1</text>
+<rect x="32" y="334" width="262" height="54" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="163" y="365" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">transaction.Commit()</text>
+<path d="M294 361L305 361" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M304.8 357.4L312 361L304.8 364.6Z" fill="#3987e5"/>
+<rect x="312" y="334" width="616" height="54" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="620" y="356.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">One commit of the three Stores</text><text x="620" y="373.5" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">the Log, the parcels and the tracking, together</text>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="316" viewBox="0 0 960 316" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A reference to a part retains its whole chain</title>
+<desc>An entry of the playlist Favorites designates the track Sound and Vision by a strong reference. The track, its album Low and its artist David Bowie are all retained: bowie.Remove(), bowie.Albums.Remove(low) and low.Tracks.Remove(sound) are each refused. The exception names the chain: Artist 1, Album 1, Track 1.</desc>
+<rect width="960" height="316" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A reference to a part retains its whole chain</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">A part requires its Owner, and its Owner requires its own, up to the Root</text>
+<rect x="32" y="140" width="214" height="92" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="44" y="160" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Favorites</text><text x="234" y="160" font-size="11" font-weight="400" fill="#7f9199" text-anchor="end">a playlist</text>
+<rect x="48" y="174" width="182" height="46" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="139" y="201.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Entry</text>
+<rect x="370" y="100" width="558" height="154" rx="10" fill="none" stroke="#3987e5" stroke-width="1.5"/><text x="382" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">David Bowie</text>
+<rect x="386" y="134" width="526" height="106" rx="10" fill="none" stroke="#3987e5" stroke-width="1.5"/><text x="398" y="154" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Low</text>
+<rect x="402" y="174" width="180" height="46" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="492" y="201.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Sound and Vision</text>
+<path d="M230 197L395 197" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M394.8 193.4L402 197L394.8 200.6Z" fill="#3987e5"/>
+<text x="308" y="188" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">[Strong] Track</text>
+<text x="878" y="124" font-size="12" font-weight="400" fill="#f07a78" text-anchor="end" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">bowie.Remove()</text>
+<path d="M890 116L898 124M898 116L890 124" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="878" y="158" font-size="12" font-weight="400" fill="#f07a78" text-anchor="end" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">bowie.Albums.Remove(low)</text>
+<path d="M890 150L898 158M898 150L890 158" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="878" y="202" font-size="12" font-weight="400" fill="#f07a78" text-anchor="end" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">low.Tracks.Remove(sound)</text>
+<path d="M890 194L898 202M898 194L890 202" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="32" y="282" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">The exception names the chain, from the removed entity to the retained one:</text>
+<text x="480" y="282" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Artist 1 → Album 1 → Track 1</text>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="312" viewBox="0 0 960 312" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A book created during a query is enumerated too</title>
+<desc>The query meets four books in their order. Dune, of 1965, and Foundation, of 1951, are not older than 1950. 1984, of 1949, is: the lambda reprints it, and creates a book 1984 of 2026. The same query meets that reprint later: 2026 is not below 1950, and it is not reprinted again. Count gives 1, and the library holds 4 books.</desc>
+<rect width="960" height="312" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A book created during a query is enumerated too</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The lambda reprints each book older than 1950, in 2026: the same query meets the reprint, later</text>
+<text x="32" y="104" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">BookCollection.Count(2026, static (book, year) =&gt; book.Year &lt; 1950 &amp;&amp; Reprinted(book, year))</text>
+<line x1="32" y1="126" x2="928" y2="126" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="132" cy="126" r="3.5" fill="#aebcc4"/>
+<circle cx="364" cy="126" r="3.5" fill="#aebcc4"/>
+<circle cx="596" cy="126" r="3.5" fill="#aebcc4"/>
+<circle cx="828" cy="126" r="3.5" fill="#aebcc4"/>
+<text x="132" y="151" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">1965 &lt; 1950</text>
+<rect x="66" y="168" width="132" height="50" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="132" y="190" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Dune</text><text x="132" y="206" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">1965</text>
+<text x="132" y="240" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">false</text>
+<text x="364" y="151" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">1951 &lt; 1950</text>
+<rect x="298" y="168" width="132" height="50" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="364" y="190" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Foundation</text><text x="364" y="206" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">1951</text>
+<text x="364" y="240" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">false</text>
+<text x="596" y="151" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">1949 &lt; 1950</text>
+<rect x="530" y="168" width="132" height="50" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="596" y="190" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">1984</text><text x="596" y="206" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">1949</text>
+<text x="596" y="240" font-size="12" font-weight="600" fill="#3987e5" text-anchor="middle">true: reprinted</text>
+<text x="828" y="151" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">2026 &lt; 1950</text>
+<rect x="762" y="168" width="132" height="50" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="828" y="190" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">1984</text><text x="828" y="206" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">2026</text>
+<text x="828" y="240" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">false</text>
+<path d="M662 193L755 193" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M754.8 189.4L762 193L754.8 196.6Z" fill="#3987e5"/>
+<text x="712" y="183" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">creates</text>
+<text x="32" y="272" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Count(...) == 1</text>
+<text x="170" y="272" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">BookCollection.Count() == 4</text>
+<text x="32" y="294" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">The reprint is from 2026: the query meets it, and does not reprint it again</text>
+</svg>

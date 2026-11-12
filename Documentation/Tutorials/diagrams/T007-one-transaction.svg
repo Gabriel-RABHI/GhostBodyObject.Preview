@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="392" viewBox="0 0 960 392" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>One transaction writes the parcels and their Records, or neither</title>
+<desc>A transaction of the Repository holds a transaction of the Log. Parcels.Register and Parcels.Scan change the parcel PX-9001 and add two Records, registered PX-9001 and scanned at Lyon. transaction.Commit() writes both, in the Store of the parcels and in the Store of the Log. In the second test, Parcels.Register adds PX-9002, and transaction.Rollback() writes neither: the snapshot and the Log stay empty.</desc>
+<rect width="960" height="392" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">One transaction writes the parcels and their Records, or neither</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">repository.Chain(log): each ReadWrite transaction of the Repository opens a transaction of the Log</text>
+<text x="32" y="160" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Committed</text>
+<rect x="136" y="100" width="404" height="112" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="148" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The transaction of the Repository</text>
+<rect x="148" y="132" width="184" height="68" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="160" y="152" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The parcel</text>
+<text x="240" y="182" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">PX-9001 InTransit Lyon 1</text>
+<rect x="344" y="132" width="184" height="68" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="356" y="152" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The transaction of the Log</text>
+<text x="436" y="174" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">registered PX-9001</text>
+<text x="436" y="190" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">scanned at Lyon</text>
+<path d="M540 126L701 126" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M700.8 122.4L708 126L700.8 129.6Z" fill="#aebcc4"/>
+<path d="M540 186L701 186" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M700.8 182.4L708 186L700.8 189.6Z" fill="#aebcc4"/>
+<text x="624" y="160" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">transaction.Commit()</text>
+<rect x="708" y="100" width="220" height="52" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="818" y="121.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">parcels</text><text x="818" y="138.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">PX-9001 InTransit Lyon 1</text>
+<rect x="708" y="160" width="220" height="52" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="818" y="181.5" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">journal</text><text x="818" y="198.5" font-size="11" font-weight="400" fill="#e8eef1" text-anchor="middle">registered PX-9001, scanned at Lyon</text>
+<line x1="32" y1="224" x2="928" y2="224" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="296" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Rolled back</text>
+<rect x="136" y="236" width="404" height="112" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="148" y="256" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The transaction of the Repository</text>
+<rect x="148" y="268" width="184" height="68" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="160" y="288" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The parcel</text>
+<text x="240" y="318" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">PX-9002, for Bob</text>
+<rect x="344" y="268" width="184" height="68" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="356" y="288" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The transaction of the Log</text>
+<text x="436" y="318" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">registered PX-9002</text>
+<path d="M540 262L664 262" fill="none" stroke="#7f9199" stroke-width="1.4" stroke-dasharray="5 4"/>
+<path d="M540 322L664 322" fill="none" stroke="#7f9199" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="624" y="296" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">transaction.Rollback()</text>
+<rect x="708" y="236" width="220" height="52" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="818" y="257.5" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">parcels</text><text x="818" y="274.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">nothing</text>
+<rect x="708" y="296" width="220" height="52" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="818" y="317.5" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">journal</text><text x="818" y="334.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">nothing</text>
+<text x="32" y="374" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">Chained, the Log has no transaction of its own: it opens and commits with the one of its Repository</text>
+</svg>

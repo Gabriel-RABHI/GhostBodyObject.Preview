@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="494" viewBox="0 0 960 494" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A link shares one entity, an assignment copies a Record</title>
+<desc>Two columns. On the left, Ada and Bob each hold a weak link, Favorite, to the one hotel Ritz: after ritz.Name = "The Ritz", both see The Ritz. On the right, Ada holds an address in Home, 12 rue de Rivoli, Paris, and Bob receives a copy of it by Home = ada.Home: after ada.Home takes a new address, 3 quai Saint-Antoine, Lyon, Bob still holds 12 rue de Rivoli, Paris: each one has its own.</desc>
+<rect width="960" height="494" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A link shares one entity, an assignment copies a Record</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">A second guest: the hotel stays one hotel, the address becomes two values</text>
+<text x="32" y="108" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">An entity, by a link</text>
+<text x="32" y="127" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">[Weak] Option&lt;MHotel&gt; Favorite</text>
+<line x1="32" y1="140" x2="460" y2="140" stroke="#2b3a42" stroke-width="1"/>
+<rect x="32" y="152" width="96" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="80" y="176.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="32" y="216" width="96" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="80" y="240.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Bob</text>
+<rect x="310" y="152" width="150" height="104" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="385" y="208.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ritz</text>
+<path d="M128 172L310 172" fill="none" stroke="#aebcc4" stroke-width="1.4" stroke-dasharray="5 4"/><path d="M302.8 168.4L310 172L302.8 175.6" fill="none" stroke="#aebcc4" stroke-width="1.4" stroke-linejoin="round"/>
+<text x="219" y="164" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Favorite</text>
+<path d="M128 236L310 236" fill="none" stroke="#aebcc4" stroke-width="1.4" stroke-dasharray="5 4"/><path d="M302.8 232.4L310 236L302.8 239.6" fill="none" stroke="#aebcc4" stroke-width="1.4" stroke-linejoin="round"/>
+<text x="219" y="228" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Favorite</text>
+<text x="246" y="282" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ritz.Name = "The Ritz"</text>
+<path d="M246 290L246 305" fill="none" stroke="#4a5a62" stroke-width="1.2"/><path d="M249.6 304.8L246 312L242.4 304.8Z" fill="#4a5a62"/>
+<rect x="32" y="320" width="96" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="80" y="344.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Ada</text>
+<rect x="32" y="384" width="96" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="80" y="408.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Bob</text>
+<rect x="310" y="320" width="150" height="104" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="385" y="376.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The Ritz</text>
+<path d="M128 340L310 340" fill="none" stroke="#aebcc4" stroke-width="1.4" stroke-dasharray="5 4"/><path d="M302.8 336.4L310 340L302.8 343.6" fill="none" stroke="#aebcc4" stroke-width="1.4" stroke-linejoin="round"/>
+<text x="219" y="332" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Favorite</text>
+<path d="M128 404L310 404" fill="none" stroke="#aebcc4" stroke-width="1.4" stroke-dasharray="5 4"/><path d="M302.8 400.4L310 404L302.8 407.6" fill="none" stroke="#aebcc4" stroke-width="1.4" stroke-linejoin="round"/>
+<text x="219" y="396" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Favorite</text>
+<text x="246" y="452" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Both see one entity</text>
+<text x="246" y="472" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ada.Favorite.Get().Name == "The Ritz"</text>
+<text x="500" y="108" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A Record, by a copy</text>
+<text x="500" y="127" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">RAddress Home</text>
+<line x1="500" y1="140" x2="928" y2="140" stroke="#2b3a42" stroke-width="1"/>
+<rect x="500" y="152" width="428" height="40" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="514" y="176.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Ada</text>
+<rect x="596" y="158" width="326" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="606" y="176.3" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Home</text>
+<text x="912" y="176.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end">12 rue de Rivoli, Paris</text>
+<rect x="500" y="216" width="428" height="40" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="514" y="240.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Bob</text>
+<rect x="596" y="222" width="326" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="606" y="240.3" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Home</text>
+<text x="912" y="240.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end">12 rue de Rivoli, Paris</text>
+<path d="M676 186L676 215" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M679.6 214.8L676 222L672.4 214.8Z" fill="#aebcc4"/>
+<text x="688" y="208" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Home = ada.Home</text>
+<text x="714" y="282" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ada.Home = new Address { ..., City = "Lyon" }</text>
+<path d="M714 290L714 305" fill="none" stroke="#4a5a62" stroke-width="1.2"/><path d="M717.6 304.8L714 312L710.4 304.8Z" fill="#4a5a62"/>
+<rect x="500" y="320" width="428" height="40" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="514" y="344.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Ada</text>
+<rect x="596" y="326" width="326" height="28" rx="4" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/>
+<text x="606" y="344.3" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Home</text>
+<text x="912" y="344.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end">3 quai Saint-Antoine, Lyon</text>
+<rect x="500" y="384" width="428" height="40" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="514" y="408.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Bob</text>
+<rect x="596" y="390" width="326" height="28" rx="4" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="606" y="408.3" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Home</text>
+<text x="912" y="408.3" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="end">12 rue de Rivoli, Paris</text>
+<text x="714" y="452" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Each one has its own</text>
+<text x="714" y="472" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">bob.Home.City == "Paris"</text>
+</svg>

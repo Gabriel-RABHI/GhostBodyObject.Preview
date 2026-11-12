@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="346" viewBox="0 0 960 346" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>The first write decides: refused, or condemned</title>
+<desc>An operation runs from left to right: your check, then the checks of GBO, then the first write, then your On...Changed. An exception before the first write changes nothing: caught, the transaction goes on and commits. An exception after it condemns the transaction: it still reads, refuses its writes and its Commit, and only a rollback is left.</desc>
+<rect width="960" height="346" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">The first write decides: refused, or condemned</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The steps of one operation, and what an exception leaves at each of them</text>
+<rect x="32" y="100" width="462" height="222" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="44" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Before the first write</text>
+<rect x="514" y="100" width="414" height="222" rx="10" fill="none" stroke="#f07a78" stroke-width="1.5"/><text x="526" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">After it</text>
+<rect x="48" y="136" width="200" height="56" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="148" y="159.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Your check</text><text x="148" y="176.5" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Album.AddTrack</text>
+<rect x="280" y="136" width="198" height="56" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="379" y="159.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Every check of GBO</text><text x="379" y="176.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">a retention, a full slot</text>
+<rect x="530" y="136" width="170" height="56" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="615" y="159.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The writes of GBO</text><text x="615" y="176.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">the operation, done</text>
+<rect x="732" y="136" width="180" height="56" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="822" y="159.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Your On...Changed</text><text x="822" y="176.5" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">OnTitleChanged</text>
+<path d="M248 164L273 164" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M272.8 160.4L280 164L272.8 167.6Z" fill="#aebcc4"/>
+<path d="M478 164L523 164" fill="none" stroke="#f07a78" stroke-width="2"/><path d="M522.8 160.4L530 164L522.8 167.6Z" fill="#f07a78"/>
+<path d="M700 164L725 164" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M724.8 160.4L732 164L724.8 167.6Z" fill="#aebcc4"/>
+<path d="M148 192L148 209" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M151.6 208.8L148 216L144.4 208.8Z" fill="#f07a78"/>
+<path d="M379 192L379 209" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M382.6 208.8L379 216L375.4 208.8Z" fill="#f07a78"/>
+<path d="M822 192L822 209" fill="none" stroke="#f07a78" stroke-width="1.6"/><path d="M825.6 208.8L822 216L818.4 208.8Z" fill="#f07a78"/>
+<text x="148" y="240" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Refused</text>
+<text x="379" y="240" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Refused</text>
+<text x="263" y="268" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">Nothing changed. Caught, the transaction goes on, and commits.</text>
+<text x="263" y="306" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">transaction.CondemnedBy is null</text>
+<text x="822" y="240" font-size="13" font-weight="600" fill="#f07a78" text-anchor="middle">Condemned</text>
+<text x="721" y="268" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">It still reads, and refuses its writes and its commit.</text>
+<text x="721" y="285" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">Only a rollback is left.</text>
+<text x="721" y="306" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">transaction.CondemnedBy is the exception</text>
+</svg>

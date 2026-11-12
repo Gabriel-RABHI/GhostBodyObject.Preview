@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="414" viewBox="0 0 960 414" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A role comes and goes; the party stays</title>
+<desc>Three stages of Acme: a supplier; a supplier that buys from us as well; a customer that stops supplying. With inheritance, Acme is a class Supplier : Party, then needs a third class, or two objects for one party, then changes of class, so of identity, to a class Customer : Party. With components, Acme is one entity, with the same identity and the same links all along: acme.Supplier.New() gives it the role of supplier, with its offer Steel; acme.Customer.New() a second role, with a credit limit of 50,000; acme.Supplier.Remove() takes the first role away, with its offer.</desc>
+<rect width="960" height="414" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A role comes and goes; the party stays</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The same three stages of Acme: with inheritance, a class at each one; with components, one entity</text>
+<line x1="32" y1="94" x2="928" y2="94" stroke="#4a5a62" stroke-width="1"/><circle cx="314" cy="94" r="3.5" fill="#aebcc4"/><circle cx="562" cy="94" r="3.5" fill="#aebcc4"/><circle cx="810" cy="94" r="3.5" fill="#aebcc4"/>
+<text x="314" y="118" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">A supplier</text>
+<text x="562" y="118" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">It buys from us as well</text>
+<text x="810" y="118" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">It stops supplying</text>
+<text x="32" y="150" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">With inheritance</text>
+<text x="32" y="168" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">Each combination of roles</text>
+<text x="32" y="184" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">is a class</text>
+<rect x="212" y="134" width="204" height="58" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="314" y="158.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Acme</text><text x="314" y="175.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">class Supplier : Party</text>
+<rect x="460" y="134" width="204" height="58" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="562" y="158.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Acme</text><text x="562" y="175.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">a third class, or two objects</text>
+<rect x="708" y="134" width="204" height="58" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="810" y="158.5" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Acme</text><text x="810" y="175.5" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">class Customer : Party</text>
+<text x="810" y="208" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">a change of class, so of identity</text>
+<line x1="32" y1="218" x2="928" y2="218" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="250" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">With components</text>
+<text x="32" y="268" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">One entity, whose roles</text>
+<text x="32" y="284" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">are its capabilities</text>
+<rect x="196" y="226" width="732" height="36" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="562" y="248.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Acme: one party, the same identity and the same links</text>
+<line x1="261" y1="262" x2="261" y2="280" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="196" y="280" width="130" height="72" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="208" y="300" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Supplier</text>
+<rect x="208" y="312" width="106" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="261" y="331.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Steel</text>
+<line x1="509" y1="262" x2="509" y2="280" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="444" y="280" width="130" height="72" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="456" y="300" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Supplier</text>
+<rect x="456" y="312" width="106" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="509" y="331.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Steel</text>
+<line x1="632" y1="262" x2="632" y2="280" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="584" y="280" width="96" height="72" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="632" y="313" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Customer</text><text x="632" y="329" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">50,000</text>
+<line x1="757" y1="262" x2="757" y2="280" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="692" y="280" width="130" height="72" rx="10" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="704" y="300" font-size="13" font-weight="600" fill="#7f9199" text-anchor="start">Supplier</text>
+<rect x="704" y="312" width="106" height="30" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="757" y="331.3" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">Steel</text>
+<line x1="880" y1="262" x2="880" y2="280" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="832" y="280" width="96" height="72" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="880" y="313" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Customer</text><text x="880" y="329" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">50,000</text>
+<text x="314" y="374" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">acme.Supplier.New()</text>
+<text x="562" y="374" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">acme.Customer.New()</text>
+<text x="810" y="374" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">acme.Supplier.Remove()</text>
+<rect x="32" y="385" width="20" height="14" rx="3" fill="none" stroke="#4a5a62" stroke-width="1"/><rect x="37" y="389" width="10" height="6" rx="1.5" fill="#4a5a62"/><text x="60" y="396" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">a part, in its Owner</text>
+<rect x="198" y="385" width="9" height="14" rx="2" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<line x1="207" y1="392" x2="216" y2="392" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="216" y="385" width="9" height="14" rx="2" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="233" y="396" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">a component, on its entity</text>
+</svg>

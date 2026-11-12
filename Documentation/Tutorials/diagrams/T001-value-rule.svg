@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="434" viewBox="0 0 960 434" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A value that breaks its rule never reaches a book</title>
+<desc>A line between the code that makes values and a book. Four values pass the rule and reach the book Dune: an Isbn read from 978-0-441-17271-9, Money.From(20m), Percent.From(10) and the shelf mark SF-12. Five do not exist: Isbn.TryRead of a text that is no ISBN and Money.TryFrom(-1m) say false; Percent.From(150), the conversion of -0.01 to a Money and new ShelfMark("12") throw an ArgumentException.</desc>
+<rect width="960" height="434" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A value that breaks its rule never reaches a book</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The rule is checked once, where the value is made: any code that receives it knows that it is valid</text>
+<text x="32" y="112" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Where a value is made</text>
+<text x="470" y="112" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Its rule</text>
+<line x1="470" y1="122" x2="470" y2="412" stroke="#aebcc4" stroke-width="2"/>
+<rect x="640" y="104" width="288" height="152" rx="10" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="652" y="124" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The book Dune</text>
+<text x="32" y="154" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Isbn.TryRead("978-0-441-17271-9", out var dune)</text>
+<path d="M400 150L633 150" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M632.8 146.4L640 150L632.8 153.6Z" fill="#3987e5"/>
+<circle cx="470" cy="150" r="10" fill="#1a252b"/>
+<path d="M464 150L468.5 154.5L476 145.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="654" y="154" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Isbn = dune</text>
+<text x="32" y="184" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Money.From(20m)</text>
+<path d="M400 180L633 180" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M632.8 176.4L640 180L632.8 183.6Z" fill="#3987e5"/>
+<circle cx="470" cy="180" r="10" fill="#1a252b"/>
+<path d="M464 180L468.5 184.5L476 175.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="654" y="184" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Deposit</text>
+<text x="32" y="214" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Percent.From(10)</text>
+<path d="M400 210L633 210" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M632.8 206.4L640 210L632.8 213.6Z" fill="#3987e5"/>
+<circle cx="470" cy="210" r="10" fill="#1a252b"/>
+<path d="M464 210L468.5 214.5L476 205.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="654" y="214" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">MemberDiscount</text>
+<text x="32" y="244" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">"SF-12"</text>
+<path d="M400 240L633 240" fill="none" stroke="#3987e5" stroke-width="2"/><path d="M632.8 236.4L640 240L632.8 243.6Z" fill="#3987e5"/>
+<circle cx="470" cy="240" r="10" fill="#1a252b"/>
+<path d="M464 240L468.5 244.5L476 235.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="654" y="244" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Shelf</text>
+<text x="32" y="292" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Isbn.TryRead("not an isbn", out _)</text>
+<path d="M400 288L458 288" fill="none" stroke="#f07a78" stroke-width="1.6"/>
+<circle cx="470" cy="288" r="10" fill="#1a252b"/>
+<path d="M464 282L476 294M476 282L464 294" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="490" y="292" font-size="12" font-weight="400" fill="#f07a78" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">false</text>
+<text x="32" y="320" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Money.TryFrom(-1m, out _)</text>
+<path d="M400 316L458 316" fill="none" stroke="#f07a78" stroke-width="1.6"/>
+<circle cx="470" cy="316" r="10" fill="#1a252b"/>
+<path d="M464 310L476 322M476 310L464 322" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="490" y="320" font-size="12" font-weight="400" fill="#f07a78" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">false</text>
+<text x="32" y="348" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Percent.From(150)</text>
+<path d="M400 344L458 344" fill="none" stroke="#f07a78" stroke-width="1.6"/>
+<circle cx="470" cy="344" r="10" fill="#1a252b"/>
+<path d="M464 338L476 350M476 338L464 350" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="490" y="348" font-size="12" font-weight="400" fill="#f07a78" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ArgumentException</text>
+<text x="32" y="376" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Money price = -0.01m</text>
+<path d="M400 372L458 372" fill="none" stroke="#f07a78" stroke-width="1.6"/>
+<circle cx="470" cy="372" r="10" fill="#1a252b"/>
+<path d="M464 366L476 378M476 366L464 378" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="490" y="376" font-size="12" font-weight="400" fill="#f07a78" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ArgumentException</text>
+<text x="32" y="404" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">new ShelfMark("12")</text>
+<path d="M400 400L458 400" fill="none" stroke="#f07a78" stroke-width="1.6"/>
+<circle cx="470" cy="400" r="10" fill="#1a252b"/>
+<path d="M464 394L476 406M476 394L464 406" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="490" y="404" font-size="12" font-weight="400" fill="#f07a78" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">ArgumentException</text>
+<text x="640" y="324" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">A value that breaks its rule does not exist:</text>
+<text x="640" y="342" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">TryFrom says false, From and a conversion throw</text>
+</svg>

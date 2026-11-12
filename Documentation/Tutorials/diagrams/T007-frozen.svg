@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="352" viewBox="0 0 960 352" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A Record is written until its Add, and frozen after it</title>
+<desc>Six instructions. A ParcelScanned is created with the depot Lyon: it is detached. scanned.Depot = "Lille" changes it. scanned.Add() makes it a fact, frozen. scanned.Depot = "Paris" is refused, and the depot stays Lille. transaction.Commit() appends it: the Log holds Lille. scanned.Depot = "Paris" is refused again, after the commit: the Record keeps Lille.</desc>
+<rect width="960" height="352" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A Record is written until its Add, and frozen after it</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The value of its Depot at each instruction, and what the Log holds</text>
+<line x1="32" y1="94" x2="928" y2="94" stroke="#4a5a62" stroke-width="1"/><circle cx="101" cy="94" r="3.5" fill="#aebcc4"/><circle cx="252.6" cy="94" r="3.5" fill="#aebcc4"/><circle cx="404.2" cy="94" r="3.5" fill="#aebcc4"/><circle cx="555.8" cy="94" r="3.5" fill="#aebcc4"/><circle cx="707.4" cy="94" r="3.5" fill="#aebcc4"/><circle cx="859" cy="94" r="3.5" fill="#aebcc4"/>
+<text x="101" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">new ParcelScanned</text>
+<text x="101" y="134" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">{ Depot = "Lyon" }</text>
+<rect x="32" y="164" width="138" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="101" y="190.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Lyon</text>
+<text x="252.6" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">scanned.Depot</text>
+<text x="252.6" y="134" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">= "Lille"</text>
+<rect x="183.6" y="164" width="138" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="252.6" y="190.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Lille</text>
+<text x="404.2" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">scanned.Add()</text>
+<rect x="335.2" y="164" width="138" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="404.2" y="190.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Lille</text>
+<text x="555.8" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">scanned.Depot</text>
+<text x="555.8" y="134" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">= "Paris"</text>
+<rect x="486.8" y="164" width="138" height="44" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="555.8" y="190.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Lille</text>
+<text x="555.8" y="228" font-size="12" font-weight="600" fill="#f07a78" text-anchor="middle">refused</text>
+<text x="707.4" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">transaction</text>
+<text x="707.4" y="134" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">.Commit()</text>
+<rect x="638.4" y="164" width="138" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="707.4" y="190.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Lille</text>
+<rect x="638.4" y="280" width="138" height="44" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="707.4" y="306.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Lille</text>
+<text x="859" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">scanned.Depot</text>
+<text x="859" y="134" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">= "Paris"</text>
+<rect x="790" y="164" width="138" height="44" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="859" y="190.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Lille</text>
+<text x="859" y="228" font-size="12" font-weight="600" fill="#f07a78" text-anchor="middle">refused</text>
+<rect x="790" y="280" width="138" height="44" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="859" y="306.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Lille</text>
+<rect x="32" y="240" width="289.6" height="26" rx="6" fill="#233139" stroke="#4a5a62" stroke-width="1"/>
+<text x="176.8" y="257" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">Detached: written as many times as needed</text>
+<rect x="335.2" y="240" width="592.8" height="26" rx="6" fill="#1f3a55" stroke="#3987e5" stroke-width="1"/>
+<text x="631.6" y="257" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">A fact: frozen, in its transaction and after it</text>
+<text x="32" y="334" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">The Log holds the value written before the Add</text>
+<text x="626.4" y="307" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="end">The Log</text>
+</svg>

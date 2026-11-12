@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="494" viewBox="0 0 960 494" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A capability never outlives its entity, and never ends it</title>
+<desc>Two removals. The Front door has a battery at level 80 and an alarm log of two alarms. front.AlarmLog.Remove() removes the log with its alarms; the lock stays, with its battery. In the second one, the Front door has a battery and an alarm log of one alarm, and the Back door a battery at level 60. front.Remove() removes the lock with its battery, its log and its alarm; the Back door and its battery stay.</desc>
+<rect width="960" height="494" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A capability never outlives its entity, and never ends it</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Two removals: the target in blue, and what leaves with it</text>
+<rect x="32" y="100" width="104" height="126" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="84" y="167.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Front door</text>
+<line x1="136" y1="122" x2="156" y2="122" stroke="#4a5a62" stroke-width="1.2"/>
+<line x1="136" y1="189" x2="156" y2="189" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="156" y="100" width="226" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="269" y="119" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Battery</text><text x="269" y="135" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Level 80</text>
+<rect x="156" y="152" width="226" height="74" rx="10" fill="none" stroke="#3987e5" stroke-width="1.5"/><text x="168" y="172" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">AlarmLog</text>
+<rect x="168" y="184" width="98" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="217" y="203.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Forced</text>
+<rect x="272" y="184" width="98" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="321" y="203.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Left open</text>
+<text x="480" y="153" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">front.AlarmLog.Remove()</text>
+<path d="M394 163L559 163" fill="none" stroke="#4a5a62" stroke-width="1.2"/><path d="M558.8 159.4L566 163L558.8 166.6Z" fill="#4a5a62"/>
+<text x="480" y="187" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The lock stays</text>
+<text x="480" y="205" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">with its other capabilities</text>
+<rect x="578" y="100" width="104" height="126" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="630" y="167.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Front door</text>
+<line x1="682" y1="122" x2="702" y2="122" stroke="#4a5a62" stroke-width="1.2"/>
+<line x1="682" y1="189" x2="702" y2="189" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="702" y="100" width="226" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="815" y="119" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Battery</text><text x="815" y="135" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Level 80</text>
+<rect x="702" y="152" width="226" height="74" rx="10" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="714" y="172" font-size="13" font-weight="600" fill="#7f9199" text-anchor="start">AlarmLog</text>
+<rect x="714" y="184" width="98" height="30" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="763" y="203.3" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">Forced</text>
+<rect x="818" y="184" width="98" height="30" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="867" y="203.3" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">Left open</text>
+<line x1="32" y1="244" x2="928" y2="244" stroke="#2b3a42" stroke-width="1"/>
+<rect x="32" y="262" width="104" height="126" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="84" y="329.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Front door</text>
+<line x1="136" y1="284" x2="156" y2="284" stroke="#4a5a62" stroke-width="1.2"/>
+<line x1="136" y1="351" x2="156" y2="351" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="156" y="262" width="226" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="269" y="281" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Battery</text><text x="269" y="297" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Level 80</text>
+<rect x="156" y="314" width="226" height="74" rx="10" fill="none" stroke="#4a5a62" stroke-width="1"/><text x="168" y="334" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">AlarmLog</text>
+<rect x="168" y="346" width="98" height="30" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="217" y="365.3" font-size="12" font-weight="600" fill="#e8eef1" text-anchor="middle">Forced</text>
+<rect x="32" y="402" width="104" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="84" y="428.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Back door</text>
+<line x1="136" y1="424" x2="156" y2="424" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="156" y="402" width="226" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="269" y="421" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Battery</text><text x="269" y="437" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Level 60</text>
+<text x="480" y="315" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">front.Remove()</text>
+<path d="M394 325L559 325" fill="none" stroke="#4a5a62" stroke-width="1.2"/><path d="M558.8 321.4L566 325L558.8 328.6Z" fill="#4a5a62"/>
+<text x="480" y="349" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Its capabilities go with it</text>
+<text x="480" y="367" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="middle">and their parts</text>
+<rect x="578" y="262" width="104" height="126" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="630" y="329.7" font-size="13" font-weight="600" fill="#7f9199" text-anchor="middle">Front door</text>
+<line x1="682" y1="284" x2="702" y2="284" stroke="#4a5a62" stroke-width="1.2"/>
+<line x1="682" y1="351" x2="702" y2="351" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="702" y="262" width="226" height="44" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="815" y="281" font-size="13" font-weight="600" fill="#7f9199" text-anchor="middle">Battery</text><text x="815" y="297" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Level 80</text>
+<rect x="702" y="314" width="226" height="74" rx="10" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="714" y="334" font-size="13" font-weight="600" fill="#7f9199" text-anchor="start">AlarmLog</text>
+<rect x="714" y="346" width="98" height="30" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="763" y="365.3" font-size="12" font-weight="600" fill="#7f9199" text-anchor="middle">Forced</text>
+<rect x="578" y="402" width="104" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="630" y="428.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Back door</text>
+<line x1="682" y1="424" x2="702" y2="424" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="702" y="402" width="226" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="815" y="421" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Battery</text><text x="815" y="437" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Level 60</text>
+<rect x="32" y="465" width="20" height="14" rx="3" fill="none" stroke="#4a5a62" stroke-width="1"/><rect x="37" y="469" width="10" height="6" rx="1.5" fill="#4a5a62"/><text x="60" y="476" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">a part, in its Owner</text>
+<rect x="198" y="465" width="9" height="14" rx="2" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<line x1="207" y1="472" x2="216" y2="472" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="216" y="465" width="9" height="14" rx="2" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="233" y="476" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">a component, on its entity</text>
+</svg>

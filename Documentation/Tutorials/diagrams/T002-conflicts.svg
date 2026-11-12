@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="442" viewBox="0 0 960 442" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>An aggregate is a unit of conflict</title>
+<desc>Three scenarios of two concurrent transactions, the second committing first. Both add a track to the same album: the commit of the first conflicts. They add tracks to two albums: both commit. One adds a reference to a track while the other removes its artist: the commit of the first conflicts, and writes nothing.</desc>
+<rect width="960" height="442" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">An aggregate is a unit of conflict</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">Two concurrent transactions: the later commit conflicts when both changed the same thing</text>
+<text x="32" y="130" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">The same album</text>
+<text x="32" y="150" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">Both change Low: a rule of the</text>
+<text x="32" y="166" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">album could not be broken by both</text>
+<text x="310" y="136" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">T1</text>
+<line x1="322" y1="132" x2="830" y2="132" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="370" cy="132" r="4" fill="#aebcc4"/>
+<text x="370" y="122" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">low.Tracks.New()</text>
+<text x="830" y="120" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<text x="310" y="180" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">T2</text>
+<line x1="322" y1="176" x2="690" y2="176" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="548" cy="176" r="4" fill="#aebcc4"/>
+<text x="548" y="166" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">low.Tracks.New()</text>
+<text x="690" y="164" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<path d="M684 176L688.5 180.5L696 171.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M702 172L820 138" fill="none" stroke="#f07a78" stroke-width="1.4" stroke-dasharray="5 4"/><path d="M812.1 136.6L820 138L814.1 143.4" fill="none" stroke="#f07a78" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M824 126L836 138M836 126L824 138" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="844" y="136" font-size="12" font-weight="600" fill="#f07a78" text-anchor="start">conflict</text>
+<text x="844" y="152" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">writes nothing</text>
+<line x1="32" y1="206" x2="928" y2="206" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="242" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">Two albums</text>
+<text x="32" y="262" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">The parts of two albums</text>
+<text x="32" y="278" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">never conflict</text>
+<text x="310" y="248" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">T1</text>
+<line x1="322" y1="244" x2="830" y2="244" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="370" cy="244" r="4" fill="#aebcc4"/>
+<text x="370" y="234" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">low.Tracks.New()</text>
+<text x="830" y="232" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<text x="310" y="292" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">T2</text>
+<line x1="322" y1="288" x2="690" y2="288" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="548" cy="288" r="4" fill="#aebcc4"/>
+<text x="548" y="278" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">heroes.Tracks.New()</text>
+<text x="690" y="276" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<path d="M684 288L688.5 292.5L696 283.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M824 244L828.5 248.5L836 239.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="844" y="248" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">committed</text>
+<line x1="32" y1="318" x2="928" y2="318" stroke="#2b3a42" stroke-width="1"/>
+<text x="32" y="354" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">A target removed</text>
+<text x="32" y="374" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">Both change the count of</text>
+<text x="32" y="390" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">the strong references of the track</text>
+<text x="310" y="360" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">T1</text>
+<line x1="322" y1="356" x2="830" y2="356" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="370" cy="356" r="4" fill="#aebcc4"/>
+<text x="370" y="346" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Entries.New(track)</text>
+<text x="830" y="344" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<text x="310" y="404" font-size="12" font-weight="400" fill="#7f9199" text-anchor="end">T2</text>
+<line x1="322" y1="400" x2="690" y2="400" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="548" cy="400" r="4" fill="#aebcc4"/>
+<text x="548" y="390" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">bowie.Remove()</text>
+<text x="690" y="388" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Commit()</text>
+<path d="M684 400L688.5 404.5L696 395.5" fill="none" stroke="#3987e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M702 396L820 362" fill="none" stroke="#f07a78" stroke-width="1.4" stroke-dasharray="5 4"/><path d="M812.1 360.6L820 362L814.1 367.4" fill="none" stroke="#f07a78" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M824 350L836 362M836 350L824 362" fill="none" stroke="#f07a78" stroke-width="2" stroke-linecap="round"/>
+<text x="844" y="360" font-size="12" font-weight="600" fill="#f07a78" text-anchor="start">conflict</text>
+<text x="844" y="376" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">writes nothing</text>
+</svg>

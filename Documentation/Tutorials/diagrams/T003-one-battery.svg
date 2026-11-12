@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="324" viewBox="0 0 960 324" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A lock has one battery at most</title>
+<desc>Six instructions on the slot of the battery of the Front door. new DoorLock: the slot is empty. New().Level = 40: a battery is born on its lock, at level 40. A second New() is refused, and nothing changes. Remove() returns true: the battery is removed. Remove() again returns false: there is nothing to remove. New().Level = 100: the slot takes a new battery.</desc>
+<rect width="960" height="324" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A lock has one battery at most</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The slot front.Battery at each instruction: full, it refuses; empty again, it takes a new one</text>
+<line x1="32" y1="94" x2="928" y2="94" stroke="#4a5a62" stroke-width="1"/><circle cx="101" cy="94" r="3.5" fill="#aebcc4"/><circle cx="252.6" cy="94" r="3.5" fill="#aebcc4"/><circle cx="404.2" cy="94" r="3.5" fill="#aebcc4"/><circle cx="555.8" cy="94" r="3.5" fill="#aebcc4"/><circle cx="707.4" cy="94" r="3.5" fill="#aebcc4"/><circle cx="859" cy="94" r="3.5" fill="#aebcc4"/>
+<text x="101" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">new DoorLock</text>
+<rect x="42" y="136" width="118" height="36" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="101" y="158.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Front door</text>
+<path d="M101 172L101 200" fill="none" stroke="#7f9199" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="101" y="218" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="middle">none</text>
+<text x="101" y="272" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">the slot is empty</text>
+<text x="252.6" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">New().Level = 40</text>
+<rect x="193.6" y="136" width="118" height="36" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="252.6" y="158.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Front door</text>
+<line x1="252.6" y1="172" x2="252.6" y2="200" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="193.6" y="200" width="118" height="46" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="252.6" y="220" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Battery</text><text x="252.6" y="236" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Level 40</text>
+<text x="252.6" y="272" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">born on its lock</text>
+<text x="404.2" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">New()</text>
+<rect x="345.2" y="136" width="118" height="36" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="404.2" y="158.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Front door</text>
+<line x1="404.2" y1="172" x2="404.2" y2="200" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="345.2" y="200" width="118" height="46" rx="8" fill="#47292d" stroke="#f07a78" stroke-width="1.5"/><text x="404.2" y="220" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Battery</text><text x="404.2" y="236" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Level 40</text>
+<text x="404.2" y="272" font-size="12" font-weight="600" fill="#f07a78" text-anchor="middle">refused</text>
+<text x="404.2" y="290" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">nothing changes</text>
+<text x="555.8" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Remove()</text>
+<rect x="496.8" y="136" width="118" height="36" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="555.8" y="158.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Front door</text>
+<line x1="555.8" y1="172" x2="555.8" y2="200" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="496.8" y="200" width="118" height="46" rx="8" fill="none" stroke="#4a5a62" stroke-width="1" stroke-dasharray="4 4"/><text x="555.8" y="220" font-size="13" font-weight="600" fill="#7f9199" text-anchor="middle">Battery</text><text x="555.8" y="236" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">Level 40</text>
+<text x="555.8" y="272" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">true</text>
+<text x="555.8" y="290" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">the battery is removed</text>
+<text x="707.4" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">Remove()</text>
+<rect x="648.4" y="136" width="118" height="36" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="707.4" y="158.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Front door</text>
+<path d="M707.4 172L707.4 200" fill="none" stroke="#7f9199" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="707.4" y="218" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="middle">none</text>
+<text x="707.4" y="272" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">false</text>
+<text x="707.4" y="290" font-size="12" font-weight="400" fill="#7f9199" text-anchor="middle">nothing to remove</text>
+<text x="859" y="118" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">New().Level = 100</text>
+<rect x="800" y="136" width="118" height="36" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="859" y="158.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Front door</text>
+<line x1="859" y1="172" x2="859" y2="200" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="800" y="200" width="118" height="46" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="859" y="220" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Battery</text><text x="859" y="236" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Level 100</text>
+<text x="859" y="272" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="middle">a new battery</text>
+</svg>

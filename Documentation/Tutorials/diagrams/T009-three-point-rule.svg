@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="348" viewBox="0 0 960 348" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>A value without a rule of merge, at the commit</title>
+<desc>Four questions in their order. Did the transaction change the value? No: it takes the head. Did the head change it? No: it takes the new value. Did both give the same value? Yes: that value. Otherwise: a Merger decides if the type has one, and without a Merger the commit conflicts, of the kind Change. A link is outside this rule: changed by the head, it is always a conflict.</desc>
+<rect width="960" height="348" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">A value without a rule of merge, at the commit</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">The first answer settles it. On a type [Mergeable], the unit of conflict is the value, no longer the entity</text>
+<text x="44" y="123" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">1</text>
+<rect x="68" y="96" width="272" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="204" y="120.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The transaction left it unchanged?</text>
+<text x="354" y="121" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start">yes</text>
+<path d="M400 116L613 116" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M612.8 112.4L620 116L612.8 119.6Z" fill="#aebcc4"/>
+<rect x="620" y="96" width="308" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="774" y="120.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">the head</text>
+<path d="M160 136L160 141" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M163.6 140.8L160 148L156.4 140.8Z" fill="#aebcc4"/>
+<text x="44" y="175" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">2</text>
+<rect x="68" y="148" width="272" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="204" y="172.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">The head left it unchanged?</text>
+<text x="354" y="173" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start">yes</text>
+<path d="M400 168L613 168" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M612.8 164.4L620 168L612.8 171.6Z" fill="#aebcc4"/>
+<rect x="620" y="148" width="308" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="774" y="172.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">the new value</text>
+<path d="M160 188L160 193" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M163.6 192.8L160 200L156.4 192.8Z" fill="#aebcc4"/>
+<text x="44" y="227" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">3</text>
+<rect x="68" y="200" width="272" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="204" y="224.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Both gave the same value?</text>
+<text x="354" y="225" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start">yes</text>
+<path d="M400 220L613 220" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M612.8 216.4L620 220L612.8 223.6Z" fill="#aebcc4"/>
+<rect x="620" y="200" width="308" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="774" y="224.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">that value</text>
+<path d="M160 240L160 245" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M163.6 244.8L160 252L156.4 244.8Z" fill="#aebcc4"/>
+<text x="44" y="279" font-size="18" font-weight="600" fill="#e8eef1" text-anchor="middle">4</text>
+<rect x="68" y="252" width="272" height="40" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="204" y="276.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">A Merger on the type?</text>
+<text x="354" y="277" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start">yes</text>
+<path d="M400 272L613 272" fill="none" stroke="#aebcc4" stroke-width="1.6"/><path d="M612.8 268.4L620 272L612.8 275.6Z" fill="#aebcc4"/>
+<rect x="620" y="252" width="308" height="40" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="774" y="276.7" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">what the Merger chooses</text>
+<text x="68" y="306" font-size="12" font-weight="400" fill="#f07a78" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">no Merger: the commit conflicts, Change</text>
+<text x="32" y="332" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">A link is outside this rule: changed by the head, it is a conflict, even for a transaction that changed a [Delta] only.</text>
+</svg>

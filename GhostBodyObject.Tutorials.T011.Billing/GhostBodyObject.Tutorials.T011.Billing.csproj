@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+	  <PackageReference Include="System.IO.Hashing" Version="10.0.0.6" />
+    <ProjectReference Include="../GhostBodyObject.Tutorials.T011.Catalog/GhostBodyObject.Tutorials.T011.Catalog.csproj" />
+    <InternalsVisibleTo Include="GhostBodyObject.Tutorials.T011" />
+  </ItemGroup>
+	<ItemGroup>
+		<!-- Load the source generator in the compiler so it generates the model at build time. -->
+		<Analyzer Include="..\Libs\GhostBodyObject.Generator.dll" />
+		<Reference Include="GhostBodyObject.Runtime">
+			<HintPath>..\Libs\GhostBodyObject.Runtime.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+</Project>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="338" viewBox="0 0 960 338" role="img" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+<title>One collection holds every battery, whatever its device</title>
+<desc>Three devices: the Hall camera, a Camera, has a battery at level 30; the Front door, a DoorLock, has a battery at level 90; the Office thermostat, a Thermostat, has none. BatteryCollection holds the two batteries, and its Count() is 2. Each battery reads its device as an Option of each type, one of them set: the first one reads battery.Camera, the Hall camera, and battery.DoorLock, none; the second one reads none and the Front door.</desc>
+<rect width="960" height="338" rx="14" fill="#1a252b"/>
+<text x="32" y="44" font-size="20" font-weight="600" fill="#e8eef1" text-anchor="start">One collection holds every battery, whatever its device</text>
+<text x="32" y="68" font-size="13" font-weight="400" fill="#aebcc4" text-anchor="start">[ComponentFor] repeated: one component on two types, without a base class</text>
+<rect x="262" y="100" width="218" height="152" rx="10" fill="none" stroke="#3987e5" stroke-width="1.5"/><text x="274" y="120" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="start">BatteryCollection</text><text x="468" y="120" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="end">Count(): 2</text>
+<rect x="32" y="136" width="170" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="117" y="155" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Hall camera</text><text x="117" y="171" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">a Camera</text>
+<line x1="202" y1="158" x2="276" y2="158" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="276" y="136" width="190" height="44" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="371" y="155" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Battery</text><text x="371" y="171" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Level 30</text>
+<rect x="32" y="194" width="170" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="117" y="213" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Front door</text><text x="117" y="229" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">a DoorLock</text>
+<line x1="202" y1="216" x2="276" y2="216" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="276" y="194" width="190" height="44" rx="8" fill="#1f3a55" stroke="#3987e5" stroke-width="1.5"/><text x="371" y="213" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Battery</text><text x="371" y="229" font-size="11" font-weight="400" fill="#aebcc4" text-anchor="middle">Level 90</text>
+<rect x="32" y="252" width="170" height="44" rx="8" fill="#233139" stroke="#4a5a62" stroke-width="1"/><text x="117" y="271" font-size="13" font-weight="600" fill="#e8eef1" text-anchor="middle">Office thermostat</text><text x="117" y="287" font-size="11" font-weight="400" fill="#7f9199" text-anchor="middle">a Thermostat</text>
+<path d="M202 274L226 274" fill="none" stroke="#7f9199" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="234" y="278.5" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">none</text>
+<text x="518" y="122" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">battery.Camera</text>
+<text x="724" y="122" font-size="12" font-weight="400" fill="#e8eef1" text-anchor="start" font-family="'Cascadia Mono', Consolas, Menlo, 'DejaVu Sans Mono', monospace">battery.DoorLock</text>
+<line x1="512" y1="132" x2="928" y2="132" stroke="#4a5a62" stroke-width="1"/>
+<circle cx="524" cy="158" r="6" fill="#3987e5"/>
+<text x="538" y="162" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Hall camera</text>
+<circle cx="730" cy="158" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="744" y="162" font-size="13" font-weight="400" fill="#7f9199" text-anchor="start">none</text>
+<circle cx="524" cy="216" r="6" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="538" y="220" font-size="13" font-weight="400" fill="#7f9199" text-anchor="start">none</text>
+<circle cx="730" cy="216" r="6" fill="#3987e5"/>
+<text x="744" y="220" font-size="13" font-weight="400" fill="#e8eef1" text-anchor="start">Front door</text>
+<line x1="512" y1="187" x2="928" y2="187" stroke="#2b3a42" stroke-width="1"/>
+<line x1="512" y1="245" x2="928" y2="245" stroke="#2b3a42" stroke-width="1"/>
+<text x="512" y="278" font-size="12" font-weight="400" fill="#aebcc4" text-anchor="start">Each battery reads its device: an Option of each type, one of them set</text>
+<rect x="32" y="309" width="9" height="14" rx="2" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<line x1="41" y1="316" x2="50" y2="316" stroke="#4a5a62" stroke-width="1.2"/>
+<rect x="50" y="309" width="9" height="14" rx="2" fill="none" stroke="#4a5a62" stroke-width="1"/>
+<text x="67" y="320" font-size="11" font-weight="400" fill="#7f9199" text-anchor="start">a component, on its entity</text>
+</svg>
