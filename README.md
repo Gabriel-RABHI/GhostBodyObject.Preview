@@ -7,7 +7,7 @@
 
 **Why?**
 
-To change how we develop applications that manage state, which nearly all applications do. GBO makes AI code generation more effective. It allows AI to build large distributed systems with a fraction of the code and far less complexity. The complete GBO stack, from dedicated front-end UI systems to distributed data stores, is designed to push the limits of what you can build with AI. GBO’s main goal today is to enable a swarm of AI agents to manage an entire large-scale business application.
+To change how we develop applications that manage state - which nearly all applications do - and makes AI code generation more effective. It allows AI to build large distributed systems with a fraction of the code and far less complexity. The complete GBO stack, from dedicated front-end UI systems to distributed data stores, is designed to push the limits of what you can build with AI. GBO’s main goal today is to enable a swarm of AI agents to manage an entire large-scale business application.
 
 **How?**
 
