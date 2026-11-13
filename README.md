@@ -15,9 +15,9 @@ The upcoming complete GBO stack, from dedicated front-end UI systems to distribu
 
 Three features are central to GBO’s approach.
 
-1. **The GBO data model extends the capabilities of native C# objects.** It combines object aggregates, weak and strong references, entity-component systems (ECS), and edge-based graphs. It also supports various types of indexes, including text indexes.
-    
-2. **GBO provides stronger safety guarantees.** With GBO objects, you no longer encounter a `NullReferenceException`. GBO manages memory deterministically, largely outside the scope of the garbage collector. A fine-grained code analysis extension provides feedback on problems in your code. GBO also lets you compose large data models from loosely coupled modules, with thousands of entity types organized into a clear hierarchy of module-specific assemblies.
+1. **The GBO data model extends the capabilities of native C# objects.** It combines object aggregates, weak and strong references, entity-component systems (ECS), and edge-based graphs. It also supports various types of indexes, including text indexes. GBO also lets you compose large data models from loosely coupled modules, with thousands of entity types organized into a clear hierarchy of module-specific assemblies. A fine-grained code analysis extension provides feedback on problems in your code. 
+
+2. **GBO provides stronger safety guarantees.** With GBO objects, you no longer encounter a `NullReferenceException`. GBO manages memory release deterministically, largely outside the scope of the garbage collector. GBO objects are physically write-protected to safeguard their data and reduce the attack surface.
     
 3. **Its API is ambient.** Managing these objects requires no explicit load or save operations. You open a transaction, create or find objects across deep call paths, modify them, and commit the transaction. This is called **orthogonal persistence**, a principle regarded as the holy grail of durable data management.
     
@@ -26,7 +26,7 @@ This combination of memory safety, deterministic memory management, and static a
 
 **The result ?**
 
-A much smaller codebase and a dramatic reduction in complexity, from the simplest applications to the largest modular, distributed systems. GBO introduces a transactional paradigm at the object level. This paradigm is easy for human developers to work with and is designed for the next generation of **AI .NET Dark Software Factories**. GBO provides the memory model for these factories.
+The result is a much smaller codebase and a dramatic reduction in complexity, from the simplest applications to the largest modular, distributed systems. GBO introduces an object-level transactional paradigm that is easy for human developers to work with and is designed for the next generation of **AI .NET Dark Software Factories**. As the first component of these factories, GBO provides their memory model.
 
 > [!WARNING]
 > This repository is a preview of the upcoming official GBO repository. Not all projects and samples are available yet.
