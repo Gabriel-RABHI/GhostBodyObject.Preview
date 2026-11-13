@@ -3,11 +3,11 @@
 
 ## Let AI turn your app into a fast, distributed, scalable database
 
-**GBO (Ghost Body Object)** is a high-performance, transactional, persistent, and distributed memory manager that turns your application into a database engine. Your code manages millions of C# objects in collections that can grow to several times the size of the available physical RAM. These objects are not transient representations of stored data. **They are the data itself.** Working with them is nearly as fast as working with plain old CLR objects (POCOs). These large collections can be shared and distributed across dozens of applications running in a server cluster, transparently and in real time. GBO brings the highest standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery) to your in-memory C# objects.
+**GBO (Ghost Body Object)** is a high-performance, transactional, persistent, and distributed memory manager that turns your application into a database engine. Your code manages millions of C# objects in collections that can grow to several times the size of the available physical RAM. These objects are not transient representations of stored data. **They are the data itself.** These large collections can be shared and distributed across dozens of applications running in a server cluster, and in a network of desktop and mobile application, transparently and in real time. GBO brings the highest standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery) to your in-memory C# objects, across running applications.
 
-**Why?**
+**Why GBO?**
 
-To change how we develop applications that manage state - which nearly all applications do - and makes AI code generation more effective. It allows AI to build large distributed systems with a fraction of the code and far less complexity. The complete GBO stack, from dedicated front-end UI systems to distributed data stores, is designed to push the limits of what you can build with AI. GBO’s main goal today is to enable a swarm of AI agents to manage an entire large-scale business application.
+To makes AI code generation far more effective. It change how we develop applications that manage state - which nearly all applications do. It allows AI to build large distributed systems with a fraction of the code and far less complexity. This memory space can be shared between all major platforms (Windows, Linux, MacOS, iOs, Android) to build from simple CRUD systems, to distributed CQRS Event Sourcing systems, up to Mobile, Edge and IoT that need offline data mutations. The complete GBO stack, from dedicated front-end UI systems to distributed data stores, is designed to push the limits of what you can build with AI. GBO’s main goal today is to enable a swarm of AI agents to manage an entire large-scale business application.
 
 **How?**
 
