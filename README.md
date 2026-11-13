@@ -1,15 +1,17 @@
 ![GBO](Documentation/gbo-git-logo.png)
-# What is GBO?
+# What is GBO ?
 
 ## Let AI turn your app into a fast, distributed, scalable database
 
-**GBO (Ghost Body Object)** is a high-performance, transactional, persistent, and distributed memory manager that turns your application into a database engine. Your code manages millions of C# objects in collections that can grow to several times the size of the available physical RAM. These objects are not transient representations of stored data. **They are the data itself.** These large collections can be shared and distributed across dozens of applications running in a server cluster, and in a network of desktop and mobile application, transparently and in real time. GBO brings the highest standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery) to your in-memory C# objects, across running applications.
+**GBO (Ghost Body Object)** is a high-performance, transactional, persistent, and distributed memory manager that turns your application into a database engine. Your code manages millions of C# objects in collections that can grow to several times the size of the available physical RAM. These objects are not transient representations of stored data. **They are the data itself.** These large collections can be shared and distributed, transparently and in real time, across dozens of applications running in a server cluster, on desktop computers, and on mobile devices. GBO brings the highest standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery) to your in-memory C# objects, even when those objects are shared across running applications.
 
-**Why GBO?**
+**Why GBO ?**
 
-To makes AI code generation far more effective. It change how we develop applications that manage state - which nearly all applications do. It allows AI to build large distributed systems with a fraction of the code and far less complexity. This memory space can be shared between all major platforms (Windows, Linux, MacOS, iOs, Android) to build from simple CRUD systems, to distributed CQRS Event Sourcing systems, up to Mobile, Edge and IoT that need offline data mutations. The complete GBO stack, from dedicated front-end UI systems to distributed data stores, is designed to push the limits of what you can build with AI. GBO’s main goal today is to enable a swarm of AI agents to manage an entire large-scale business application.
+To make AI code generation far more effective. GBO changes how we develop applications that manage state, which nearly all applications do. It allows AI to build large distributed systems with a fraction of the code and far less complexity. Applications running on Windows, Linux, macOS, iOS, and Android can all share memory spaces. You can use it to build simple CRUD systems, high load distributed systems that combine CQRS and event sourcing, and mobile, edge, and IoT applications that need to modify data while offline.
 
-**How?**
+The upcoming complete GBO stack, from dedicated front-end UI systems to distributed data stores, is designed to push the limits of what you can build with AI. GBO’s main goal today is to enable a swarm of AI agents to manage an entire large-scale business application.
+
+**How ?**
 
 Three features are central to GBO’s approach.
 
@@ -19,11 +21,12 @@ Three features are central to GBO’s approach.
     
 3. **Its API is ambient.** Managing these objects requires no explicit load or save operations. You open a transaction, create or find objects across deep call paths, modify them, and commit the transaction. This is called **orthogonal persistence**, a principle regarded as the holy grail of durable data management.
     
+
 This combination of memory safety, deterministic memory management, and static analysis is similar to the one that makes Rust more effective for AI-assisted software development. GBO applies it to the development of large, full-stack .NET business applications. You can use these object collections to store a business application’s data, enable independent systems to communicate without a message broker, build caching infrastructure, aggregate data in edge computing or IoT environments, or build complex distributed systems that combine all of these capabilities. GBO can work alongside traditional DBMSs and message brokers or replace them entirely.
 
-**The result?**
+**The result ?**
 
-A much smaller codebase and a dramatic reduction in complexity, from the simplest applications to the largest modular, distributed systems. GBO introduces a transactional paradigm at object level. This paradigm is easy for human developers to work with and is designed for the next generation of **AI .NET Dark Software Factories**. GBO is the memory model of this Factories.
+A much smaller codebase and a dramatic reduction in complexity, from the simplest applications to the largest modular, distributed systems. GBO introduces a transactional paradigm at the object level. This paradigm is easy for human developers to work with and is designed for the next generation of **AI .NET Dark Software Factories**. GBO provides the memory model for these factories.
 
 > [!WARNING]
 > This repository is a preview of the upcoming official GBO repository. Not all projects and samples are available yet.
