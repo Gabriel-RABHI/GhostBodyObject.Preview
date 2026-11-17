@@ -509,7 +509,7 @@ Core GBO library :
 - [ ] **Internet Scale Distribution**. `StoreSystem` and `StoreSpace` concepts. Will use Web Sockets to manage thousands `Stores`.
 - [ ] **Permissions.** Object level permission, with access, write, read restrictions over collections and entities.
 - [ ] **Automatic fail.** The loss of the owner of the write token stops the writes of its chain, the reads going on, until the chain is restarted. It will perform a recovery with quorum.
-- [ ] **Rolling deployment.** Rebuild.
+- [ ] **Rolling deployment.** Isolated projections rebuild, dual processes, A/B testing, zero down-time.
 
 Samples :
 
