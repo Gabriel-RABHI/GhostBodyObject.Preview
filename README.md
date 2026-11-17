@@ -1,7 +1,7 @@
 ![GBO](Documentation/gbo-git-logo.png)
 # What is GBO ?
 
-**GBO (Ghost Body Object)** is a high-performance, transactional, persistent, and distributed memory manager that turns your application into a database engine. Your code manages millions of C# objects in collections that can grow to several times the size of the available physical RAM. GBO brings the highest standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery) to your in-memory collections of C# objects. These objects are not transient representations of stored data. **They are the data itself.** These large collections can be shared and distributed transparently and in real time across dozens of applications running in a server cluster, on desktop computers, and on mobile devices.
+**GBO (Ghost Body Object)** is a high-performance, transactional, persistent, and distributed memory manager that turns your application into a database engine. Your code manages millions of C# objects in collections that can grow to several times the size of the available physical RAM. GBO brings the highest standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery) to your in-memory collections of C# objects. These objects are not transient representations of stored data. **They are the data itself, physically.** These large collections can be shared and distributed transparently and in real time across dozens of applications running in a server cluster, on desktop computers, and on mobile devices.
 
 **Why GBO?**
 
