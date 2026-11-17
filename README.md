@@ -503,10 +503,36 @@ GBO on one page: what the engine does, how each guarantee is obtained, and the i
 
 ## To come
 
+
+Core GBO library :
+
+- [ ] **Internet Scale Distribution**. `StoreSystem` and `StoreSpace` concepts. Will use Web Sockets to manage thousands `Stores`.
 - [ ] **Permissions.** Object level permission, with access, write, read restrictions over collections and entities.
-- [ ] **Automatic fail-over.** The loss of the owner of the write token stops the writes of its chain, the reads going on, until the chain is restarted. It will perform a recovery with quorum.
-- [ ] **Internet Scale Distribution**. Will use Web Sockets.
+- [ ] **Automatic fail.** The loss of the owner of the write token stops the writes of its chain, the reads going on, until the chain is restarted. It will perform a recovery with quorum.
+- [ ] **Rolling deployment.** Rebuild.
+
+Samples :
+
+- [ ] **Basic**. Simple To-Do List in many architectures.
+- [ ] **Advanced**. Slack like messenger, with channels, sub-message, likes, notifications, documents and search. Implemented using Mutation-Sourcing. The same implemented with Entity-Framework and PostgreSQL.
+- [ ] **Large**. Part of a complete ERP data layer, with unit-tests.
+
+IA coding :
+
+- [ ] **Skills**. Better set of skills and Agentic rules.
+- [ ] **Trainning Sets.** Synthetic large set of code sample, per GBO type, feature and architecture.
+
+Interoperability :
+
+- [ ] **Blazor Component Library**. Strong UX, consistent layout, fast and lightweight.
+
+Full-stack :
+
 - [ ] **Transparent SQL connectors**, to fill an SQL server with every transaction done using GBO. EF entities included.
+
+Tooling :
+
 - [ ] **GBO Explorer** : dedicated tool with Schema Versions, live Query, model edition in real-time, complete suite.
+
 
 
