@@ -3,17 +3,15 @@
 
 ## Let AI turn your app into a fast, distributed, scalable database
 
-**GBO (Ghost Body Object)** is a high-performance, transactional, persistent, and distributed memory manager that turns your application into a database engine. Your code manages millions of C# objects in collections that can grow to several times the size of the available physical RAM.
+**GBO (Ghost Body Object)** is a high-performance, transactional, persistent, and distributed memory manager that turns your application into a database engine. Your code manages millions of C# objects in collections that can grow to several times the size of the available physical RAM. GBO brings the highest standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery) to your in-memory collections of C# objects. These objects are not transient representations of stored data. **They are the data itself.** These large collections can be shared and distributed transparently and in real time across dozens of applications running in a server cluster, on desktop computers, and on mobile devices.
 
-These objects are not transient representations of stored data. **They are the data itself.** These large collections can be shared and distributed, transparently and in real time, across dozens of applications running in a server cluster, on desktop computers, and on mobile devices. GBO brings the highest standards of snapshot isolation (MVCC) and durability (ACID, hash-based recovery) to your in-memory C# objects collections.
+**Why GBO?**
 
-**Why GBO ?**
+In the years to come, AI will become the new abstraction layer for programming. Choosing the right underlying layer will help you make the most of that abstraction. GBO has two main goals in the AI era.
 
-Two main goals :
-
-1. **To make AI code generation far more effective.** GBO drastically simplify how we develop applications that manage shared state, which nearly all applications do. It allows AI to build large distributed systems with a fraction of the code and far less complexity. Applications running on Windows, Linux, macOS, iOS, and Android can all share memory spaces. You can use it to build from simple CRUD systems to high load distributed systems that combine CQRS and event sourcing, and mobile, edge, and IoT applications that need to modify data while offline. GBO is the memory manager of an upcoming full stack designed to push the limits of what you can build with AI.
-
-2. **To provide a solid foundation for future agentic systems.** In the years ahead, AI agents will need a fast, secure, auditable and deterministic data layer to communicate, share context, and store data. Agentic business applications will be modular systems that can build themselves. The data model itself will express much of how the data is meant to be used and capture domain concepts. Aggregations, components, graphs, and indexes will make the relationships between objects explicit. Strict constraints will enforce deterministic object lifecycles. Agentic business applications will need this kind of evolving, strongly typed shared memory to improve themselves and construct proofs of correctness.
+1. **To make AI code generation far more effective.** Nearly all applications manage shared state, and GBO dramatically simplifies their development. It allows AI to build large distributed systems with far less complexity and a fraction of the code normally required. Applications running on Windows, Linux, macOS, iOS, and Android can all share memory spaces. You can use GBO to build anything from simple local applications to distributed systems that handle heavy loads and combine CQRS with event sourcing. You can also use it to build mobile, edge, and IoT applications that need to modify data while offline.
+    
+2. **To provide a solid foundation for future agentic systems.** In the years ahead, fully agentic systems will challenge this new programming abstraction layer. AI agents will need a fast, secure, auditable, and deterministic data and execution layer to communicate, share context, apply business logic, and store data. Agentic business applications will be modular systems that rebuild themselves over a deterministic data model. This data model must capture domain concepts and express how the data is meant to be used. Aggregations, components, graphs, and indexes will make the relationships between objects explicit. Strict constraints will enforce deterministic object lifecycles. Agentic business applications will need this kind of evolving, strongly typed shared memory to construct proofs of correctness and improve themselves. Event-based projection (the GBO Mutation concept) will become the most reliable way to manage data as these systems evolve.
 
 **How ?**
 
