@@ -5,7 +5,7 @@
 
 **Why GBO?**
 
-In the years to come, AI will become the new abstraction layer for programming. Choosing the right underlying layer will help you make the most of that abstraction. GBO has two main goals in the AI era.
+In the years to come, AI will become the new abstraction layer for programming and beyond, for solution design. Choosing the right underlying layer will help you make the most of that abstraction. GBO has two main goals in the AI era.
 
 1. **To make AI code generation far more effective.** Nearly all applications manage shared state, and GBO dramatically simplifies their development. It allows AI to build large distributed systems with far less complexity and a fraction of the code normally required. Applications running on Windows, Linux, macOS, iOS, and Android can all share memory spaces. You can use GBO to build anything from simple local applications to distributed systems that handle heavy loads and combine CQRS with event sourcing. You can also use it to build mobile, edge, and IoT applications that need to modify data while offline.
     
